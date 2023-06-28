@@ -64,13 +64,13 @@ python -m venv env
 if [ -d "env/Scripts" ]; then
   source env/Scripts/activate
 else
-  check_dos2unix=$(dos2unix --version 2>&1)
-	if [ "$check_dos2unix" == *"not found"* ]; then
-	   echo "Please install dos2unix (sudo apt-get dos2unix)"
-	   exit
-	fi
+  # check_dos2unix=$(dos2unix --version 2>&1)
+  #	if [ "$check_dos2unix" == *"not found"* ]; then
+  #	   echo "Please install dos2unix (sudo apt-get dos2unix)"
+  #	   exit
+  #	fi
   source env/bin/activate
-  dos2unix $work_dir/bugsinpy_requirements.txt
+  #dos2unix $work_dir/bugsinpy_requirements.txt
 fi
 ###Add pythonpath
 pythonpath_set=""
