@@ -1,0 +1,104 @@
+#!/bin/bash
+
+usage="-h help
+               show this help
+       -v verbose
+               shows output, output is automatically saved in /temp/test.txt
+       -c cleanup
+               cleanup /temp directory
+"
+
+verbose="0"
+fixed="0"
+
+# Creates Unix timestamp
+now=$(date +"%F-%T%Z")
+
+case $1 in
+ -[h?] | --help)
+    cat <<-____HALP
+        Usage: ${0##*/} [ --help ]
+        $usage
+____HALP
+        exit 0;;
+ -v) verbose="1";;
+ -f) fixed="1";;
+ -c)
+   rm -rfv /temp/*
+   exit 0;;
+esac
+
+mkdir -p /temp/projects
+
+count_log() {
+  errors=$(cat $1 | grep -wicE "ERRORS|error")
+  warnings=$(cat $1 | grep -wicE "warnings|warning")
+  failures=$(cat $1 | grep -wicE "FAILURES|FAILED|failure")
+  passed=$(cat $1 | grep -wicE "passed|OK|success")
+  if [[ $errors -gt 0 ]]; then
+    echo -e "${red}ERRORS: $errors$off"
+  fi
+  if [[ $warnings -gt 0 ]]; then
+    echo -e "${yellow}WARNINGS: $warnings$off"
+  fi
+  if [[ $failures -gt 0 ]]; then
+    echo -e "${purple}FAILURES: $failures$off"
+  fi
+  if [[ $passed -gt 0 ]]; then
+    echo -e "${green}PASSED: $passed$off"
+  fi
+}
+
+compile_test() {
+  bugsinpy-compile &>>/temp/compile-$now.txt
+  bugsinpy-test &>/tmp/test-$now.txt
+  cat /tmp/test-$now.txt >> /temp/test-$now.txt
+  if [[ "$verbose" == "1" ]]; then
+    cat /temp/test-$now.txt
+  fi
+  count_log /tmp/test-$now.txt
+}
+
+# Reset
+off='\033[0m'
+
+# Regular Colors
+black='\033[0;30m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+purple='\033[0;35m'
+cyan='\033[0;36m'
+white='\033[0;37m'
+
+projects=$(ls /BugsInPy/projects)
+
+echo -e "Reproducing bugs from all projects in /BugsInPy/projects\n$projects\n"
+echo -e "See details in:\n/temp/test-$now.txt\n/temp/compile-$now.txt\n/temp/checkout-$now.txt"
+
+# Iterate over the projects
+for project in $projects; do
+  # Get the number of bugs in the project
+  bugs=$(ls /BugsInPy/projects/$project/bugs | wc -l)
+
+  echo -e "\n${blue}Working $bugs bugs in project $project ... $off"
+
+  # For each bug, execute the test
+  for bug in $(seq 1 $bugs); do
+    echo "**TESTCHECK** Project: $project, Bug: $bug"
+    echo -e "\n\n\n\n\n**TESTCHECK** Project: $project, Bug: $bug" >> /temp/test-$now.txt
+    echo -e "Checkout the buggy version of bug $bug in project $project"
+    bugsinpy-checkout -p $project -v 0 -i $bug -w /temp/projects &>>/temp/checkout-$now.txt
+    cd /temp/projects/$project
+    compile_test
+    echo -e "Checkout the fixed version of bug $bug in project $project"
+    bugsinpy-checkout -p $project -v 1 -i $bug -w /temp/projects &>>/temp/checkout-$now.txt
+    compile_test
+  done
+done
+
+echo -e"\n\nAll projects executed!"
+echo -e "See details in /temp/test-$now.txt /temp/compile-$now.txt /temp/checkout-$now.txt"
+
+exit 0
