@@ -52,6 +52,11 @@ fi
 ###Remove environment if exist
 rm -r -f env/
 
+# Setup proper python version using pyenv
+bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
+pyenv install $bug_python_version
+pyenv global $bug_python_version
+
 ###Add environment
 python -m venv env
 
