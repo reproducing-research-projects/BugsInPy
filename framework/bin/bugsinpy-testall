@@ -41,7 +41,7 @@ for project in $projects; do
   echo "Working $bugs bugs in project $project ... "
 
   # For each bug, execute the test
-  for bug in $(seq 1 $bugs); do
+  for bug in $(seq $bugs); do
 
     # Test buggy version
     bugsinpy-checkout -p $project -v 0 -i $bug -w /temp/projects
