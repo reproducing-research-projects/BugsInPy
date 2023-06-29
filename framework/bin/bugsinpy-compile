@@ -49,9 +49,6 @@ fi
 #   exit
 #fi
 
-###Remove environment if exist
-rm -r -f env/
-
 ###Required to use conda activate, included in docker continuumio/miniconda3
 . /opt/conda/etc/profile.d/conda.sh
 
@@ -63,21 +60,9 @@ conda activate $bug_python_version
 # Removes unwanted git prompts
 export GIT_TERMINAL_PROMPT=0
 
-###Add environment
-python -m venv env
+# Convert text files with DOS or Mac line breaks to Unix line breaks
+dos2unix $work_dir/bugsinpy_requirements.txt
 
-###Activate environment
-if [ -d "env/Scripts" ]; then
-  source env/Scripts/activate
-else
-  #check_dos2unix=$(dos2unix --version 2>&1)
-  #if [ "$check_dos2unix" == *"not found"* ]; then
-  #   echo "Please install dos2unix (sudo apt-get dos2unix)"
-  #   exit
-  #fi
-  source env/bin/activate
-  dos2unix $work_dir/bugsinpy_requirements.txt
-fi
 ###Add pythonpath
 pythonpath_set=""
 pythonpath_without_folder=""
@@ -148,7 +133,6 @@ done
 if grep -q '[^[:space:]]' "$work_dir/bugsinpy_requirements.txt"; then
     cat "$work_dir/bugsinpy_requirements.txt" | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 pip install
 fi
-deactivate
 
 
 ###Add pythonpath
