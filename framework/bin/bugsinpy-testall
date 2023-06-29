@@ -8,6 +8,7 @@ usage="-h help
        -c cleanup
                cleanup /temp directory
 "
+
 case $1 in
  -[h?] | --help)
     cat <<-____HALP
