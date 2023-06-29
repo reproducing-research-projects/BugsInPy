@@ -65,7 +65,7 @@ for project in $projects; do
 
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
-      printf "fail" >> /temp/output.csv
+      echo "fail" >> /temp/output.csv
     else
 
       # Test fixed (1) version
