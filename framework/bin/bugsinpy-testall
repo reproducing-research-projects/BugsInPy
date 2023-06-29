@@ -1,6 +1,6 @@
 #!/bin/bash
 
-###Reproduces all the bugs for every project
+###bugsinpy-testall reproduces all the bugs for every project
 # Result in /temp/output.csv test ok (reproduced successfully) test fail (unable to reproduce)
 # Full test logs in /temp/logs.txt
 
@@ -30,9 +30,9 @@ projects=$(ls ~/BugsInPy/projects)
 echo "bugsinpy-testall reproduces all the bugs for every project"
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
-echo "see results in /temp/output.csv"
-echo "see full tests logs in /temp/logs.txt"
-echo "reproducing all the bugs for every project please wait ..."
+echo "See results in /temp/output.csv"
+echo "See full tests logs in /temp/logs.txt"
+echo "Reproducing all the bugs for every project please wait ..."
 echo "---------------"
 echo "repo,bugid,test" > /temp/output.csv
 echo "repo,bugid,test"
