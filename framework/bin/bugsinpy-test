@@ -10,7 +10,6 @@ usage="-w work_dir
              Run the test case that relevant from bugs (Default)
 "
 
-
 run_all="0"
 relevant="0"
 case $1 in
@@ -58,6 +57,13 @@ if [[ "$relevant" == "1" ]]; then
    run_all="0"
    single_test=""
 fi
+
+###Required to use conda activate, included in docker continuumio/miniconda3
+. /opt/conda/etc/profile.d/conda.sh
+
+###Setup proper python version already installed in bugsinpy-compile using miniconda
+bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
+conda activate $bug_python_version
 
 ###Activate environment
 cd "$work_dir"
