@@ -30,6 +30,8 @@ echo "See results in output.csv"
 
 echo "repo,bugid,test" >> /temp/output.csv
 
+export GIT_TERMINAL_PROMPT=0
+
 # Iterate over the projects
 for project in $projects; do
 
