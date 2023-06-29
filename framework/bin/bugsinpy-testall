@@ -11,10 +11,10 @@ usage="-h help
 
 case $1 in
   -[h?] | --help)
-    cat <<-HELP
+    cat <<-_HELP
         Usage: ${0##*/} [ --help ]
         $usage
-    HELP
+    _HELP
     exit 0;;
   -c | --cleanup)
    rm -rfv /temp/*
