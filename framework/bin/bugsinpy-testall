@@ -40,13 +40,6 @@ tail -f /temp/output.csv&
 
 export GIT_TERMINAL_PROMPT=0
 
-checkout_compile_test() {
-  bugsinpy-checkout -p $1 -v $2 -i $3 -w /temp/projects &>> /temp/logs.txt
-  cd /temp/projects/$1
-  bugsinpy-compile &>> /temp/logs.txt
-  bugsinpy-test &>> /temp/logs.txt
-}
-
 # Iterate over the projects
 for project in $projects; do
 
@@ -61,7 +54,10 @@ for project in $projects; do
     printf "$project,$bug," >> /temp/output.csv
 
     # Test buggy (0) version
-    checkout_compile_test $project 0 $bug
+    bugsinpy-checkout -p $project -v 0 -i $bug -w /temp/projects &>> /temp/logs.txt
+    cd /temp/projects/$project
+    bugsinpy-compile &>> /temp/logs.txt
+    bugsinpy-test &>> /temp/logs.txt
 
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
@@ -69,7 +65,10 @@ for project in $projects; do
     else
 
       # Test fixed (1) version
-      checkout_compile_test $project 1 $bug
+      bugsinpy-checkout -p $project -v 1 -i $bug -w /temp/projects &>> /temp/logs.txt
+      cd /temp/projects/$project
+      bugsinpy-compile &>> /temp/logs.txt
+      bugsinpy-test &>> /temp/logs.txt
   
       # Test execution output and make sure fixed version passes test ok
       if [ -f "bugsinpy_fail.txt" ]; then
