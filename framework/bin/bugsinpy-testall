@@ -21,14 +21,16 @@ ____HALP
         exit 0;;
 esac
 
+touch /temp/output.csv
+
+echo "repo,bugid,test" >> /temp/output.csv
+
 projects=$(ls ~/BugsInPy/projects)
 
 echo "Reproducing bugs from all projects"
 echo "$projects"
 
 echo "See results in output.csv"
-
-echo "repo,bugid,test" >> /temp/output.csv
 
 export GIT_TERMINAL_PROMPT=0
 
@@ -54,21 +56,20 @@ for project in $projects; do
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
       echo "fail" >> /temp/output.csv
-      break
+    else
+
+      # Test fixed version
+      bugsinpy-checkout -p $project -v 1 -i $bug -w /temp/projects
+      bugsinpy-compile
+      bugsinpy-test
+  
+      # Test execution output and make sure fixed version passes test ok
+      if [ -f "bugsinpy_fail.txt" ]; then
+        echo "fail" >> /temp/output.csv
+      else
+        echo "ok" >> /temp/output.csv
+      fi
     fi
-
-    # Test fixed version
-    bugsinpy-checkout -p $project -v 1 -i $bug -w /temp/projects
-    bugsinpy-compile
-    bugsinpy-test
-
-    # Test execution output and make sure fixed version passes test ok
-    if [ -f "bugsinpy_fail.txt" ]; then
-      echo "fail" >> /temp/output.csv
-      break
-    fi
-    echo "ok" >> /temp/output.csv
-
   done
 done
 
