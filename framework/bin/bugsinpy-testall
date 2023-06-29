@@ -23,7 +23,7 @@ esac
 
 projects=$(ls ~/BugsInPy/projects)
 
-echo "Reproducing bugs from all projects in /BugsInPy/projects\n$projects\n"
+echo "Reproducing bugs from all projects $projects"
 echo "See results in output.csv"
 echo "repo,bugid,test" > output.csv
 
