@@ -1,4 +1,4 @@
-#!/bin/bash -c
+#!/bin/bash
 
 ###Rreproduce all the bugs for every project
 # Result is shown in /temp/output.csv
