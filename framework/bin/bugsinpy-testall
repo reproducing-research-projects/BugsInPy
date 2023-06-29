@@ -1,6 +1,6 @@
 #!/bin/bash
 
-###Rreproduce all the bugs for every project
+###Reproduce all the bugs for every project
 # Result in /temp/output.csv test ok (reproduced successfully) test fail (unable to reproduce)
 # Full test logs in /temp/logs.txt
 
@@ -29,11 +29,9 @@ echo "repo,bugid,test" > /temp/output.csv
 
 projects=$(ls ~/BugsInPy/projects)
 
-echo "Reproducing bugs from all projects"
+echo "Reproducing all the bugs for every project please wait ..."
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
-
-tail -f /temp/output.csv&
 
 export GIT_TERMINAL_PROMPT=0
 
@@ -43,12 +41,13 @@ for project in $projects; do
   # Get the number of bugs in the project
   bugs=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
 
-  echo "Working $bugs bugs in project $project ... "  &>> /temp/logs.txt
+  echo "Working $bugs bugs in project $project"  &>> /temp/logs.txt
 
   # For each bug, execute the test
   for bug in $(seq $bugs); do
 
     printf "$project,$bug," >> /temp/output.csv
+    printf "$project,$bug,"
 
     # Test buggy (0) version
     bugsinpy-checkout -p $project -v 0 -i $bug -w /temp/projects &>> /temp/logs.txt
@@ -59,6 +58,7 @@ for project in $projects; do
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
       echo "fail" >> /temp/output.csv
+      echo "fail"
     else
 
       # Test fixed (1) version
@@ -66,17 +66,18 @@ for project in $projects; do
       cd /temp/projects/$project
       bugsinpy-compile &>> /temp/logs.txt
       bugsinpy-test &>> /temp/logs.txt
-  
+
       # Test execution output and make sure fixed version passes test ok
       if [ -f "bugsinpy_fail.txt" ]; then
         echo "fail" >> /temp/output.csv
+        echo "fail"
       else
         echo "ok" >> /temp/output.csv
+        echo "ok"
       fi
     fi
   done
 done
-
 echo "see results in /temp/output.csv"
 echo "see full tests logs in /temp/logs.txt"
 echo "done."
