@@ -17,8 +17,8 @@ case $1 in
 ____HALP
         exit 0;;
   -c | --cleanup)
-     rm -rfv /temp/*
-     exit 0;;
+    rm -rfv /temp/*
+        exit 0;;
 esac
 
 projects=$(ls ~/BugsInPy/projects)
