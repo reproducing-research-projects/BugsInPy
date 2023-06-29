@@ -68,13 +68,7 @@ conda activate $bug_python_version
 # Removes unwanted git prompts
 export GIT_TERMINAL_PROMPT=0
 
-###Activate environment
 cd "$work_dir"
-if [ -d "env/Scripts" ]; then
-  source env/Scripts/activate
-else
-  source env/bin/activate
-fi
 
 pytest="0"
 #read file run_test.sh
@@ -187,4 +181,4 @@ elif [ "$single_test" != "" ]; then
 fi
 
 ###Deactivate the environment
-deactivate
+conda deactivate
