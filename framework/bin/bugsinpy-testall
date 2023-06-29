@@ -30,6 +30,9 @@ projects=$(ls ~/BugsInPy/projects)
 echo "Reproducing all the bugs for every project please wait ..."
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
+echo "see results in /temp/output.csv"
+echo "see full tests logs in /temp/logs.txt"
+echo "---------------"
 echo "repo,bugid,test" > /temp/output.csv
 echo "repo,bugid,test"
 
@@ -78,6 +81,5 @@ for project in $projects; do
     fi
   done
 done
-echo "see results in /temp/output.csv"
-echo "see full tests logs in /temp/logs.txt"
+
 echo "done."
