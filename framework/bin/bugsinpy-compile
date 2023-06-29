@@ -54,8 +54,9 @@ fi
 
 ###Setup proper python version using miniconda
 bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
-conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix decorator future six python_toolbox
+conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix
 conda activate $bug_python_version
+pip install decorator future six python_toolbox
 
 # Removes unwanted git prompts
 export GIT_TERMINAL_PROMPT=0
