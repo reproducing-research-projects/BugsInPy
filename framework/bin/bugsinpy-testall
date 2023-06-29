@@ -41,7 +41,7 @@ tail -f /temp/output.csv&
 export GIT_TERMINAL_PROMPT=0
 
 checkout_compile_test() {
-  bugsinpy-checkout -p $1 -v $2 -i $3 -w /temp/projects
+  bugsinpy-checkout -p $1 -v $2 -i $3 -w /temp/projects &>> /temp/logs.txt
   cd /temp/projects/$1
   bugsinpy-compile &>> /temp/logs.txt
   bugsinpy-test &>> /temp/logs.txt
