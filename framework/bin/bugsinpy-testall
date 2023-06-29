@@ -23,12 +23,16 @@ esac
 
 projects=$(ls ~/BugsInPy/projects)
 
-echo "Reproducing bugs from all projects $projects"
+echo "Reproducing bugs from all projects"
+echo "$projects"
+
 echo "See results in output.csv"
+
 echo "repo,bugid,test" > /temp/output.csv
 
 # Iterate over the projects
 for project in $projects; do
+
   # Get the number of bugs in the project
   bugs=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
 
@@ -45,7 +49,7 @@ for project in $projects; do
 
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
-      echo "$project,$bug,fail" >> output.csv
+      echo "$project,$bug,fail" >> /temp/output.csv
       break
     fi
 
