@@ -45,7 +45,7 @@ for project in $projects; do
 
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
-      echo "$project,$bug,fail" > output.csv
+      echo "$project,$bug,fail" >> output.csv
       break
     fi
 
@@ -56,9 +56,9 @@ for project in $projects; do
 
     # Test execution output and make sure fixed version passes test ok
     if [ -f "bugsinpy_fail.txt" ]; then
-      echo "$project,$bug,fail" > output.csv
+      echo "$project,$bug,fail" >> output.csv
     else
-      echo "$project,$bug,ok" > output.csv
+      echo "$project,$bug,ok" >> output.csv
     fi
 
   done
