@@ -57,8 +57,9 @@ rm -r -f env/
 
 ###Setup proper python version using miniconda
 bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
-conda create -n $bug_python_version -y python=$bug_python_version
+conda create -n $bug_python_version -y python=$bug_python_version pytest
 conda activate $bug_python_version
+pip install python-toolbox
 
 ###Add environment
 python -m venv env
