@@ -1,9 +1,11 @@
 #!/bin/bash
 
 ###Rreproduce all the bugs for every project
-# Result is shown in /temp/output.csv
+# Result in /temp/output.csv test ok (reproduced successfully) test fail (unable to reproduce)
+# Full test logs in /temp/logs.txt
 
-usage="-h
+usage="
+       -h
              show this help
        -c
              cleanup /temp directory
@@ -31,10 +33,19 @@ projects=$(ls ~/BugsInPy/projects)
 
 echo "Reproducing bugs from all projects"
 echo "$projects"
+echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
+echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
 
-echo "See results in output.csv"
+tail -f /temp/output.csv&
 
 export GIT_TERMINAL_PROMPT=0
+
+checkout_compile_test() {
+  bugsinpy-checkout -p $1 -v $2 -i $3 -w /temp/projects
+  cd /temp/projects/$1
+  bugsinpy-compile &>> /temp/logs.txt
+  bugsinpy-test &>> /temp/logs.txt
+}
 
 # Iterate over the projects
 for project in $projects; do
@@ -42,28 +53,23 @@ for project in $projects; do
   # Get the number of bugs in the project
   bugs=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
 
-  echo "Working $bugs bugs in project $project ... "
+  echo "Working $bugs bugs in project $project ... "  &>> /temp/logs.txt
 
   # For each bug, execute the test
   for bug in $(seq $bugs); do
 
     printf "$project,$bug," >> /temp/output.csv
 
-    # Test buggy version
-    bugsinpy-checkout -p $project -v 0 -i $bug -w /temp/projects
-    cd /temp/projects/$project
-    bugsinpy-compile
-    bugsinpy-test
+    # Test buggy (0) version
+    checkout_compile_test $project 0 $bug
 
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
-      echo "fail" >> /temp/output.csv
+      printf "fail" >> /temp/output.csv
     else
 
-      # Test fixed version
-      bugsinpy-checkout -p $project -v 1 -i $bug -w /temp/projects
-      bugsinpy-compile
-      bugsinpy-test
+      # Test fixed (1) version
+      checkout_compile_test $project 1 $bug
   
       # Test execution output and make sure fixed version passes test ok
       if [ -f "bugsinpy_fail.txt" ]; then
@@ -76,4 +82,5 @@ for project in $projects; do
 done
 
 echo "see results in /temp/output.csv"
+echo "see full tests logs in /temp/logs.txt"
 echo "done."
