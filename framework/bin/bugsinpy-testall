@@ -8,14 +8,13 @@ usage="-h help
        -c cleanup
                cleanup /temp directory
 "
-
 case $1 in
-  -[h?] | --help)
-    cat <<-_HELP
+ -[h?] | --help)
+    cat <<-____HALP
         Usage: ${0##*/} [ --help ]
         $usage
-    _HELP
-    exit 0;;
+____HALP
+        exit 0;;
   -c | --cleanup)
    rm -rfv /temp/*
    exit 0;;
