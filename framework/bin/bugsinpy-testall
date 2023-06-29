@@ -21,6 +21,8 @@ ____HALP
         exit 0;;
 esac
 
+mkdir -p /temp/projects
+
 touch /temp/output.csv
 
 echo "repo,bugid,test" >> /temp/output.csv
