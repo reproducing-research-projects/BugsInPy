@@ -52,7 +52,16 @@ fi
 ###Remove environment if exist
 rm -r -f env/
 
-# Setup proper python version using miniconda
+###Check for miniconda
+if ! [ -x "$(command -v conda)" ]; then
+  echo 'Error: miniconda is not installed.' >&2
+  exit 1
+fi
+
+###Require to use conda activate, included in docker continuumio/miniconda3
+. /opt/conda/etc/profile.d/conda.sh
+
+###Setup proper python version using miniconda
 bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
 conda create -n $bug_python_version -y python=$bug_python_version
 conda activate $bug_python_version
