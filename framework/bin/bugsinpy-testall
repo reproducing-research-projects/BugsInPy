@@ -25,7 +25,7 @@ projects=$(ls ~/BugsInPy/projects)
 
 echo "Reproducing bugs from all projects $projects"
 echo "See results in output.csv"
-echo "repo,bugid,test" > output.csv
+echo "repo,bugid,test" > /temp/output.csv
 
 # Iterate over the projects
 for project in $projects; do
@@ -56,13 +56,13 @@ for project in $projects; do
 
     # Test execution output and make sure fixed version passes test ok
     if [ -f "bugsinpy_fail.txt" ]; then
-      echo "$project,$bug,fail" >> output.csv
+      echo "$project,$bug,fail" >> /temp/output.csv
     else
-      echo "$project,$bug,ok" >> output.csv
+      echo "$project,$bug,ok" >> /temp/output.csv
     fi
 
   done
 done
 
-echo "see results in output.csv"
+echo "see results in /temp/output.csv"
 echo "done."
