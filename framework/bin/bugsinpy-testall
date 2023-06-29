@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -c
 
 ###Rreproduce all the bugs for every project
 # Result is shown in /temp/output.csv
@@ -28,7 +28,7 @@ echo "$projects"
 
 echo "See results in output.csv"
 
-echo "repo,bugid,test" > /temp/output.csv
+echo "repo,bugid,test" >> /temp/output.csv
 
 # Iterate over the projects
 for project in $projects; do
