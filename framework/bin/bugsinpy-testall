@@ -3,10 +3,10 @@
 ###Rreproduce all the bugs for every project
 # Result is shown in /temp/output.csv
 
-usage="-h help
-               show this help
-       -c cleanup
-               cleanup /temp directory
+usage="-h
+             show this help
+       -c
+             cleanup /temp directory
 "
 
 case $1 in
@@ -16,7 +16,7 @@ case $1 in
         $usage
 ____HALP
         exit 0;;
-  -c | --cleanup)
+ -c)
     rm -rfv /temp/*
         exit 0;;
 esac
