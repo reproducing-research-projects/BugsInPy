@@ -25,14 +25,11 @@ esac
 
 mkdir -p /temp/projects
 
-touch /temp/output.csv
-
-echo "repo,bugid,test" >> /temp/output.csv
+echo "repo,bugid,test" > /temp/output.csv
 
 projects=$(ls ~/BugsInPy/projects)
 
 echo "Reproducing bugs from all projects"
-echo "$projects"
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
 
