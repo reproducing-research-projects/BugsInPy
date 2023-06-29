@@ -57,7 +57,7 @@ rm -r -f env/
 
 ###Setup proper python version using miniconda
 bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
-conda create -n $bug_python_version -y python=$bug_python_version pytest
+conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix
 conda activate $bug_python_version
 
 # Removes unwanted git prompts
@@ -70,11 +70,11 @@ python -m venv env
 if [ -d "env/Scripts" ]; then
   source env/Scripts/activate
 else
-  check_dos2unix=$(dos2unix --version 2>&1)
-  if [ "$check_dos2unix" == *"not found"* ]; then
-     echo "Please install dos2unix (sudo apt-get dos2unix)"
-     exit
-  fi
+  #check_dos2unix=$(dos2unix --version 2>&1)
+  #if [ "$check_dos2unix" == *"not found"* ]; then
+  #   echo "Please install dos2unix (sudo apt-get dos2unix)"
+  #   exit
+  #fi
   source env/bin/activate
   dos2unix $work_dir/bugsinpy_requirements.txt
 fi
