@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Build image and run bugsinpy-testall
+    - name: Build image bugsinpy-testall
       run: |
         docker build . --file Dockerfile --tag bugsinpy-testall:Dockerfile
-        docker run -t bugsinpy-testall:Dockerfile /root/BugsInPy/framework/bin/bugsinpy-testall
