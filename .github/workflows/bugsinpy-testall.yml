@@ -9,5 +9,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build image and run bugsinpy-testall
       run: |
-        docker build -t "bugsinpy-testall:Dockerfile" .
-        docker run -t bugsinpy-testall:Dockerfile bugsinpy-testall
+        docker build . --file Dockerfile --tag bugsinpy-testall:Dockerfile
+        docker run -t bugsinpy-testall:Dockerfile /root/bugsinpy-testall
