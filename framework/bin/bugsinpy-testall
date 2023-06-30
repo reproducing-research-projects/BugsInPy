@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###bugsinpy-testall reproduces all the bugs for every project
-# Result in /temp/output.csv test ok (reproduced successfully) test fail (unable to reproduce)
+# test ok (reproduced successfully) test fail (unable to reproduce)
 # Full test logs in /temp/logs.txt
 
 usage="
@@ -30,11 +30,9 @@ projects=$(ls ~/BugsInPy/projects)
 echo "bugsinpy-testall reproduces all the bugs for every project"
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
-echo "See results in /temp/output.csv"
 echo "See full tests logs in /temp/logs.txt"
 echo "Reproducing all the bugs for every project please wait ..."
 echo "---------------"
-echo "repo,bugid,test" > /temp/output.csv
 echo "repo,bugid,test"
 
 export GIT_TERMINAL_PROMPT=0
@@ -50,7 +48,6 @@ for project in $projects; do
   # For each bug, execute the test
   for bug in $(seq $bugs); do
 
-    printf "$project,$bug," >> /temp/output.csv
     printf "$project,$bug,"
 
     # Test buggy (0) version
@@ -61,7 +58,6 @@ for project in $projects; do
 
     # Make sure a failure is detected in buggy version and bug is reproducible
     if [ ! -f "bugsinpy_fail.txt" ]; then
-      echo "fail" >> /temp/output.csv
       echo "fail"
     else
 
@@ -73,10 +69,8 @@ for project in $projects; do
 
       # Test execution output and make sure fixed version passes test ok
       if [ -f "bugsinpy_fail.txt" ]; then
-        echo "fail" >> /temp/output.csv
         echo "fail"
       else
-        echo "ok" >> /temp/output.csv
         echo "ok"
       fi
     fi
