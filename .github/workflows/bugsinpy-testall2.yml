@@ -1,0 +1,14 @@
+name: bugsinpy-testall
+
+on: workflow_call
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: continuumio/miniconda3
+    steps:
+      - run: |
+         apt-get update
+         apt-get -y install git build-essential
+         git clone https://github.com/faustinoaq/BugsInPy ~/BugsInPy
+         ~/BugsInPy/framework/bin/bugsinpy-testall
