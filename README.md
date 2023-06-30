@@ -21,6 +21,7 @@ The objective of this work is to support reproducible research on real-world Pyt
 | coverage | Run code coverage analysis from test case that relevant with bug, single-test case from input user, or all test cases |
 | mutation | Run mutation analysis from input user or test case that relevant with bug                                             |
 | fuzz     | Run a test input generation from specific bug                                                                         |
+| testall  | Reproduce all bugs buggy and fixed version for all projects                                                           |
 
 # Example BugsInPy Command
 
@@ -34,7 +35,9 @@ The objective of this work is to support reproducible research on real-world Pyt
 
 # Example BugsInPy Docker
 
-Prerequisite is `docker` please se [documentation](https://docs.docker.com/engine/install/)
+The docker enviroments make sure all the dependencies and specific python versions are met by using the [miniconda3 image](https://hub.docker.com/r/continuumio/miniconda3)
+
+Prerequisite is `docker` please see [documentation](https://docs.docker.com/engine/install/)
 
 - Build docker image using `Dockerfile`:
   - `docker build -t "bugsinpy-testall:Dockerfile" .`
