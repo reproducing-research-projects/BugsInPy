@@ -65,9 +65,6 @@ fi
 bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
 conda activate $bug_python_version
 
-# Removes unwanted git prompts
-export GIT_TERMINAL_PROMPT=0
-
 cd "$work_dir"
 
 pytest="0"
