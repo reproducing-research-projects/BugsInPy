@@ -1,13 +1,14 @@
-name: bugsinpy-testall
+name: bugsinpy-testall 🐍
 
-on: workflow_dispatch
+on: workflow_call
 
 jobs:
-  testall:
+  test:
     runs-on: ubuntu-latest
+    container: continuumio/miniconda3
     steps:
-    - uses: actions/checkout@v3
-    - name: Build image bugsinpy-testall
-      run: |
-        docker build . --file Dockerfile --tag bugsinpy-testall:Dockerfile
-        docker run -t bugsinpy-testall:Dockerfile ~/BugsInPy/framework/bin/bugsinpy-testall
+      - run: |
+         apt-get update
+         apt-get -y install git build-essential
+         git clone https://github.com/faustinoaq/BugsInPy ~/BugsInPy
+         ~/BugsInPy/framework/bin/bugsinpy-testall
