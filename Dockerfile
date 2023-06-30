@@ -5,5 +5,5 @@ RUN apt-get update
 RUN apt-get -y install git build-essential
 RUN git clone https://github.com/faustinoaq/BugsInPy ~/BugsInPy
 RUN echo "export PATH=$PATH:~/BugsInPy/framework/bin" >> ~/.bashrc
-RUN mkdir -p /temp/projects
+RUN bugsinpy-testall
 CMD ["/usr/bin/bash"]
