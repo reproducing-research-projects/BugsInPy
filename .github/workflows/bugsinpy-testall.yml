@@ -10,4 +10,4 @@ jobs:
     - name: Build image and run bugsinpy-testall
       run: |
         docker build . --file Dockerfile --tag bugsinpy-testall:Dockerfile
-        docker run -t bugsinpy-testall:Dockerfile /root/bugsinpy-testall
+        docker run -t bugsinpy-testall:Dockerfile /root/BugsInPy/framework/bin/bugsinpy-testall
