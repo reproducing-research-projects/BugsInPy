@@ -58,9 +58,6 @@ conda create -n $bug_python_version -y python=$bug_python_version pytest dos2uni
 conda activate $bug_python_version
 pip install decorator future six python_toolbox
 
-# Removes unwanted git prompts
-export GIT_TERMINAL_PROMPT=0
-
 # Convert text files with DOS or Mac line breaks to Unix line breaks
 dos2unix $work_dir/bugsinpy_requirements.txt
 
