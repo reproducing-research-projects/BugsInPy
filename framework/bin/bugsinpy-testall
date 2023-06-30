@@ -23,6 +23,8 @@ ____HALP
         exit 0;;
 esac
 
+source ~/.bashrc
+
 mkdir -p ~/projects
 
 projects=$(ls ~/BugsInPy/projects)
