@@ -1,4 +1,4 @@
-name: bugsinpy-testall 🐍
+name: bugsinpy-testall
 
 on: workflow_call
 
