@@ -31,8 +31,6 @@ case $1 in
     echo $projects;;
 esac
 
-source ~/.bashrc
-
 mkdir -p ~/projects
 
 if [[ "$projects" != "" ]]; then
