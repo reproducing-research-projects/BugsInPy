@@ -27,8 +27,7 @@ case $1 in
     fi
     exit 0;;
  -p)
-    projects="${@:2}"
-    echo $projects;;
+    projects="${@:2}";;
 esac
 
 mkdir -p ~/projects
