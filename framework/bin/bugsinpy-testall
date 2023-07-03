@@ -51,6 +51,9 @@ if [[ ! -f "$HOME/projects/output.csv" ]]; then
   echo "repo,bugid,test" | tee -a ~/projects/output.csv
 fi
 
+# Cleanup unfinished reproductions
+sed -i '/[0-9]$/d' ~/projects/output.cs
+
 # Iterate over the projects
 for project in $projects; do
 
