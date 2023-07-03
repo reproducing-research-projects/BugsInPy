@@ -52,7 +52,7 @@ if [[ ! -f "$HOME/projects/output.csv" ]]; then
 fi
 
 # Cleanup unfinished reproductions
-sed -i '/[0-9]$/d' ~/projects/output.cs
+sed -i '/[0-9]$/d' ~/projects/output.csv
 
 # Iterate over the projects
 for project in $projects; do
