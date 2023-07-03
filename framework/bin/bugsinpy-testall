@@ -11,7 +11,10 @@ usage="
        -c
              cleanup ~ directory
        -p
-             specify projects and bugs to test project:start:end or project:end ex pandas:75:100 black:5
+             specify multiple project:start:end or project:end or project:
+             Ex;
+             pandas:75:100 (reproduce tests 75 to 100 for pandas)
+             black:5 ansible: (only reproduces test 5 for black and all for ansible)
 "
 
 case $1 in
@@ -60,9 +63,11 @@ for project in $projects; do
     start=$(echo $project | cut -d ":" -f 2)
     finish=$(echo $project | cut -d ":" -f 3)
     project=$(echo $project | cut -d ":" -f 1)
-    if [[ "$finish" == "" ]]; then
-      finish=$start
+    if [[ "$start" == "" ]]; then
+      finish=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
       start=1
+    elif [[ "$finish" == "" ]]; then
+      finish=$start
     fi
   fi
 
