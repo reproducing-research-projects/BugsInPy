@@ -45,7 +45,7 @@ echo "test 'ok' means reproduced successfully, buggy version failed and fixed ve
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
 echo "See full tests logs in ~/logs.txt"
 echo "See results in ~/projects/output.csv"
-echo "Reproducing all the bugs for every project please wait ..."
+echo "Reproducing bugs please wait ..."
 echo "---------------"
 if [[ ! -f "$HOME/projects/output.csv" ]]; then
   echo "repo,bugid,test" | tee -a ~/projects/output.csv
