@@ -2,76 +2,107 @@
 
 ###bugsinpy-testall reproduces all the bugs for every project
 # test ok (reproduced successfully) test fail (unable to reproduce)
-# Full test logs in ~/logs.txt
+# Full test logs in ~/projects/logs.txt
+# Output in ~/projects/output.csv
 
 usage="
        -h
              show this help
        -c
              cleanup ~ directory
+       -p
+             specify projects and bugs to test project:start:end or project:end ex pandas:75:100 black:5
 "
 
 case $1 in
  -[h?] | --help)
-    cat <<-____HALP
-        Usage: ${0##*/} [ --help ]
-        $usage
-____HALP
-        exit 0;;
+    echo "Usage: ${0##*/} [ --help ]"
+    echo "$usage"
+    exit 0;;
  -c)
-    rm -rfv ~/projects
-        exit 0;;
+    read -p "Are you sure? [y/n]" -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      rm -rfv ~/projects
+    fi
+    exit 0;;
+ -p)
+    projects="${@:2}"
+    echo $projects;;
 esac
 
 source ~/.bashrc
 
 mkdir -p ~/projects
 
-projects=$(ls ~/BugsInPy/projects)
+if [[ "$projects" != "" ]]; then
+  projects=$(ls ~/BugsInPy/projects)
+fi
 
 echo "bugsinpy-testall reproduces all the bugs for every project"
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
 echo "See full tests logs in ~/logs.txt"
+echo "See results in ~/projects/output.csv"
 echo "Reproducing all the bugs for every project please wait ..."
 echo "---------------"
-echo "repo,bugid,test"
+echo "repo,bugid,test" | tee -a ~/projects/output.csv
 
 # Iterate over the projects
 for project in $projects; do
 
   # Get the number of bugs in the project
-  bugs=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
+  echo $projects | grep -q ":"
+  if [[ $? -ne 0 ]]; then
+    start=1
+    finish=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
+  else
+    start=$(echo $project | cut -d ":" -f 2)
+    finish=$(echo $project | cut -d ":" -f 3)
+    project=$(echo $project | cut -d ":" -f 1)
+    if [[ "$finish" == "" ]]; then
+      finish=$start
+      start=1
+    fi
+  fi
 
   echo "Working $bugs bugs in project $project"  &>> ~/logs.txt
 
   # For each bug, execute the test
-  for bug in $(seq $bugs); do
+  for bug in $(seq $start $finish); do
 
-    printf "$project,$bug,"
-
-    # Test buggy (0) version
-    bugsinpy-checkout -p $project -v 0 -i $bug -w ~/projects &>> ~/logs.txt
-    cd ~/projects/$project
-    bugsinpy-compile &>> ~/logs.txt
-    bugsinpy-test &>> ~/logs.txt
-
-    # Make sure a failure is detected in buggy version and bug is reproducible
-    if [ ! -f "bugsinpy_fail.txt" ]; then
-      echo "fail"
+    grep -q "$project,$bug" ~/projects/output.csv
+    if [[ $? -eq 0 ]]; then
+      echo "$project bug $bug is alreasy tested, remove entry manually in csv file or try -c to cleanup all"
+    elif [[ ! -d "~/BugsInPy/projects/$project/bugs/$bug" ]]; then
+      echo "$project has no bug $bug yet, skipping ..." &>> ~/logs.txt
     else
 
-      # Test fixed (1) version
-      bugsinpy-checkout -p $project -v 1 -i $bug -w ~/projects &>> ~/logs.txt
+      printf "$project,$bug," | tee -a ~/projects/output.csv
+
+      # Test buggy (0) version
+      bugsinpy-checkout -p $project -v 0 -i $bug -w ~/projects &>> ~/logs.txt
       cd ~/projects/$project
       bugsinpy-compile &>> ~/logs.txt
       bugsinpy-test &>> ~/logs.txt
 
-      # Test execution output and make sure fixed version passes test ok
-      if [ -f "bugsinpy_fail.txt" ]; then
-        echo "fail"
+      # Make sure a failure is detected in buggy version and bug is reproducible
+      if [ ! -f "bugsinpy_fail.txt" ]; then
+        echo "fail" | tee -a ~/projects/output.csv
       else
-        echo "ok"
+
+        # Test fixed (1) version
+        bugsinpy-checkout -p $project -v 1 -i $bug -w ~/projects &>> ~/logs.txt
+        cd ~/projects/$project
+        bugsinpy-compile &>> ~/logs.txt
+        bugsinpy-test &>> ~/logs.txt
+
+        # Test execution output and make sure fixed version passes test ok
+        if [ -f "bugsinpy_fail.txt" ]; then
+          echo "fail" | tee -a ~/projects/output.csv
+        else
+          echo "ok" | tee -a ~/projects/output.csv
+        fi
       fi
     fi
   done
