@@ -43,10 +43,7 @@ echo "See full tests logs in ~/logs.txt"
 echo "See results in ~/projects/output.csv"
 echo "Reproducing all the bugs for every project please wait ..."
 echo "---------------"
-grep "repo,bugid,test" ~/projects/output.csv
-if [[ $? -ne 0 ]]; then
-  echo "repo,bugid,test" | tee ~/projects/output.csv
-fi
+echo "repo,bugid,test" | tee ~/projects/output.csv
 
 # Iterate over the projects
 for project in $projects; do
