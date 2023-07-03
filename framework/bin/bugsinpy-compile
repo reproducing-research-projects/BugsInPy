@@ -54,10 +54,7 @@ fi
 
 ###Setup proper python version using miniconda
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
-conda env list | grep -q $bug_python_version
-if [[ $? -ne 0 ]]; then
-   conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix
-fi
+conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix
 conda activate $bug_python_version
 pip install decorator future six python_toolbox
 
