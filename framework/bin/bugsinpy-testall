@@ -32,7 +32,8 @@ esac
 
 mkdir -p ~/projects
 
-if [[ "$projects" != "" ]]; then
+echo $projects | grep -q ":"
+if [[ $? -ne 0 ]]; then
   projects=$(ls ~/BugsInPy/projects)
 fi
 
