@@ -58,7 +58,7 @@ conda create -n $bug_python_version -y python=$bug_python_version pytest dos2uni
 conda activate $bug_python_version
 echo $work_dir | grep -q matplotlib
 if [[ $? -eq 0 ]]; then
-   conda install -c conda-forge matplotlib=2.2.4
+   conda install -y -c conda-forge matplotlib=2.2.4
 fi
 pip install decorator future six python_toolbox
 
