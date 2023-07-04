@@ -56,7 +56,10 @@ fi
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
 conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix
 conda activate $bug_python_version
-conda install -c conda-forge matplotlib=2.2.5
+echo $work_dir | grep -q matplotlib
+if [[ $? -eq 0 ]]; then
+   conda install -c conda-forge matplotlib=2.2.5
+fi
 pip install decorator future six python_toolbox
 
 # Convert text files with DOS or Mac line breaks to Unix line breaks
