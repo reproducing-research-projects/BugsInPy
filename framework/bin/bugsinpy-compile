@@ -54,9 +54,9 @@ fi
 
 ###Setup proper python version using miniconda
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
-conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix
+conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix matplotlib
 conda activate $bug_python_version
-pip install decorator future six python_toolbox numpy pyparsing cycler pandas kiwisolver
+pip install decorator future six python_toolbox
 
 # Convert text files with DOS or Mac line breaks to Unix line breaks
 dos2unix $work_dir/bugsinpy_requirements.txt
