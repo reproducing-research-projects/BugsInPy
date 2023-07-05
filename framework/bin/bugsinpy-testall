@@ -82,48 +82,51 @@ for project in $projects; do
     grep "$project,$bug," ~/projects/output.csv
     if [[ $? -eq 0 ]]; then
       echo "$project bug $bug is already tested, remove entry manually in output.csv file or try -c to cleanup all"  &>> ~/logs.txt
-    elif [[ ! -d "$HOME/BugsInPy/projects/$project/bugs/$bug" ]]; then
-      echo "$project has no bug $bug yet, skipping ..." &>> ~/logs.txt
     else
-
-      printf "$project,$bug" | tee -a ~/projects/output.csv
-
-      # Test buggy (0) version
-      bugsinpy-checkout -p $project -v 0 -i $bug -w ~/projects &>> ~/logs.txt
-      cd ~/projects/$project
-      ###Required to use conda activate, included in docker continuumio/miniconda3
-      . /opt/conda/etc/profile.d/conda.sh &>> ~/logs.txt
-      ###Setup proper python version already installed in bugsinpy-compile using miniconda
-      bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info") &>> ~/logs.txt
-      conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix  &>> ~/logs.txt
-      # TODO: Develop custom fixes for failing libraries
-      # echo $work_dir | grep -q xyz
-      # if [[ $? -eq 0 ]]; then
-      #    conda install -y -c conda-forge xyz=2.2.5
-      # fi
-      pip install decorator future six python_toolbox &>> ~/logs.txt
-      conda activate $bug_python_version &>> ~/logs.txt
-      bugsinpy-compile &>> ~/logs.txt
-      bugsinpy-test &>> ~/logs.txt
-
-      # Make sure a failure is detected in buggy version and bug is reproducible
-      if [ ! -f "bugsinpy_fail.txt" ]; then
-        echo ",fail" | tee -a ~/projects/output.csv
+      if [[ ! -d "$HOME/BugsInPy/projects/$project/bugs/$bug" ]]; then
+        echo "$project has no bug $bug yet, skipping ..." &>> ~/logs.txt
       else
 
-        # Test fixed (1) version
-        bugsinpy-checkout -p $project -v 1 -i $bug -w ~/projects &>> ~/logs.txt
+        printf "$project,$bug" | tee -a ~/projects/output.csv
+
+        # Test buggy (0) version
+        bugsinpy-checkout -p $project -v 0 -i $bug -w ~/projects &>> ~/logs.txt
         cd ~/projects/$project
+        ###Required to use conda activate, included in docker continuumio/miniconda3
+        . /opt/conda/etc/profile.d/conda.sh &>> ~/logs.txt
+        ###Setup proper python version already installed using miniconda
+        bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info") &>> ~/logs.txt
+        conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix  &>> ~/logs.txt
+        # TODO: Develop custom fixes for failing libraries
+        # echo $work_dir | grep -q xyz
+        # if [[ $? -eq 0 ]]; then
+        #    conda install -y -c conda-forge xyz=2.2.5
+        # fi
+        pip install decorator future six python_toolbox &>> ~/logs.txt
+
         bugsinpy-compile &>> ~/logs.txt
         bugsinpy-test &>> ~/logs.txt
 
-        # Test execution output and make sure fixed version passes test ok
-        if [ -f "bugsinpy_fail.txt" ]; then
+        # Make sure a failure is detected in buggy version and bug is reproducible
+        if [ ! -f "bugsinpy_fail.txt" ]; then
           echo ",fail" | tee -a ~/projects/output.csv
         else
-          echo ",ok" | tee -a ~/projects/output.csv
+
+          # Test fixed (1) version
+          bugsinpy-checkout -p $project -v 1 -i $bug -w ~/projects &>> ~/logs.txt
+          cd ~/projects/$project
+          bugsinpy-compile &>> ~/logs.txt
+          bugsinpy-test &>> ~/logs.txt
+
+          # Test execution output and make sure fixed version passes test ok
+          if [ -f "bugsinpy_fail.txt" ]; then
+            echo ",fail" | tee -a ~/projects/output.csv
+          else
+            echo ",ok" | tee -a ~/projects/output.csv
+          fi
         fi
       fi
+
     fi
   done
 done

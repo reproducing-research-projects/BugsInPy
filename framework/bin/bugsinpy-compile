@@ -49,6 +49,11 @@ fi
 #   exit
 #fi
 
+###Setup proper python version already installed using miniconda
+. /opt/conda/etc/profile.d/conda.sh
+bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info")
+conda activate $bug_python_version
+
 # Convert text files with DOS or Mac line breaks to Unix line breaks
 dos2unix $work_dir/bugsinpy_requirements.txt
 
@@ -197,4 +202,3 @@ fi
 
 ###Add compile flag
 echo "1" > "$work_dir/bugsinpy_compile_flag"
-

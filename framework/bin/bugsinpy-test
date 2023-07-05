@@ -58,6 +58,11 @@ if [[ "$relevant" == "1" ]]; then
    single_test=""
 fi
 
+###Setup proper python version already installed using miniconda
+. /opt/conda/etc/profile.d/conda.sh
+bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info")
+conda activate $bug_python_version
+
 cd "$work_dir"
 
 pytest="0"
