@@ -97,6 +97,7 @@ for project in $projects; do
         ###Setup proper python version already installed using miniconda
         bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info") &>> ~/logs.txt
         conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix  &>> ~/logs.txt
+        conda activate $bug_python_version &>> ~/logs.txt
         # TODO: Develop custom fixes for failing libraries
         # echo $work_dir | grep -q xyz
         # if [[ $? -eq 0 ]]; then
@@ -125,6 +126,9 @@ for project in $projects; do
             echo ",ok" | tee -a ~/projects/output.csv
           fi
         fi
+
+        ###Deactivate the environment
+        conda deactivate
       fi
 
     fi

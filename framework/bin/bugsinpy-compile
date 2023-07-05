@@ -49,12 +49,21 @@ fi
 #   exit
 #fi
 
-###Setup proper python version already installed using miniconda
+###Add environment
 . /opt/conda/etc/profile.d/conda.sh
-bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info")
+bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
 conda activate $bug_python_version
+if [[ $? -ne 0 ]]; then
+   echo "Please use 'conda create -n $bug_python_version -y python=$bug_python_version' to create your enviroment first or bugsinpy-testall -p project_name:bug_id"
+   exit
+fi
 
-# Convert text files with DOS or Mac line breaks to Unix line breaks
+###Activate environment
+check_dos2unix=$(dos2unix --version 2>&1)
+if [ "$check_dos2unix" == *"not found"* ]; then
+   echo "Please install dos2unix (sudo apt-get dos2unix)"
+   exit
+fi
 dos2unix $work_dir/bugsinpy_requirements.txt
 
 ###Add pythonpath
@@ -127,7 +136,7 @@ done
 if grep -q '[^[:space:]]' "$work_dir/bugsinpy_requirements.txt"; then
     cat "$work_dir/bugsinpy_requirements.txt" | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 pip install
 fi
-
+conda deactivate
 
 ###Add pythonpath
   if [ "$pythonpath_set" != "" ]; then
@@ -202,3 +211,4 @@ fi
 
 ###Add compile flag
 echo "1" > "$work_dir/bugsinpy_compile_flag"
+

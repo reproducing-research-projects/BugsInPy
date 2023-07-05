@@ -10,6 +10,7 @@ usage="-w work_dir
              Run the test case that relevant from bugs (Default)
 "
 
+
 run_all="0"
 relevant="0"
 case $1 in
@@ -58,12 +59,10 @@ if [[ "$relevant" == "1" ]]; then
    single_test=""
 fi
 
-###Setup proper python version already installed using miniconda
-. /opt/conda/etc/profile.d/conda.sh
-bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info")
-conda activate $bug_python_version
-
+###Activate environment
 cd "$work_dir"
+bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
+conda activate $bug_python_version
 
 pytest="0"
 #read file run_test.sh
