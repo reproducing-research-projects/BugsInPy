@@ -61,6 +61,7 @@ fi
 
 ###Activate environment
 cd "$work_dir"
+. /opt/conda/etc/profile.d/conda.sh
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
 conda activate $bug_python_version
 
