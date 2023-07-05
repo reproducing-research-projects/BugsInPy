@@ -101,7 +101,7 @@ for project in $projects; do
       # if [[ $? -eq 0 ]]; then
       #    conda install -y -c conda-forge xyz=2.2.5
       # fi
-      pip install decorator future six python_toolbox
+      pip install decorator future six python_toolbox &>> ~/logs.txt
       conda activate $bug_python_version &>> ~/logs.txt
       bugsinpy-compile &>> ~/logs.txt
       bugsinpy-test &>> ~/logs.txt
