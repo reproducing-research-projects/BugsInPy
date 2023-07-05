@@ -58,13 +58,6 @@ if [[ "$relevant" == "1" ]]; then
    single_test=""
 fi
 
-###Required to use conda activate, included in docker continuumio/miniconda3
-. /opt/conda/etc/profile.d/conda.sh
-
-###Setup proper python version already installed in bugsinpy-compile using miniconda
-bug_python_version=$(cat "$work_dir/bugsinpy_bug.info" | grep -o "3\..\..")
-conda activate $bug_python_version
-
 cd "$work_dir"
 
 pytest="0"

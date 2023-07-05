@@ -91,6 +91,18 @@ for project in $projects; do
       # Test buggy (0) version
       bugsinpy-checkout -p $project -v 0 -i $bug -w ~/projects &>> ~/logs.txt
       cd ~/projects/$project
+      ###Required to use conda activate, included in docker continuumio/miniconda3
+      . /opt/conda/etc/profile.d/conda.sh &>> ~/logs.txt
+      ###Setup proper python version already installed in bugsinpy-compile using miniconda
+      bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info") &>> ~/logs.txt
+      conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix  &>> ~/logs.txt
+      # TODO: Develop custom fixes for failing libraries
+      # echo $work_dir | grep -q xyz
+      # if [[ $? -eq 0 ]]; then
+      #    conda install -y -c conda-forge xyz=2.2.5
+      # fi
+      pip install decorator future six python_toolbox
+      conda activate $bug_python_version &>> ~/logs.txt
       bugsinpy-compile &>> ~/logs.txt
       bugsinpy-test &>> ~/logs.txt
 
