@@ -1,0 +1,142 @@
+\documentclass[conference]{IEEEtran}
+%\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{main.bib}
+\addbibresource{IEEEabrv.bib}
+
+\begin{document}
+
+\title{Reproducing BugsInPy}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+
+\maketitle
+
+\begin{abstract}
+  We present our experience on replicating a bug dataset for the Python programming language.
+  The bug dataset provides some information about the software environment, but this environment decays quickly into something uninstallable.
+  We assess the reproducibility over time and improve the reproducibility of the dataset.
+\end{abstract}
+
+\begin{IEEEkeywords}
+reproducibility, bug database, python
+\end{IEEEkeywords}
+
+% http://www.ieee-scam.org/2023/#cfpengtrack
+
+\section{Introduction}
+
+What is BugsInPy~\cite{widyasari_bugsinpy_2020}.
+
+Why does it exist.
+
+What information does the dataset contain.
+
+\section{Methodology}
+
+Explain the bugsinpy-testall script.
+
+Explain how Conda packaging works.
+
+Explain how Pip and PyPI works.
+
+\section{Results}
+
+Table containing results with Debian 11 and results with Conda
+
+\section{Discussion}
+
+What makes our reproduction easy.
+
+What makes our reproduction hard.
+
+\subsection{Recommendations to BugsInPy users}
+
+\subsection{Recommendations to artifact authors}
+
+\subsection{Threats to validity}
+
+Is it possible that our reproduction is not working when it should be?
+
+Is it possible that our reproduction won't be reproducible by others?
+
+\section{Conclusion}
+
+Does our study support the conclusion?
+
+Future directions for research?
+
+\begin{itemize}
+\item Improve reproducibility of BugsInPy
+\item Improve description of software environments.
+\item Make reproducibility tools easier to use.
+\end{itemize}
+
+\section*{References}
+
+\printbibliography
+
+\appendix[Code, Data, and Reproducing]
+
+A snapshot of the latest state of this code can be found at: \url{... (Zenodo DOI)}.
+
+A rolling release of the code can be found at: \url{... (GitHub)}.
+
+In the rolling release or snapshot:
+\begin{itemize}
+\item \texttt{data} holds a machine-readable view of the data, split across several files.
+\item \texttt{spack/spack.lock} contains the Spack environment in which this experiment was run.
+\end{itemize}
+
+To reproduce this paper, run:
+
+\begin{verbatim*}
+# command
+output
+\end{verbatim*}
+
+After which, the results will be here:
+
+\begin{itemize}
+\item \texttt{reports/main.pdf} This is the actual paper.
+\item \texttt{raw\_data} This is the raw data.
+\end{itemize}
+
+\end{document}
