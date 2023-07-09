@@ -172,8 +172,11 @@ The following is a table with the percentage of bug reproducibility for each pro
 | spacy       | 2      | 8     | 10    | 20.0%    | 80.0% |
 | tornado     | 1      | 14    | 15    | 6.7%     | 93.3% |
 | tqdm        | 4      | 4     | 8     | 50.0%    | 50.0% |
+| **Total**   | **285**| **290**| **575**| **49.6%**| **50.4%**|
 
 The table provides an overview of the test results for each project. It includes the number of failed and OK tests, the total number of tests performed, and the percentage of failed and OK tests.
+
+The total line aggregates the numbers from all projects and calculates the overall percentages of success and failure for the reproducibility of bugs.
 
 ## Discussion
 
