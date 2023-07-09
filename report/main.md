@@ -163,7 +163,7 @@ The following is a table with the percentage of bug reproducibility for each pro
 | luigi       | 32     | 0     | 32    | 100.0%   | 0.0%  |
 | matplotlib  | 29     | 0     | 29    | 100.0%   | 0.0%  |
 | pandas      | 59     | 86    | 145   | 40.7%    | 59.3% |
-| spacy       | 2      | 4     | 6     | 33.3%    | 66.7% |
+| spacy       | 2      | 8     | 10    | 20.0%    | 80.0% |
 | thefuck     | 11     | 12    | 23    | 47.8%    | 52.2% |
 | tqdm        | 4      | 4     | 8     | 50.0%    | 50.0% |
 | youtube-dl  | 0      | 23    | 23    | 0.0%     | 100.0%|
@@ -172,7 +172,7 @@ The following is a table with the percentage of bug reproducibility for each pro
 | spacy       | 2      | 8     | 10    | 20.0%    | 80.0% |
 | tornado     | 1      | 14    | 15    | 6.7%     | 93.3% |
 | tqdm        | 4      | 4     | 8     | 50.0%    | 50.0% |
-| **Total**   | **285**| **290**| **575**| **49.6%**| **50.4%**|
+| **Total**   | **285**| **216**| **501**| **56.9%**| **43.1%**|
 
 The table provides an overview of the test results for each project. It includes the number of failed and OK tests, the total number of tests performed, and the percentage of failed and OK tests.
 
