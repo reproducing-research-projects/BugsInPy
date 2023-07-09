@@ -134,6 +134,36 @@ Pip is the default package installer for Python, which allows users to install a
 - The use of Conda allows for easy management of dependencies and ensures consistent environments across different systems.
 - The script maintains logs of the test results and outputs them to `~/projects/output.csv`, providing a centralized record for analysis and tracking the progress of bug reproduction.
 
+The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
+
+```sh
+# Iterate over the projects
+for project in $projects; do
+  # Get the number of bugs in the project
+  # More project handling...
+
+  # For each bug, execute the test
+  for bug in $(seq $start $finish); do
+    # Check if bug is already tested
+    grep "$project,$bug," ~/projects/output.csv
+    # More checks...
+
+    # Test buggy (0) version
+    # Checkout the buggy version
+    # Set up the Python environment using conda
+    # Compile and test the code
+    # Handle failures and update output.csv
+
+    # Test fixed (1) version
+    # Checkout the fixed version
+    # Compile and test the code
+    # Handle failures and update output.csv
+
+    # Deactivate the Python environment
+  done
+done
+```
+
 ### What makes our reproduction hard?
 - Reproducing bugs can be challenging due to various factors, including complex codebases, interdependencies, and compatibility issues between different versions of libraries and tools.
 - In some cases, bugs may be intermittent or require specific conditions to manifest, making it difficult to consistently reproduce them.
