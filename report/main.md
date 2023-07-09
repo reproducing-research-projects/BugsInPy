@@ -137,6 +137,10 @@ Pip is the default package installer for Python, which allows users to install a
 The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
 
 ```sh
+echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
+echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
+echo "See full tests logs in ~/logs.txt"
+echo "See results in ~/projects/output.csv"
 # Iterate over the projects
 for project in $projects; do
   # Get the number of bugs in the project
