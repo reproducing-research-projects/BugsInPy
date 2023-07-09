@@ -74,8 +74,6 @@ for project in $projects; do
     fi
   fi
 
-  echo "Working $finish bugs in project $project"  &>> ~/logs.txt
-
   # For each bug, execute the test
   for bug in $(seq $start $finish); do
 
