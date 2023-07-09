@@ -85,6 +85,39 @@ To use this Dockerfile for your Python project, follow these steps:
    ```
    This command starts an interactive container based on the `myproject` image. You will be dropped into a Bash shell inside the container, where you can execute commands and run your Python project.
 
+The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
+
+```sh
+echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
+echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
+echo "See full tests logs in ~/logs.txt"
+echo "See results in ~/projects/output.csv"
+# Iterate over the projects
+for project in $projects; do
+  # Get the number of bugs in the project
+  # More project handling...
+
+  # For each bug, execute the test
+  for bug in $(seq $start $finish); do
+    # Check if bug is already tested
+    grep "$project,$bug," ~/projects/output.csv
+    # More checks...
+
+    # Test buggy (0) version
+    # Checkout the buggy version
+    # Set up the Python environment using conda
+    # Compile and test the code
+    # Handle failures and update output.csv
+
+    # Test fixed (1) version
+    # Checkout the fixed version
+    # Compile and test the code
+    # Handle failures and update output.csv
+
+    # Deactivate the Python environment
+  done
+done
+```
 
 The `bugsinpy-testall` script automates the execution of the BugsInPy dataset, which contains bugs in various Python projects. The script reproduces the bugs, executes tests, and records the results. It enhances the reproducibility of Python projects by providing a standardized process for reproducing and testing bugs in different projects.
 
@@ -128,50 +161,6 @@ Conda is a cross-platform package management system and environment management s
 Pip is the default package installer for Python, which allows users to install and manage Python packages from the Python Package Index (PyPI) and other package repositories. PyPI is the official software repository for Python packages. When using Pip, it searches for packages on PyPI based on package names and versions specified in the requirements file or command-line arguments. Pip then downloads the package and its dependencies from PyPI and installs them into the Python environment. PyPI serves as a central repository for sharing and distributing Python packages, making it easier for developers to package and distribute their software for others to use.
 
 ## Results
-
-### What makes our reproduction easy?
-- The `bugsinpy-testall` script provides a standardized and automated approach to reproduce and test bugs in Python projects. It automates the process of setting up the environment, checking out specific versions of projects, compiling code (if required), and running tests.
-- The use of Conda allows for easy management of dependencies and ensures consistent environments across different systems.
-- The script maintains logs of the test results and outputs them to `~/projects/output.csv`, providing a centralized record for analysis and tracking the progress of bug reproduction.
-
-The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
-
-```sh
-echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
-echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
-echo "See full tests logs in ~/logs.txt"
-echo "See results in ~/projects/output.csv"
-# Iterate over the projects
-for project in $projects; do
-  # Get the number of bugs in the project
-  # More project handling...
-
-  # For each bug, execute the test
-  for bug in $(seq $start $finish); do
-    # Check if bug is already tested
-    grep "$project,$bug," ~/projects/output.csv
-    # More checks...
-
-    # Test buggy (0) version
-    # Checkout the buggy version
-    # Set up the Python environment using conda
-    # Compile and test the code
-    # Handle failures and update output.csv
-
-    # Test fixed (1) version
-    # Checkout the fixed version
-    # Compile and test the code
-    # Handle failures and update output.csv
-
-    # Deactivate the Python environment
-  done
-done
-```
-
-### What makes our reproduction hard?
-- Reproducing bugs can be challenging due to various factors, including complex codebases, interdependencies, and compatibility issues between different versions of libraries and tools.
-- In some cases, bugs may be intermittent or require specific conditions to manifest, making it difficult to consistently reproduce them.
-- Projects with a large number of bugs or a high failure rate pose additional challenges in terms of time and resources required for reproduction.
 
 ### Why the percentage of success and failure for the reproducibility of bugs?
 
@@ -241,9 +230,16 @@ In summary, the inclusion of Python version information in the bug dataset not o
 
 ## Discussion
 
-What makes our reproduction easy
+### What makes our reproduction easy?
+- The `bugsinpy-testall` script provides a standardized and automated approach to reproduce and test bugs in Python projects. It automates the process of setting up the environment, checking out specific versions of projects, compiling code (if required), and running tests.
+- The use of Conda allows for easy management of dependencies and ensures consistent environments across different systems.
+- The script maintains logs of the test results and outputs them to `~/projects/output.csv`, providing a centralized record for analysis and tracking the progress of bug reproduction.
 
-What makes our reproduction hard
+### What makes our reproduction hard?
+
+- Reproducing bugs can be challenging due to various factors, including complex codebases, interdependencies, and compatibility issues between different versions of libraries and tools.
+- In some cases, bugs may be intermittent or require specific conditions to manifest, making it difficult to consistently reproduce them.
+- Projects with a large number of bugs or a high failure rate pose additional challenges in terms of time and resources required for reproduction.
 
 ## Recommendations to BugsInPy users
 
