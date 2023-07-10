@@ -1,6 +1,4 @@
-
-
-## Introduction
+# Introduction
 
 BugsInPy is a curated dataset of real-world bugs in large Python projects. It provides a database of known bugs in Python code, along with the test cases that reveal the bugs. BugsInPy is intended to be used by researchers to develop and evaluate software defect detection tools.
 
@@ -26,10 +24,11 @@ The text also discusses the significance of Python version information in the bu
 
 The discussion section covers both the ease and challenges of bug reproduction. It acknowledges that reproducing bugs can be complex and highlights factors such as code complexity, interdependencies, and intermittent nature of bugs that can make the process challenging. It also mentions the potential difficulties posed by projects with a large number of bugs or a high failure rate.
 
-## Methodology
+# Methodology
 
 By using Docker, we can ensure that your Python project runs consistently across different environments, making it more reproducible. It eliminates potential conflicts with system dependencies and provides a self-contained execution environment.
 
+\footnotesize
 ```Dockerfile
 FROM continuumio/miniconda3:23.3.1-0
 MAINTAINER faustinoaq <faustino.aguilar@up.ac.pa>
@@ -46,10 +45,12 @@ RUN chown -R user:user /home/user/BugsInPy
 
 USER user
 
-RUN echo "export PATH=$PATH:/home/user/BugsInPy/framework/bin" >> /home/user/.bashrc
+RUN echo "export PATH=$PATH:/home/user/BugsInPy/framework/bin" \
+    >> /home/user/.bashrc
 
 CMD ["/bin/bash"]
 ```
+\normalsize
 
 This Dockerfile sets up a Docker image for running a Python project using Miniconda and improves reproducibility by providing a controlled environment for project execution. Let's break it down step by step:
 
@@ -95,6 +96,7 @@ To use this Dockerfile for your Python project, follow these steps:
 
 The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
 
+\footnotesize
 ```sh
 echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
 echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
@@ -126,6 +128,7 @@ for project in $projects; do
   done
 done
 ```
+\normalsize
 
 The `bugsinpy-testall` script automates the execution of the BugsInPy dataset, which contains bugs in various Python projects. The script reproduces the bugs, executes tests, and records the results. It enhances the reproducibility of Python projects by providing a standardized process for reproducing and testing bugs in different projects.
 
@@ -156,21 +159,21 @@ The `bugsinpy-testall` script improves reproducibility by providing a standardiz
 
 Now, let's answer your additional questions:
 
-### `bugsinpy-testall` script
+## `bugsinpy-testall` script
 
 The `bugsinpy-testall` script automates the process of reproducing and testing bugs in Python projects. It iterates over specified projects or all projects in the `~/BugsInPy/projects` directory. For each project, it determines the range of bugs to reproduce and test. The script checks if a bug has already been tested and skips it if so. It sets up the environment for testing the buggy (0) version, runs the tests, and checks if the bug fails. If it fails, it proceeds to test the fixed (1) version and checks if it passes the test. The results are recorded in `~/projects/output.csv`.
 
-### Conda package manager
+## Conda package manager
 
 Conda is a cross-platform package management system and environment management system. It allows users to create and manage isolated environments with specific versions of software packages. Conda packaging works by creating packages containing pre-compiled binaries and metadata. These packages can include Python libraries, dependencies, and other software tools. Conda allows for the creation of custom environments with specific package versions, enabling reproducibility by ensuring consistent software dependencies across different systems.
 
-### Pip and PyPI work
+## Pip and PyPI work
 
 Pip is the default package installer for Python, which allows users to install and manage Python packages from the Python Package Index (PyPI) and other package repositories. PyPI is the official software repository for Python packages. When using Pip, it searches for packages on PyPI based on package names and versions specified in the requirements file or command-line arguments. Pip then downloads the package and its dependencies from PyPI and installs them into the Python environment. PyPI serves as a central repository for sharing and distributing Python packages, making it easier for developers to package and distribute their software for others to use.
 
-## Results
+# Results
 
-### Why the percentage of success and failure for the reproducibility of bugs?
+## Why the percentage of success and failure for the reproducibility of bugs?
 
 - The percentage of success and failure indicates the reproducibility of bugs in the given dataset.
 - Success indicates that the bug was successfully reproduced and the test passed, verifying the correctness of the fix.
@@ -182,28 +185,35 @@ Analyzing the success and failure percentages can inform the project maintainers
 
 The following is a table with the percentage of bug reproducibility for each project:
 
-| Project     | Failed | OK    | Total | % Failed | % OK  |
-|-------------|--------|-------|-------|----------|-------|
-| PySnooper   | 2      | 1     | 3     | 66.7%    | 33.3% |
-| ansible     | 4      | 13    | 17    | 23.5%    | 76.5% |
-| black       | 1      | 21    | 22    | 4.5%     | 95.5% |
-| cookiecutter| 2      | 2     | 4     | 50.0%    | 50.0% |
-| fastapi     | 0      | 12    | 12    | 0.0%     | 100.0%|
-| httpie      | 4      | 1     | 5     | 80.0%    | 20.0% |
-| keras       | 25     | 35    | 60    | 41.7%    | 58.3% |
-| luigi       | 32     | 0     | 32    | 100.0%   | 0.0%  |
-| matplotlib  | 29     | 0     | 29    | 100.0%   | 0.0%  |
-| pandas      | 59     | 86    | 145   | 40.7%    | 59.3% |
-| spacy       | 2      | 8     | 10    | 20.0%    | 80.0% |
-| thefuck     | 11     | 12    | 23    | 47.8%    | 52.2% |
-| tqdm        | 4      | 4     | 8     | 50.0%    | 50.0% |
-| youtube-dl  | 0      | 23    | 23    | 0.0%     | 100.0%|
-| sanic       | 5      | 0     | 5     | 100.0%   | 0.0%  |
-| scrapy      | 17     | 21    | 38    | 44.7%    | 55.3% |
-| spacy       | 2      | 8     | 10    | 20.0%    | 80.0% |
-| tornado     | 1      | 14    | 15    | 6.7%     | 93.3% |
-| tqdm        | 4      | 4     | 8     | 50.0%    | 50.0% |
-| **Total**   | **285**| **216**| **501**| **56.9%**| **43.1%**|
+\begin{tabular}{llllll}
+\toprule
+Project & Failed & OK & Total & \% Failed & \% OK \\
+\midrule
+PySnooper & 2 & 1 & 3 & 66.7\% & 33.3\% \\
+ansible & 4 & 13 & 17 & 23.5\% & 76.5\% \\
+black & 1 & 21 & 22 & 4.5\% & 95.5\% \\
+cookiecutter & 2 & 2 & 4 & 50.0\% & 50.0\% \\
+fastapi & 0 & 12 & 12 & 0.0\% & 100.0\% \\
+httpie & 4 & 1 & 5 & 80.0\% & 20.0\% \\
+keras & 25 & 35 & 60 & 41.7\% & 58.3\% \\
+luigi & 32 & 0 & 32 & 100.0\% & 0.0\% \\
+matplotlib & 29 & 0 & 29 & 100.0\% & 0.0\% \\
+pandas & 59 & 86 & 145 & 40.7\% & 59.3\% \\
+spacy & 2 & 8 & 10 & 20.0\% & 80.0\% \\
+thefuck & 11 & 12 & 23 & 47.8\% & 52.2\% \\
+tqdm & 4 & 4 & 8 & 50.0\% & 50.0\% \\
+youtube-dl & 0 & 23 & 23 & 0.0\% & 100.0\% \\
+sanic & 5 & 0 & 5 & 100.0\% & 0.0\% \\
+scrapy & 17 & 21 & 38 & 44.7\% & 55.3\% \\
+spacy & 2 & 8 & 10 & 20.0\% & 80.0\% \\
+tornado & 1 & 14 & 15 & 6.7\% & 93.3\% \\
+tqdm & 4 & 4 & 8 & 50.0\% & 50.0\% \\
+\midrule
+\textbf{Total} & \textbf{285} & \textbf{216} & \textbf{501} &
+\textbf{56.9\%} & \textbf{43.1\%} \\
+\bottomrule
+\end{tabular}
+
 
 The table provides an overview of the test results for each project. It includes the number of failed and OK tests, the total number of tests performed, and the percentage of failed and OK tests.
 
@@ -211,16 +221,20 @@ The total line aggregates the numbers from all projects and calculates the overa
 
 The inclusion of Python version information in the bug dataset is crucial for ensuring the reproducibility of tests executed for bug detection and fixing. When developers encounter a bug, having access to the specific Python version used during its occurrence enables them to reproduce the bug in a controlled environment.
 
-| python_version | count | percentage |
-|----------------|-------|------------|
-|     3.6.9      |  31   |   6.19%    |
-|     3.7.0      |  58   |  11.58%    |
-|     3.7.3      |  50   |   9.98%    |
-|     3.7.4      |  33   |   6.59%    |
-|     3.7.7      |  9    |   1.80%    |
-|     3.8.1      |  33   |   6.59%    |
-|     3.8.3      |  287  |  57.28%    |
-|     Total      |  501  |   100%     |
+\begin{tabular}{lll}
+\toprule
+python\_version & count & percentage \\
+\midrule
+3.6.9 & 31 & 6.19\% \\
+3.7.0 & 58 & 11.58\% \\
+3.7.3 & 50 & 9.98\% \\
+3.7.4 & 33 & 6.59\% \\
+3.7.7 & 9 & 1.80\% \\
+3.8.1 & 33 & 6.59\% \\
+3.8.3 & 287 & 57.28\% \\
+Total & 501 & 100\% \\
+\bottomrule
+\end{tabular}
 
 The table provides a summary of Python versions and their corresponding counts in the bug dataset mentioned in the "bugsinpy" paper. The dataset contains bug information for various Python repositories, with each bug having a corresponding "bug.info" file specifying the Python version.
 
@@ -236,14 +250,14 @@ Reproducibility plays a significant role in software development, particularly i
 
 In summary, the inclusion of Python version information in the bug dataset not only provides insights into the distribution of bugs across different versions but also enables developers to reproduce and investigate the bugs more effectively. This contributes to improved bug detection, diagnosis, and ultimately, the development of more reliable and stable software systems.
 
-## Discussion
+# Discussion
 
-### What makes our reproduction easy?
+## What makes our reproduction easy?
 - The `bugsinpy-testall` script provides a standardized and automated approach to reproduce and test bugs in Python projects. It automates the process of setting up the environment, checking out specific versions of projects, compiling code (if required), and running tests.
 - The use of Conda allows for easy management of dependencies and ensures consistent environments across different systems.
 - The script maintains logs of the test results and outputs them to `~/projects/output.csv`, providing a centralized record for analysis and tracking the progress of bug reproduction.
 
-### What makes our reproduction hard?
+## What makes our reproduction hard?
 
 - Reproducing bugs can be challenging due to various factors, including complex codebases, interdependencies, and compatibility issues between different versions of libraries and tools.
 - In some cases, bugs may be intermittent or require specific conditions to manifest, making it difficult to consistently reproduce them.
@@ -259,13 +273,12 @@ Is it possible that our reproduction is not working when it should be?
 
 Is it possible that our reproduction won't be reproducible by others?
 
-## Conclusion
+# Conclusion
 
 Does our study support the conclusion?
 
 Future directions for research?
 
-## itemize
-Improve reproducibility of BugsInPy
-Improve description of software environments
-Make reproducibility tools easier to use
+- Improve reproducibility of BugsInPy
+- Improve description of software environments
+- Make reproducibility tools easier to use

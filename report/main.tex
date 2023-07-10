@@ -3,8 +3,11 @@
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 
 \usepackage[backend=biber,style=ieee]{biblatex}
+
 \addbibresource{main.bib}
 \addbibresource{IEEEabrv.bib}
+
+\input{pandoc_header.tex}
 
 \begin{document}
 
@@ -61,53 +64,7 @@ reproducibility, bug database, python
 
 % http://www.ieee-scam.org/2023/#cfpengtrack
 
-\section{Introduction}
-
-What is BugsInPy~\cite{widyasari_bugsinpy_2020}.
-
-Why does it exist.
-
-What information does the dataset contain.
-
-\section{Methodology}
-
-Explain the bugsinpy-testall script.
-
-Explain how Conda packaging works.
-
-Explain how Pip and PyPI works.
-
-\section{Results}
-
-Table containing results with Debian 11 and results with Conda
-
-\section{Discussion}
-
-What makes our reproduction easy.
-
-What makes our reproduction hard.
-
-\subsection{Recommendations to BugsInPy users}
-
-\subsection{Recommendations to artifact authors}
-
-\subsection{Threats to validity}
-
-Is it possible that our reproduction is not working when it should be?
-
-Is it possible that our reproduction won't be reproducible by others?
-
-\section{Conclusion}
-
-Does our study support the conclusion?
-
-Future directions for research?
-
-\begin{itemize}
-\item Improve reproducibility of BugsInPy
-\item Improve description of software environments.
-\item Make reproducibility tools easier to use.
-\end{itemize}
+\input{meat.tex}
 
 \section*{References}
 
