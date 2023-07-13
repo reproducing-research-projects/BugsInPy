@@ -59,11 +59,17 @@ if [[ "$relevant" == "1" ]]; then
    single_test=""
 fi
 
-###Activate environment
 cd "$work_dir"
+
+###Add environment
+dos2unix $work_dir/bugsinpy_requirements.txt
 . /opt/conda/etc/profile.d/conda.sh
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
-conda activate $bug_python_version
+conda_env_name=$(cat <(echo $bug_python_version) "$work_dir/bugsinpy_requirements.txt" | md5sum | cut -d' ' -f 1)
+if ! conda activate $conda_env_name; then
+   echo "Please use 'conda create -n $bug_python_version -y python=$bug_python_version' to create your enviroment first or bugsinpy-testall -p project_name:bug_id"
+   exit
+fi
 
 pytest="0"
 #read file run_test.sh
