@@ -1,0 +1,121 @@
+services:
+  pysnooper:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p PySnooper:
+  ansible:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p ansible:
+  black:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p black:
+  # TODO; major fixes required
+  # cookiecutter:
+  #   build: .
+  #   volumes:
+  #     - ./projects:/home/user/BugsInPy/projects
+  #     - ./temp:/home/user/projects
+  #   command: |
+  #     bugsinpy-testall -p cookiecutter:
+  fastapi:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p fastapi:
+  httpie:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p httpie:
+  keras:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p keras:
+  luigi:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p luigi:
+  matplotlib:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p matplotlib:
+  pandas:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p pandas:
+  spacy:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p spacy:
+  thefuck:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p thefuck:
+  youtube-dl:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p youtube-dl:
+  sanic:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p sanic:
+  scrapy:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p scrapy:
+  tornado:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p tornado:
+  tqdm:
+    build: .
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p tqdm:
