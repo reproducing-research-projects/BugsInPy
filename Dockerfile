@@ -7,7 +7,8 @@ RUN apt-get -y install git nano dos2unix build-essential
 
 WORKDIR /home/user
 
-COPY . /home/user/BugsInPy
+COPY ./framework /home/user/BugsInPy/framework
+COPY ./projects /home/user/BugsInPy/projects
 
 RUN chown -R user:user /home/user/BugsInPy
 
