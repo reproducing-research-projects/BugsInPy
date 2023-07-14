@@ -1,10 +1,12 @@
+# Execute "docker compose down" before a new run
+# To run do "docker compose up --build" or "docker compose up setup <repo> --build"
 services:
   setup:
     build: .
     image: bugsinpy-setup
     pull_policy: never
     volumes:
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command:
       - /bin/bash
       - -c
@@ -19,7 +21,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p PySnooper:
     depends_on:
@@ -29,9 +31,9 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
-      bugsinpy-testall -p ansible:
+      bugsinpy-testall -p ansible:1
     depends_on:
       - setup
   black:
@@ -39,7 +41,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p black:
     depends_on:
@@ -49,7 +51,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p cookiecutter:
     depends_on:
@@ -59,7 +61,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p fastapi:
     depends_on:
@@ -69,7 +71,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p httpie:
     depends_on:
@@ -79,7 +81,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p keras:
     depends_on:
@@ -89,7 +91,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p luigi:
     depends_on:
@@ -99,7 +101,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p matplotlib:
     depends_on:
@@ -109,7 +111,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p pandas:
     depends_on:
@@ -119,7 +121,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p spacy:
     depends_on:
@@ -129,7 +131,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p thefuck:
     depends_on:
@@ -139,7 +141,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p youtube-dl:
     depends_on:
@@ -149,7 +151,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p sanic:
     depends_on:
@@ -159,7 +161,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p scrapy:
     depends_on:
@@ -169,7 +171,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p tornado:
     depends_on:
@@ -179,7 +181,7 @@ services:
     image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
-      - ./temp:/home/user/projects
+      - ./temp:/home/user/BugsInPy/temp
     command: |
       bugsinpy-testall -p tqdm:
     depends_on:
