@@ -1,14 +1,19 @@
 #!/bin/bash
-# set -e
 
-###bugsinpy-testall reproduces all the bugs for every project
-# test ok (reproduced successfully) test fail (unable to reproduce)
-# Files bug_fixed.txt and bug_buggy.txt are added to each project bug
-# Index result in BugsInPy/projects/index.csv
-# Full setup logs in temp/$project/logs.txt 
-
-DIR="/home/user"
-INDEX="$DIR/BugsInPy/projects/index.csv"
+###bugsinpy-testall reproduces all the bugs
+# similar to <repo>/verify.sh included in some projects
+# this approach improves current setup by having the proper enviroment
+# and replacing virtualenv with conda within the BugsInPy framework
+# the expected outputs for each test are added to every bug
+# "<repo>/bugs/<bugid>/bug_buggy.txt" shows buggy version output
+# "<repo>/bugs/<bugid>/bug_fixed.txt" shows fixed version output
+# an index result is provided in BugsInPy/projects/index.csv
+# the index contains reproducibility result status
+# "fail" a failure expected in buggy version
+# "error" a hard error not reproducible
+# "pass" a success expected in fixed version
+# "unknown" a unknown unexpected output probably an "error"
+# a temp full log file is provided in every <repo>/logs.txt
 
 usage="
        -h
@@ -22,27 +27,32 @@ usage="
              black:5 ansible: (only reproduces test 5 for black and all for ansible)
 "
 
+dir_of_script=$(dirname $0)
+bugs_in_py_dir=$(realpath $dir_of_script/../..)
+temp_projects="$bugs_in_py_dir/temp/projects"
+index_file="$bugs_in_py_dir/projects/index.csv"
+
 case $1 in
  -[h?] | --help)
     echo "Usage: ${0##*/} [ --help ]"
     echo "$usage"
     exit 0;;
  -c)
-    rm -rf $DIR/projects/*
-    touch .gitkeep
+    rm -rf $bugs_in_py_dir/temp/*
+    touch $bugs_in_py_dir/temp/.gitkeep
     exit 0;;
  -p)
     projects="${@:2}";;
 esac
 
-mkdir -p $DIR/projects
+mkdir -p $temp_projects
 
 if ! echo $projects | grep -q ":"; then
-  projects=$(ls $DIR/BugsInPy/projects)
+  projects=$(ls $bugs_in_py_dir/projects)
 fi
 
-if [ ! -f $INDEX ]; then
-  echo "repo,bugid,version,result" > $INDEX
+if [ ! -f $index_file ]; then
+  echo "repo,bugid,version,result" > $index_file
 fi
 
 # Iterate over the projects
@@ -51,13 +61,13 @@ for project in $projects; do
   # Get the number of bugs in the project
   if ! echo $projects | grep -q ":"; then
     start=1
-    finish=$(ls $DIR/BugsInPy/projects/$project/bugs | wc -l)
+    finish=$(ls $bugs_in_py_dir/projects/$project/bugs | wc -l)
   else
     start=$(echo $project | cut -d ":" -f 2)
     finish=$(echo $project | cut -d ":" -f 3)
     project=$(echo $project | cut -d ":" -f 1)
     if [[ "$start" == "" ]]; then
-      finish=$(ls $DIR/BugsInPy/projects/$project/bugs | wc -l)
+      finish=$(ls $bugs_in_py_dir/projects/$project/bugs | wc -l)
       start=1
     elif [[ "$finish" == "" ]]; then
       finish=$start
@@ -67,88 +77,66 @@ for project in $projects; do
   # For each bug, execute the test
   for bug in $(seq $start $finish); do
 
-    BUG_SOURCE_DIR="$DIR/BugsInPy/projects/$project/bugs/$bug"
-    if ! grep "$project,$bug," $INDEX && [ -d "$BUG_SOURCE_DIR" ]; then
-      touch $BUG_SOURCE_DIR/requirements.txt
-      work_dir="$DIR/projects/$project"
-      projects_dir="$DIR/projects"
-      BUG_INFO="$work_dir/bugsinpy_bug.info"
+    bug_source_dir="$bugs_in_py_dir/projects/$project/bugs/$bug"
 
-      # Test buggy (0) version
-      bugsinpy-checkout -p $project -v 0 -i $bug -w $projects_dir &>> /dev/null
+    if ! grep "$project,$bug," $index_file && [ -d "$bug_source_dir" ]; then
 
-      cd $work_dir
+      # Make sure requirements.txt always exist even if empty
+      touch $bug_source_dir/requirements.txt
 
-      ###Required to use conda activate, included in docker continuumio/miniconda3
-      . /opt/conda/etc/profile.d/conda.sh &>> $work_dir/logs.txt
-      ###Setup proper python version already installed using miniconda
-      bug_python_version=$(grep -o "3\..\.." $BUG_INFO)
+      work_dir="$temp_projects/$project"
 
-      ###Add environment
-      REQUIREMENTS="$work_dir/bugsinpy_requirements.txt"
-      dos2unix $REQUIREMENTS &>/dev/null
-      . /opt/conda/etc/profile.d/conda.sh
-      sed -i -e '/^\s*#.*$/d' -e '/^\s*$/d' "$REQUIREMENTS"
-      bug_python_version=$(grep -o "3\..\.." "$BUG_INFO")
-      conda_env_name=$(cat <(echo $bug_python_version) "$REQUIREMENTS" | md5sum | cut -d' ' -f 1)
-      if conda env list | grep -q "$conda_env_name"; then
-        touch "$work_dir/bugsinpy_compile_flag"
-      else
-        conda create -n $conda_env_name -y python=$bug_python_version pytest &>> $work_dir/logs.txt
+      bug_info="$work_dir/bugsinpy_bug.info"
+
+      # Test buggy (0) and fixed (1) versions
+      for version_id in 0 1; do
+
+        if [[ $version_id == "0" ]];then
+          version="buggy"
+        else
+          version="fixed"
+        fi
+
+        bugsinpy-checkout -p $project -v $version_id -i $bug -w $temp_projects &>> /dev/null
+        cd $work_dir
+
+        # Cleanup requirements.txt from unwanted spaces
+        # dos2unix is required to make sure requirements.txt is always the correct encoding
+        requirements="$work_dir/bugsinpy_requirements.txt"
+        sed -i -e '/^\s*#.*$/d' -e '/^\s*$/d' "$requirements"
+        dos2unix $requirements &>/dev/null
+
+        # Add environment
+        . /opt/conda/etc/profile.d/conda.sh &>> $work_dir/logs.txt
+        # Generate unique hash for the current enviroment
+        bug_python_version=$(grep -o "3\..\.." $bug_info)
+        conda_env_name=$(cat <(echo $bug_python_version) "$requirements" | md5sum | cut -d' ' -f 1)
+        if ! conda env list | grep -q "$conda_env_name"; then
+          conda create -n $conda_env_name -y python=$bug_python_version pytest &>> $work_dir/logs.txt
+        fi
+
         bugsinpy-compile &>> $work_dir/logs.txt
-      fi
+        bugsinpy-test &> "$bug_source_dir/bug_$version.txt"
 
-      bugsinpy-test &> $BUG_SOURCE_DIR/bug_buggy.txt
-
-      # Make sure a failure is detected in buggy version and bug is reproducible
-      if grep -q "= FAILURES =" $BUG_SOURCE_DIR/bug_buggy.txt || \
-         grep -q "FAILED (" $BUG_SOURCE_DIR/bug_buggy.txt
-      then
-        echo "$project,$bug,buggy,fail" | tee -a $INDEX
-      elif grep -q "= ERRORS =" $BUG_SOURCE_DIR/bug_buggy.txt || \
-         grep -q ": command not found" $BUG_SOURCE_DIR/bug_buggy.txt || \
-         grep -q "You have not compile this project" $BUG_SOURCE_DIR/bug_buggy.txt
-      then
-        echo "$project,$bug,buggy,error" | tee -a $INDEX
-      elif grep -qwE "passed|OK" $BUG_SOURCE_DIR/bug_buggy.txt; then
-        echo "$project,$bug,buggy,pass" | tee -a $INDEX
-      else
-        echo "$project,$bug,buggy,unknown" | tee -a $INDEX
-      fi
-
+        # Check for keywords in test output
+        # buggy (0) expected to fail
+        # fixed (1) expected to pass
+        if grep -q "= FAILURES =" "$bug_source_dir/bug_$version.txt" || \
+          grep -q "FAILED (" "$bug_source_dir/bug_$version.txt"
+        then
+          echo "$project,$bug,buggy,fail" | tee -a $index_file
+        elif grep -q "= ERRORS =" "$bug_source_dir/bug_$version.txt" || \
+          grep -q ": command not found" "$bug_source_dir/bug_$version.txt" || \
+          grep -q "You have not compile this project" "$bug_source_dir/bug_$version.txt"
+        then
+          echo "$project,$bug,buggy,error" | tee -a $index_file
+        elif grep -qwE "passed|OK" $"bug_source_dir/bug_$version.txt"; then
+          echo "$project,$bug,buggy,pass" | tee -a $index_file
+        else
+          echo "$project,$bug,buggy,unknown" | tee -a $index_file
+        fi
+      done
       # echo $LINENO # debug
-
-      # Test fixed (1) version
-      bugsinpy-checkout -p $project -v 1 -i $bug -w $DIR/projects &>> $work_dir/logs.txt
-
-      ### Check for same enviroment and avoid recompiling
-      dos2unix $REQUIREMENTS &>/dev/null
-      sed -i -e '/^\s*#.*$/d' -e '/^\s*$/d' "$REQUIREMENTS"
-      bug_python_version=$(grep -o "3\..\.." "$BUG_INFO")
-      conda_env_name=$(cat <(echo $bug_python_version) "$REQUIREMENTS" | md5sum | cut -d' ' -f 1)
-      if conda env list | grep -q "$conda_env_name"; then
-        touch "$work_dir/bugsinpy_compile_flag"
-      else
-        conda create -n $conda_env_name -y python=$bug_python_version pytest &>> $work_dir/logs.txt
-        bugsinpy-compile &>> $work_dir/logs.txt
-      fi
-      bugsinpy-test &> $BUG_SOURCE_DIR/bug_fixed.txt
-
-      # Test execution output and make sure fixed version passes test ok
-      if grep -q "= FAILURES =" $BUG_SOURCE_DIR/bug_fixed.txt || \
-         grep -q "FAILED (" $BUG_SOURCE_DIR/bug_fixed.txt
-      then
-        echo "$project,$bug,fixed,fail" | tee -a $INDEX
-      elif grep -q "= ERRORS =" $BUG_SOURCE_DIR/bug_fixed.txt || \
-         grep -q ": command not found" $BUG_SOURCE_DIR/bug_fixed.txt || \
-         grep -q "You have not compile this project" $BUG_SOURCE_DIR/bug_fixed.txt
-      then
-        echo "$project,$bug,fixed,error" | tee -a $INDEX
-      elif grep -qwE "passed|OK" $BUG_SOURCE_DIR/bug_fixed.txt; then
-        echo "$project,$bug,fixed,pass" | tee -a $INDEX
-      else
-        echo "$project,$bug,fixed,unknown" | tee -a $INDEX
-      fi
     fi
   done
 done
