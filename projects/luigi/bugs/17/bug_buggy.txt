@@ -1,0 +1,73 @@
+pytest test/scheduler_test.py::SchedulerTest::test_local_scheduler_task_history_status
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/projects/luigi
+plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
+collected 1 item
+
+test/scheduler_test.py F                                                 [100%]
+
+=================================== FAILURES ===================================
+____________ SchedulerTest.test_local_scheduler_task_history_status ____________
+
+self = <scheduler_test.SchedulerTest testMethod=test_local_scheduler_task_history_status>
+
+    @with_config({'scheduler': {'record_task_history': 'True'},
+                  'task_history': {'db_connection': 'sqlite:////none/existing/path/hist.db'}})
+    def test_local_scheduler_task_history_status(self):
+>       ls = luigi.interface._WorkerSchedulerFactory().create_local_scheduler()
+
+test/scheduler_test.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/luigi/luigi/interface.py:134: in create_local_scheduler
+    return scheduler.CentralPlannerScheduler(prune_on_get_work=True)
+src/luigi/luigi/scheduler.py:533: in __init__
+    from luigi import db_task_history  # Needs sqlalchemy, thus imported here
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    """
+    Provides a database backend to the central scheduler. This lets you see historical runs.
+    See :ref:`TaskHistory` for information about how to turn out the task history feature.
+    """
+    #
+    # Description: Added codes for visualization of how long each task takes
+    # running-time until it reaches the next status (failed or done)
+    # At "{base_url}/tasklist", all completed(failed or done) tasks are shown.
+    # At "{base_url}/tasklist", a user can select one specific task to see
+    # how its running-time has changed over time.
+    # At "{base_url}/tasklist/{task_name}", it visualizes a multi-bar graph
+    # that represents the changes of the running-time for a selected task
+    # up to the next status (failed or done).
+    # This visualization let us know how the running-time of the specific task
+    # has changed over time.
+    #
+    # Copyright 2015 Naver Corp.
+    # Author Yeseul Park (yeseul.park@navercorp.com)
+    #
+    
+    import datetime
+    import logging
+    from contextlib import contextmanager
+    
+    from luigi import six
+    
+    from luigi import configuration
+    from luigi import task_history
+    from luigi.task_status import DONE, FAILED, PENDING, RUNNING
+    
+>   import sqlalchemy
+E   ModuleNotFoundError: No module named 'sqlalchemy'
+
+src/luigi/luigi/db_task_history.py:48: ModuleNotFoundError
+----------------------------- Captured stdout call -----------------------------
+INFO: Loaded []
+------------------------------ Captured log call -------------------------------
+INFO     luigi-interface:configuration.py:69 Loaded []
+=========================== short test summary info ============================
+FAILED test/scheduler_test.py::SchedulerTest::test_local_scheduler_task_history_status
+============================== 1 failed in 0.17s ===============================

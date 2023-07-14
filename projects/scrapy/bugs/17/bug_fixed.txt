@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_utils_response.ResponseUtilsTest.test_response_status_message
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

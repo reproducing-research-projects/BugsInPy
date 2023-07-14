@@ -1,0 +1,9 @@
+python -m unittest -q test.test_utils.TestUtil.test_cli_bool_option
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

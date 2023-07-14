@@ -1,0 +1,9 @@
+pytest pandas/tests/frame/indexing/test_indexing.py::TestDataFrameIndexing::test_reindex_nearest_tz
+RUN EVERY COMMAND
+0
+
+
+ImportError while loading conftest '/home/user/projects/pandas/pandas/conftest.py'.
+pandas/__init__.py:35: in <module>
+    raise ImportError(
+E   ImportError: C extension: 'normalize_date' from 'pandas._libs.tslibs.conversion' (/home/user/projects/pandas/pandas/_libs/tslibs/conversion.cpython-38-x86_64-linux-gnu.so) not built. If you want to import pandas from the source directory, you may need to run 'python setup.py build_ext --inplace --force' to build the C extensions first.

@@ -1,0 +1,20 @@
+pytest test/units/galaxy/test_collection.py::test_verify_collections_no_version
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/projects/ansible, inifile:
+
+==================================== ERRORS ====================================
+____________ ERROR collecting test/units/galaxy/test_collection.py _____________
+ImportError while importing test module '/home/user/projects/ansible/test/units/galaxy/test_collection.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+test/units/galaxy/test_collection.py:20: in <module>
+    from ansible import context
+E   ModuleNotFoundError: No module named 'ansible'
+=========================== 1 error in 0.18 seconds ============================
+ERROR: not found: /home/user/projects/ansible/test/units/galaxy/test_collection.py::test_verify_collections_no_version
+(no name '/home/user/projects/ansible/test/units/galaxy/test_collection.py::test_verify_collections_no_version' in any of [<Module 'test_collection.py'>])

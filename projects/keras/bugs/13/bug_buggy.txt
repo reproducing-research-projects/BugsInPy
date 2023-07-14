@@ -1,0 +1,648 @@
+pytest tests/keras/engine/test_training.py::test_model_methods
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/projects/keras, inifile: pytest.ini
+plugins: forked-1.1.3, flaky-3.6.1, xdist-1.32.0
+gw0 I / gw1 I
+[gw0] linux Python 3.7.3 cwd: /home/user/projects/keras
+[gw1] linux Python 3.7.3 cwd: /home/user/projects/keras
+[gw1] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
+[gw0] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
+gw0 [1] / gw1 [1]
+
+scheduling tests via LoadScheduling
+
+tests/keras/engine/test_training.py::test_model_methods 
+[gw1] [100%] FAILED tests/keras/engine/test_training.py::test_model_methods 
+
+=================================== FAILURES ===================================
+______________________________ test_model_methods ______________________________
+[gw1] linux -- Python 3.7.3 /home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/bin/python
+
+    def test_model_methods():
+        a = Input(shape=(3,), name='input_a')
+        b = Input(shape=(3,), name='input_b')
+    
+        a_2 = Dense(4, name='dense_1')(a)
+        dp = Dropout(0.5, name='dropout')
+        b_2 = dp(b)
+    
+        model = Model([a, b], [a_2, b_2])
+    
+        optimizer = 'rmsprop'
+        loss = 'mse'
+        loss_weights = [1., 0.5]
+    
+        input_a_np = np.random.random((10, 3))
+        input_b_np = np.random.random((10, 3))
+    
+        output_a_np = np.random.random((10, 4))
+        output_b_np = np.random.random((10, 3))
+    
+        # training/testing doesn't work before compiling.
+        with pytest.raises(RuntimeError):
+            model.train_on_batch([input_a_np, input_b_np],
+                                 [output_a_np, output_b_np])
+    
+        model.compile(optimizer, loss, metrics=[], loss_weights=loss_weights,
+                      sample_weight_mode=None)
+    
+        # test train_on_batch
+        out = model.train_on_batch([input_a_np, input_b_np],
+                                   [output_a_np, output_b_np])
+        out = model.train_on_batch({'input_a': input_a_np, 'input_b': input_b_np},
+                                   [output_a_np, output_b_np])
+        out = model.train_on_batch({'input_a': input_a_np, 'input_b': input_b_np},
+                                   {'dense_1': output_a_np, 'dropout': output_b_np})
+    
+        # test fit
+        out = model.fit([input_a_np, input_b_np],
+                        [output_a_np, output_b_np], epochs=1, batch_size=4)
+        out = model.fit({'input_a': input_a_np, 'input_b': input_b_np},
+                        [output_a_np, output_b_np], epochs=1, batch_size=4)
+        out = model.fit({'input_a': input_a_np, 'input_b': input_b_np},
+                        {'dense_1': output_a_np, 'dropout': output_b_np},
+                        epochs=1, batch_size=4)
+    
+        # test validation_split
+        out = model.fit([input_a_np, input_b_np],
+                        [output_a_np, output_b_np],
+                        epochs=1, batch_size=4, validation_split=0.5)
+        out = model.fit({'input_a': input_a_np, 'input_b': input_b_np},
+                        [output_a_np, output_b_np],
+                        epochs=1, batch_size=4, validation_split=0.5)
+    
+        # test validation data
+        out = model.fit([input_a_np, input_b_np],
+                        [output_a_np, output_b_np],
+                        epochs=1, batch_size=4,
+                        validation_data=([input_a_np, input_b_np],
+                                         [output_a_np, output_b_np]))
+        out = model.fit({'input_a': input_a_np, 'input_b': input_b_np},
+                        [output_a_np, output_b_np],
+                        epochs=1, batch_size=4, validation_split=0.5,
+                        validation_data=({'input_a': input_a_np,
+                                          'input_b': input_b_np},
+                                         [output_a_np, output_b_np]))
+        out = model.fit({'input_a': input_a_np, 'input_b': input_b_np},
+                        {'dense_1': output_a_np, 'dropout': output_b_np},
+                        epochs=1, batch_size=4, validation_split=0.5,
+                        validation_data=(
+                            {'input_a': input_a_np, 'input_b': input_b_np},
+                            {'dense_1': output_a_np, 'dropout': output_b_np}))
+    
+        # test_on_batch
+        out = model.test_on_batch([input_a_np, input_b_np],
+                                  [output_a_np, output_b_np])
+        out = model.test_on_batch({'input_a': input_a_np, 'input_b': input_b_np},
+                                  [output_a_np, output_b_np])
+        out = model.test_on_batch({'input_a': input_a_np, 'input_b': input_b_np},
+                                  {'dense_1': output_a_np, 'dropout': output_b_np})
+    
+        # predict_on_batch
+        out = model.predict_on_batch([input_a_np, input_b_np])
+        out = model.predict_on_batch({'input_a': input_a_np,
+                                      'input_b': input_b_np})
+    
+        # predict, evaluate
+        input_a_np = np.random.random((10, 3))
+        input_b_np = np.random.random((10, 3))
+    
+        output_a_np = np.random.random((10, 4))
+        output_b_np = np.random.random((10, 3))
+    
+        out = model.evaluate([input_a_np, input_b_np],
+                             [output_a_np, output_b_np],
+                             batch_size=4)
+        out = model.predict([input_a_np, input_b_np], batch_size=4)
+    
+        # with sample_weight
+        input_a_np = np.random.random((10, 3))
+        input_b_np = np.random.random((10, 3))
+    
+        output_a_np = np.random.random((10, 4))
+        output_b_np = np.random.random((10, 3))
+    
+        sample_weight = [None, np.random.random((10,))]
+        out = model.train_on_batch([input_a_np, input_b_np],
+                                   [output_a_np, output_b_np],
+                                   sample_weight=sample_weight)
+    
+        out = model.test_on_batch([input_a_np, input_b_np],
+                                  [output_a_np, output_b_np],
+                                  sample_weight=sample_weight)
+    
+        # test accuracy metric
+        model.compile(optimizer, loss, metrics=['acc'],
+                      sample_weight_mode=None)
+    
+        out = model.train_on_batch([input_a_np, input_b_np],
+                                   [output_a_np, output_b_np])
+        assert len(out) == 5
+        out = model.test_on_batch([input_a_np, input_b_np],
+                                  [output_a_np, output_b_np])
+        assert len(out) == 5
+    
+        # this should also work
+        model.compile(optimizer, loss, metrics={'dense_1': 'acc'},
+                      sample_weight_mode=None)
+    
+        out = model.train_on_batch([input_a_np, input_b_np],
+                                   [output_a_np, output_b_np])
+        assert len(out) == 4
+        out = model.test_on_batch([input_a_np, input_b_np],
+                                  [output_a_np, output_b_np])
+        assert len(out) == 4
+    
+        # and this as well
+        model.compile(optimizer, loss, metrics={'dense_1': ['acc']},
+                      sample_weight_mode=None)
+    
+        out = model.train_on_batch([input_a_np, input_b_np],
+                                   [output_a_np, output_b_np])
+        assert len(out) == 4
+        out = model.test_on_batch([input_a_np, input_b_np],
+                                  [output_a_np, output_b_np])
+        assert len(out) == 4
+    
+        # test starting from non-zero initial epoch
+        trained_epochs = []
+        trained_batches = []
+    
+        # define tracer callback
+        def on_epoch_begin(epoch, logs):
+            trained_epochs.append(epoch)
+    
+        def on_batch_begin(batch, logs):
+            trained_batches.append(batch)
+    
+        tracker_cb = LambdaCallback(on_epoch_begin=on_epoch_begin,
+                                    on_batch_begin=on_batch_begin)
+    
+        out = model.fit([input_a_np, input_b_np],
+                        [output_a_np, output_b_np], epochs=5, batch_size=4,
+                        initial_epoch=2, callbacks=[tracker_cb])
+        assert trained_epochs == [2, 3, 4]
+    
+        # test starting from non-zero initial epoch for generator too
+        trained_epochs = []
+    
+        @threadsafe_generator
+        def gen_data(batch_sz):
+            while True:
+                yield ([np.random.random((batch_sz, 3)),
+                        np.random.random((batch_sz, 3))],
+                       [np.random.random((batch_sz, 4)),
+                        np.random.random((batch_sz, 3))])
+    
+        out = model.fit_generator(gen_data(4), steps_per_epoch=3, epochs=5,
+                                  initial_epoch=2, callbacks=[tracker_cb])
+        assert trained_epochs == [2, 3, 4]
+    
+        # test with a custom metric function
+        def mse(y_true, y_pred):
+            return K.mean(K.pow(y_true - y_pred, 2))
+    
+        model.compile(optimizer, loss, metrics=[mse],
+                      sample_weight_mode=None)
+    
+        out = model.train_on_batch([input_a_np, input_b_np],
+                                   [output_a_np, output_b_np])
+        out_len = 1 + 2 * (1 + 1)  # total loss + 2 outputs * (loss + metric)
+        assert len(out) == out_len
+        out = model.test_on_batch([input_a_np, input_b_np],
+                                  [output_a_np, output_b_np])
+        assert len(out) == out_len
+    
+        input_a_np = np.random.random((10, 3))
+        input_b_np = np.random.random((10, 3))
+    
+        output_a_np = np.random.random((10, 4))
+        output_b_np = np.random.random((10, 3))
+    
+        out = model.fit([input_a_np, input_b_np],
+                        [output_a_np, output_b_np],
+                        batch_size=4, epochs=1)
+        out = model.evaluate([input_a_np, input_b_np],
+                             [output_a_np, output_b_np],
+                             batch_size=4)
+        out = model.predict([input_a_np, input_b_np], batch_size=4)
+    
+        # enable verbose for evaluate_generator
+        out = model.evaluate_generator(gen_data(4), steps=3, verbose=1)
+    
+        # empty batch
+        with pytest.raises(ValueError):
+            @threadsafe_generator
+            def gen_data():
+                while True:
+                    yield (np.asarray([]), np.asarray([]))
+    
+            out = model.evaluate_generator(gen_data(), steps=1)
+    
+        # x is not a list of numpy arrays.
+        with pytest.raises(ValueError):
+            out = model.predict([None])
+    
+        # x does not match _feed_input_names.
+        with pytest.raises(ValueError):
+            out = model.predict([input_a_np, None, input_b_np])
+        with pytest.raises(ValueError):
+            out = model.predict([None, input_a_np, input_b_np])
+    
+        # all input/output/weight arrays should have the same number of samples.
+        with pytest.raises(ValueError):
+            out = model.train_on_batch([input_a_np, input_b_np[:2]],
+                                       [output_a_np, output_b_np],
+                                       sample_weight=sample_weight)
+        with pytest.raises(ValueError):
+            out = model.train_on_batch([input_a_np, input_b_np],
+                                       [output_a_np, output_b_np[:2]],
+                                       sample_weight=sample_weight)
+        with pytest.raises(ValueError):
+            out = model.train_on_batch([input_a_np, input_b_np],
+                                       [output_a_np, output_b_np],
+                                       sample_weight=[sample_weight[1],
+                                                      sample_weight[1][:2]])
+    
+        # `sample_weight` is neither a dict nor a list.
+        with pytest.raises(TypeError):
+            out = model.train_on_batch([input_a_np, input_b_np],
+                                       [output_a_np, output_b_np],
+                                       sample_weight=tuple(sample_weight))
+    
+        # `validation_data` is neither a tuple nor a triple.
+        with pytest.raises(ValueError):
+            out = model.fit([input_a_np, input_b_np],
+                            [output_a_np, output_b_np],
+                            epochs=1, batch_size=4,
+                            validation_data=([input_a_np, input_b_np],))
+    
+        # `loss` does not match outputs.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss=['mse', 'mae', 'mape'])
+    
+        # `loss_weights` does not match output_names.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss='mse', loss_weights={'lstm': 0.5})
+    
+        # `loss_weights` does not match outputs.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss='mse', loss_weights=[0.5])
+    
+        # `loss_weights` is invalid type.
+        with pytest.raises(TypeError):
+            model.compile(optimizer, loss='mse', loss_weights=(0.5, 0.5))
+    
+        # `sample_weight_mode` does not match output_names.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss='mse',
+                          sample_weight_mode={'lstm': 'temporal'})
+    
+        # `sample_weight_mode` does not match output_names.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss='mse', sample_weight_mode=['temporal'])
+    
+        # `sample_weight_mode` matches output_names partially.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss='mse',
+                          sample_weight_mode={'dense_1': 'temporal'})
+    
+        # `loss` does not exist.
+        with pytest.raises(ValueError):
+            model.compile(optimizer, loss=[])
+    
+        model.compile(optimizer, loss=['mse', 'mae'])
+        model.compile(optimizer, loss='mse', loss_weights={'dense_1': 0.2,
+                                                           'dropout': 0.8})
+        model.compile(optimizer, loss='mse', loss_weights=[0.2, 0.8])
+    
+        # the rank of weight arrays should be 1.
+        with pytest.raises(ValueError):
+            out = model.train_on_batch(
+                [input_a_np, input_b_np],
+                [output_a_np, output_b_np],
+                sample_weight=[None, np.random.random((10, 20, 30))])
+    
+        model.compile(optimizer, loss='mse',
+                      sample_weight_mode={'dense_1': None, 'dropout': 'temporal'})
+        model.compile(optimizer, loss='mse', sample_weight_mode=[None, 'temporal'])
+    
+        # the rank of output arrays should be at least 3D.
+        with pytest.raises(ValueError):
+            out = model.train_on_batch([input_a_np, input_b_np],
+                                       [output_a_np, output_b_np],
+                                       sample_weight=sample_weight)
+    
+        model.compile(optimizer, loss, metrics=[], loss_weights=loss_weights,
+                      sample_weight_mode=None)
+        trained_epochs = []
+        trained_batches = []
+        val_seq = RandomSequence(4)
+        out = model.fit_generator(generator=RandomSequence(3),
+                                  steps_per_epoch=3,
+                                  epochs=5,
+                                  initial_epoch=0,
+                                  validation_data=val_seq,
+                                  validation_steps=3,
+                                  max_queue_size=1,
+                                  callbacks=[tracker_cb])
+        assert trained_epochs == [0, 1, 2, 3, 4]
+        assert trained_batches == list(range(3)) * 5
+        assert len(val_seq.logs) <= 4 * 5
+    
+        # steps_per_epoch will be equal to len of sequence if it's unspecified
+        trained_epochs = []
+        trained_batches = []
+        val_seq = RandomSequence(4)
+        out = model.fit_generator(generator=RandomSequence(3),
+                                  epochs=5,
+                                  initial_epoch=0,
+                                  validation_data=val_seq,
+                                  callbacks=[tracker_cb])
+        assert trained_epochs == [0, 1, 2, 3, 4]
+        assert trained_batches == list(range(12)) * 5
+        assert len(val_seq.logs) == 12 * 5
+    
+        # test for workers = 0
+        trained_epochs = []
+        trained_batches = []
+        val_seq = RandomSequence(4)
+        out = model.fit_generator(generator=RandomSequence(3),
+                                  epochs=5,
+                                  validation_data=val_seq,
+                                  callbacks=[tracker_cb],
+>                                 workers=0)
+
+tests/keras/engine/test_training.py:479: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+keras/legacy/interfaces.py:91: in wrapper
+    return func(*args, **kwargs)
+keras/engine/training.py:1418: in fit_generator
+    initial_epoch=initial_epoch)
+keras/engine/training_generator.py:233: in fit_generator
+    workers=0)
+keras/legacy/interfaces.py:91: in wrapper
+    return func(*args, **kwargs)
+keras/engine/training.py:1472: in evaluate_generator
+    verbose=verbose)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+model = <keras.engine.training.Model object at 0x7f8239e81278>
+generator = <generator object iter_sequence_infinite at 0x7f8239d5dcf0>
+steps = None, max_queue_size = 10, workers = 0, use_multiprocessing = False
+verbose = 0
+
+    def evaluate_generator(model, generator,
+                           steps=None,
+                           max_queue_size=10,
+                           workers=1,
+                           use_multiprocessing=False,
+                           verbose=0):
+        """See docstring for `Model.evaluate_generator`."""
+        model._make_test_function()
+    
+        if hasattr(model, 'metrics'):
+            for m in model.stateful_metric_functions:
+                m.reset_states()
+            stateful_metric_indices = [
+                i for i, name in enumerate(model.metrics_names)
+                if str(name) in model.stateful_metric_names]
+        else:
+            stateful_metric_indices = []
+    
+        steps_done = 0
+        wait_time = 0.01
+        outs_per_batch = []
+        batch_sizes = []
+        is_sequence = isinstance(generator, Sequence)
+        if not is_sequence and use_multiprocessing and workers > 1:
+            warnings.warn(
+                UserWarning('Using a generator with `use_multiprocessing=True`'
+                            ' and multiple workers may duplicate your data.'
+                            ' Please consider using the`keras.utils.Sequence'
+                            ' class.'))
+        if steps is None:
+            if is_sequence:
+                steps = len(generator)
+            else:
+>               raise ValueError('`steps=None` is only valid for a generator'
+                                 ' based on the `keras.utils.Sequence` class.'
+                                 ' Please specify `steps` or use the'
+                                 ' `keras.utils.Sequence` class.')
+E               ValueError: `steps=None` is only valid for a generator based on the `keras.utils.Sequence` class. Please specify `steps` or use the `keras.utils.Sequence` class.
+
+keras/engine/training_generator.py:300: ValueError
+----------------------------- Captured stdout call -----------------------------
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.6368 - dense_1_loss: 0.4168 - dropout_loss: 0.4401
+10/10 [==============================] - 0s 1ms/step - loss: 0.7044 - dense_1_loss: 0.5111 - dropout_loss: 0.3865
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.8056 - dense_1_loss: 0.5269 - dropout_loss: 0.5574
+10/10 [==============================] - 0s 147us/step - loss: 0.7220 - dense_1_loss: 0.4989 - dropout_loss: 0.4461
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.8386 - dense_1_loss: 0.6091 - dropout_loss: 0.4589
+10/10 [==============================] - 0s 154us/step - loss: 0.7328 - dense_1_loss: 0.4890 - dropout_loss: 0.4877
+Train on 5 samples, validate on 5 samples
+Epoch 1/1
+
+4/5 [=======================>......] - ETA: 0s - loss: 0.6703 - dense_1_loss: 0.3880 - dropout_loss: 0.5645
+5/5 [==============================] - 0s 8ms/step - loss: 0.8194 - dense_1_loss: 0.5243 - dropout_loss: 0.5902 - val_loss: 0.5228 - val_dense_1_loss: 0.4333 - val_dropout_loss: 0.1790
+Train on 5 samples, validate on 5 samples
+Epoch 1/1
+
+4/5 [=======================>......] - ETA: 0s - loss: 0.8103 - dense_1_loss: 0.5318 - dropout_loss: 0.5571
+5/5 [==============================] - 0s 369us/step - loss: 0.8267 - dense_1_loss: 0.5172 - dropout_loss: 0.6189 - val_loss: 0.5184 - val_dense_1_loss: 0.4290 - val_dropout_loss: 0.1790
+Train on 10 samples, validate on 10 samples
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.5418 - dense_1_loss: 0.3987 - dropout_loss: 0.2863
+10/10 [==============================] - 0s 362us/step - loss: 0.6265 - dense_1_loss: 0.4688 - dropout_loss: 0.3153 - val_loss: 0.5398 - val_dense_1_loss: 0.4631 - val_dropout_loss: 0.1534
+Train on 10 samples, validate on 10 samples
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.7333 - dense_1_loss: 0.4744 - dropout_loss: 0.5179
+10/10 [==============================] - 0s 489us/step - loss: 0.6660 - dense_1_loss: 0.4614 - dropout_loss: 0.4093 - val_loss: 0.5329 - val_dense_1_loss: 0.4562 - val_dropout_loss: 0.1534
+Train on 10 samples, validate on 10 samples
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.7964 - dense_1_loss: 0.5208 - dropout_loss: 0.5513
+10/10 [==============================] - 0s 1ms/step - loss: 0.6790 - dense_1_loss: 0.4546 - dropout_loss: 0.4489 - val_loss: 0.5262 - val_dense_1_loss: 0.4495 - val_dropout_loss: 0.1534
+
+ 4/10 [===========>..................] - ETA: 0s
+10/10 [==============================] - 0s 110us/step
+Epoch 3/5
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.8931 - dense_1_loss: 0.4130 - dropout_loss: 0.4801 - dense_1_acc: 0.2500
+10/10 [==============================] - 0s 894us/step - loss: 0.9685 - dense_1_loss: 0.3713 - dropout_loss: 0.5972 - dense_1_acc: 0.3000
+Epoch 4/5
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.6741 - dense_1_loss: 0.3447 - dropout_loss: 0.3294 - dense_1_acc: 0.5000
+10/10 [==============================] - 0s 168us/step - loss: 0.7715 - dense_1_loss: 0.3635 - dropout_loss: 0.4080 - dense_1_acc: 0.3000
+Epoch 5/5
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 1.1622 - dense_1_loss: 0.3802 - dropout_loss: 0.7819 - dense_1_acc: 0.5000
+10/10 [==============================] - 0s 198us/step - loss: 0.8949 - dense_1_loss: 0.3578 - dropout_loss: 0.5372 - dense_1_acc: 0.3000
+Epoch 3/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.8474 - dense_1_loss: 0.3932 - dropout_loss: 0.4542 - dense_1_acc: 0.0000e+00
+3/3 [==============================] - 0s 1ms/step - loss: 1.0256 - dense_1_loss: 0.3654 - dropout_loss: 0.6602 - dense_1_acc: 0.2500
+Epoch 4/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.6697 - dense_1_loss: 0.2943 - dropout_loss: 0.3754 - dense_1_acc: 0.2500
+3/3 [==============================] - 0s 661us/step - loss: 0.7778 - dense_1_loss: 0.2977 - dropout_loss: 0.4801 - dense_1_acc: 0.2500
+Epoch 5/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.4322 - dense_1_loss: 0.2348 - dropout_loss: 0.1974 - dense_1_acc: 0.0000e+00
+3/3 [==============================] - 0s 717us/step - loss: 0.6424 - dense_1_loss: 0.2816 - dropout_loss: 0.3608 - dense_1_acc: 0.1667
+Epoch 1/1
+
+ 4/10 [===========>..................] - ETA: 0s - loss: 0.6950 - dense_1_loss: 0.4376 - dropout_loss: 0.2574 - dense_1_mse: 0.4376 - dropout_mse: 0.2574
+10/10 [==============================] - 0s 1ms/step - loss: 0.7442 - dense_1_loss: 0.3238 - dropout_loss: 0.4205 - dense_1_mse: 0.3238 - dropout_mse: 0.4205
+
+ 4/10 [===========>..................] - ETA: 0s
+10/10 [==============================] - 0s 99us/step
+
+1/3 [=========>....................] - ETA: 0s
+3/3 [==============================] - 0s 12ms/step
+Epoch 1/5
+
+1/3 [=========>....................] - ETA: 1s - loss: 0.5730 - dense_1_loss: 0.3659 - dropout_loss: 0.4141
+3/3 [==============================] - 1s 223ms/step - loss: 0.6617 - dense_1_loss: 0.3196 - dropout_loss: 0.6843 - val_loss: 0.4020 - val_dense_1_loss: 0.3113 - val_dropout_loss: 0.1813
+Epoch 2/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.5398 - dense_1_loss: 0.3258 - dropout_loss: 0.4281
+3/3 [==============================] - 0s 2ms/step - loss: 0.4537 - dense_1_loss: 0.2828 - dropout_loss: 0.3419 - val_loss: 0.3714 - val_dense_1_loss: 0.2741 - val_dropout_loss: 0.1946
+Epoch 3/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.3967 - dense_1_loss: 0.2271 - dropout_loss: 0.3392
+3/3 [==============================] - 0s 4ms/step - loss: 0.4226 - dense_1_loss: 0.2792 - dropout_loss: 0.2869 - val_loss: 0.3501 - val_dense_1_loss: 0.2578 - val_dropout_loss: 0.1845
+Epoch 4/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.5418 - dense_1_loss: 0.2936 - dropout_loss: 0.4963
+3/3 [==============================] - 0s 3ms/step - loss: 0.4726 - dense_1_loss: 0.2358 - dropout_loss: 0.4735 - val_loss: 0.3573 - val_dense_1_loss: 0.2711 - val_dropout_loss: 0.1723
+Epoch 5/5
+
+1/3 [=========>....................] - ETA: 0s - loss: 0.4007 - dense_1_loss: 0.2668 - dropout_loss: 0.2677
+3/3 [==============================] - 0s 35ms/step - loss: 0.5131 - dense_1_loss: 0.2957 - dropout_loss: 0.4347 - val_loss: 0.2914 - val_dense_1_loss: 0.1837 - val_dropout_loss: 0.2155
+Epoch 1/5
+
+ 1/12 [=>............................] - ETA: 0s - loss: 0.4882 - dense_1_loss: 0.3016 - dropout_loss: 0.3734
+12/12 [==============================] - 0s 9ms/step - loss: 0.4723 - dense_1_loss: 0.2629 - dropout_loss: 0.4187 - val_loss: 0.3655 - val_dense_1_loss: 0.2841 - val_dropout_loss: 0.1628
+Epoch 2/5
+
+ 1/12 [=>............................] - ETA: 0s - loss: 0.5019 - dense_1_loss: 0.2669 - dropout_loss: 0.4700
+12/12 [==============================] - 0s 9ms/step - loss: 0.4520 - dense_1_loss: 0.2402 - dropout_loss: 0.4236 - val_loss: 0.3131 - val_dense_1_loss: 0.2254 - val_dropout_loss: 0.1754
+Epoch 3/5
+
+ 1/12 [=>............................] - ETA: 0s - loss: 0.4863 - dense_1_loss: 0.0950 - dropout_loss: 0.7826
+12/12 [==============================] - 0s 11ms/step - loss: 0.5220 - dense_1_loss: 0.2229 - dropout_loss: 0.5981 - val_loss: 0.3461 - val_dense_1_loss: 0.2504 - val_dropout_loss: 0.1913
+Epoch 4/5
+
+ 1/12 [=>............................] - ETA: 0s - loss: 0.4618 - dense_1_loss: 0.2025 - dropout_loss: 0.5187
+12/12 [==============================] - 0s 8ms/step - loss: 0.4797 - dense_1_loss: 0.2410 - dropout_loss: 0.4774 - val_loss: 0.2985 - val_dense_1_loss: 0.2153 - val_dropout_loss: 0.1663
+Epoch 5/5
+
+ 1/12 [=>............................] - ETA: 0s - loss: 0.4506 - dense_1_loss: 0.3542 - dropout_loss: 0.1929
+12/12 [==============================] - 0s 9ms/step - loss: 0.4287 - dense_1_loss: 0.2225 - dropout_loss: 0.4124 - val_loss: 0.2824 - val_dense_1_loss: 0.2114 - val_dropout_loss: 0.1419
+Epoch 1/5
+
+ 1/12 [=>............................] - ETA: 0s - loss: 0.8801 - dense_1_loss: 0.2400 - dropout_loss: 1.2801
+----------------------------- Captured stderr call -----------------------------
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:4138: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:131: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:133: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:3445: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+WARNING:tensorflow:From /home/user/projects/keras/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:973: The name tf.assign is deprecated. Please use tf.compat.v1.assign instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:199: The name tf.is_variable_initialized is deprecated. Please use tf.compat.v1.is_variable_initialized instead.
+
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:206: The name tf.variables_initializer is deprecated. Please use tf.compat.v1.variables_initializer instead.
+
+------------------------------ Captured log call -------------------------------
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:4138: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:131: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:133: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
+
+WARNING  tensorflow:deprecation.py:506 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:3445: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:973: The name tf.assign is deprecated. Please use tf.compat.v1.assign instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:199: The name tf.is_variable_initialized is deprecated. Please use tf.compat.v1.is_variable_initialized instead.
+
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:206: The name tf.variables_initializer is deprecated. Please use tf.compat.v1.variables_initializer instead.
+--------------------------- Captured stderr teardown ---------------------------
+WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:95: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+---------------------------- Captured log teardown -----------------------------
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:95: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+=============================== warnings summary ===============================
+tests/keras/engine/test_training.py:1104
+  /home/user/projects/keras/tests/keras/engine/test_training.py:1104: DeprecationWarning: invalid escape sequence \d
+    'have one entry per model output. The model has \d '
+
+tests/keras/engine/test_training.py:1109
+  /home/user/projects/keras/tests/keras/engine/test_training.py:1109: DeprecationWarning: invalid escape sequence \d
+    match='The model has \d outputs, but you passed a single '
+
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+  /home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521: DeprecationWarning: tostring() is deprecated. Use tobytes() instead.
+    tensor_proto.tensor_content = nparray.tostring()
+
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:339
+  /home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:339: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    if not isinstance(values, collections.Sequence):
+
+keras/utils/data_utils.py:651
+keras/utils/data_utils.py:651
+keras/utils/data_utils.py:651
+  /home/user/projects/keras/keras/utils/data_utils.py:651: DeprecationWarning: `wait_time` is not used anymore.
+    DeprecationWarning)
+
+/home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/contrib/learn/python/learn/learn_io/generator_io.py:26
+  /home/user/.conda/envs/30be27653f737e13d505dcd8372bd58d/lib/python3.7/site-packages/tensorflow_core/contrib/learn/python/learn/learn_io/generator_io.py:26: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    from collections import Container
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+========================== slowest 20 test durations ===========================
+5.02s call     tests/keras/engine/test_training.py::test_model_methods
+
+(0.00 durations hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/keras/engine/test_training.py::test_model_methods - ValueError: ...
+======================= 1 failed, 14 warnings in 15.78s ========================
+Using TensorFlow backend.

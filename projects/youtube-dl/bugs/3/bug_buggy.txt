@@ -1,0 +1,20 @@
+python -m unittest -q test.test_utils.TestUtil.test_unescape_html
+RUN EVERY COMMAND
+0
+
+
+======================================================================
+FAIL: test_unescape_html (test.test_utils.TestUtil)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/projects/youtube-dl/test/test_utils.py", line 282, in test_unescape_html
+    self.assertEqual(unescapeHTML('&a&quot;'), '&a"')
+AssertionError: '&a&quot;' != '&a"'
+- &a&quot;
++ &a"
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

@@ -1,0 +1,9 @@
+python -m unittest -q test.test_InfoExtractor.TestInfoExtractor.test_parse_mpd_formats
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.158s
+
+OK

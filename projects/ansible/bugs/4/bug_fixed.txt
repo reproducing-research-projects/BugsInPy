@@ -1,0 +1,41 @@
+pytest test/units/playbook/test_collectionsearch.py::test_collection_static_warning
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/projects/ansible, inifile:
+collected 1 item
+
+test/units/playbook/test_collectionsearch.py F                           [100%]
+
+=================================== FAILURES ===================================
+________________________ test_collection_static_warning ________________________
+
+capsys = <_pytest.capture.CaptureFixture object at 0x7f27ce837b00>
+
+    def test_collection_static_warning(capsys):
+        """Test that collection name is not templated.
+    
+        Also, make sure that users see the warning message for the referenced name.
+        """
+    
+        collection_name = 'foo.{{bar}}'
+        cs = CollectionSearch()
+>       assert collection_name in cs._load_collections(None, [collection_name])
+
+test/units/playbook/test_collectionsearch.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ansible.playbook.collectionsearch.CollectionSearch object at 0x7f27ce8375c0>
+attr = None, ds = ['foo.{{bar}}']
+
+    def _load_collections(self, attr, ds):
+        # We are always a mixin with Base, so we can validate this untemplated
+        # field early on to guarantee we are dealing with a list.
+>       ds = self.get_validated_value('collections', self._collections, ds, None)
+E       AttributeError: 'CollectionSearch' object has no attribute 'get_validated_value'
+
+../../.conda/envs/e91cde33ffcafb3e40ee0f44cab38afc/lib/python3.6/site-packages/ansible_base-2.10.0.dev0-py3.6.egg/ansible/playbook/collectionsearch.py:43: AttributeError
+=========================== 1 failed in 2.02 seconds ===========================

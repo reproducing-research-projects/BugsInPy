@@ -1,0 +1,9 @@
+python -m unittest -q test.test_jsinterp.TestJSInterpreter.test_call
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.028s
+
+OK

@@ -1,0 +1,22 @@
+pytest test/units/module_utils/facts/hardware/test_linux_get_cpu_info.py::test_get_cpu_info_missing_arch
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/projects/ansible, inifile:
+collected 1 item
+
+test/units/module_utils/facts/hardware/test_linux_get_cpu_info.py E      [100%]
+
+==================================== ERRORS ====================================
+_______________ ERROR at setup of test_get_cpu_info_missing_arch _______________
+file /home/user/projects/ansible/test/units/module_utils/facts/hardware/test_linux_get_cpu_info.py, line 25
+  def test_get_cpu_info_missing_arch(mocker):
+E       fixture 'mocker' not found
+>       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/user/projects/ansible/test/units/module_utils/facts/hardware/test_linux_get_cpu_info.py:25
+=========================== 1 error in 0.17 seconds ============================

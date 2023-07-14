@@ -1,0 +1,9 @@
+python -m unittest -q tornado.test.gen_test.WaitIteratorTest.test_no_ref
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

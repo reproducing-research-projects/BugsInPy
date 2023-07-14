@@ -1,0 +1,30 @@
+pytest pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises
+pytest pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises
+RUN EVERY COMMAND
+0
+
+
+ImportError while loading conftest '/home/user/projects/pandas/pandas/conftest.py'.
+pandas/__init__.py:52: in <module>
+    from pandas.core.api import (
+pandas/core/api.py:15: in <module>
+    from pandas.core.arrays import Categorical
+pandas/core/arrays/__init__.py:15: in <module>
+    from pandas.core.arrays.timedeltas import TimedeltaArray
+pandas/core/arrays/timedeltas.py:9: in <module>
+    from pandas._libs.tslibs.timedeltas import (
+E   ImportError: cannot import name 'precision_from_unit' from 'pandas._libs.tslibs.timedeltas' (/home/user/projects/pandas/pandas/_libs/tslibs/timedeltas.cpython-38-x86_64-linux-gnu.so)
+RUN EVERY COMMAND
+1
+pytest pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises
+
+ImportError while loading conftest '/home/user/projects/pandas/pandas/conftest.py'.
+pandas/__init__.py:52: in <module>
+    from pandas.core.api import (
+pandas/core/api.py:15: in <module>
+    from pandas.core.arrays import Categorical
+pandas/core/arrays/__init__.py:15: in <module>
+    from pandas.core.arrays.timedeltas import TimedeltaArray
+pandas/core/arrays/timedeltas.py:9: in <module>
+    from pandas._libs.tslibs.timedeltas import (
+E   ImportError: cannot import name 'precision_from_unit' from 'pandas._libs.tslibs.timedeltas' (/home/user/projects/pandas/pandas/_libs/tslibs/timedeltas.cpython-38-x86_64-linux-gnu.so)

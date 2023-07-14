@@ -1,0 +1,69 @@
+pytest tests/test_blueprints.py::test_bp_middleware_order
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.2.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/projects/sanic, inifile: tox.ini
+plugins: sugar-0.9.3, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
+collected 1 item
+
+tests/test_blueprints.py F                                               [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_bp_middleware_order ___________________________
+
+app = <sanic.app.Sanic object at 0x7efd588f3a60>
+
+    def test_bp_middleware_order(app):
+        blueprint = Blueprint("test_bp_middleware_order")
+        order = list()
+        @blueprint.middleware("request")
+        def mw_1(request):
+            order.append(1)
+        @blueprint.middleware("request")
+        def mw_2(request):
+            order.append(2)
+        @blueprint.middleware("request")
+        def mw_3(request):
+            order.append(3)
+        @blueprint.middleware("response")
+        def mw_4(request, response):
+            order.append(6)
+        @blueprint.middleware("response")
+        def mw_5(request, response):
+            order.append(5)
+        @blueprint.middleware("response")
+        def mw_6(request, response):
+            order.append(4)
+    
+        @blueprint.route("/")
+        def process_response(request):
+            return text("OK")
+    
+        app.blueprint(blueprint)
+        order.clear()
+        request, response = app.test_client.get("/")
+    
+        assert response.status == 200
+>       assert order == [1, 2, 3, 4, 5, 6]
+E       assert [1, 2, 3, 6, 5, 4] == [1, 2, 3, 4, 5, 6]
+E         At index 3 diff: 6 != 4
+E         Use -v to get the full diff
+
+tests/test_blueprints.py:304: AssertionError
+----------------------------- Captured stdout call -----------------------------
+[2023-07-14 07:08:43 +0000] [1827] [INFO] http://127.0.0.1:55849/
+[2023-07-14 07:08:43 +0000] - (sanic.access)[INFO][127.0.0.1:44066]: GET http://127.0.0.1:55849/  200 2
+[2023-07-14 07:08:43 +0000] [1827] [INFO] Starting worker [1827]
+[2023-07-14 07:08:43 +0000] [1827] [INFO] Stopping worker [1827]
+[2023-07-14 07:08:43 +0000] [1827] [INFO] Server Stopped
+------------------------------ Captured log call -------------------------------
+INFO     sanic.root:testing.py:29 http://127.0.0.1:55849/
+INFO     sanic.access:server.py:449 
+INFO     sanic.root:server.py:855 Starting worker [1827]
+INFO     sanic.root:server.py:858 Stopping worker [1827]
+INFO     sanic.root:app.py:1180 Server Stopped
+============================== 1 failed in 0.53s ===============================

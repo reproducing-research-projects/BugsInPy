@@ -1,0 +1,29 @@
+tox tests/test_hooks.py::TestExternalHooks::test_run_failing_hook
+RUN EVERY COMMAND
+0
+
+
+GLOB sdist-make: /home/user/projects/cookiecutter/setup.py
+py27 create: /home/user/projects/cookiecutter/.tox/py27
+ERROR: InterpreterNotFound: python2.7
+py33 create: /home/user/projects/cookiecutter/.tox/py33
+ERROR: InterpreterNotFound: python3.3
+py34 create: /home/user/projects/cookiecutter/.tox/py34
+ERROR: InterpreterNotFound: python3.4
+py35 create: /home/user/projects/cookiecutter/.tox/py35
+ERROR: InterpreterNotFound: python3.5
+pypy create: /home/user/projects/cookiecutter/.tox/pypy
+ERROR: InterpreterNotFound: pypy
+flake8 create: /home/user/projects/cookiecutter/.tox/flake8
+flake8 installdeps: flake8==2.3.0, pep8==1.6.2
+flake8 inst: /home/user/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip
+flake8 installed: binaryornot==0.4.4,chardet==5.0.0,click==8.0.4,cookiecutter @ file:///home/user/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip,flake8==2.3.0,future==0.18.3,importlib-metadata==4.8.3,Jinja2==3.0.3,MarkupSafe==2.0.1,mccabe==0.7.0,pep8==1.6.2,pyflakes==3.0.1,ruamel.yaml==0.17.32,ruamel.yaml.clib==0.2.7,typing-extensions==4.1.1,whichcraft==0.6.1,zipp==3.6.0
+flake8 run-test-pre: PYTHONHASHSEED='3154706580'
+flake8 run-test: commands[0] | flake8 cookiecutter tests setup.py
+___________________________________ summary ____________________________________
+ERROR:  py27: InterpreterNotFound: python2.7
+ERROR:  py33: InterpreterNotFound: python3.3
+ERROR:  py34: InterpreterNotFound: python3.4
+ERROR:  py35: InterpreterNotFound: python3.5
+ERROR:  pypy: InterpreterNotFound: pypy
+  flake8: commands succeeded
