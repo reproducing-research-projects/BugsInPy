@@ -62,12 +62,13 @@ fi
 cd "$work_dir"
 
 ###Add environment
-dos2unix $work_dir/bugsinpy_requirements.txt
+dos2unix $work_dir/bugsinpy_requirements.txt &>/dev/null
 . /opt/conda/etc/profile.d/conda.sh
+sed -i -e '/^\s*#.*$/d' -e '/^\s*$/d' "$work_dir/bugsinpy_requirements.txt"
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
 conda_env_name=$(cat <(echo $bug_python_version) "$work_dir/bugsinpy_requirements.txt" | md5sum | cut -d' ' -f 1)
 if ! conda activate $conda_env_name; then
-   echo "Please use 'conda create -n $bug_python_version -y python=$bug_python_version' to create your enviroment first or bugsinpy-testall -p project_name:bug_id"
+   echo "Please use 'conda create -n $conda_env_name -y python=$bug_python_version' to create your enviroment first or bugsinpy-testall -p project_name:bug_id"
    exit
 fi
 
