@@ -33,7 +33,7 @@ services:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/BugsInPy/temp
     command: |
-      bugsinpy-testall -p ansible:1
+      bugsinpy-testall -p ansible:
     depends_on:
       - setup
   black:
