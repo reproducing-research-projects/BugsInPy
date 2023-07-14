@@ -124,16 +124,16 @@ for project in $projects; do
         if grep -q "= FAILURES =" "$bug_source_dir/bug_$version.txt" || \
           grep -q "FAILED (" "$bug_source_dir/bug_$version.txt"
         then
-          echo "$project,$bug,buggy,fail" | tee -a $index_file
+          echo "$project,$bug,$version,fail" | tee -a $index_file
         elif grep -q "= ERRORS =" "$bug_source_dir/bug_$version.txt" || \
           grep -q ": command not found" "$bug_source_dir/bug_$version.txt" || \
           grep -q "You have not compile this project" "$bug_source_dir/bug_$version.txt"
         then
-          echo "$project,$bug,buggy,error" | tee -a $index_file
+          echo "$project,$bug,$version,error" | tee -a $index_file
         elif grep -qwE "passed|OK" "$bug_source_dir/bug_$version.txt"; then
-          echo "$project,$bug,buggy,pass" | tee -a $index_file
+          echo "$project,$bug,$version,pass" | tee -a $index_file
         else
-          echo "$project,$bug,buggy,unknown" | tee -a $index_file
+          echo "$project,$bug,$version,unknown" | tee -a $index_file
         fi
       done
       # echo $LINENO # debug
