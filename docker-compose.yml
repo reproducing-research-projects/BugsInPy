@@ -1,121 +1,186 @@
 services:
-  pysnooper:
+  setup:
     build: .
+    image: bugsinpy-setup
+    pull_policy: never
+    volumes:
+      - ./temp:/home/user/projects
+    command:
+      - /bin/bash
+      - -c
+      - |
+        bugsinpy-testall -c
+        echo Cleaning up temp folder ...
+        echo Reproducing bugs please wait ...
+        echo -------------------------
+        echo repo,bugid,version,result
+  pysnooper:
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p PySnooper:
+    depends_on:
+      - setup
   ansible:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p ansible:
+    depends_on:
+      - setup
   black:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p black:
-  # TODO; major fixes required
-  # cookiecutter:
-  #   build: .
-  #   volumes:
-  #     - ./projects:/home/user/BugsInPy/projects
-  #     - ./temp:/home/user/projects
-  #   command: |
-  #     bugsinpy-testall -p cookiecutter:
+    depends_on:
+      - setup
+  cookiecutter:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/projects
+    command: |
+      bugsinpy-testall -p cookiecutter:
+    depends_on:
+      - setup
   fastapi:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p fastapi:
+    depends_on:
+      - setup
   httpie:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p httpie:
+    depends_on:
+      - setup
   keras:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p keras:
+    depends_on:
+      - setup
   luigi:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p luigi:
+    depends_on:
+      - setup
   matplotlib:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p matplotlib:
+    depends_on:
+      - setup
   pandas:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p pandas:
+    depends_on:
+      - setup
   spacy:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p spacy:
+    depends_on:
+      - setup
   thefuck:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p thefuck:
+    depends_on:
+      - setup
   youtube-dl:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p youtube-dl:
+    depends_on:
+      - setup
   sanic:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p sanic:
+    depends_on:
+      - setup
   scrapy:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p scrapy:
+    depends_on:
+      - setup
   tornado:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p tornado:
+    depends_on:
+      - setup
   tqdm:
-    build: .
+    pull_policy: never
+    image: bugsinpy-setup
     volumes:
       - ./projects:/home/user/BugsInPy/projects
       - ./temp:/home/user/projects
     command: |
       bugsinpy-testall -p tqdm:
+    depends_on:
+      - setup
