@@ -1,0 +1,13 @@
+pytest test/units/galaxy/test_api.py::test_get_role_versions_pagination
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+collected 2 items
+
+test/units/galaxy/test_api.py ..                                         [100%]
+
+=========================== 2 passed in 2.03 seconds ===========================

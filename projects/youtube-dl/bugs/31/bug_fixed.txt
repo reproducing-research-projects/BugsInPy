@@ -1,0 +1,9 @@
+python -m unittest -q test.test_utils.TestUtil.test_parse_duration
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

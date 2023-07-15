@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_black.BlackTestCase.test_python2
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.007s
+
+OK

@@ -1,0 +1,53 @@
+pytest tests/test_sessions.py::TestSession::test_download_in_session
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/httpie, inifile: pytest.ini
+plugins: httpbin-1.0.0
+collected 1 item
+
+tests/test_sessions.py F                                                 [100%]
+
+=================================== FAILURES ===================================
+_____________________ TestSession.test_download_in_session _____________________
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/httpie/tests/test_sessions.py", line 186, in test_download_in_session
+    httpbin.url + '/get', env=self.env())
+  File "/home/user/BugsInPy/temp/projects/httpie/tests/utils.py", line 136, in http
+    exit_status = main(args=args, **kwargs)
+  File "/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/core.py", line 115, in main
+    response = get_response(args, config_dir=env.config.directory)
+  File "/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/client.py", line 55, in get_response
+    read_only=bool(args.session_read_only),
+  File "/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/sessions.py", line 52, in get_response
+    session.update_headers(kwargs['headers'])
+  File "/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/sessions.py", line 104, in update_headers
+    value = value.decode('utf8')
+AttributeError: 'NoneType' object has no attribute 'decode'
+=============================== warnings summary ===============================
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \?
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:56
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:56
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \d
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:57
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:57
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \*
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:463
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:463
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:463: DeprecationWarning: invalid escape sequence \=
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:11
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:11: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_sessions.py::TestSession::test_download_in_session - Attrib...
+======================== 1 failed, 9 warnings in 1.32s =========================

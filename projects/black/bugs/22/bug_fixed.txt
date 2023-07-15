@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_black.BlackTestCase.test_comments3
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.017s
+
+OK

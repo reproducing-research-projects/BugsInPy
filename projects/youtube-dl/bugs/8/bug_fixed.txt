@@ -1,0 +1,9 @@
+python -m unittest -q test.test_YoutubeDL.TestFormatSelection.test_youtube_format_selection
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 2.236s
+
+OK

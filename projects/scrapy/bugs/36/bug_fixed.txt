@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_utils_misc.__init__.UtilsMiscTestCase.test_create_instance
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+OK

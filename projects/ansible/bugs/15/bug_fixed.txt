@@ -1,0 +1,13 @@
+pytest test/units/modules/network/eos/test_eos_eapi.py::TestEosEapiModule::test_eos_eapi_vrf
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+collected 1 item
+
+test/units/modules/network/eos/test_eos_eapi.py .                        [100%]
+
+=========================== 1 passed in 0.18 seconds ===========================

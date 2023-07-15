@@ -1,0 +1,1920 @@
+pytest pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises
+pytest pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 18 items
+
+pandas/tests/series/methods/test_to_period.py FF..FFFFFFFFFFFFFF         [100%]
+
+=================================== FAILURES ===================================
+_________________ TestToPeriod.test_to_period_raises[unicode] __________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc8c38b0>
+indices = Index(['ן2עקךרב16ז', 'עכ03שר75םט', 'גדףזןשהצע9', 'ןצבליי7יבע', '7קףני10מ4צ',
+       'הוצכרקא35ר', '0קל1א81ף27', 'ח6הקל...2ן7', 'זכיטרקךן3ץ',
+       'שםץ3קט914ף', 'זצשנארב7ש9', 'פרמ68גלנכה', 'ןד72קגכלכב', 'צ452בעקף7כ'],
+      dtype='object')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ן2עקךרב16ז    NaN
+עכ03שר75םט    NaN
+גדףזןשהצע9    NaN
+ןצבליי7יבע    NaN
+7קףני10מ4צ    NaN
+             ... 
+שםץ3קט914ף    NaN
+זצשנארב7ש9    NaN
+פרמ68גלנכה    NaN
+ןד72קגכלכב    NaN
+צ452בעקף7כ    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[string] __________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc61e3a0>
+indices = Index(['MEemKMgIND', 'FRwI6wrTbg', 'jDTMFuHsko', 'eIa3ThqHMv', 'RlXvvoJWsq',
+       'ILNgMJEswT', '7zTyl1NlLf', 'Np9cl...KHt', 'dZNDg1PdnT',
+       '7jnehUbev4', 'i6zBN1hll1', 'YTS1M70jHg', 'kZY1Zd7vWX', 'r0j3hNEzkT'],
+      dtype='object')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = MEemKMgIND    NaN
+FRwI6wrTbg    NaN
+jDTMFuHsko    NaN
+eIa3ThqHMv    NaN
+RlXvvoJWsq    NaN
+             ... 
+7jnehUbev4    NaN
+i6zBN1hll1    NaN
+YTS1M70jHg    NaN
+kZY1Zd7vWX    NaN
+r0j3hNEzkT    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[period] __________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc7a6790>
+indices = PeriodIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+             '2000-01-07', '2000-01-10', '2000-01...-05-15',
+             '2000-05-16', '2000-05-17', '2000-05-18', '2000-05-19'],
+            dtype='period[B]', freq='B')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 2000-01-03    NaN
+2000-01-04    NaN
+2000-01-05    NaN
+2000-01-06    NaN
+2000-01-07    NaN
+             ... 
+2000-05-15    NaN
+2000-05-16    NaN
+2000-05-17    NaN
+2000-05-18    NaN
+2000-05-19    NaN
+Freq: B, Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+________________ TestToPeriod.test_to_period_raises[timedelta] _________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc6f3460>
+indices = TimedeltaIndex([  '1 days',   '2 days',   '3 days',   '4 days',   '5 days',
+                  '6 days',   '7 days',   ...          '96 days',  '97 days',  '98 days',  '99 days', '100 days'],
+               dtype='timedelta64[ns]', freq='D')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 1 days      NaN
+2 days      NaN
+3 days      NaN
+4 days      NaN
+5 days      NaN
+           ... 
+96 days     NaN
+97 days     NaN
+98 days     NaN
+99 days     NaN
+100 days    NaN
+Freq: D, Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+___________________ TestToPeriod.test_to_period_raises[int] ____________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc7a6ca0>
+indices = Int64Index([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+            17, 18, 19, 20, 21, 22, 23... 80, 81, 82, 83, 84,
+            85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+           dtype='int64')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 0     NaN
+1     NaN
+2     NaN
+3     NaN
+4     NaN
+     ... 
+95    NaN
+96    NaN
+97    NaN
+98    NaN
+99    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+___________________ TestToPeriod.test_to_period_raises[uint] ___________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc631550>
+indices = UInt64Index([9223372036854775808, 9223372036854775809, 9223372036854775810,
+             9223372036854775811, 92233720...2036854775904, 9223372036854775905, 9223372036854775906,
+             9223372036854775907],
+            dtype='uint64')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 9223372036854775808    NaN
+9223372036854775809    NaN
+9223372036854775810    NaN
+9223372036854775811    NaN
+9223372036...5904    NaN
+9223372036854775905    NaN
+9223372036854775906    NaN
+9223372036854775907    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[range] ___________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc61e5b0>
+indices = RangeIndex(start=0, stop=100, step=1)
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 0     NaN
+1     NaN
+2     NaN
+3     NaN
+4     NaN
+     ... 
+95    NaN
+96    NaN
+97    NaN
+98    NaN
+99    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[float] ___________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc7a62e0>
+indices = Float64Index([-1.8114682443984287, -0.6074427146091965, -0.3586984735043153,
+               0.4929961609392963,  1.452...6515920708,   97.30158517511217,   97.36184110599643,
+                97.49012241765651],
+             dtype='float64')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = -1.811468     NaN
+-0.607443     NaN
+-0.358698     NaN
+ 0.492996     NaN
+ 1.452250     NaN
+             ... 
+ 95.943911    NaN
+ 96.761652    NaN
+ 97.301585    NaN
+ 97.361841    NaN
+ 97.490122    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+___________________ TestToPeriod.test_to_period_raises[bool] ___________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc5823d0>
+indices = Index([False, True, False, False, False, False, False, False, False, False], dtype='object')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = False    NaN
+True     NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+_______________ TestToPeriod.test_to_period_raises[categorical] ________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc3ff430>
+indices = CategoricalIndex(['POAl', '72ZF', 'snSI', 'POAl', '72ZF', 'snSI', 'POAl',
+                  '72ZF', 'snSI', 'POAl', '7...                'snSI', 'POAl'],
+                 categories=['POAl', '72ZF', 'snSI'], ordered=False, dtype='category')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = POAl    NaN
+72ZF    NaN
+snSI    NaN
+POAl    NaN
+72ZF    NaN
+       ... 
+snSI    NaN
+POAl    NaN
+72ZF    NaN
+snSI    NaN
+POAl    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+_________________ TestToPeriod.test_to_period_raises[interval] _________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc61e9a0>
+indices = IntervalIndex([(0.0, 1.0], (1.0, 2.0], (2.0, 3.0], (3.0, 4.0], (4.0, 5.0] ... (95.0, 96.0], (96.0, 97.0], (97.0, 98.0], (98.0, 99.0], (99.0, 100.0]],
+              closed='right',
+              dtype='interval[float64]')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = (0.0, 1.0]       NaN
+(1.0, 2.0]       NaN
+(2.0, 3.0]       NaN
+(3.0, 4.0]       NaN
+(4.0, 5.0]       NaN
+             ...     NaN
+(96.0, 97.0]     NaN
+(97.0, 98.0]     NaN
+(98.0, 99.0]     NaN
+(99.0, 100.0]    NaN
+Length: 100, dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[empty] ___________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc6ceb50>
+indices = Index([], dtype='object')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Series([], dtype: object), freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[tuples] __________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc3ffca0>
+indices = MultiIndex([('foo', 1),
+            ('bar', 2),
+            ('baz', 3)],
+           )
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = foo  1    NaN
+bar  2    NaN
+baz  3    NaN
+dtype: object, freq = None
+copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+___________ TestToPeriod.test_to_period_raises[mi-with-dt64tz-level] ___________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc868fa0>
+indices = MultiIndex([(1, 'a', '2013-01-01 00:00:00-05:00'),
+            (1, 'a', '2013-01-02 00:00:00-05:00'),
+            (1, ...3-01-02 00:00:00-05:00'),
+            (2, 'b', '2013-01-03 00:00:00-05:00')],
+           names=['one', 'two', 'three'])
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = one  two  three                    
+1    a    2013-01-01 00:00:00-05:00    NaN
+          2013-01-02 00:00:00-05:00    ...:00:00-05:00    NaN
+          2013-01-02 00:00:00-05:00    NaN
+          2013-01-03 00:00:00-05:00    NaN
+dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+__________________ TestToPeriod.test_to_period_raises[multi] ___________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc6ce130>
+indices = MultiIndex([('foo', 'one'),
+            ('foo', 'two'),
+            ('bar', 'one'),
+            ('baz', 'two'),
+            ('qux', 'one'),
+            ('qux', 'two')],
+           names=['first', 'second'])
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = first  second
+foo    one       NaN
+       two       NaN
+bar    one       NaN
+baz    two       NaN
+qux    one       NaN
+       two       NaN
+dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+_________________ TestToPeriod.test_to_period_raises[repeats] __________________
+
+self = <pandas.tests.series.methods.test_to_period.TestToPeriod object at 0x7f5bfc3ff910>
+indices = Int64Index([0, 0, 1, 1, 2, 2], dtype='int64')
+
+    def test_to_period_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, DatetimeIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_period()
+
+pandas/tests/series/methods/test_to_period.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 0    NaN
+0    NaN
+1    NaN
+1    NaN
+2    NaN
+2    NaN
+dtype: object
+freq = None, copy = True
+
+    def to_period(self, freq=None, copy=True) -> "Series":
+        """
+        Convert Series from DatetimeIndex to PeriodIndex with desired
+        frequency (inferred from index if not passed).
+    
+        Parameters
+        ----------
+        freq : str, default None
+            Frequency associated with the PeriodIndex.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series
+            Series with index converted to PeriodIndex.
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, DatetimeIndex)
+E       AssertionError
+
+pandas/core/series.py:4714: AssertionError
+=========================== short test summary info ============================
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[unicode]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[string]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[period]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[timedelta]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[int]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[uint]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[range]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[float]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[bool]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[categorical]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[interval]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[empty]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[tuples]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[mi-with-dt64tz-level]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[multi]
+FAILED pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises[repeats]
+========================= 16 failed, 2 passed in 0.53s =========================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 18 items
+
+pandas/tests/series/methods/test_to_timestamp.py FFFF.FFFFFFFFFFFFF      [100%]
+
+=================================== FAILURES ===================================
+______________ TestToTimestamp.test_to_timestamp_raises[unicode] _______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e7ed00>
+indices = Index(['5ר40וקע2םק', 'צדצפ4נשצ6ב', '49מ4מהמזבד', 'ם0ךצ5ץה5סא', 'לז7זץנצדצן',
+       '665ך2סבזטב', '3ך0רמךס4חר', 'ציג92...ףפל', '73יוחרה7ר6',
+       'פ3ףן9ג8ע83', 'ק3ךעטע4להצ', 'נונ3ףסבוט3', 'רשפט2ח8שגב', 'מאי5גק3טגע'],
+      dtype='object')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 5ר40וקע2םק    NaN
+צדצפ4נשצ6ב    NaN
+49מ4מהמזבד    NaN
+ם0ךצ5ץה5סא    NaN
+לז7זץנצדצן    NaN
+             ... 
+פ3ףן9ג8ע83    NaN
+ק3ךעטע4להצ    NaN
+נונ3ףסבוט3    NaN
+רשפט2ח8שגב    NaN
+מאי5גק3טגע    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_______________ TestToTimestamp.test_to_timestamp_raises[string] _______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e818b0>
+indices = Index(['w8bqjnYbMR', 'B1k6dhT0rv', 'wc54CZqC2t', '5JZ1uk3D8O', 'RSFPhzV0AP',
+       'ZhDzLR2CA4', 'Acx5yZD38X', 'YCDLz...63L', 'l8oQpSDoZj',
+       'gN9rtneamS', 'q8TjMlN9je', 'juvMMYDoOe', 'h99awMuwtc', 'Gh1awG9EbW'],
+      dtype='object')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = w8bqjnYbMR    NaN
+B1k6dhT0rv    NaN
+wc54CZqC2t    NaN
+5JZ1uk3D8O    NaN
+RSFPhzV0AP    NaN
+             ... 
+gN9rtneamS    NaN
+q8TjMlN9je    NaN
+juvMMYDoOe    NaN
+h99awMuwtc    NaN
+Gh1awG9EbW    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+______________ TestToTimestamp.test_to_timestamp_raises[datetime] ______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e8fb20>
+indices = DatetimeIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+               '2000-01-07', '2000-01-10', '200...               '2000-05-16', '2000-05-17', '2000-05-18', '2000-05-19'],
+              dtype='datetime64[ns]', freq='B')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 2000-01-03    NaN
+2000-01-04    NaN
+2000-01-05    NaN
+2000-01-06    NaN
+2000-01-07    NaN
+             ... 
+2000-05-15    NaN
+2000-05-16    NaN
+2000-05-17    NaN
+2000-05-18    NaN
+2000-05-19    NaN
+Freq: B, Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+____________ TestToTimestamp.test_to_timestamp_raises[datetime-tz] _____________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1b34490>
+indices = DatetimeIndex(['2000-01-03 00:00:00-08:00', '2000-01-04 00:00:00-08:00',
+               '2000-01-05 00:00:00-08:00', '... '2000-05-18 00:00:00-07:00', '2000-05-19 00:00:00-07:00'],
+              dtype='datetime64[ns, US/Pacific]', freq='B')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 2000-01-03 00:00:00-08:00    NaN
+2000-01-04 00:00:00-08:00    NaN
+2000-01-05 00:00:00-08:00    NaN
+2000-01-06 00:00:00...0:00-07:00    NaN
+2000-05-18 00:00:00-07:00    NaN
+2000-05-19 00:00:00-07:00    NaN
+Freq: B, Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_____________ TestToTimestamp.test_to_timestamp_raises[timedelta] ______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e8f9a0>
+indices = TimedeltaIndex([  '1 days',   '2 days',   '3 days',   '4 days',   '5 days',
+                  '6 days',   '7 days',   ...          '96 days',  '97 days',  '98 days',  '99 days', '100 days'],
+               dtype='timedelta64[ns]', freq='D')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 1 days      NaN
+2 days      NaN
+3 days      NaN
+4 days      NaN
+5 days      NaN
+           ... 
+96 days     NaN
+97 days     NaN
+98 days     NaN
+99 days     NaN
+100 days    NaN
+Freq: D, Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+________________ TestToTimestamp.test_to_timestamp_raises[int] _________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1b34400>
+indices = Int64Index([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+            17, 18, 19, 20, 21, 22, 23... 80, 81, 82, 83, 84,
+            85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+           dtype='int64')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 0     NaN
+1     NaN
+2     NaN
+3     NaN
+4     NaN
+     ... 
+95    NaN
+96    NaN
+97    NaN
+98    NaN
+99    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+________________ TestToTimestamp.test_to_timestamp_raises[uint] ________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1cef2e0>
+indices = UInt64Index([9223372036854775808, 9223372036854775809, 9223372036854775810,
+             9223372036854775811, 92233720...2036854775904, 9223372036854775905, 9223372036854775906,
+             9223372036854775907],
+            dtype='uint64')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 9223372036854775808    NaN
+9223372036854775809    NaN
+9223372036854775810    NaN
+9223372036854775811    NaN
+9223372036...5904    NaN
+9223372036854775905    NaN
+9223372036854775906    NaN
+9223372036854775907    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_______________ TestToTimestamp.test_to_timestamp_raises[range] ________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1ea7580>
+indices = RangeIndex(start=0, stop=100, step=1)
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 0     NaN
+1     NaN
+2     NaN
+3     NaN
+4     NaN
+     ... 
+95    NaN
+96    NaN
+97    NaN
+98    NaN
+99    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_______________ TestToTimestamp.test_to_timestamp_raises[float] ________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1bd61f0>
+indices = Float64Index([ -689.3078161697898,  -679.4103959736445,  -672.2984635564283,
+               -671.1704228002861,  -651....2353365927,  265.07115549368075,   286.5002577429372,
+               291.02676934350524],
+             dtype='float64')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = -689.307816    NaN
+-679.410396    NaN
+-672.298464    NaN
+-671.170423    NaN
+-651.936254    NaN
+              ... 
+ 252.887734    NaN
+ 258.529424    NaN
+ 265.071155    NaN
+ 286.500258    NaN
+ 291.026769    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+________________ TestToTimestamp.test_to_timestamp_raises[bool] ________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1ea41c0>
+indices = Index([False, True, False, False, False, False, False, False, False, False], dtype='object')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = False    NaN
+True     NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+False    NaN
+dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+____________ TestToTimestamp.test_to_timestamp_raises[categorical] _____________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e8f3d0>
+indices = CategoricalIndex(['jUwC', 'Lm2M', 'LVhS', 'jUwC', 'Lm2M', 'LVhS', 'jUwC',
+                  'Lm2M', 'LVhS', 'jUwC', 'L...                'LVhS', 'jUwC'],
+                 categories=['jUwC', 'Lm2M', 'LVhS'], ordered=False, dtype='category')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = jUwC    NaN
+Lm2M    NaN
+LVhS    NaN
+jUwC    NaN
+Lm2M    NaN
+       ... 
+LVhS    NaN
+jUwC    NaN
+Lm2M    NaN
+LVhS    NaN
+jUwC    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+______________ TestToTimestamp.test_to_timestamp_raises[interval] ______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1bcbd60>
+indices = IntervalIndex([(0.0, 1.0], (1.0, 2.0], (2.0, 3.0], (3.0, 4.0], (4.0, 5.0] ... (95.0, 96.0], (96.0, 97.0], (97.0, 98.0], (98.0, 99.0], (99.0, 100.0]],
+              closed='right',
+              dtype='interval[float64]')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = (0.0, 1.0]       NaN
+(1.0, 2.0]       NaN
+(2.0, 3.0]       NaN
+(3.0, 4.0]       NaN
+(4.0, 5.0]       NaN
+             ...     NaN
+(96.0, 97.0]     NaN
+(97.0, 98.0]     NaN
+(98.0, 99.0]     NaN
+(99.0, 100.0]    NaN
+Length: 100, dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_______________ TestToTimestamp.test_to_timestamp_raises[empty] ________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e7e910>
+indices = Index([], dtype='object')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Series([], dtype: object), freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_______________ TestToTimestamp.test_to_timestamp_raises[tuples] _______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1c55a30>
+indices = MultiIndex([('foo', 1),
+            ('bar', 2),
+            ('baz', 3)],
+           )
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = foo  1    NaN
+bar  2    NaN
+baz  3    NaN
+dtype: object, freq = None
+how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+________ TestToTimestamp.test_to_timestamp_raises[mi-with-dt64tz-level] ________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1cc5bb0>
+indices = MultiIndex([(1, 'a', '2013-01-01 00:00:00-05:00'),
+            (1, 'a', '2013-01-02 00:00:00-05:00'),
+            (1, ...3-01-02 00:00:00-05:00'),
+            (2, 'b', '2013-01-03 00:00:00-05:00')],
+           names=['one', 'two', 'three'])
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = one  two  three                    
+1    a    2013-01-01 00:00:00-05:00    NaN
+          2013-01-02 00:00:00-05:00    ...:00:00-05:00    NaN
+          2013-01-02 00:00:00-05:00    NaN
+          2013-01-03 00:00:00-05:00    NaN
+dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+_______________ TestToTimestamp.test_to_timestamp_raises[multi] ________________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1c633a0>
+indices = MultiIndex([('foo', 'one'),
+            ('foo', 'two'),
+            ('bar', 'one'),
+            ('baz', 'two'),
+            ('qux', 'one'),
+            ('qux', 'two')],
+           names=['first', 'second'])
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = first  second
+foo    one       NaN
+       two       NaN
+bar    one       NaN
+baz    two       NaN
+qux    one       NaN
+       two       NaN
+dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+______________ TestToTimestamp.test_to_timestamp_raises[repeats] _______________
+
+self = <pandas.tests.series.methods.test_to_timestamp.TestToTimestamp object at 0x7f49c1e0c520>
+indices = Int64Index([0, 0, 1, 1, 2, 2], dtype='int64')
+
+    def test_to_timestamp_raises(self, indices):
+        # https://github.com/pandas-dev/pandas/issues/33327
+        index = indices
+        ser = Series(index=index, dtype=object)
+        if not isinstance(index, PeriodIndex):
+            msg = f"unsupported Type {type(index).__name__}"
+            with pytest.raises(TypeError, match=msg):
+>               ser.to_timestamp()
+
+pandas/tests/series/methods/test_to_timestamp.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = 0    NaN
+0    NaN
+1    NaN
+1    NaN
+2    NaN
+2    NaN
+dtype: object
+freq = None, how = 'start', copy = True
+
+    def to_timestamp(self, freq=None, how="start", copy=True) -> "Series":
+        """
+        Cast to DatetimeIndex of Timestamps, at *beginning* of period.
+    
+        Parameters
+        ----------
+        freq : str, default frequency of PeriodIndex
+            Desired frequency.
+        how : {'s', 'e', 'start', 'end'}
+            Convention for converting period to timestamp; start of period
+            vs. end.
+        copy : bool, default True
+            Whether or not to return a copy.
+    
+        Returns
+        -------
+        Series with DatetimeIndex
+        """
+        new_values = self._values
+        if copy:
+            new_values = new_values.copy()
+    
+>       assert isinstance(self.index, PeriodIndex)
+E       AssertionError
+
+pandas/core/series.py:4687: AssertionError
+=========================== short test summary info ============================
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[unicode]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[string]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[datetime]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[datetime-tz]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[timedelta]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[int]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[uint]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[range]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[float]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[bool]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[categorical]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[interval]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[empty]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[tuples]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[mi-with-dt64tz-level]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[multi]
+FAILED pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises[repeats]
+========================= 17 failed, 1 passed in 0.61s =========================

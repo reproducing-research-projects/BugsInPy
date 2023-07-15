@@ -1,0 +1,9 @@
+python -m unittest -q test.test_utils.TestUtil.test_js_to_json
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

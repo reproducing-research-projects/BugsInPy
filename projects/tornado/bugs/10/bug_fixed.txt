@@ -1,0 +1,9 @@
+python -m unittest -q tornado.test.websocket_test.WebSocketTest.test_render_message
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.025s
+
+OK

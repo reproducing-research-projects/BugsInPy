@@ -1,0 +1,36 @@
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_full_url
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_host
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_type
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_origin_req_host
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+RUN EVERY COMMAND
+1
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_full_url
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+RUN EVERY COMMAND
+2
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_host
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK
+RUN EVERY COMMAND
+3
+python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_type
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

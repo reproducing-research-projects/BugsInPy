@@ -1,0 +1,133 @@
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_nototal
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py FE                                              [100%]
+
+==================================== ERRORS ====================================
+______________________ ERROR at teardown of test_nototal _______________________
+
+    def posttest():
+        if getattr(tqdm, "_instances", False):
+            n = len(tqdm._instances)
+            if n:
+                tqdm._instances.clear()
+                raise EnvironmentError(
+>                   "{0} `tqdm` instances still in existence POST-test".format(n))
+E               OSError: 1 `tqdm` instances still in existence POST-test
+
+tqdm/tests/tests_tqdm.py:132: OSError
+=================================== FAILURES ===================================
+_________________________________ test_nototal _________________________________
+
+    @with_setup(pretest, posttest)
+    def test_nototal():
+        """Test unknown total length"""
+        with closing(StringIO()) as our_file:
+>           for i in tqdm((i for i in range(10)), file=our_file, unit_scale=10):
+
+tqdm/tests/tests_tqdm.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tqdm/_tqdm.py:927: in __init__
+    self.display()
+tqdm/_tqdm.py:1297: in display
+    self.sp(self.__repr__() if msg is None else msg)
+tqdm/_tqdm.py:966: in __repr__
+    return self.format_meter(**self.format_dict)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+n = 0, total = None, elapsed = 0, ncols = None, prefix = '', ascii = True
+unit = 'it', unit_scale = 10, rate = None, bar_format = None, postfix = None
+unit_divisor = 1000, extra_kwargs = {}
+
+    @staticmethod
+    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+                     unit='it', unit_scale=False, rate=None, bar_format=None,
+                     postfix=None, unit_divisor=1000, **extra_kwargs):
+        """
+        Return a string-based progress bar given some parameters
+    
+        Parameters
+        ----------
+        n  : int
+            Number of finished iterations.
+        total  : int
+            The expected total number of iterations. If meaningless (), only
+            basic progress statistics are displayed (no ETA).
+        elapsed  : float
+            Number of seconds passed since start.
+        ncols  : int, optional
+            The width of the entire output message. If specified,
+            dynamically resizes the progress meter to stay within this bound
+            [default: None]. The fallback meter width is 10 for the progress
+            bar + no limit for the iterations counter and statistics. If 0,
+            will not print any meter (only stats).
+        prefix  : str, optional
+            Prefix message (included in total width) [default: ''].
+            Use as {desc} in bar_format string.
+        ascii  : bool, optional
+            If not set, use unicode (smooth blocks) to fill the meter
+            [default: False]. The fallback is to use ASCII characters
+            (1-9 #).
+        unit  : str, optional
+            The iteration unit [default: 'it'].
+        unit_scale  : bool or int or float, optional
+            If 1 or True, the number of iterations will be printed with an
+            appropriate SI metric prefix (k = 10^3, M = 10^6, etc.)
+            [default: False]. If any other non-zero number, will scale
+            `total` and `n`.
+        rate  : float, optional
+            Manual override for iteration rate.
+            If [default: None], uses n/elapsed.
+        bar_format  : str, optional
+            Specify a custom bar string formatting. May impact performance.
+            [default: '{l_bar}{bar}{r_bar}'], where
+            l_bar='{desc}: {percentage:3.0f}%|' and
+            r_bar='| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, '
+              '{rate_fmt}{postfix}]'
+            Possible vars: l_bar, bar, r_bar, n, n_fmt, total, total_fmt,
+              percentage, rate, rate_fmt, rate_noinv, rate_noinv_fmt,
+              rate_inv, rate_inv_fmt, elapsed, elapsed_s,
+              remaining, remaining_s, desc, postfix, unit.
+            Note that a trailing ": " is automatically removed after {desc}
+            if the latter is empty.
+        postfix  : *, optional
+            Similar to `prefix`, but placed at the end
+            (e.g. for additional stats).
+            Note: postfix is usually a string (not a dict) for this method,
+            and will if possible be set to postfix = ', ' + postfix.
+            However other types are supported (#382).
+        unit_divisor  : float, optional
+            [default: 1000], ignored unless `unit_scale` is True.
+    
+        Returns
+        -------
+        out  : Formatted meter and stats, ready to display.
+        """
+    
+        # sanity check: total
+        if total and n > total:
+            total = None
+    
+        # apply custom scale if necessary
+        if unit_scale and unit_scale not in (True, 1):
+>           total *= unit_scale
+E           TypeError: unsupported operand type(s) for *=: 'NoneType' and 'int'
+
+tqdm/_tqdm.py:323: TypeError
+=============================== warnings summary ===============================
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    from imp import find_module, load_module, acquire_lock, release_lock
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tqdm/tests/tests_tqdm.py::test_nototal - TypeError: unsupported operan...
+ERROR tqdm/tests/tests_tqdm.py::test_nototal - OSError: 1 `tqdm` instances st...
+==================== 1 failed, 1 warning, 1 error in 1.68s =====================

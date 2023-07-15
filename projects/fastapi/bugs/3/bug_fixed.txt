@@ -1,0 +1,200 @@
+pytest tests/test_serialize_response_model.py::test_valid
+pytest tests/test_serialize_response_model.py::test_coerce
+pytest tests/test_serialize_response_model.py::test_validlist
+pytest tests/test_serialize_response_model.py::test_validdict
+pytest tests/test_serialize_response_model.py::test_valid_exclude_unset
+pytest tests/test_serialize_response_model.py::test_coerce_exclude_unset
+pytest tests/test_serialize_response_model.py::test_validlist_exclude_unset
+pytest tests/test_serialize_response_model.py::test_validdict_exclude_unset
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.41s =========================
+RUN EVERY COMMAND
+1
+pytest tests/test_serialize_response_model.py::test_valid
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.47s =========================
+RUN EVERY COMMAND
+2
+pytest tests/test_serialize_response_model.py::test_coerce
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.43s =========================
+RUN EVERY COMMAND
+3
+pytest tests/test_serialize_response_model.py::test_validlist
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.45s =========================
+RUN EVERY COMMAND
+4
+pytest tests/test_serialize_response_model.py::test_validdict
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.41s =========================
+RUN EVERY COMMAND
+5
+pytest tests/test_serialize_response_model.py::test_valid_exclude_unset
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.42s =========================
+RUN EVERY COMMAND
+6
+pytest tests/test_serialize_response_model.py::test_coerce_exclude_unset
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.40s =========================
+RUN EVERY COMMAND
+7
+pytest tests/test_serialize_response_model.py::test_validlist_exclude_unset
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_serialize_response_model.py .                                 [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6d77396cd44c7df1384dad69b48c4335/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.27s =========================

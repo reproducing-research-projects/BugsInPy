@@ -1,0 +1,216 @@
+pytest tests/rules/test_fix_file.py::test_get_new_command_with_settings
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
+plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
+collected 22 items
+
+tests/rules/test_fix_file.py FF.....FF......FF..FF.                      [100%]
+
+=================================== FAILURES ===================================
+__________________ test_get_new_command_with_settings[test0] ___________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b280b90f0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b2825df98>
+test = ('gcc a.c', 'a.c', 3, 1, '', "\na.c: In function 'main':\na.c:3:1: error: expected expression before '}' token\n }\n  ^\n")
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor...+3 && gcc a.c' == 'dummy_editor ...:1 && gcc a.c'
+E             - dummy_editor a.c +3 && gcc a.c
+E             + dummy_editor a.c +3:1 && gcc a.c
+E             ?                    ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test1] ___________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b293576a0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b29357668>
+test = ('clang a.c', 'a.c', 3, 1, '', '\na.c:3:1: error: expected expression\n}\n^\n')
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor... && clang a.c' == 'dummy_editor ... && clang a.c'
+E             - dummy_editor a.c +3 && clang a.c
+E             + dummy_editor a.c +3:1 && clang a.c
+E             ?                    ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test7] ___________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b281dbc88>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b29395128>
+test = ('rustc a.rs', 'a.rs', 2, 5, '', '\na.rs:2:5: 2:6 error: unexpected token: `+`\na.rs:2     +\n           ^\n')
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor...&& rustc a.rs' == 'dummy_editor ...&& rustc a.rs'
+E             - dummy_editor a.rs +2 && rustc a.rs
+E             + dummy_editor a.rs +2:5 && rustc a.rs
+E             ?                     ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test8] ___________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b281db668>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b281db4a8>
+test = ('cargo build', 'src/lib.rs', 3, 5, '', '\n   Compiling test v0.1.0 (file:///tmp/fix-error/test)\n   src/lib.rs:3:5: 3...s:3     +\n                    ^\nCould not compile `test`.\n\nTo learn more, run the command again with --verbose.\n')
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor...& cargo build' == 'dummy_editor ...& cargo build'
+E             - dummy_editor src/lib.rs +3 && cargo build
+E             + dummy_editor src/lib.rs +3:5 && cargo build
+E             ?                           ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test15] __________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b2937da20>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b2821ffd0>
+test = ('llc a.ll', 'a.ll', 1, 2, '', '\nllc: a.ll:1:2: error: expected top-level entity\n+\n^\n')
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor...1 && llc a.ll' == 'dummy_editor ...2 && llc a.ll'
+E             - dummy_editor a.ll +1 && llc a.ll
+E             + dummy_editor a.ll +1:2 && llc a.ll
+E             ?                     ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test16] __________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b281c16d8>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b281c16a0>
+test = ('go build a.go', 'a.go', 1, 2, '', "\ncan't load package:\na.go:1:2: expected 'package', found '+'\n")
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor...go build a.go' == 'dummy_editor ...go build a.go'
+E             - dummy_editor a.go +1 && go build a.go
+E             + dummy_editor a.go +1:2 && go build a.go
+E             ?                     ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test19] __________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b29390d30>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b2937bd68>
+test = ('node fuck.js asdf qwer', '/Users/pablo/Workspace/barebones/fuck.js', '2', 5, '', '\n/Users/pablo/Workspace/barebones...s:310:12)\n    at Function.Module.runMain (module.js:501:10)\n    at startup (node.js:129:16)\n    at node.js:814:3\n')
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor....js asdf qwer' == 'dummy_editor ....js asdf qwer'
+E             Skipping 46 identical leading characters in diff, use -v to show
+E             - fuck.js +2 && node fuck.js asdf qwer
+E             + fuck.js +2:5 && node fuck.js asdf qwer
+E             ?           ++
+
+tests/rules/test_fix_file.py:230: AssertionError
+__________________ test_get_new_command_with_settings[test20] __________________
+
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f3b2938d5c0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3b2938d390>
+test = ('pep8', './tests/rules/test_systemctl.py', 17, 80, '\n./tests/rules/test_systemctl.py:17:80: E501 line too long (93 >... line too long (89 > 79 characters)\n./tests/rules/test_whois.py:22:80: E501 line too long (83 > 79 characters)\n', '')
+
+    @pytest.mark.parametrize('test', tests)
+    @pytest.mark.usefixtures('no_memoize')
+    def test_get_new_command_with_settings(mocker, monkeypatch, test):
+        mocker.patch('os.path.isfile', return_value=True)
+        monkeypatch.setenv('EDITOR', 'dummy_editor')
+    
+        cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+        settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+    
+        if test[3]:
+>           assert (get_new_command(cmd, settings) ==
+                'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))
+E           AssertionError: assert 'dummy_editor...y +17 && pep8' == 'dummy_editor ...17:80 && pep8'
+E             Skipping 38 identical leading characters in diff, use -v to show
+E             - ctl.py +17 && pep8
+E             + ctl.py +17:80 && pep8
+E             ?           +++
+
+tests/rules/test_fix_file.py:230: AssertionError
+=============================== warnings summary ===============================
+thefuck/rules/fix_file.py:23
+  /home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/fix_file.py:23: DeprecationWarning: invalid escape sequence \(
+    '^{file} \(line {line}\):',
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=============== 8 failed, 14 passed, 1 warnings in 0.45 seconds ================

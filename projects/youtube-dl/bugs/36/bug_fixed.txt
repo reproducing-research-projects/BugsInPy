@@ -1,0 +1,9 @@
+python -m unittest -q test.test_all_urls.TestAllURLsMatching.test_facebook_matching
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

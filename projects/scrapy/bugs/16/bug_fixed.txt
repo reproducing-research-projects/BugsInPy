@@ -1,0 +1,54 @@
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_url_unicode_query_string
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_normalize_percent_encoding_in_paths
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_normalize_percent_encoding_in_query_arguments
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_idns
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_urlparsed
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_parse_url
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+OK
+RUN EVERY COMMAND
+1
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_url_unicode_query_string
+
+----------------------------------------------------------------------
+Ran 1 test in 0.015s
+
+OK
+RUN EVERY COMMAND
+2
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_normalize_percent_encoding_in_paths
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK
+RUN EVERY COMMAND
+3
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_normalize_percent_encoding_in_query_arguments
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+OK
+RUN EVERY COMMAND
+4
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_idns
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK
+RUN EVERY COMMAND
+5
+python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize_urlparsed
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK

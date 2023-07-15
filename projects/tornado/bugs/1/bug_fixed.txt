@@ -1,0 +1,9 @@
+python -m unittest -q tornado.test.websocket_test.WebSocketTest.test_nodelay
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.034s
+
+OK

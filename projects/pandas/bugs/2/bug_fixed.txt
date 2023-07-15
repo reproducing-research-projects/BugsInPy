@@ -1,0 +1,56 @@
+pytest pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_get
+pytest pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_set
+pytest pandas/tests/indexing/test_scalar.py::test_multiindex_at_get
+pytest pandas/tests/indexing/test_scalar.py::test_multiindex_at_set
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexing/test_scalar.py .                                   [100%]
+
+============================== 1 passed in 0.04s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_get
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexing/test_scalar.py .                                   [100%]
+
+============================== 1 passed in 0.01s ===============================
+RUN EVERY COMMAND
+2
+pytest pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_set
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexing/test_scalar.py .                                   [100%]
+
+============================== 1 passed in 0.01s ===============================
+RUN EVERY COMMAND
+3
+pytest pandas/tests/indexing/test_scalar.py::test_multiindex_at_get
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexing/test_scalar.py .                                   [100%]
+
+============================== 1 passed in 0.01s ===============================

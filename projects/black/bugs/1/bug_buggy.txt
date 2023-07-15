@@ -1,0 +1,21 @@
+python -m unittest -q tests.test_black.BlackTestCase.test_works_in_mono_process_only_environment
+RUN EVERY COMMAND
+0
+
+
+======================================================================
+FAIL: test_works_in_mono_process_only_environment (tests.test_black.BlackTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/conda/envs/87b58448f32fe09241efe0a490d468af/lib/python3.8/unittest/mock.py", line 1325, in patched
+    return func(*newargs, **newkeywargs)
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 1288, in test_works_in_mono_process_only_environment
+    self.invokeBlack([str(workspace)])
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 162, in invokeBlack
+    self.assertEqual(result.exit_code, exit_code, msg=runner.stderr_bytes.decode())
+AssertionError: 1 != 0 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.071s
+
+FAILED (failures=1)

@@ -1,0 +1,9 @@
+python -m unittest -q test.test_utils.TestUtil.test_unified_dates
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.036s
+
+OK

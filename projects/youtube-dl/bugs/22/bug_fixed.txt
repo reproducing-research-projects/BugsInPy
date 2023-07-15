@@ -1,0 +1,9 @@
+python -m unittest -q test.test_YoutubeDL.TestYoutubeDL.test_match_filter
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.393s
+
+OK

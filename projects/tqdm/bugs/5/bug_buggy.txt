@@ -1,0 +1,70 @@
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_bool
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py F                                               [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_bool ___________________________________
+
+    @with_setup(pretest, posttest)
+    def test_bool():
+        """Test boolean cast"""
+        def internal(our_file, disable):
+            with tqdm(total=10, file=our_file, disable=disable) as t:
+                assert t
+            with tqdm(total=0, file=our_file, disable=disable) as t:
+                assert not t
+            with trange(10, file=our_file, disable=disable) as t:
+                assert t
+            with trange(0, file=our_file, disable=disable) as t:
+                assert not t
+            with tqdm([], file=our_file, disable=disable) as t:
+                assert not t
+            with tqdm([0], file=our_file, disable=disable) as t:
+                assert t
+            with tqdm(file=our_file, disable=disable) as t:
+                try:
+                    print(bool(t))
+                except TypeError:
+                    pass
+                else:
+                    raise TypeError(
+                        "Expected tqdm() with neither total nor iterable to fail")
+    
+        # test with and without disable
+        with closing(StringIO()) as our_file:
+            internal(our_file, False)
+>           internal(our_file, True)
+
+tqdm/tests/tests_tqdm.py:1591: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tqdm/tests/tests_tqdm.py:1568: in internal
+    assert t
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'tqdm' object has no attribute 'total'",) raised in repr()] tqdm object at 0x7f85ff836c18>
+
+    def __len__(self):
+>       return self.total if self.iterable is None else \
+            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+             else len(self.iterable) if hasattr(self.iterable, "__len__")
+             else getattr(self, "total", None))
+E       AttributeError: 'tqdm' object has no attribute 'total'
+
+tqdm/_tqdm.py:869: AttributeError
+=============================== warnings summary ===============================
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    from imp import find_module, load_module, acquire_lock, release_lock
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tqdm/tests/tests_tqdm.py::test_bool - AttributeError: 'tqdm' object ha...
+========================= 1 failed, 1 warning in 1.24s =========================

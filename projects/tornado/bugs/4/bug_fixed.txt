@@ -1,0 +1,20 @@
+python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_with_range_neg_past_start
+python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_unsatisfiable_range_end_less_than_start
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.028s
+
+OK
+RUN EVERY COMMAND
+1
+python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_with_range_neg_past_start
+
+WARNING:tornado.access:416 HEAD /static/robots.txt (127.0.0.1) 5.36ms
+WARNING:tornado.access:416 GET /static/robots.txt (127.0.0.1) 0.41ms
+----------------------------------------------------------------------
+Ran 1 test in 0.041s
+
+OK

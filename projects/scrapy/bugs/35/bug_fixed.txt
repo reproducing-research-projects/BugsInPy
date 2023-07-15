@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_crawler.CrawlerRunnerTestCase.test_spidermanager_deprecation
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

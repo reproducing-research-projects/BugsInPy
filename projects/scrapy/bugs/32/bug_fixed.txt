@@ -1,0 +1,12 @@
+python -m unittest -q tests.test_crawler.CrawlerProcessTest.test_crawler_process_accepts_dict
+RUN EVERY COMMAND
+0
+
+
+2023-07-15 07:14:39+0000 [scrapy] INFO: Scrapy 1.1.0dev1 started (bot: scrapybot)
+2023-07-15 07:14:39+0000 [scrapy] INFO: Optional features available: ssl, http11
+2023-07-15 07:14:39+0000 [scrapy] INFO: Overridden settings: {}
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK

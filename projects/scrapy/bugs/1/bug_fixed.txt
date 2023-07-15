@@ -1,0 +1,18 @@
+python -m unittest -q tests.test_spidermiddleware_offsite.TestOffsiteMiddleware4._get_spiderargs
+python -m unittest -q tests.test_spidermiddleware_offsite.TestOffsiteMiddleware4.test_process_spider_output
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.085s
+
+OK
+RUN EVERY COMMAND
+1
+python -m unittest -q tests.test_spidermiddleware_offsite.TestOffsiteMiddleware4._get_spiderargs
+
+----------------------------------------------------------------------
+Ran 1 test in 0.127s
+
+OK

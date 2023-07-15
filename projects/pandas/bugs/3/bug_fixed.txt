@@ -1,0 +1,28 @@
+pytest pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises
+pytest pandas/tests/series/methods/test_to_timestamp.py::TestToTimestamp::test_to_timestamp_raises
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 18 items
+
+pandas/tests/series/methods/test_to_period.py ..................         [100%]
+
+============================== 18 passed in 0.04s ==============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/series/methods/test_to_period.py::TestToPeriod::test_to_period_raises
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 18 items
+
+pandas/tests/series/methods/test_to_timestamp.py ..................      [100%]
+
+============================== 18 passed in 0.04s ==============================

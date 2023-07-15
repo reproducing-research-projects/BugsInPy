@@ -1,0 +1,13 @@
+pytest test/units/module_utils/common/validation/test_check_required_arguments.py::test_check_required_arguments_missing_multiple
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+collected 1 item
+
+test/units/module_utils/common/validation/test_check_required_arguments.py . [100%]
+
+=========================== 1 passed in 0.12 seconds ===========================

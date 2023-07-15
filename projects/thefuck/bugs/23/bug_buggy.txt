@@ -1,0 +1,153 @@
+pytest tests/test_utils.py::TestCache::test_when_etag_changed
+pytest tests/test_utils.py::TestCache::test_with_filled_cache
+pytest tests/test_utils.py::TestCache::test_with_blank_cache
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
+plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
+collected 1 item
+
+tests/test_utils.py F                                                    [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestCache.test_when_etag_changed _______________________
+
+self = <tests.test_utils.TestCache object at 0x7f4fbd842b00>
+shelve = {'tests.test_utils.<function TestCache.fn.<locals>.fn ': {'etag': '-1', 'value': 'old-value'}}
+fn = <function TestCache.fn.<locals>.fn at 0x7f4fbe74cea0>
+key = 'tests.test_utils.<function TestCache.fn.<locals>.fn '
+
+    def test_when_etag_changed(self, shelve, fn, key):
+        shelve.update({key: {'etag': '-1', 'value': 'old-value'}})
+>       assert fn() == 'test'
+
+tests/test_utils.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+<decorator-gen-4>:2: in fn
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = <function TestCache.fn.<locals>.fn at 0x7f4fbe74ce18>, args = ()
+kwargs = {}, cache_path = '/tmp/.thefuck-cache'
+key = 'tests.test_utils.<function TestCache.fn.<locals>.fn ', etag = '0'
+
+    @decorator
+    def _cache(fn, *args, **kwargs):
+        if cache.disabled:
+            return fn(*args, **kwargs)
+    
+        cache_path = os.path.join(tempfile.gettempdir(), '.thefuck-cache')
+        key = '{}.{}'.format(fn.__module__, repr(fn).split('at')[0])
+    
+        etag = '.'.join(_get_mtime(name) for name in depends_on)
+    
+>       with shelve.open(cache_path) as db:
+E       AttributeError: __enter__
+
+thefuck/utils.py:183: AttributeError
+=========================== 1 failed in 0.21 seconds ===========================
+RUN EVERY COMMAND
+1
+pytest tests/test_utils.py::TestCache::test_when_etag_changed
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
+plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
+collected 1 item
+
+tests/test_utils.py F                                                    [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestCache.test_with_filled_cache _______________________
+
+self = <tests.test_utils.TestCache object at 0x7fe97b15cd30>
+shelve = {'tests.test_utils.<function TestCache.fn.<locals>.fn ': {'etag': '0', 'value': 'new-value'}}
+fn = <function TestCache.fn.<locals>.fn at 0x7fe97af63158>
+key = 'tests.test_utils.<function TestCache.fn.<locals>.fn '
+
+    def test_with_filled_cache(self, shelve, fn, key):
+        cache_value = {key: {'etag': '0', 'value': 'new-value'}}
+        shelve.update(cache_value)
+>       assert fn() == 'new-value'
+
+tests/test_utils.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+<decorator-gen-4>:2: in fn
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = <function TestCache.fn.<locals>.fn at 0x7fe97af630d0>, args = ()
+kwargs = {}, cache_path = '/tmp/.thefuck-cache'
+key = 'tests.test_utils.<function TestCache.fn.<locals>.fn ', etag = '0'
+
+    @decorator
+    def _cache(fn, *args, **kwargs):
+        if cache.disabled:
+            return fn(*args, **kwargs)
+    
+        cache_path = os.path.join(tempfile.gettempdir(), '.thefuck-cache')
+        key = '{}.{}'.format(fn.__module__, repr(fn).split('at')[0])
+    
+        etag = '.'.join(_get_mtime(name) for name in depends_on)
+    
+>       with shelve.open(cache_path) as db:
+E       AttributeError: __enter__
+
+thefuck/utils.py:183: AttributeError
+=========================== 1 failed in 0.21 seconds ===========================
+RUN EVERY COMMAND
+2
+pytest tests/test_utils.py::TestCache::test_with_filled_cache
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
+plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
+collected 1 item
+
+tests/test_utils.py F                                                    [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestCache.test_with_blank_cache ________________________
+
+self = <tests.test_utils.TestCache object at 0x7f98b3a24320>, shelve = {}
+fn = <function TestCache.fn.<locals>.fn at 0x7f98b26ce158>
+key = 'tests.test_utils.<function TestCache.fn.<locals>.fn '
+
+    def test_with_blank_cache(self, shelve, fn, key):
+        assert shelve == {}
+>       assert fn() == 'test'
+
+tests/test_utils.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+<decorator-gen-4>:2: in fn
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = <function TestCache.fn.<locals>.fn at 0x7f98b26ce0d0>, args = ()
+kwargs = {}, cache_path = '/tmp/.thefuck-cache'
+key = 'tests.test_utils.<function TestCache.fn.<locals>.fn ', etag = '0'
+
+    @decorator
+    def _cache(fn, *args, **kwargs):
+        if cache.disabled:
+            return fn(*args, **kwargs)
+    
+        cache_path = os.path.join(tempfile.gettempdir(), '.thefuck-cache')
+        key = '{}.{}'.format(fn.__module__, repr(fn).split('at')[0])
+    
+        etag = '.'.join(_get_mtime(name) for name in depends_on)
+    
+>       with shelve.open(cache_path) as db:
+E       AttributeError: __enter__
+
+thefuck/utils.py:183: AttributeError
+=========================== 1 failed in 0.13 seconds ===========================

@@ -1,0 +1,14 @@
+pytest tests/keras/metrics_test.py::test_sparse_top_k_categorical_accuracy[y_pred1-y_true1]
+RUN EVERY COMMAND
+0
+
+
+Using TensorFlow backend.
+ImportError while loading conftest '/home/user/BugsInPy/temp/projects/keras/tests/conftest.py'.
+tests/conftest.py:2: in <module>
+    from keras import backend as K
+/opt/conda/envs/a0a5407915338c9fac99516b5bd41c30/lib/python3.7/site-packages/keras/__init__.py:5: in <module>
+    from . import applications
+/opt/conda/envs/a0a5407915338c9fac99516b5bd41c30/lib/python3.7/site-packages/keras/applications/__init__.py:13: in <module>
+    keras_applications.set_keras_submodules(
+E   AttributeError: module 'keras_applications' has no attribute 'set_keras_submodules'

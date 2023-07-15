@@ -1,0 +1,22 @@
+python -m unittest -q tests.test_http_request.FormRequestTest.test_html_base_form_action
+RUN EVERY COMMAND
+0
+
+
+======================================================================
+FAIL: test_html_base_form_action (tests.test_http_request.FormRequestTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_http_request.py", line 820, in test_html_base_form_action
+    self.assertEqual(req.url, 'http://b.com/test_form')
+AssertionError: 'http://a.com/test_form' != 'http://b.com/test_form'
+- http://a.com/test_form
+?        ^
++ http://b.com/test_form
+?        ^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

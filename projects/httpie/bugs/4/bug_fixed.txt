@@ -1,0 +1,36 @@
+pytest tests/test_regressions.py::test_Host_header_overwrite
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/httpie
+plugins: httpbin-1.0.0
+collected 1 item
+
+tests/test_regressions.py .                                              [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8
+  /opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \?
+
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/downloads.py:56
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/downloads.py:56
+  /opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \d
+
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/downloads.py:57
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/downloads.py:57
+  /opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \*
+
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/input.py:446
+/opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/input.py:446
+  /opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/httpie-0.9.0.dev0-py3.7.egg/httpie/input.py:446: DeprecationWarning: invalid escape sequence \=
+
+tests/test_regressions.py::test_Host_header_overwrite
+  /opt/conda/envs/d67214fd79125c3eb272eee3600f4a34/lib/python3.7/site-packages/requests/models.py:153: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    if isinstance(hook, collections.Callable):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 9 warnings in 4.10s =========================

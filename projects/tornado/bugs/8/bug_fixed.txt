@@ -1,0 +1,10 @@
+python -m unittest -q tornado.test.websocket_test.WebSocketTest.test_missing_websocket_key
+RUN EVERY COMMAND
+0
+
+
+WARNING:tornado.access:400 GET /echo (127.0.0.1) 0.24ms
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+OK

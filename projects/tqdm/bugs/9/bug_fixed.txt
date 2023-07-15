@@ -1,0 +1,26 @@
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_si_format
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_update
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py .                                               [100%]
+
+============================== 1 passed in 0.13s ===============================
+RUN EVERY COMMAND
+1
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_si_format
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py .                                               [100%]
+
+============================== 1 passed in 0.03s ===============================
