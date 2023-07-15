@@ -28,9 +28,9 @@ usage="
 "
 
 dir_of_script=$(dirname $0)
-bugs_in_py_dir=$(realpath $dir_of_script/../..)
-temp_projects="$bugs_in_py_dir/temp/projects"
-index_file="$bugs_in_py_dir/projects/index.csv"
+bugsinpy_location=$(realpath $dir_of_script/../..)
+temp_projects="$bugsinpy_location/temp/projects"
+index_file="$bugsinpy_location/projects/index.csv"
 
 case $1 in
  -[h?] | --help)
@@ -38,8 +38,7 @@ case $1 in
     echo "$usage"
     exit 0;;
  -c)
-    rm -rf $bugs_in_py_dir/temp/*
-    touch $bugs_in_py_dir/temp/.gitkeep
+    rm -rf $bugsinpy_location/temp/projects
     exit 0;;
  -p)
     projects="${@:2}";;
@@ -48,7 +47,7 @@ esac
 mkdir -p $temp_projects
 
 if ! echo $projects | grep -q ":"; then
-  projects=$(ls $bugs_in_py_dir/projects)
+  projects=$(ls $bugsinpy_location/projects)
 fi
 
 if [ ! -f $index_file ]; then
@@ -56,35 +55,35 @@ if [ ! -f $index_file ]; then
 fi
 
 # Iterate over the projects
-for project in $projects; do
+for project_name in $projects; do
 
   # Get the number of bugs in the project
-  if ! echo $projects | grep -q ":"; then
-    start=1
-    finish=$(ls $bugs_in_py_dir/projects/$project/bugs | wc -l)
-  else
-    start=$(echo $project | cut -d ":" -f 2)
-    finish=$(echo $project | cut -d ":" -f 3)
-    project=$(echo $project | cut -d ":" -f 1)
+  if echo $projects | grep -q ":"; then
+    start=$(echo $project_name | cut -d ":" -f 2)
+    finish=$(echo $project_name | cut -d ":" -f 3)
+    project=$(echo $project_name | cut -d ":" -f 1)
     if [[ "$start" == "" ]]; then
-      finish=$(ls $bugs_in_py_dir/projects/$project/bugs | wc -l)
+      finish=$(ls $bugsinpy_location/projects/$project/bugs | wc -l)
       start=1
     elif [[ "$finish" == "" ]]; then
       finish=$start
     fi
+  else
+    start=1
+    finish=$(ls $bugsinpy_location/projects/$project_name/bugs | wc -l)
   fi
+
+  work_dir="$temp_projects/$project"
 
   # For each bug, execute the test
   for bug in $(seq $start $finish); do
 
-    bug_source_dir="$bugs_in_py_dir/projects/$project/bugs/$bug"
+    bug_source_dir="$bugsinpy_location/projects/$project/bugs/$bug"
 
     if ! grep "$project,$bug," $index_file && [ -d "$bug_source_dir" ]; then
 
       # Make sure requirements.txt always exist even if empty
       touch $bug_source_dir/requirements.txt
-
-      work_dir="$temp_projects/$project"
 
       bug_info="$work_dir/bugsinpy_bug.info"
 
@@ -111,7 +110,10 @@ for project in $projects; do
         # Generate unique hash for the current enviroment
         bug_python_version=$(grep -o "3\..\.." $bug_info)
         conda_env_name=$(cat <(echo $bug_python_version) "$requirements" | md5sum | cut -d' ' -f 1)
-        if ! conda env list | grep -q "$conda_env_name"; then
+
+        if conda env list | grep -q "$conda_env_name"; then
+          touch "$work_dir/bugsinpy_compile_flag"
+        else
           conda create -n $conda_env_name -y python=$bug_python_version pytest &>> $work_dir/logs.txt
         fi
 
