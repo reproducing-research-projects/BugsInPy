@@ -45,5 +45,5 @@ Prerequisite is `docker` and `docker compose` please see [documentation](https:/
 - Reproduce all the bugs in a specific project:
   - `docker compose up setup youtube-dl --build`
 - Reproduce all projects bugs running buggy (0) and fixed (1) versions
-  ⚠️ This may require a lot of resources, tested successfully on 4 cores 8 RAM 100GB free drive space
+  - ⚠️ Reproduce all projects may require a lot of resources, tested successfully on 4 cores 8 RAM 100GB free drive space
   - `docker compose up --build`
