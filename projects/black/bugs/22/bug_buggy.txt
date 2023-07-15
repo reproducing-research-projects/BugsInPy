@@ -532,11 +532,11 @@ file_input
 FAIL: test_comments3 (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/5d5ee738c2357f585e30916fc41aee1f/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/5d5ee738c2357f585e30916fc41aee1f/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 157, in test_comments3
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 157, in test_comments3
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 69, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 69, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: "def [645 chars]tion(\n                        exc,\n         [802 chars] )\n" != "def [645 chars]tion(exc, limit=limit, lookup_lines=lookup_lin[645 chars] )\n"
   def func():
@@ -585,6 +585,6 @@ AssertionError: "def [645 chars]tion(\n                        exc,\n         [8
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.025s
+Ran 1 test in 0.049s
 
 FAILED (failures=1)

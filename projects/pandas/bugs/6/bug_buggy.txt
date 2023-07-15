@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/pandas, inifile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
 plugins: hypothesis-5.15.1
 collected 1 item
 
@@ -45,4 +45,4 @@ E   ValueError: Given date string not likely a datetime.
 pandas/_libs/tslibs/parsing.pyx:308: ValueError
 =========================== short test summary info ============================
 FAILED pandas/tests/groupby/test_size.py::test_size_period_index - ValueError...
-============================== 1 failed in 0.16s ===============================
+============================== 1 failed in 0.14s ===============================

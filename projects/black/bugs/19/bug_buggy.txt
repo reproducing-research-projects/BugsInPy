@@ -89,11 +89,11 @@ file_input
 FAIL: test_comment_in_decorator (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/9eb237635523606f4da80fce5b96935a/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/9eb237635523606f4da80fce5b96935a/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 633, in test_comment_in_decorator
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 633, in test_comment_in_decorator
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 100, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 100, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: '@pro[13 chars]: X\n@property\n# TODO: Y\n# TODO: Z\n@propert[21 chars]ss\n' != '@pro[13 chars]: X\n\n\n@property\n# TODO: Y\n# TODO: Z\n\n\n[29 chars]ss\n'
   @property
@@ -111,6 +111,6 @@ AssertionError: '@pro[13 chars]: X\n@property\n# TODO: Y\n# TODO: Z\n@propert[21
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.004s
+Ran 1 test in 0.019s
 
 FAILED (failures=1)

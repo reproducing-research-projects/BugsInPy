@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 FAIL: test_spaces_in_action (tests.test_http_request.FormRequestTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_http_request.py", line 1007, in test_spaces_in_action
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_http_request.py", line 1007, in test_spaces_in_action
     self.assertEqual(req.url, 'http://example.com/path')
 AssertionError: 'http://example.com/%20path' != 'http://example.com/path'
 - http://example.com/%20path
@@ -16,6 +16,6 @@ AssertionError: 'http://example.com/%20path' != 'http://example.com/path'
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.002s
+Ran 1 test in 0.031s
 
 FAILED (failures=1)

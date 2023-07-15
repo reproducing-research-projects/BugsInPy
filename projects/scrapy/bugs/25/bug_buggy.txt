@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 FAIL: test_html_base_form_action (tests.test_http_request.FormRequestTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_http_request.py", line 820, in test_html_base_form_action
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_http_request.py", line 820, in test_html_base_form_action
     self.assertEqual(req.url, 'http://b.com/test_form')
 AssertionError: 'http://a.com/test_form' != 'http://b.com/test_form'
 - http://a.com/test_form
@@ -17,6 +17,6 @@ AssertionError: 'http://a.com/test_form' != 'http://b.com/test_form'
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.015s
+Ran 1 test in 0.079s
 
 FAILED (failures=1)

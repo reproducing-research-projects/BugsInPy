@@ -4,25 +4,25 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.7.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/bin/python
+platform linux -- Python 3.7.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/bin/python
 cachedir: .pytest_cache
-rootdir: /home/user/projects/keras, inifile: pytest.ini
+rootdir: /home/user/BugsInPy/temp/projects/keras, inifile: pytest.ini
 plugins: forked-1.1.3, flaky-3.6.1, xdist-1.32.0
 gw0 I / gw1 I
-[gw0] linux Python 3.7.3 cwd: /home/user/projects/keras
-[gw1] linux Python 3.7.3 cwd: /home/user/projects/keras
-[gw0] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
+[gw0] linux Python 3.7.3 cwd: /home/user/BugsInPy/temp/projects/keras
+[gw1] linux Python 3.7.3 cwd: /home/user/BugsInPy/temp/projects/keras
 [gw1] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
+[gw0] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
 gw0 [1] / gw1 [1]
 
 scheduling tests via LoadScheduling
 
 tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training 
-[gw0] [100%] FAILED tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training 
+[gw1] [100%] FAILED tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training 
 
 =================================== FAILURES ===================================
 ______________________ test_image_data_generator_training ______________________
-[gw0] linux -- Python 3.7.3 /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/bin/python
+[gw1] linux -- Python 3.7.3 /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/bin/python
 
     def test_image_data_generator_training():
         np.random.seed(1337)
@@ -63,10 +63,10 @@ keras/engine/training.py:1418: in fit_generator
     initial_epoch=initial_epoch)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-model = <keras.engine.sequential.Sequential object at 0x7f8be90db550>
-generator = <keras_preprocessing.image.numpy_array_iterator.NumpyArrayIterator object at 0x7f8be90db278>
+model = <keras.engine.sequential.Sequential object at 0x7fd8840a5fd0>
+generator = <keras_preprocessing.image.numpy_array_iterator.NumpyArrayIterator object at 0x7fd88409ca58>
 steps_per_epoch = None, epochs = 10, verbose = 0, callbacks = None
-validation_data = <keras_preprocessing.image.numpy_array_iterator.NumpyArrayIterator object at 0x7f8be90e8588>
+validation_data = <keras_preprocessing.image.numpy_array_iterator.NumpyArrayIterator object at 0x7fd8840b63c8>
 validation_steps = None, class_weight = None, max_queue_size = 10, workers = 1
 use_multiprocessing = False, shuffle = True, initial_epoch = 0
 
@@ -112,83 +112,84 @@ E               ValueError: `steps_per_epoch=None` is only valid for a generator
 
 keras/engine/training_generator.py:54: ValueError
 ----------------------------- Captured stderr call -----------------------------
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:4140: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:4140: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:3978: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:3978: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:3297: The name tf.log is deprecated. Please use tf.math.log instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:3297: The name tf.log is deprecated. Please use tf.math.log instead.
 
-WARNING:tensorflow:From /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/ops/math_grad.py:1424: where (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+WARNING:tensorflow:From /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/ops/math_grad.py:1424: where (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use tf.where in 2.0, which has the same broadcast rule as np.where
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:973: The name tf.assign is deprecated. Please use tf.compat.v1.assign instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:973: The name tf.assign is deprecated. Please use tf.compat.v1.assign instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:2743: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:2743: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
 
 ------------------------------ Captured log call -------------------------------
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:4140: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:4140: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:3978: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:3978: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:3297: The name tf.log is deprecated. Please use tf.math.log instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:3297: The name tf.log is deprecated. Please use tf.math.log instead.
 
-WARNING  tensorflow:deprecation.py:323 From /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/ops/math_grad.py:1424: where (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+WARNING  tensorflow:deprecation.py:323 From /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/ops/math_grad.py:1424: where (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use tf.where in 2.0, which has the same broadcast rule as np.where
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:973: The name tf.assign is deprecated. Please use tf.compat.v1.assign instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:973: The name tf.assign is deprecated. Please use tf.compat.v1.assign instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:2743: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:2743: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
 --------------------------- Captured stderr teardown ---------------------------
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:95: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:95: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
 
-WARNING:tensorflow:From /home/user/projects/keras/keras/backend/tensorflow_backend.py:98: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
+WARNING:tensorflow:From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:98: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
 
 ---------------------------- Captured log teardown -----------------------------
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:95: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:95: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
 
-WARNING  tensorflow:module_wrapper.py:139 From /home/user/projects/keras/keras/backend/tensorflow_backend.py:98: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
+WARNING  tensorflow:module_wrapper.py:139 From /home/user/BugsInPy/temp/projects/keras/keras/backend/tensorflow_backend.py:98: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
 =============================== warnings summary ===============================
 keras/preprocessing/image.py:440
-  /home/user/projects/keras/keras/preprocessing/image.py:440: DeprecationWarning: inspect.getargspec() is deprecated since Python 3.0, use inspect.signature() or inspect.getfullargspec()
+  /home/user/BugsInPy/temp/projects/keras/keras/preprocessing/image.py:440: DeprecationWarning: inspect.getargspec() is deprecated since Python 3.0, use inspect.signature() or inspect.getfullargspec()
     image.ImageDataGenerator.__init__).args:
 
-/home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
-/home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
-/home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
-/home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
-  /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521: DeprecationWarning: tostring() is deprecated. Use tobytes() instead.
+/opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+/opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521
+  /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/tensor_util.py:521: DeprecationWarning: tostring() is deprecated. Use tobytes() instead.
     tensor_proto.tensor_content = nparray.tostring()
 
-/home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:339
-  /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:339: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:339
+  /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:339: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     if not isinstance(values, collections.Sequence):
 
-/home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/contrib/learn/python/learn/learn_io/generator_io.py:26
-  /home/user/.conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/contrib/learn/python/learn/learn_io/generator_io.py:26: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/contrib/learn/python/learn/learn_io/generator_io.py:26
+  /opt/conda/envs/ec1239e90de2b89d455019719a3688a0/lib/python3.7/site-packages/tensorflow_core/contrib/learn/python/learn/learn_io/generator_io.py:26: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     from collections import Container
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 ========================== slowest 20 test durations ===========================
-0.79s call     tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training
+0.69s call     tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training
+0.01s teardown tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training
 
 (0.00 durations hidden.  Use -vv to show these durations.)
 =========================== short test summary info ============================
 FAILED tests/integration_tests/test_image_data_tasks.py::test_image_data_generator_training
-======================== 1 failed, 7 warnings in 13.84s ========================
+======================== 1 failed, 7 warnings in 11.38s ========================
 Using TensorFlow backend.

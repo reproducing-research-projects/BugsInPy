@@ -13,6 +13,6 @@ RUN EVERY COMMAND
 python -m unittest -q tornado.test.asyncio_test.LeakTest.test_ioloop_close_leak
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.001s
+Ran 1 test in 0.029s
 
 OK

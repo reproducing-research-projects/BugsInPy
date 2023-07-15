@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.7.7, pytest-7.1.2, pluggy-1.0.0
-rootdir: /home/user/projects/spacy, configfile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/spacy, configfile: setup.cfg
 plugins: timeout-1.4.2
 collected 1 item
 
@@ -14,7 +14,7 @@ spacy/tests/test_language.py F                                           [100%]
 =================================== FAILURES ===================================
 ____________________________ test_evaluate_no_pipe _____________________________
 
-nlp = <spacy.language.Language object at 0x7f0b558f39d0>
+nlp = <spacy.language.Language object at 0x7f46f61d8a50>
 
     def test_evaluate_no_pipe(nlp):
         """Test that docs are processed correctly within Language.pipe if the
@@ -35,7 +35,7 @@ spacy/language.py:684: in evaluate
     for doc, gold in zip(docs, golds):
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-docs = <function test_evaluate_no_pipe.<locals>.pipe at 0x7f0b55851440>
+docs = <function test_evaluate_no_pipe.<locals>.pipe at 0x7f46f61157a0>
 proc = [hello world], kwargs = {}
 
     def _pipe(docs, proc, kwargs):
@@ -50,4 +50,4 @@ E       TypeError: 'function' object is not iterable
 spacy/language.py:1105: TypeError
 =========================== short test summary info ============================
 FAILED spacy/tests/test_language.py::test_evaluate_no_pipe - TypeError: 'func...
-============================== 1 failed in 0.22s ===============================
+============================== 1 failed in 0.24s ===============================

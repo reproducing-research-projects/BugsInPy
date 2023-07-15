@@ -4,11 +4,11 @@ RUN EVERY COMMAND
 
 
 Using TensorFlow backend.
-ImportError while loading conftest '/home/user/projects/keras/tests/conftest.py'.
+ImportError while loading conftest '/home/user/BugsInPy/temp/projects/keras/tests/conftest.py'.
 tests/conftest.py:2: in <module>
     from keras import backend as K
-../../.conda/envs/a0a5407915338c9fac99516b5bd41c30/lib/python3.7/site-packages/keras/__init__.py:5: in <module>
+/opt/conda/envs/a0a5407915338c9fac99516b5bd41c30/lib/python3.7/site-packages/keras/__init__.py:5: in <module>
     from . import applications
-../../.conda/envs/a0a5407915338c9fac99516b5bd41c30/lib/python3.7/site-packages/keras/applications/__init__.py:13: in <module>
+/opt/conda/envs/a0a5407915338c9fac99516b5bd41c30/lib/python3.7/site-packages/keras/applications/__init__.py:13: in <module>
     keras_applications.set_keras_submodules(
 E   AttributeError: module 'keras_applications' has no attribute 'set_keras_submodules'

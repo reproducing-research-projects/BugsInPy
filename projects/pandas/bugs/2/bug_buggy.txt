@@ -8,7 +8,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/pandas, inifile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
 plugins: hypothesis-5.15.1
 collected 1 item
 
@@ -35,7 +35,7 @@ pandas/core/indexing.py:2055: in __getitem__
     return super().__getitem__(key)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <pandas.core.indexing._AtIndexer object at 0x7f84a4b0d180>, key = (1, 2)
+self = <pandas.core.indexing._AtIndexer object at 0x7f3daa2a8b30>, key = (1, 2)
 
     def __getitem__(self, key):
         if not isinstance(key, tuple):
@@ -53,14 +53,14 @@ E       TypeError: _get_value() got multiple values for argument 'takeable'
 pandas/core/indexing.py:2008: TypeError
 =========================== short test summary info ============================
 FAILED pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_get - T...
-============================== 1 failed in 0.13s ===============================
+============================== 1 failed in 0.18s ===============================
 RUN EVERY COMMAND
 1
 pytest pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_get
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/pandas, inifile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
 plugins: hypothesis-5.15.1
 collected 1 item
 
@@ -88,7 +88,7 @@ pandas/core/indexing.py:2066: in __setitem__
     return super().__setitem__(key, value)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <pandas.core.indexing._AtIndexer object at 0x7ffb90780a90>, key = (1, 2)
+self = <pandas.core.indexing._AtIndexer object at 0x7f41f0d1d900>, key = (1, 2)
 value = 3
 
     def __setitem__(self, key, value):
@@ -107,14 +107,14 @@ E           ValueError: Not enough indexers for scalar access (setting)!
 pandas/core/indexing.py:2020: ValueError
 =========================== short test summary info ============================
 FAILED pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_set - V...
-============================== 1 failed in 0.09s ===============================
+============================== 1 failed in 0.18s ===============================
 RUN EVERY COMMAND
 2
 pytest pandas/tests/indexing/test_scalar.py::test_at_with_tuple_index_set
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/pandas, inifile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
 plugins: hypothesis-5.15.1
 collected 1 item
 
@@ -142,7 +142,7 @@ pandas/core/indexing.py:2055: in __getitem__
     return super().__getitem__(key)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <pandas.core.indexing._AtIndexer object at 0x7fddc2374d60>, key = (1, 3)
+self = <pandas.core.indexing._AtIndexer object at 0x7f6ac3192ea0>, key = (1, 3)
 
     def __getitem__(self, key):
         if not isinstance(key, tuple):
@@ -160,14 +160,14 @@ E       TypeError: _get_value() got multiple values for argument 'takeable'
 pandas/core/indexing.py:2008: TypeError
 =========================== short test summary info ============================
 FAILED pandas/tests/indexing/test_scalar.py::test_multiindex_at_get - TypeErr...
-============================== 1 failed in 0.09s ===============================
+============================== 1 failed in 0.22s ===============================
 RUN EVERY COMMAND
 3
 pytest pandas/tests/indexing/test_scalar.py::test_multiindex_at_get
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/pandas, inifile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
 plugins: hypothesis-5.15.1
 collected 1 item
 
@@ -197,7 +197,7 @@ pandas/core/indexing.py:2066: in __setitem__
     return super().__setitem__(key, value)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <pandas.core.indexing._AtIndexer object at 0x7f7204aee220>, key = (1, 3)
+self = <pandas.core.indexing._AtIndexer object at 0x7f98a73f3090>, key = (1, 3)
 value = 5
 
     def __setitem__(self, key, value):
@@ -216,4 +216,4 @@ E           ValueError: Not enough indexers for scalar access (setting)!
 pandas/core/indexing.py:2020: ValueError
 =========================== short test summary info ============================
 FAILED pandas/tests/indexing/test_scalar.py::test_multiindex_at_set - ValueEr...
-============================== 1 failed in 0.10s ===============================
+============================== 1 failed in 0.12s ===============================

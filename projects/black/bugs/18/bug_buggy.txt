@@ -7,11 +7,11 @@ RUN EVERY COMMAND
 FAIL: test_preserves_line_endings (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/black/tests/test_black.py", line 1121, in test_preserves_line_endings
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 1121, in test_preserves_line_endings
     self.assertIn(nl.encode(), updated_contents)  # type: ignore
 AssertionError: b'\r\n' not found in b'def f():\n    pass\n'
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.002s
+Ran 1 test in 0.013s
 
 FAILED (failures=1)

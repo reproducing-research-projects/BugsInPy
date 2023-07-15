@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.088s
+Ran 1 test in 0.085s
 
 OK
 RUN EVERY COMMAND
@@ -13,6 +13,6 @@ RUN EVERY COMMAND
 python -m unittest -q tests.test_spidermiddleware_offsite.TestOffsiteMiddleware4._get_spiderargs
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.130s
+Ran 1 test in 0.127s
 
 OK

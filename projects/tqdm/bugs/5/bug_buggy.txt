@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_tqdm.py F                                               [100%]
@@ -49,7 +49,7 @@ tqdm/tests/tests_tqdm.py:1568: in internal
     assert t
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <[AttributeError("'tqdm' object has no attribute 'total'",) raised in repr()] tqdm object at 0x7f41554c5ba8>
+self = <[AttributeError("'tqdm' object has no attribute 'total'",) raised in repr()] tqdm object at 0x7f85ff836c18>
 
     def __len__(self):
 >       return self.total if self.iterable is None else \
@@ -60,11 +60,11 @@ E       AttributeError: 'tqdm' object has no attribute 'total'
 
 tqdm/_tqdm.py:869: AttributeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
-  /home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     from imp import find_module, load_module, acquire_lock, release_lock
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_tqdm.py::test_bool - AttributeError: 'tqdm' object ha...
-========================= 1 failed, 1 warning in 1.14s =========================
+========================= 1 failed, 1 warning in 1.24s =========================

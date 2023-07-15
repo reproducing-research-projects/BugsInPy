@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 FAIL: test_parse_duration (test.test_utils.TestUtil)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/youtube-dl/test/test_utils.py", line 224, in test_parse_duration
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/test/test_utils.py", line 224, in test_parse_duration
     self.assertEqual(parse_duration('3 min'), 180)
 AssertionError: None != 180
 

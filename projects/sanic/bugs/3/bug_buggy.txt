@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.2.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/sanic, inifile: tox.ini
+rootdir: /home/user/BugsInPy/temp/projects/sanic, inifile: tox.ini
 plugins: sugar-0.9.3, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
@@ -15,7 +15,7 @@ tests/test_url_for.py F                                                  [100%]
 =================================== FAILURES ===================================
 ____________________________ test_routes_with_host _____________________________
 
-app = <sanic.app.Sanic object at 0x7f0160be13a0>
+app = <sanic.app.Sanic object at 0x7f5427cbc550>
 
     def test_routes_with_host(app):
         @app.route("/")
@@ -31,4 +31,4 @@ E         - example.com
 E         + /
 
 tests/test_url_for.py:9: AssertionError
-============================== 1 failed in 0.13s ===============================
+============================== 1 failed in 0.26s ===============================

@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 1 item
 
@@ -15,8 +15,8 @@ tests/shells/test_fish.py F                                              [100%]
 =================================== FAILURES ===================================
 __________________________ TestFish.test_get_aliases ___________________________
 
-self = <tests.shells.test_fish.TestFish object at 0x7f49960e69b0>
-shell = <thefuck.shells.fish.Fish object at 0x7f4995b446a0>
+self = <tests.shells.test_fish.TestFish object at 0x7f5a75d2df28>
+shell = <thefuck.shells.fish.Fish object at 0x7f5a75d30f28>
 
     def test_get_aliases(self, shell):
 >       assert shell.get_aliases() == {'fish_config': 'fish_config',
@@ -55,4 +55,4 @@ overridden = {'', 'cd', 'grep', 'ls', 'man', 'open'}
 E           ValueError: not enough values to unpack (expected 2, got 1)
 
 thefuck/shells/fish.py:25: ValueError
-=========================== 1 failed in 0.22 seconds ===========================
+=========================== 1 failed in 0.21 seconds ===========================

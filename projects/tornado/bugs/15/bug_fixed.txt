@@ -3,9 +3,9 @@ RUN EVERY COMMAND
 0
 
 
-WARNING:tornado.access:403 HEAD /static/../static_foo.txt (127.0.0.1) 0.39ms
-WARNING:tornado.access:403 GET /static/../static_foo.txt (127.0.0.1) 0.31ms
+WARNING:tornado.access:403 HEAD /static/../static_foo.txt (127.0.0.1) 0.44ms
+WARNING:tornado.access:403 GET /static/../static_foo.txt (127.0.0.1) 0.23ms
 ----------------------------------------------------------------------
-Ran 1 test in 0.016s
+Ran 1 test in 0.030s
 
 OK

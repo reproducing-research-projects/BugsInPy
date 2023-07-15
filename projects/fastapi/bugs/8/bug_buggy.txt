@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -24,20 +24,20 @@ E       AttributeError: 'APIRoute' object has no attribute 'x_type'
 
 tests/test_custom_route_class.py:112: AttributeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_custom_route_class.py::test_route_classes - AttributeError:...
-======================== 1 failed, 7 warnings in 1.49s =========================
+======================== 1 failed, 7 warnings in 1.59s =========================

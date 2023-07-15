@@ -73,11 +73,11 @@ file_input
 FAIL: test_tuple_assign (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/b657706be35f360ba710368e4ce42a52/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/b657706be35f360ba710368e4ce42a52/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 549, in test_tuple_assign
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 549, in test_tuple_assign
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 159, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 159, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: '(\n    sdfjklsdfsjldkflkjsf,\n    sdfjsdf[81 chars]3)\n' != 'sdfjklsdfsjldkflkjsf, sdfjsdfjlksdljkfsdl[74 chars]n)\n'
 + sdfjklsdfsjldkflkjsf, sdfjsdfjlksdljkfsdlkf, sdfsdjfklsdfjlksdljkf, sdsfsdfjskdflsfsdf = (

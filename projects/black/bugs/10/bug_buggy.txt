@@ -71,9 +71,9 @@ file_input
 FAIL: test_comment_indentation (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/black/tests/test_black.py", line 517, in test_comment_indentation
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 517, in test_comment_indentation
     self.assertFormatEqual(fs(contents_tab), contents_spc)
-  File "/home/user/projects/black/tests/test_black.py", line 156, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 156, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: 'if 1:\n    if 2:\n        pass\n        # comment\n    pass\n' != 'if 1:\n    if 2:\n        pass\n    # comment\n    pass\n'
   if 1:
@@ -86,6 +86,6 @@ AssertionError: 'if 1:\n    if 2:\n        pass\n        # comment\n    pass\n' 
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.013s
+Ran 1 test in 0.034s
 
 FAILED (failures=1)

@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 4 items
 
@@ -31,7 +31,7 @@ E         ?                          ^
 E         + unzip foo\ bar.zip -d 'foo bar'
 E         ?                       +   ^^^^^
 
-/home/user/projects/thefuck/tests/rules/test_dirty_unzip.py:50: AssertionError
+/home/user/BugsInPy/temp/projects/thefuck/tests/rules/test_dirty_unzip.py:50: AssertionError
 __ test_get_new_command[unzip 'foo bar.zip'-unzip 'foo bar.zip' -d 'foo bar'] __
 
 zip_error = None, script = "unzip 'foo bar.zip'"
@@ -49,5 +49,5 @@ E         - unzip 'foo bar.zip' -d 'foo
 E         + unzip 'foo bar.zip' -d 'foo bar'
 E         ?                            +++++
 
-/home/user/projects/thefuck/tests/rules/test_dirty_unzip.py:50: AssertionError
-====================== 2 failed, 2 passed in 0.15 seconds ======================
+/home/user/BugsInPy/temp/projects/thefuck/tests/rules/test_dirty_unzip.py:50: AssertionError
+====================== 2 failed, 2 passed in 0.21 seconds ======================

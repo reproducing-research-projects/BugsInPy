@@ -12,7 +12,7 @@ RUN EVERY COMMAND
 FAIL: test_canonicalize_url_unicode_query_string (tests.test_utils_url.CanonicalizeUrlTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_url.py", line 138, in test_canonicalize_url_unicode_query_string
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_url.py", line 138, in test_canonicalize_url_unicode_query_string
     self.assertEqual(canonicalize_url(u"http://www.example.com/résumé?q=résumé", encoding='latin1'),
 AssertionError: 'http://www.example.com/r%C3%A9sum%C3%A9?q=r%C3%A9sum%C3%A9' != 'http://www.example.com/r%C3%A9sum%C3%A9?q=r%E9sum%E9'
 - http://www.example.com/r%C3%A9sum%C3%A9?q=r%C3%A9sum%C3%A9
@@ -33,7 +33,7 @@ python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize
 FAIL: test_normalize_percent_encoding_in_paths (tests.test_utils_url.CanonicalizeUrlTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_url.py", line 159, in test_normalize_percent_encoding_in_paths
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_url.py", line 159, in test_normalize_percent_encoding_in_paths
     self.assertEqual(canonicalize_url("http://www.example.com/a%a3do"),
 AssertionError: 'http://www.example.com/a%EF%BF%BDdo' != 'http://www.example.com/a%A3do'
 - http://www.example.com/a%EF%BF%BDdo
@@ -43,7 +43,7 @@ AssertionError: 'http://www.example.com/a%EF%BF%BDdo' != 'http://www.example.com
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.017s
+Ran 1 test in 0.002s
 
 FAILED (failures=1)
 RUN EVERY COMMAND
@@ -54,7 +54,7 @@ python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_normalize_pe
 FAIL: test_normalize_percent_encoding_in_query_arguments (tests.test_utils_url.CanonicalizeUrlTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_url.py", line 171, in test_normalize_percent_encoding_in_query_arguments
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_url.py", line 171, in test_normalize_percent_encoding_in_query_arguments
     self.assertEqual(canonicalize_url("http://www.example.com/do?k=b%a3"),
 AssertionError: 'http://www.example.com/do?k=b%EF%BF%BD' != 'http://www.example.com/do?k=b%A3'
 - http://www.example.com/do?k=b%EF%BF%BD
@@ -75,7 +75,7 @@ python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_normalize_pe
 FAIL: test_canonicalize_idns (tests.test_utils_url.CanonicalizeUrlTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_url.py", line 225, in test_canonicalize_idns
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_url.py", line 225, in test_canonicalize_idns
     self.assertEqual(canonicalize_url(u'http://www.bücher.de?q=bücher'),
 AssertionError: 'http://www.bücher.de/?q=b%C3%BCcher' != 'http://www.xn--bcher-kva.de/?q=b%C3%BCcher'
 - http://www.bücher.de/?q=b%C3%BCcher
@@ -85,7 +85,7 @@ AssertionError: 'http://www.bücher.de/?q=b%C3%BCcher' != 'http://www.xn--bcher-
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.003s
+Ran 1 test in 0.054s
 
 FAILED (failures=1)
 RUN EVERY COMMAND
@@ -96,7 +96,7 @@ python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize
 FAIL: test_canonicalize_urlparsed (tests.test_utils_url.CanonicalizeUrlTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_url.py", line 241, in test_canonicalize_urlparsed
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_url.py", line 241, in test_canonicalize_urlparsed
     self.assertEqual(canonicalize_url(urlparse('http://www.example.com/caf%e9-con-leche.htm')),
 AssertionError: 'http://www.example.com/caf%EF%BF%BD-con-leche.htm' != 'http://www.example.com/caf%E9-con-leche.htm'
 - http://www.example.com/caf%EF%BF%BD-con-leche.htm
@@ -106,7 +106,7 @@ AssertionError: 'http://www.example.com/caf%EF%BF%BD-con-leche.htm' != 'http://w
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.007s
+Ran 1 test in 0.002s
 
 FAILED (failures=1)
 RUN EVERY COMMAND
@@ -117,7 +117,7 @@ python -m unittest -q tests.test_utils_url.CanonicalizeUrlTest.test_canonicalize
 FAIL: test_canonicalize_parse_url (tests.test_utils_url.CanonicalizeUrlTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_url.py", line 250, in test_canonicalize_parse_url
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_url.py", line 250, in test_canonicalize_parse_url
     self.assertEqual(canonicalize_url(parse_url('http://www.example.com/caf%e9-con-leche.htm')),
 AssertionError: 'http://www.example.com/caf%EF%BF%BD-con-leche.htm' != 'http://www.example.com/caf%E9-con-leche.htm'
 - http://www.example.com/caf%EF%BF%BD-con-leche.htm

@@ -4,25 +4,25 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.7.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/bin/python
+platform linux -- Python 3.7.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/bin/python
 cachedir: .pytest_cache
-rootdir: /home/user/projects/keras, inifile: pytest.ini
+rootdir: /home/user/BugsInPy/temp/projects/keras, inifile: pytest.ini
 plugins: forked-1.1.3, xdist-1.32.0
 gw0 I / gw1 I
-[gw0] linux Python 3.7.3 cwd: /home/user/projects/keras
-[gw1] linux Python 3.7.3 cwd: /home/user/projects/keras
-[gw1] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
+[gw0] linux Python 3.7.3 cwd: /home/user/BugsInPy/temp/projects/keras
+[gw1] linux Python 3.7.3 cwd: /home/user/BugsInPy/temp/projects/keras
 [gw0] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
+[gw1] Python 3.7.3 (default, Mar 27 2019, 22:11:17)  -- [GCC 7.3.0]
 gw0 [1] / gw1 [1]
 
 scheduling tests via LoadScheduling
 
 tests/test_multiprocessing.py::test_multiprocessing_training 
-[gw1] [100%] FAILED tests/test_multiprocessing.py::test_multiprocessing_training 
+[gw0] [100%] FAILED tests/test_multiprocessing.py::test_multiprocessing_training 
 
 =================================== FAILURES ===================================
 ________________________ test_multiprocessing_training _________________________
-[gw1] linux -- Python 3.7.3 /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/bin/python
+[gw0] linux -- Python 3.7.3 /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/bin/python
 
     @keras_test
     def test_multiprocessing_training():
@@ -195,11 +195,11 @@ keras/legacy/interfaces.py:91: in wrapper
     return func(*args, **kwargs)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <keras.engine.training.Model object at 0x7fb842f06c50>
-generator = <test_multiprocessing.DummySequence object at 0x7fb84293cf60>
+self = <keras.engine.training.Model object at 0x7feb69a48ef0>
+generator = <test_multiprocessing.DummySequence object at 0x7feb6992f390>
 steps_per_epoch = 100, epochs = 1, verbose = 1
-callbacks = <keras.callbacks.CallbackList object at 0x7fb8429558d0>
-validation_data = <generator object test_multiprocessing_training.<locals>.custom_generator at 0x7fb842f292a0>
+callbacks = <keras.callbacks.CallbackList object at 0x7feb69b48518>
+validation_data = <generator object test_multiprocessing_training.<locals>.custom_generator at 0x7feb69957b88>
 validation_steps = 1, class_weight = None, max_queue_size = 10, workers = 0
 use_multiprocessing = True, shuffle = True, initial_epoch = 0
 
@@ -467,197 +467,203 @@ keras/engine/training.py:2207: TypeError
 ----------------------------- Captured stdout call -----------------------------
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 20s - loss: 5244.0718
- 17/100 [====>.........................] - ETA: 1s - loss: 5920.4943 
- 40/100 [===========>..................] - ETA: 0s - loss: 5686.7720
- 72/100 [====================>.........] - ETA: 0s - loss: 5547.1453
-100/100 [==============================] - 0s 4ms/step - loss: 5223.5964
+  1/100 [..............................] - ETA: 15s - loss: 36868.5742
+ 15/100 [===>..........................] - ETA: 1s - loss: 27005.1152 
+ 38/100 [==========>...................] - ETA: 0s - loss: 26190.7296
+ 55/100 [===============>..............] - ETA: 0s - loss: 25672.4717
+ 80/100 [=======================>......] - ETA: 0s - loss: 24795.5524
+100/100 [==============================] - 0s 4ms/step - loss: 23929.4405
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 0s - loss: 7784.9873
-  8/100 [=>............................] - ETA: 0s - loss: 5446.9974
- 41/100 [===========>..................] - ETA: 0s - loss: 4327.2178
- 71/100 [====================>.........] - ETA: 0s - loss: 3823.7266
- 96/100 [===========================>..] - ETA: 0s - loss: 3822.4012
-100/100 [==============================] - 0s 2ms/step - loss: 3807.4719
+  1/100 [..............................] - ETA: 0s - loss: 16415.7461
+ 26/100 [======>.......................] - ETA: 0s - loss: 18616.0644
+ 53/100 [==============>...............] - ETA: 0s - loss: 18537.7829
+ 78/100 [======================>.......] - ETA: 0s - loss: 17575.5936
+100/100 [==============================] - 0s 2ms/step - loss: 16976.1199
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 5s - loss: 525.0306
- 27/100 [=======>......................] - ETA: 0s - loss: 1386.5075
- 52/100 [==============>...............] - ETA: 0s - loss: 1454.7698
- 85/100 [========================>.....] - ETA: 0s - loss: 1401.9006
-100/100 [==============================] - 0s 2ms/step - loss: 1445.1619 - val_loss: 1346.2305
+  1/100 [..............................] - ETA: 5s - loss: 7193.3384
+ 15/100 [===>..........................] - ETA: 0s - loss: 5366.0518
+ 34/100 [=========>....................] - ETA: 0s - loss: 5314.3505
+ 54/100 [===============>..............] - ETA: 0s - loss: 5405.1500
+ 73/100 [====================>.........] - ETA: 0s - loss: 5362.0688
+ 85/100 [========================>.....] - ETA: 0s - loss: 5297.7706
+100/100 [==============================] - 0s 4ms/step - loss: 5246.3170 - val_loss: 4795.6582
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 0s - loss: 442.8875
- 39/100 [==========>...................] - ETA: 0s - loss: 1206.3648
- 69/100 [===================>..........] - ETA: 0s - loss: 1116.8070
-100/100 [==============================] - 0s 2ms/step - loss: 1201.6523 - val_loss: 1120.7915
+  1/100 [..............................] - ETA: 0s - loss: 6131.7529
+ 25/100 [======>.......................] - ETA: 0s - loss: 4364.0050
+ 42/100 [===========>..................] - ETA: 0s - loss: 4270.3753
+ 76/100 [=====================>........] - ETA: 0s - loss: 4156.4289
+100/100 [==============================] - 0s 2ms/step - loss: 4050.5813 - val_loss: 3634.0359
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 3s - loss: 371.1512
- 12/100 [==>...........................] - ETA: 0s - loss: 834.9904
- 40/100 [===========>..................] - ETA: 0s - loss: 963.4066
- 77/100 [======================>.......] - ETA: 0s - loss: 1087.7982
-100/100 [==============================] - 0s 3ms/step - loss: 1097.3120 - val_loss: 669.3436
+  1/100 [..............................] - ETA: 3s - loss: 4722.4326
+ 20/100 [=====>........................] - ETA: 0s - loss: 3669.2873
+ 38/100 [==========>...................] - ETA: 0s - loss: 3615.7818
+ 60/100 [=================>............] - ETA: 0s - loss: 3337.2760
+ 83/100 [=======================>......] - ETA: 0s - loss: 3164.8108
+ 97/100 [============================>.] - ETA: 0s - loss: 3113.7656
+100/100 [==============================] - 0s 3ms/step - loss: 3117.3142 - val_loss: 3066.5347
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 1s - loss: 720.8842
-  6/100 [>.............................] - ETA: 1s - loss: 450.5297
- 20/100 [=====>........................] - ETA: 0s - loss: 602.6354
- 55/100 [===============>..............] - ETA: 0s - loss: 850.9878
- 84/100 [========================>.....] - ETA: 0s - loss: 851.7509
-100/100 [==============================] - 0s 3ms/step - loss: 851.7567 - val_loss: 203.3608
+  1/100 [..............................] - ETA: 0s - loss: 3893.5527
+ 18/100 [====>.........................] - ETA: 0s - loss: 2677.2934
+ 50/100 [==============>...............] - ETA: 0s - loss: 2461.2871
+ 85/100 [========================>.....] - ETA: 0s - loss: 2316.4719
+100/100 [==============================] - 0s 2ms/step - loss: 2248.9253 - val_loss: 2635.5037
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 0s - loss: 252.4677
- 75/100 [=====================>........] - ETA: 0s - loss: 573.8227
-100/100 [==============================] - 0s 673us/step - loss: 527.3720 - val_loss: 580.9188
+  1/100 [..............................] - ETA: 0s - loss: 1996.1188
+ 38/100 [==========>...................] - ETA: 0s - loss: 1932.7970
+ 76/100 [=====================>........] - ETA: 0s - loss: 1804.2855
+100/100 [==============================] - 0s 1ms/step - loss: 1751.7773 - val_loss: 1687.2227
 Epoch 1/1
 
-  1/100 [..............................] - ETA: 0s - loss: 106.1954
- 71/100 [====================>.........] - ETA: 0s - loss: 387.5697
-100/100 [==============================] - 0s 710us/step - loss: 367.5147 - val_loss: 106.0445
+  1/100 [..............................] - ETA: 0s - loss: 786.9584
+ 42/100 [===========>..................] - ETA: 0s - loss: 1340.0231
+ 84/100 [========================>.....] - ETA: 0s - loss: 1271.1178
+100/100 [==============================] - 0s 1ms/step - loss: 1211.6427 - val_loss: 1354.3267
 Epoch 1/1
 ----------------------------- Captured stderr call -----------------------------
-WARNING:tensorflow:From /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+WARNING:tensorflow:From /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Colocations handled automatically by placer.
-WARNING:tensorflow:From /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+WARNING:tensorflow:From /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use tf.cast instead.
-2023-07-14 07:49:57.258485: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-2023-07-14 07:49:57.263281: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3600000000 Hz
-2023-07-14 07:49:57.263433: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x55d94112b2b0 executing computations on platform Host. Devices:
-2023-07-14 07:49:57.263446: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2023-07-15 06:29:27.857469: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2023-07-15 06:29:27.861132: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3600000000 Hz
+2023-07-15 06:29:27.863418: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x557b9db4aa50 executing computations on platform Host. Devices:
+2023-07-15 06:29:27.863439: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
 ------------------------------ Captured log call -------------------------------
-WARNING  tensorflow:deprecation.py:323 From /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+WARNING  tensorflow:deprecation.py:323 From /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Colocations handled automatically by placer.
-WARNING  tensorflow:deprecation.py:323 From /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+WARNING  tensorflow:deprecation.py:323 From /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use tf.cast instead.
 =============================== warnings summary ===============================
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/pywrap_tensorflow_internal.py:15
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/pywrap_tensorflow_internal.py:15
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/pywrap_tensorflow_internal.py:15: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/pywrap_tensorflow_internal.py:15
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/pywrap_tensorflow_internal.py:15
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/pywrap_tensorflow_internal.py:15: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     import imp
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
     _np_qint8 = np.dtype([("qint8", np.int8, 1)])
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
     _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
     _np_qint16 = np.dtype([("qint16", np.int16, 1)])
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
     _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
     _np_qint32 = np.dtype([("qint32", np.int32, 1)])
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
     np_resource = np.dtype([("resource", np.ubyte, 1)])
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:823
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:823
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:823: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:823
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:823
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:823: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     _pywrap_tensorflow.RegisterType("Mapping", _collections.Mapping)
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:824
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:824
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:824: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:824
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:824
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/util/nest.py:824: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     _pywrap_tensorflow.RegisterType("Sequence", _collections.Sequence)
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:312
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:312
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:312: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:312
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:312
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:312: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     class _ListWrapper(List, collections.MutableSequence,
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:546
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:546
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:546: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:546
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:546
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/data_structures.py:546: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     class _DictWrapper(Mapping, collections.MutableMapping):
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/util.py:448
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/util.py:448
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/util.py:448: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/util.py:448
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/util.py:448
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/checkpointable/util.py:448: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     class _ObjectIdentitySet(collections.MutableSet):
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/adam.py:95
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/adam.py:95: DeprecationWarning: invalid escape sequence \_
-    """
-
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:10
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:10
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:10: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:10
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:10
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:10: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     _nlv = LooseVersion(_np_version)
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:11
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:11
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:11
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:11
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:11: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     _np_version_under1p14 = _nlv < LooseVersion("1.14")
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:12
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:12
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:12: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:12
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:12
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:12: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     _np_version_under1p15 = _nlv < LooseVersion("1.15")
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:13
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:13
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:13
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:13
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     _np_version_under1p16 = _nlv < LooseVersion("1.16")
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:14
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:14
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:14
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:14
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:14: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     _np_version_under1p17 = _nlv < LooseVersion("1.17")
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:15
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:15
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:15
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:15
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/__init__.py:15: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     _np_version_under1p18 = _nlv < LooseVersion("1.18")
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/setuptools/_distutils/version.py:346
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/setuptools/_distutils/version.py:346
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/setuptools/_distutils/version.py:346: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/setuptools/_distutils/version.py:346
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/setuptools/_distutils/version.py:346
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/setuptools/_distutils/version.py:346: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     other = LooseVersion(other)
 
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
-/home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
-  /home/user/.conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/pandas/compat/numpy/function.py:114: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     if LooseVersion(_np_version) >= LooseVersion("1.17.0"):
 
 keras/callbacks.py:18
 keras/callbacks.py:18
-  /home/user/projects/keras/keras/callbacks.py:18: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+  /home/user/BugsInPy/temp/projects/keras/keras/callbacks.py:18: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
     from collections import Iterable
 
+/opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/adam.py:95
+  /opt/conda/envs/50ed758a536fff6a0703bf56934e9ce8/lib/python3.7/site-packages/tensorflow/python/training/adam.py:95: DeprecationWarning: invalid escape sequence \_
+    """
+
 keras/engine/training.py:2088
-  /home/user/projects/keras/keras/engine/training.py:2088: UserWarning: Using a generator with `use_multiprocessing=True` and multiple workers may duplicate your data. Please consider using the`keras.utils.Sequence class.
+  /home/user/BugsInPy/temp/projects/keras/keras/engine/training.py:2088: UserWarning: Using a generator with `use_multiprocessing=True` and multiple workers may duplicate your data. Please consider using the`keras.utils.Sequence class.
     UserWarning('Using a generator with `use_multiprocessing=True`'
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 ========================== slowest 10 test durations ===========================
-2.48s call     tests/test_multiprocessing.py::test_multiprocessing_training
+2.84s call     tests/test_multiprocessing.py::test_multiprocessing_training
 
 (0.00 durations hidden.  Use -vv to show these durations.)
 =========================== short test summary info ============================
 FAILED tests/test_multiprocessing.py::test_multiprocessing_training - TypeErr...
-======================== 1 failed, 46 warnings in 9.14s ========================
+======================= 1 failed, 46 warnings in 13.76s ========================

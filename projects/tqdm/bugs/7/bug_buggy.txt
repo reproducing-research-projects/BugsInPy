@@ -3,10 +3,10 @@ RUN EVERY COMMAND
 0
 
 
-/home/user/BugsInPy/framework/bin/bugsinpy-test: line 108: warning: command substitution: ignored null byte in input
+/home/user/BugsInPy/framework/bin/bugsinpy-test: line 110: warning: command substitution: ignored null byte in input
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_main.py F                                               [100%]
@@ -14,7 +14,7 @@ tqdm/tests/tests_main.py F                                               [100%]
 =================================== FAILURES ===================================
 __________________________________ test_main ___________________________________
 
-fp = <_pytest.capture.EncodedFile object at 0x7f618b974ef0>
+fp = <_pytest.capture.EncodedFile object at 0x7f699b01df98>
 
     def main(fp=sys.stderr):
         """
@@ -110,7 +110,7 @@ During handling of the above exception, another exception occurred:
 tqdm/tests/tests_main.py:37: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-fp = <_pytest.capture.EncodedFile object at 0x7f618b974ef0>
+fp = <_pytest.capture.EncodedFile object at 0x7f699b01df98>
 
     def main(fp=sys.stderr):
         """
@@ -186,11 +186,11 @@ Error:
 Usage:
   tqdm [--help | options]
 =============================== warnings summary ===============================
-/home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
-  /home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     from imp import find_module, load_module, acquire_lock, release_lock
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_main.py::test_main - tqdm._tqdm.TqdmKeyError: "'delims'"
-========================= 1 failed, 1 warning in 1.18s =========================
+========================= 1 failed, 1 warning in 1.07s =========================

@@ -15,7 +15,7 @@ RUN EVERY COMMAND
 python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_full_url
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.014s
+Ran 1 test in 0.001s
 
 OK
 RUN EVERY COMMAND
@@ -23,7 +23,7 @@ RUN EVERY COMMAND
 python -m unittest -q tests.test_http_cookies.WrappedRequestTest.test_get_host
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.001s
+Ran 1 test in 0.002s
 
 OK
 RUN EVERY COMMAND

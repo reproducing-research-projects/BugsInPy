@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_tqdm.py F                                               [100%]
@@ -48,15 +48,15 @@ E         +  20%|▏| 20/100 [00:12<00:09,  8.10it/s]
 
 tqdm/tests/tests_tqdm.py:218: AssertionError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
-  /home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     from imp import find_module, load_module, acquire_lock, release_lock
 
 tqdm/_main.py:59
-  /home/user/projects/tqdm/tqdm/_main.py:59: DeprecationWarning: invalid escape sequence \s
+  /home/user/BugsInPy/temp/projects/tqdm/tqdm/_main.py:59: DeprecationWarning: invalid escape sequence \s
     argv = re.split('\s*(--\S+)[=\s]*', ' '.join(sys.argv[1:]))
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_tqdm.py::test_format_meter - AssertionError: assert '...
-======================== 1 failed, 2 warnings in 0.95s =========================
+======================== 1 failed, 2 warnings in 1.31s =========================

@@ -281,11 +281,11 @@ file_input
 FAIL: test_python2 (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/5619da77e622150490b9375f352afe47/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/5619da77e622150490b9375f352afe47/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 187, in test_python2
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 187, in test_python2
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 67, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 67, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: '#!/u[39 chars]nt >>sys.stderr, "Warning:",\nprint >>sys.stde[214 chars]))\n' != '#!/u[39 chars]nt >> sys.stderr, "Warning:",\nprint >> sys.st[217 chars]))\n'
   #!/usr/bin/env python2
@@ -311,6 +311,6 @@ AssertionError: '#!/u[39 chars]nt >>sys.stderr, "Warning:",\nprint >>sys.stde[21
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.012s
+Ran 1 test in 0.024s
 
 FAILED (failures=1)

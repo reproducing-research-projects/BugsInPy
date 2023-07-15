@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 1 item
 
@@ -16,8 +16,8 @@ tests/shells/test_bash.py F                                              [100%]
 =================================== FAILURES ===================================
 _______________ TestBash.test_app_alias_variables_correctly_set ________________
 
-self = <tests.shells.test_bash.TestBash object at 0x7f09dc800c50>
-shell = <thefuck.shells.bash.Bash object at 0x7f09dc7dacc0>
+self = <tests.shells.test_bash.TestBash object at 0x7fdd95282668>
+shell = <thefuck.shells.bash.Bash object at 0x7fdd9555c780>
 
     def test_app_alias_variables_correctly_set(self, shell):
         alias = shell.app_alias('fuck')
@@ -25,7 +25,7 @@ shell = <thefuck.shells.bash.Bash object at 0x7f09dc7dacc0>
 E       assert "alias fuck='TF_CMD=$(TF_ALIAS" in "TF_ALIAS=fuck alias fuck='PYTHONIOENCODING=utf-8 TF_CMD=$(TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1)) &&  eval $TF_CMD && history -s $TF_CMD'"
 
 tests/shells/test_bash.py:51: AssertionError
-=========================== 1 failed in 0.09 seconds ===========================
+=========================== 1 failed in 0.13 seconds ===========================
 RUN EVERY COMMAND
 1
 pytest tests/shells/test_bash.py::TestBash::test_app_alias_variables_correctly_set
@@ -33,7 +33,7 @@ pytest tests/shells/test_bash.py::TestBash::test_app_alias_variables_correctly_s
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 1 item
 
@@ -42,8 +42,8 @@ tests/shells/test_zsh.py F                                               [100%]
 =================================== FAILURES ===================================
 ________________ TestZsh.test_app_alias_variables_correctly_set ________________
 
-self = <tests.shells.test_zsh.TestZsh object at 0x7fa0d30f4080>
-shell = <thefuck.shells.zsh.Zsh object at 0x7fa0d43a3898>
+self = <tests.shells.test_zsh.TestZsh object at 0x7f645df12128>
+shell = <thefuck.shells.zsh.Zsh object at 0x7f645f1bf6d8>
 
     def test_app_alias_variables_correctly_set(self, shell):
         alias = shell.app_alias('fuck')

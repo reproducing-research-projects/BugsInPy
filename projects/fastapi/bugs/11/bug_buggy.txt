@@ -10,7 +10,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -24,35 +24,35 @@ ___________________________ test_item_openapi_schema ___________________________
 
 tests/test_union_body.py:110: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:543: in get
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:543: in get
     return self.request('GET', url, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
     return super().request(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
     loop.run_until_complete(self.app(scope, receive, send))
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
     return future.result()
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
     await self.error_middleware(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
     await self.app(scope, receive, _send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
     await self.app(scope, receive, sender)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
     await route(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
     await self.app(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
     response = await func(request)
 fastapi/applications.py:87: in openapi
     return JSONResponse(self.openapi())
@@ -64,15 +64,15 @@ fastapi/openapi/utils.py:162: in get_openapi_path
     validation_definitions, operation_parameters = get_openapi_operation_parameters(
 fastapi/openapi/utils.py:87: in get_openapi_operation_parameters
     "schema": field_schema(param, model_name_map={})[0],
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:297: in field_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:297: in field_schema
     f_schema, f_definitions, f_nested_models = field_type_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
     f_schema, f_definitions, f_nested_models = field_singleton_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:742: in field_singleton_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:742: in field_singleton_schema
     return field_singleton_sub_fields_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:648: in field_singleton_sub_fields_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:648: in field_singleton_sub_fields_schema
     sub_schema, sub_definitions, sub_nested_models = field_type_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
     f_schema, f_definitions, f_nested_models = field_singleton_schema(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
@@ -146,32 +146,32 @@ field = <Field(item_OtherItem type=OtherItem required)>
 >           model_name = model_name_map[field_type]
 E           KeyError: <class 'tests.test_union_body.OtherItem'>
 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:788: KeyError
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:788: KeyError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_union_body.py::test_item_openapi_schema - KeyError: <class ...
-======================== 1 failed, 7 warnings in 1.00s =========================
+======================== 1 failed, 7 warnings in 0.91s =========================
 RUN EVERY COMMAND
 1
 pytest tests/test_union_body.py::test_item_openapi_schema
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -185,39 +185,39 @@ _____________________________ test_post_other_item _____________________________
 
 tests/test_union_body.py:116: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
     return self.request('POST', url, data=data, json=json, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
     return super().request(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
     loop.run_until_complete(self.app(scope, receive, send))
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
     return future.result()
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
     await self.error_middleware(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
     await self.app(scope, receive, _send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
     await self.app(scope, receive, sender)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
     await route(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
     await self.app(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
     response = await func(request)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-request = <starlette.requests.Request object at 0x7fe3bcf32370>
+request = <starlette.requests.Request object at 0x7fcc65db13d0>
 
     async def app(request: Request) -> Response:
         try:
@@ -247,30 +247,30 @@ E           TypeError: __init__() missing 1 required positional argument: 'model
 
 fastapi/routing.py:105: TypeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_union_body.py::test_post_other_item - TypeError: __init__()...
-======================== 1 failed, 7 warnings in 1.04s =========================
+======================== 1 failed, 7 warnings in 0.51s =========================
 RUN EVERY COMMAND
 2
 pytest tests/test_union_body.py::test_post_other_item
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -284,39 +284,39 @@ ________________________________ test_post_item ________________________________
 
 tests/test_union_body.py:122: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
     return self.request('POST', url, data=data, json=json, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
     return super().request(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
     loop.run_until_complete(self.app(scope, receive, send))
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
     return future.result()
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
     await self.error_middleware(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
     await self.app(scope, receive, _send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
     await self.app(scope, receive, sender)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
     await route(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
     await self.app(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
     response = await func(request)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-request = <starlette.requests.Request object at 0x7faaea72f400>
+request = <starlette.requests.Request object at 0x7f062e400400>
 
     async def app(request: Request) -> Response:
         try:
@@ -346,30 +346,30 @@ E           TypeError: __init__() missing 1 required positional argument: 'model
 
 fastapi/routing.py:105: TypeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_union_body.py::test_post_item - TypeError: __init__() missi...
-======================== 1 failed, 7 warnings in 0.80s =========================
+======================== 1 failed, 7 warnings in 0.68s =========================
 RUN EVERY COMMAND
 3
 pytest tests/test_union_body.py::test_post_item
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -384,35 +384,35 @@ ______________________ test_inherited_item_openapi_schema ______________________
 
 tests/test_union_inherited_body.py:124: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:543: in get
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:543: in get
     return self.request('GET', url, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
     return super().request(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
     loop.run_until_complete(self.app(scope, receive, send))
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
     return future.result()
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
     await self.error_middleware(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
     await self.app(scope, receive, _send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
     await self.app(scope, receive, sender)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
     await route(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
     await self.app(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
     response = await func(request)
 fastapi/applications.py:87: in openapi
     return JSONResponse(self.openapi())
@@ -424,15 +424,15 @@ fastapi/openapi/utils.py:162: in get_openapi_path
     validation_definitions, operation_parameters = get_openapi_operation_parameters(
 fastapi/openapi/utils.py:87: in get_openapi_operation_parameters
     "schema": field_schema(param, model_name_map={})[0],
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:297: in field_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:297: in field_schema
     f_schema, f_definitions, f_nested_models = field_type_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
     f_schema, f_definitions, f_nested_models = field_singleton_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:742: in field_singleton_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:742: in field_singleton_schema
     return field_singleton_sub_fields_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:648: in field_singleton_sub_fields_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:648: in field_singleton_sub_fields_schema
     sub_schema, sub_definitions, sub_nested_models = field_type_schema(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:527: in field_type_schema
     f_schema, f_definitions, f_nested_models = field_singleton_schema(
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
@@ -506,32 +506,32 @@ field = <Field(item_ExtendedItem type=ExtendedItem required)>
 >           model_name = model_name_map[field_type]
 E           KeyError: <class 'tests.test_union_inherited_body.ExtendedItem'>
 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:788: KeyError
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/schema.py:788: KeyError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_union_inherited_body.py::test_inherited_item_openapi_schema
-======================== 1 failed, 7 warnings in 1.01s =========================
+======================== 1 failed, 7 warnings in 0.69s =========================
 RUN EVERY COMMAND
 4
 pytest tests/test_union_inherited_body.py::test_inherited_item_openapi_schema
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -546,39 +546,39 @@ ___________________________ test_post_extended_item ____________________________
 
 tests/test_union_inherited_body.py:131: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
     return self.request('POST', url, data=data, json=json, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
     return super().request(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
     loop.run_until_complete(self.app(scope, receive, send))
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
     return future.result()
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
     await self.error_middleware(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
     await self.app(scope, receive, _send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
     await self.app(scope, receive, sender)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
     await route(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
     await self.app(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
     response = await func(request)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-request = <starlette.requests.Request object at 0x7fee275525b0>
+request = <starlette.requests.Request object at 0x7efcbb416550>
 
     async def app(request: Request) -> Response:
         try:
@@ -608,30 +608,30 @@ E           TypeError: __init__() missing 1 required positional argument: 'model
 
 fastapi/routing.py:105: TypeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_union_inherited_body.py::test_post_extended_item - TypeErro...
-======================== 1 failed, 7 warnings in 0.85s =========================
+======================== 1 failed, 7 warnings in 1.03s =========================
 RUN EVERY COMMAND
 5
 pytest tests/test_union_inherited_body.py::test_post_extended_item
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -646,39 +646,39 @@ ________________________________ test_post_item ________________________________
 
 tests/test_union_inherited_body.py:138: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:578: in post
     return self.request('POST', url, data=data, json=json, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:405: in request
     return super().request(
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:238: in send
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/testclient.py:235: in send
     loop.run_until_complete(self.app(scope, receive, send))
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/asyncio/base_events.py:616: in run_until_complete
     return future.result()
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/applications.py:133: in __call__
     await self.error_middleware(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:177: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/middleware/errors.py:155: in __call__
     await self.app(scope, receive, _send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:73: in __call__
     raise exc from None
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/exceptions.py:62: in __call__
     await self.app(scope, receive, sender)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:590: in __call__
     await route(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:208: in __call__
     await self.app(scope, receive, send)
-../../.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/starlette/routing.py:41: in app
     response = await func(request)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-request = <starlette.requests.Request object at 0x7f8e0b778580>
+request = <starlette.requests.Request object at 0x7f8ccbcc0580>
 
     async def app(request: Request) -> Response:
         try:
@@ -708,20 +708,20 @@ E           TypeError: __init__() missing 1 required positional argument: 'model
 
 fastapi/routing.py:105: TypeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.32.2')
 
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/6a8345d79f511e631e8d83e9f190ff61/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_union_inherited_body.py::test_post_item - TypeError: __init...
-======================== 1 failed, 7 warnings in 0.80s =========================
+======================== 1 failed, 7 warnings in 0.84s =========================

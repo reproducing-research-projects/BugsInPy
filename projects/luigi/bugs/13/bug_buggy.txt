@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/luigi
+rootdir: /home/user/BugsInPy/temp/projects/luigi
 plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
@@ -28,7 +28,7 @@ self = <file_test.FileSystemTest testMethod=test_move_to_new_dir>
 test/file_test.py:308: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <luigi.file.LocalFileSystem object at 0x7fac1ff35e20>
+self = <luigi.file.LocalFileSystem object at 0x7f10ff1f5e50>
 old_path = '/tmp/luigi-test-dir/src.txt'
 new_path = '/tmp/luigi-test-dir/newdir/dest.txt', raise_if_exists = False
 
@@ -43,10 +43,10 @@ E           AttributeError: 'LocalFileSystem' object has no attribute 'fs'
 src/luigi/luigi/file.py:91: AttributeError
 =============================== warnings summary ===============================
 src/luigi/luigi/parameter.py:28
-  /home/user/projects/luigi/src/luigi/luigi/parameter.py:28: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
+  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/parameter.py:28: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
     from collections import OrderedDict, Mapping
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED test/file_test.py::FileSystemTest::test_move_to_new_dir - AttributeErr...
-========================= 1 failed, 1 warning in 0.16s =========================
+========================= 1 failed, 1 warning in 0.15s =========================

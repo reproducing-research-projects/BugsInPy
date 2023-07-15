@@ -7,9 +7,9 @@ RUN EVERY COMMAND
 ERROR: test_dfxp2srt (test.test_utils.TestUtil)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/youtube-dl/test/test_utils.py", line 1083, in test_dfxp2srt
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/test/test_utils.py", line 1083, in test_dfxp2srt
     self.assertEqual(dfxp2srt(dfxp_data), srt_data)
-  File "/home/user/projects/youtube-dl/youtube_dl/utils.py", line 2675, in dfxp2srt
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/youtube_dl/utils.py", line 2675, in dfxp2srt
     dfxp_data = dfxp_data.replace(ns, k)
 TypeError: a bytes-like object is required, not 'str'
 

@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.7.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/httpie
+rootdir: /home/user/BugsInPy/temp/projects/httpie
 plugins: httpbin-1.0.0
 collected 1 item
 
@@ -33,4 +33,4 @@ E       ?       +
 tests/tests.py:84: AssertionError
 =========================== short test summary info ============================
 FAILED tests/tests.py::TestItemParsing::test_escape_longsep - AssertionError:...
-============================== 1 failed in 0.22s ===============================
+============================== 1 failed in 0.21s ===============================

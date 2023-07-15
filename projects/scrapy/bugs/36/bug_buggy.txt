@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 FAIL: test_create_instance (tests.test_utils_misc.__init__.UtilsMiscTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_utils_misc/__init__.py", line 140, in test_create_instance
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_misc/__init__.py", line 140, in test_create_instance
     create_instance(m, settings, None)
 AssertionError: TypeError not raised
 

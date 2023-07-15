@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -21,19 +21,19 @@ _________________________________ test_router __________________________________
 
 tests/test_ws_router.py:44: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:436: in websocket_connect
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:436: in websocket_connect
     super().request("GET", url, **kwargs)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:140: in send
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:140: in send
     session = WebSocketTestSession(self.app, scope)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:273: in __init__
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:273: in __init__
     self._raise_on_close(message)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <starlette.testclient.WebSocketTestSession object at 0x7fd195d99cd0>
+self = <starlette.testclient.WebSocketTestSession object at 0x7fdce25e3f40>
 message = {'code': 1000, 'type': 'websocket.close'}
 
     def _raise_on_close(self, message: Message) -> None:
@@ -41,32 +41,32 @@ message = {'code': 1000, 'type': 'websocket.close'}
 >           raise WebSocketDisconnect(message.get("code", 1000))
 E           starlette.websockets.WebSocketDisconnect: 1000
 
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:309: WebSocketDisconnect
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:309: WebSocketDisconnect
 =============================== warnings summary ===============================
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.26')
 
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_ws_router.py::test_router - starlette.websockets.WebSocketD...
-======================== 1 failed, 7 warnings in 0.73s =========================
+======================== 1 failed, 7 warnings in 0.89s =========================
 RUN EVERY COMMAND
 1
 pytest tests/test_ws_router.py::test_router
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -81,19 +81,19 @@ ______________________________ test_prefix_router ______________________________
 
 tests/test_ws_router.py:51: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:436: in websocket_connect
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:436: in websocket_connect
     super().request("GET", url, **kwargs)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:530: in request
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:530: in request
     resp = self.send(prep, **send_kwargs)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:643: in send
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/requests/sessions.py:643: in send
     r = adapter.send(request, **kwargs)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:140: in send
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:140: in send
     session = WebSocketTestSession(self.app, scope)
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:273: in __init__
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:273: in __init__
     self._raise_on_close(message)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <starlette.testclient.WebSocketTestSession object at 0x7f25f7fb8a90>
+self = <starlette.testclient.WebSocketTestSession object at 0x7f178a692c70>
 message = {'code': 1000, 'type': 'websocket.close'}
 
     def _raise_on_close(self, message: Message) -> None:
@@ -101,22 +101,22 @@ message = {'code': 1000, 'type': 'websocket.close'}
 >           raise WebSocketDisconnect(message.get("code", 1000))
 E           starlette.websockets.WebSocketDisconnect: 1000
 
-../../.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:309: WebSocketDisconnect
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/starlette/testclient.py:309: WebSocketDisconnect
 =============================== warnings summary ===============================
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5
-  /home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5
+  /opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/pydantic/version.py:5: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     VERSION = StrictVersion('0.26')
 
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/235ca55b977721137e676add71d64e98/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_ws_router.py::test_prefix_router - starlette.websockets.Web...
-======================== 1 failed, 7 warnings in 0.63s =========================
+======================== 1 failed, 7 warnings in 0.76s =========================

@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/luigi
+rootdir: /home/user/BugsInPy/temp/projects/luigi
 plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
@@ -29,8 +29,8 @@ self = <scheduler_test.SchedulerTest testMethod=test_worker_prune_after_init>
 test/scheduler_test.py:108: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <luigi.scheduler.Worker object at 0x7fe5fbc00760>
-config = <scheduler_test.SchedulerTest.test_worker_prune_after_init.<locals>.TmpCfg object at 0x7fe5fbc004f0>
+self = <luigi.scheduler.Worker object at 0x7f09ff3086d0>
+config = <scheduler_test.SchedulerTest.test_worker_prune_after_init.<locals>.TmpCfg object at 0x7f09ff308700>
 
     def prune(self, config):
         # Delete workers that haven't said anything for a while (probably killed)

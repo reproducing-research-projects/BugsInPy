@@ -63,11 +63,11 @@ Cannot parse: 11:4:     ,
 FAIL: test_comments7 (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/6ba0b304d0c7093a86682761b7bcdeb8/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/6ba0b304d0c7093a86682761b7bcdeb8/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 395, in test_comments7
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 395, in test_comments7
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 159, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 159, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: 'from[181 chars]ES,\n)\n\n\nfrom .config import (\n    Any,\n [179 chars]n)\n' != 'from[181 chars]ES,\n    ,\n)\n\n\nfrom .config import (\n    [192 chars]n)\n'
   from .config import (
@@ -101,6 +101,6 @@ AssertionError: 'from[181 chars]ES,\n)\n\n\nfrom .config import (\n    Any,\n [1
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.017s
+Ran 1 test in 0.020s
 
 FAILED (failures=1)

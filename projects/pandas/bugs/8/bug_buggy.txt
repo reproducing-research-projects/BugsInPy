@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/pandas, inifile: setup.cfg
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
 plugins: hypothesis-5.15.1
 collected 10 items
 
@@ -14,7 +14,7 @@ pandas/tests/frame/methods/test_replace.py FF...FF...                    [100%]
 =================================== FAILURES ===================================
 ______ TestDataFrameReplace.test_replace_no_replacement_dtypes[nan-float] ______
 
-self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7fbf4cfa4f40>
+self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7f537441c0d0>
 dtype = 'float', value = nan
 
     @pytest.mark.parametrize("dtype", ["float", "float64", "int64", "Int64", "boolean"])
@@ -33,7 +33,7 @@ E       [right]: float64
 pandas/tests/frame/methods/test_replace.py:1390: AssertionError
 _____ TestDataFrameReplace.test_replace_no_replacement_dtypes[nan-float64] _____
 
-self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7fbf5132ce80>
+self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7f536f5c0dc0>
 dtype = 'float64', value = nan
 
     @pytest.mark.parametrize("dtype", ["float", "float64", "int64", "Int64", "boolean"])
@@ -52,7 +52,7 @@ E       [right]: float64
 pandas/tests/frame/methods/test_replace.py:1390: AssertionError
 ____ TestDataFrameReplace.test_replace_no_replacement_dtypes[value1-float] _____
 
-self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7fbf51314d30>
+self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7f53743ea2b0>
 dtype = 'float', value = <NA>
 
     @pytest.mark.parametrize("dtype", ["float", "float64", "int64", "Int64", "boolean"])
@@ -71,7 +71,7 @@ E       [right]: float64
 pandas/tests/frame/methods/test_replace.py:1390: AssertionError
 ___ TestDataFrameReplace.test_replace_no_replacement_dtypes[value1-float64] ____
 
-self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7fbf512ff400>
+self = <pandas.tests.frame.methods.test_replace.TestDataFrameReplace object at 0x7f536f515dc0>
 dtype = 'float64', value = <NA>
 
     @pytest.mark.parametrize("dtype", ["float", "float64", "int64", "Int64", "boolean"])
@@ -93,4 +93,4 @@ FAILED pandas/tests/frame/methods/test_replace.py::TestDataFrameReplace::test_re
 FAILED pandas/tests/frame/methods/test_replace.py::TestDataFrameReplace::test_replace_no_replacement_dtypes[nan-float64]
 FAILED pandas/tests/frame/methods/test_replace.py::TestDataFrameReplace::test_replace_no_replacement_dtypes[value1-float]
 FAILED pandas/tests/frame/methods/test_replace.py::TestDataFrameReplace::test_replace_no_replacement_dtypes[value1-float64]
-========================= 4 failed, 6 passed in 0.25s ==========================
+========================= 4 failed, 6 passed in 0.24s ==========================

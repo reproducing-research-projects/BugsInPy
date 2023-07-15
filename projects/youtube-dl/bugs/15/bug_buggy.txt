@@ -7,13 +7,13 @@ RUN EVERY COMMAND
 ERROR: test_js_to_json_edgecases (test.test_utils.TestUtil)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/youtube-dl/test/test_utils.py", line 892, in test_js_to_json_edgecases
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/test/test_utils.py", line 892, in test_js_to_json_edgecases
     self.assertEqual(json.loads(on), {'42': 42.0})
-  File "/home/user/.conda/envs/7c82e6e79bef089fa6b92454d0dfbaa4/lib/python3.7/json/__init__.py", line 348, in loads
+  File "/opt/conda/envs/7c82e6e79bef089fa6b92454d0dfbaa4/lib/python3.7/json/__init__.py", line 348, in loads
     return _default_decoder.decode(s)
-  File "/home/user/.conda/envs/7c82e6e79bef089fa6b92454d0dfbaa4/lib/python3.7/json/decoder.py", line 337, in decode
+  File "/opt/conda/envs/7c82e6e79bef089fa6b92454d0dfbaa4/lib/python3.7/json/decoder.py", line 337, in decode
     obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/home/user/.conda/envs/7c82e6e79bef089fa6b92454d0dfbaa4/lib/python3.7/json/decoder.py", line 353, in raw_decode
+  File "/opt/conda/envs/7c82e6e79bef089fa6b92454d0dfbaa4/lib/python3.7/json/decoder.py", line 353, in raw_decode
     obj, end = self.scan_once(s, idx)
 json.decoder.JSONDecodeError: Expecting ',' delimiter: line 1 column 10 (char 9)
 
@@ -21,7 +21,7 @@ json.decoder.JSONDecodeError: Expecting ',' delimiter: line 1 column 10 (char 9)
 FAIL: test_js_to_json_realworld (test.test_utils.TestUtil)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/youtube-dl/test/test_utils.py", line 818, in test_js_to_json_realworld
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/test/test_utils.py", line 818, in test_js_to_json_realworld
     self.assertEqual(js_to_json(inp), '''{"segments": [{"offset":-3.885780586188048e-16,"duration":39.75000000000001}]}''')
 AssertionError: '{"se[14 chars]fset":-3.885780586188048"e"-16,"duration":39.75000000000001}]}' != '{"se[14 chars]fset":-3.885780586188048e-16,"duration":39.75000000000001}]}'
 - {"segments": [{"offset":-3.885780586188048"e"-16,"duration":39.75000000000001}]}
@@ -30,6 +30,6 @@ AssertionError: '{"se[14 chars]fset":-3.885780586188048"e"-16,"duration":39.7500
 
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.007s
+Ran 2 tests in 0.003s
 
 FAILED (failures=1, errors=1)

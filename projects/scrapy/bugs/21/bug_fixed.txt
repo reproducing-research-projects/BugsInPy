@@ -6,6 +6,6 @@ RUN EVERY COMMAND
 Error downloading <GET http://site.local/robots.txt>: DNS lookup failed: Robotstxt address not found.
 twisted.internet.error.DNSLookupError: DNS lookup failed: Robotstxt address not found.
 ----------------------------------------------------------------------
-Ran 1 test in 0.028s
+Ran 1 test in 0.003s
 
 OK

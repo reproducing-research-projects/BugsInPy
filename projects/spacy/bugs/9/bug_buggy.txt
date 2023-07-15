@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.7.7, pytest-4.0.2, py-1.11.0, pluggy-1.0.0
-rootdir: /home/user/projects/spacy, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/spacy, inifile:
 plugins: timeout-1.4.2
 collected 1 item
 
@@ -24,4 +24,4 @@ ______________________ test_tagger_warns_no_lemma_lookups ______________________
 E           Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) was emitted. The list of emitted warnings is: [].
 
 spacy/tests/pipeline/test_tagger.py:15: Failed
-=========================== 1 failed in 0.30 seconds ===========================
+=========================== 1 failed in 0.54 seconds ===========================

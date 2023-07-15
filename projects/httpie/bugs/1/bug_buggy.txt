@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.7.3, pytest-3.2.1, py-1.8.1, pluggy-0.4.0
-rootdir: /home/user/projects/httpie, inifile: pytest.ini
+rootdir: /home/user/BugsInPy/temp/projects/httpie, inifile: pytest.ini
 plugins: httpbin-1.0.0
 collected 11 items
 
@@ -14,7 +14,7 @@ tests/test_downloads.py FFFFFFFFFFF
 =================================== FAILURES ===================================
 __________ TestDownloadUtils.test_unique_filename[foo.bar-0-foo.bar] ___________
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e2b6898>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba5257e48>,)
 keywargs = {'expected': 'foo.bar', 'orig_name': 'foo.bar', 'unique_on_attempt': 0}
 
     @wraps(func)
@@ -23,17 +23,17 @@ keywargs = {'expected': 'foo.bar', 'orig_name': 'foo.bar', 'unique_on_attempt': 
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -56,12 +56,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 _________ TestDownloadUtils.test_unique_filename[foo.bar-1-foo.bar-1] __________
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e2b6860>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2d7dba8>,)
 keywargs = {'expected': 'foo.bar-1', 'orig_name': 'foo.bar', 'unique_on_attempt': 1}
 
     @wraps(func)
@@ -70,17 +70,17 @@ keywargs = {'expected': 'foo.bar-1', 'orig_name': 'foo.bar', 'unique_on_attempt'
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -103,12 +103,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 ________ TestDownloadUtils.test_unique_filename[foo.bar-10-foo.bar-10] _________
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e70d198>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2e8c080>,)
 keywargs = {'expected': 'foo.bar-10', 'orig_name': 'foo.bar', 'unique_on_attempt': 10}
 
     @wraps(func)
@@ -117,17 +117,17 @@ keywargs = {'expected': 'foo.bar-10', 'orig_name': 'foo.bar', 'unique_on_attempt
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -150,12 +150,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 __ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-0-AAAAAAAAAA] ___
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e6e3ba8>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2c69f98>,)
 keywargs = {'expected': 'AAAAAAAAAA', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 0}
 
     @wraps(func)
@@ -164,17 +164,17 @@ keywargs = {'expected': 'AAAAAAAAAA', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'uniq
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -197,12 +197,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 __ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-1-AAAAAAAA-1] ___
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e6b67f0>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2ae1828>,)
 keywargs = {'expected': 'AAAAAAAA-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 1}
 
     @wraps(func)
@@ -211,17 +211,17 @@ keywargs = {'expected': 'AAAAAAAA-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'uniq
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -244,12 +244,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 __ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA-10-AAAAAAA-10] __
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e6e3da0>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2da8d30>,)
 keywargs = {'expected': 'AAAAAAA-10', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 10}
 
     @wraps(func)
@@ -258,17 +258,17 @@ keywargs = {'expected': 'AAAAAAA-10', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA', 'uniq
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -291,12 +291,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 _ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-0-AAAAAA.txt] _
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e58ea58>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2b2b630>,)
 keywargs = {'expected': 'AAAAAA.txt', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', 'unique_on_attempt': 0}
 
     @wraps(func)
@@ -305,17 +305,17 @@ keywargs = {'expected': 'AAAAAA.txt', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', '
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -338,12 +338,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 _ TestDownloadUtils.test_unique_filename[AAAAAAAAAAAAAAAAAAAA.txt-1-AAAA.txt-1] _
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e809048>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2da8898>,)
 keywargs = {'expected': 'AAAA.txt-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', 'unique_on_attempt': 1}
 
     @wraps(func)
@@ -352,17 +352,17 @@ keywargs = {'expected': 'AAAA.txt-1', 'orig_name': 'AAAAAAAAAAAAAAAAAAAA.txt', '
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -385,12 +385,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 _ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-0-foo.AAAAAA] _
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e6e3978>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba27ff080>,)
 keywargs = {'expected': 'foo.AAAAAA', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 0}
 
     @wraps(func)
@@ -399,17 +399,17 @@ keywargs = {'expected': 'foo.AAAAAA', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', '
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -432,12 +432,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 _ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-1-foo.AAAA-1] _
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e18f630>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2b3e828>,)
 keywargs = {'expected': 'foo.AAAA-1', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 1}
 
     @wraps(func)
@@ -446,17 +446,17 @@ keywargs = {'expected': 'foo.AAAA-1', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', '
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -479,12 +479,12 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
 _ TestDownloadUtils.test_unique_filename[foo.AAAAAAAAAAAAAAAAAAAA-10-foo.AAA-10] _
 
-args = (<test_downloads.TestDownloadUtils object at 0x7f4e2e24fa20>,)
+args = (<test_downloads.TestDownloadUtils object at 0x7f1ba2818518>,)
 keywargs = {'expected': 'foo.AAA-10', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', 'unique_on_attempt': 10}
 
     @wraps(func)
@@ -493,17 +493,17 @@ keywargs = {'expected': 'foo.AAA-10', 'orig_name': 'foo.AAAAAAAAAAAAAAAAAAAA', '
                                     args,
 >                                   keywargs) as (newargs, newkeywargs):
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1368: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/contextlib.py:112: in __enter__
     return next(self.gen)
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1334: in decoration_helper
     arg = patching.__enter__()
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1437: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <mock.mock._patch object at 0x7f4e2e9707b8>
+self = <mock.mock._patch object at 0x7f1ba2fb2390>
 
     def get_original(self):
         target = self.getter()
@@ -526,7 +526,7 @@ self = <mock.mock._patch object at 0x7f4e2e9707b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'httpie.downloads' from '/home/user/.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
+E           AttributeError: <module 'httpie.downloads' from '/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py'> does not have the attribute 'get_filename_max_length'
 
-../../.conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
-========================== 11 failed in 5.10 seconds ===========================
+/opt/conda/envs/f2ed64849367e3ce98d2d71a61cf95ea/lib/python3.7/site-packages/mock/mock.py:1411: AttributeError
+========================== 11 failed in 5.35 seconds ===========================

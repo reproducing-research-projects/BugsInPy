@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.1, pytest-7.3.1, pluggy-1.0.0
-rootdir: /home/user/projects/matplotlib
+rootdir: /home/user/BugsInPy/temp/projects/matplotlib
 configfile: pytest.ini
 collected 3 items
 
@@ -49,7 +49,7 @@ E           Max relative difference: 0.7
 E            x: array([-0.15,  0.15])
 E            y: array([-0.5,  0.5])
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
 ------------------------------ Captured log setup ------------------------------
 WARNING  matplotlib.testing:__init__.py:40 Could not set locale to English/United States. Some date-related tests may fail.
 ___________________________ test_unautoscaley[None] ____________________________
@@ -89,7 +89,7 @@ E           Max relative difference: 0.7
 E            x: array([-0.15,  0.15])
 E            y: array([-0.5,  0.5])
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
 ------------------------------ Captured log setup ------------------------------
 WARNING  matplotlib.testing:__init__.py:40 Could not set locale to English/United States. Some date-related tests may fail.
 =============================== warnings summary ===============================
@@ -98,29 +98,29 @@ lib/matplotlib/__init__.py:169
 lib/matplotlib/__init__.py:169
 lib/matplotlib/__init__.py:169
 lib/matplotlib/__init__.py:169
-  /home/user/projects/matplotlib/lib/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     if LooseVersion(module.__version__) < minver:
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-  /home/user/.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     other = LooseVersion(other)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED lib/matplotlib/tests/test_axes.py::test_unautoscaley[True] - Assertion...
 FAILED lib/matplotlib/tests/test_axes.py::test_unautoscaley[None] - Assertion...
-=================== 2 failed, 1 passed, 10 warnings in 3.71s ===================
+=================== 2 failed, 1 passed, 10 warnings in 5.01s ===================
 RUN EVERY COMMAND
 1
 pytest lib/matplotlib/tests/test_axes.py::test_unautoscaley
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.1, pytest-7.3.1, pluggy-1.0.0
-rootdir: /home/user/projects/matplotlib
+rootdir: /home/user/BugsInPy/temp/projects/matplotlib
 configfile: pytest.ini
 collected 3 items
 
@@ -164,7 +164,7 @@ E           Max relative difference: 0.7
 E            x: array([-0.15,  0.15])
 E            y: array([-0.5,  0.5])
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
 ------------------------------ Captured log setup ------------------------------
 WARNING  matplotlib.testing:__init__.py:40 Could not set locale to English/United States. Some date-related tests may fail.
 ___________________________ test_unautoscalex[None] ____________________________
@@ -204,7 +204,7 @@ E           Max relative difference: 0.7
 E            x: array([-0.15,  0.15])
 E            y: array([-0.5,  0.5])
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/contextlib.py:75: AssertionError
 ------------------------------ Captured log setup ------------------------------
 WARNING  matplotlib.testing:__init__.py:40 Could not set locale to English/United States. Some date-related tests may fail.
 =============================== warnings summary ===============================
@@ -213,19 +213,19 @@ lib/matplotlib/__init__.py:169
 lib/matplotlib/__init__.py:169
 lib/matplotlib/__init__.py:169
 lib/matplotlib/__init__.py:169
-  /home/user/projects/matplotlib/lib/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     if LooseVersion(module.__version__) < minver:
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-  /home/user/.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     other = LooseVersion(other)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED lib/matplotlib/tests/test_axes.py::test_unautoscalex[True] - Assertion...
 FAILED lib/matplotlib/tests/test_axes.py::test_unautoscalex[None] - Assertion...
-=================== 2 failed, 1 passed, 10 warnings in 2.39s ===================
+=================== 2 failed, 1 passed, 10 warnings in 3.69s ===================

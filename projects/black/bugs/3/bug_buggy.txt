@@ -7,11 +7,11 @@ RUN EVERY COMMAND
 FAIL: test_invalid_config_return_code (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/black/tests/test_black.py", line 1654, in test_invalid_config_return_code
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 1654, in test_invalid_config_return_code
     self.invokeBlack(args, exit_code=2, ignore_config=False)
-  File "/home/user/projects/black/tests/test_black.py", line 162, in invokeBlack
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 162, in invokeBlack
     self.assertEqual(result.exit_code, exit_code, msg=runner.stderr_bytes.decode())
-AssertionError: 1 != 2 : Error: Could not open file /tmp/blk__2cobqj8.log: Error reading configuration file: [Errno 2] No such file or directory: '/tmp/blk__2cobqj8.log'
+AssertionError: 1 != 2 : Error: Could not open file /tmp/blk_ujgrsiio.log: Error reading configuration file: [Errno 2] No such file or directory: '/tmp/blk_ujgrsiio.log'
 
 
 ----------------------------------------------------------------------

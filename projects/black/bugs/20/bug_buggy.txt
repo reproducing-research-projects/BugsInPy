@@ -7,13 +7,13 @@ RUN EVERY COMMAND
 FAIL: test_expression_diff (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/black/tests/test_black.py", line 215, in test_expression_diff
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 215, in test_expression_diff
     self.assertEqual(expected, actual, msg)
-AssertionError: '--- <stdin>  (original)\n+++ <stdin>  (format[9503 chars]ER\n' != '--- blk_05e44fv6.log  (original)\n+++ blk_05e[9521 chars]ER\n'
+AssertionError: '--- <stdin>  (original)\n+++ <stdin>  (format[9503 chars]ER\n' != '--- blk_hz5wmere.log  (original)\n+++ blk_hz5[9521 chars]ER\n'
 - --- <stdin>  (original)
 - +++ <stdin>  (formatted)
-+ --- blk_05e44fv6.log  (original)
-+ +++ blk_05e44fv6.log  (formatted)
++ --- blk_hz5wmere.log  (original)
++ +++ blk_hz5wmere.log  (formatted)
   @@ -1,8 +1,8 @@
    ...
   -'some_string'
@@ -310,9 +310,9 @@ AssertionError: '--- <stdin>  (original)\n+++ <stdin>  (format[9503 chars]ER\n' 
   +
    last_call()
    # standalone comment at ENDMARKER
- : Expected diff isn't equal to the actual. If you made changes to expression.py and this is an anticipated difference, overwrite tests/expression.diff with /tmp/blk_voi0najn.log
+ : Expected diff isn't equal to the actual. If you made changes to expression.py and this is an anticipated difference, overwrite tests/expression.diff with /tmp/blk_046rboir.log
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.089s
+Ran 1 test in 0.128s
 
 FAILED (failures=1)

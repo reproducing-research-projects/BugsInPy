@@ -5,767 +5,147 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
-rootdir: /home/user/projects/ansible, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+plugins: mock-1.2
 collected 54 items
 
-test/units/module_utils/test_distribution_version.py EEEEEEEEEEEEEEEEEEE [ 35%]
-EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                                      [100%]
+test/units/module_utils/test_distribution_version.py ................... [ 35%]
+..........F........................                                      [100%]
 
-==================================== ERRORS ====================================
-_____ ERROR at setup of test_distribution_version[stdin0-CentOS 7.2.1511] ______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
+=================================== FAILURES ===================================
+________________ test_distribution_version[stdin29-Kali 2020.2] ________________
 
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin1-CentOS 6.7] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
+am = <ansible.module_utils.basic.AnsibleModule object at 0x7fd48ca13978>
+mocker = <pytest_mock.MockFixture object at 0x7fd48cba85f8>
+testcase = {'distro': {'codename': 'kali-rolling', 'id': 'kali', 'lsb_release_info': {}, 'name': 'Kali GNU/Linux Rolling', ...}, ....org/"\nBUG_REPORT_URL="https://bugs.kali.org/"'}, 'name': 'Kali 2020.2', 'platform.dist': ['kali', '2020.2', ''], ...}
 
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin2-RedHat 7.7] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
+    @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
+    def test_distribution_version(am, mocker, testcase):
+        """tests the distribution parsing code of the Facts class
+    
+        testsets have
+        * a name (for output/debugging only)
+        * input files that are faked
+          * those should be complete and also include "irrelevant" files that might be mistaken as coming from other distributions
+          * all files that are not listed here are assumed to not exist at all
+        * the output of ansible.module_utils.distro.linux_distribution() [called platform.dist() for historical reasons]
+        * results for the ansible variables distribution* and os_family
+    
+        """
+    
+        # prepare some mock functions to get the testdata in
+        def mock_get_file_content(fname, default=None, strip=True):
+            """give fake content if it exists, otherwise pretend the file is empty"""
+            data = default
+            if fname in testcase['input']:
+                # for debugging
+                print('faked %s for %s' % (fname, testcase['name']))
+                data = testcase['input'][fname].strip()
+            if strip and data is not None:
+                data = data.strip()
+            return data
+    
+        def mock_get_uname(am, flags):
+            if '-v' in flags:
+                return testcase.get('uname_v', None)
+            elif '-r' in flags:
+                return testcase.get('uname_r', None)
+            else:
+                return None
+    
+        def mock_file_exists(fname, allow_empty=False):
+            if fname not in testcase['input']:
+                return False
+    
+            if allow_empty:
+                return True
+            return bool(len(testcase['input'][fname]))
+    
+        def mock_platform_system():
+            return testcase.get('platform.system', 'Linux')
+    
+        def mock_platform_release():
+            return testcase.get('platform.release', '')
+    
+        def mock_platform_version():
+            return testcase.get('platform.version', '')
+    
+        def mock_distro_name():
+            return testcase['distro']['name']
+    
+        def mock_distro_id():
+            return testcase['distro']['id']
+    
+        def mock_distro_version(best=False):
+            if best:
+                return testcase['distro']['version_best']
+            return testcase['distro']['version']
+    
+        def mock_distro_codename():
+            return testcase['distro']['codename']
+    
+        def mock_distro_os_release_info():
+            return testcase['distro']['os_release_info']
+    
+        def mock_distro_lsb_release_info():
+            return testcase['distro']['lsb_release_info']
+    
+        def mock_open(filename, mode='r'):
+            if filename in testcase['input']:
+                file_object = mocker.mock_open(read_data=testcase['input'][filename]).return_value
+                file_object.__iter__.return_value = testcase['input'][filename].splitlines(True)
+            else:
+                file_object = real_open(filename, mode)
+            return file_object
+    
+        def mock_os_path_is_file(filename):
+            if filename in testcase['input']:
+                return True
+            return False
+    
+        mocker.patch('ansible.module_utils.facts.system.distribution.get_file_content', mock_get_file_content)
+        mocker.patch('ansible.module_utils.facts.system.distribution.get_uname', mock_get_uname)
+        mocker.patch('ansible.module_utils.facts.system.distribution._file_exists', mock_file_exists)
+        mocker.patch('ansible.module_utils.distro.name', mock_distro_name)
+        mocker.patch('ansible.module_utils.distro.id', mock_distro_id)
+        mocker.patch('ansible.module_utils.distro.version', mock_distro_version)
+        mocker.patch('ansible.module_utils.distro.codename', mock_distro_codename)
+        mocker.patch(
+            'ansible.module_utils.common.sys_info.distro.os_release_info',
+            mock_distro_os_release_info)
+        mocker.patch(
+            'ansible.module_utils.common.sys_info.distro.lsb_release_info',
+            mock_distro_lsb_release_info)
+        mocker.patch('os.path.isfile', mock_os_path_is_file)
+        mocker.patch('platform.system', mock_platform_system)
+        mocker.patch('platform.release', mock_platform_release)
+        mocker.patch('platform.version', mock_platform_version)
+    
+        real_open = builtins.open
+        mocker.patch.object(builtins, 'open', new=mock_open)
+    
+        # run Facts()
+        distro_collector = DistributionFactCollector()
+        generated_facts = distro_collector.collect(am)
+    
+        # compare with the expected output
+    
+        # testcase['result'] has a list of variables and values it expects Facts() to set
+        for key, val in testcase['result'].items():
+            assert key in generated_facts
+            msg = 'Comparing value of %s on %s, should: %s, is: %s' %\
+                (key, testcase['name'], val, generated_facts[key])
+>           assert generated_facts[key] == val, msg
+E           AssertionError: Comparing value of distribution on Kali 2020.2, should: Kali, is: Kali GNU/Linux
+E           assert 'Kali GNU/Linux' == 'Kali'
+E             - Kali GNU/Linux
+E             + Kali
 
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin3-RedHat 7.2] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin4-RedHat 6.7] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin5-Virtuozzo 7.3] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-____ ERROR at setup of test_distribution_version[stdin6-openSUSE Leap 42.1] ____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-____ ERROR at setup of test_distribution_version[stdin7-openSUSE Leap 15.1] ____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin8-openSUSE 13.2] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_ ERROR at setup of test_distribution_version[stdin9-openSUSE Tumbleweed 20160917] _
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-___ ERROR at setup of test_distribution_version[stdin10-openSUSE Leap 15.0] ____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin11-SLES 11.3] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin12-SLES 11.4] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin13-SLES 12 SP0] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin14-SLES 12 SP1] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_____ ERROR at setup of test_distribution_version[stdin15-SLES4SAP 12 SP2] _____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_____ ERROR at setup of test_distribution_version[stdin16-SLES4SAP 12 SP3] _____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin17-Debian 10] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-___ ERROR at setup of test_distribution_version[stdin18-Debian stretch/sid] ____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin19-Debian 7.9] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin20-SteamOS 2.0] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_________ ERROR at setup of test_distribution_version[stdin21-Devuan] __________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_________ ERROR at setup of test_distribution_version[stdin22-Devuan] __________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin23-Ubuntu 18.04] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin24-Ubuntu 16.04] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-___ ERROR at setup of test_distribution_version[stdin25-Ubuntu 10.04 guess] ____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin26-Ubuntu 14.04] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin27-Ubuntu 12.04] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin28-Kali 2019.1] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin29-Kali 2020.2] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_____ ERROR at setup of test_distribution_version[stdin30-KDE neon 16.04] ______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_________ ERROR at setup of test_distribution_version[stdin31-Core OS] _________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-___ ERROR at setup of test_distribution_version[stdin32-SmartOS Global Zone] ___
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin33-SmartOS Zone] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin34-OpenIndiana] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_________ ERROR at setup of test_distribution_version[stdin35-OmniOS] __________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin36-Nexenta 3] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin37-Nexenta 4] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin38-Solaris 10] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin39-Solaris 11] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin40-Solaris 11.3] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin41-Solaris 11.4] _______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_______ ERROR at setup of test_distribution_version[stdin42-Solaris 10] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin43-Fedora 31] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin44-Fedora 22] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-________ ERROR at setup of test_distribution_version[stdin45-Fedora 25] ________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_________ ERROR at setup of test_distribution_version[stdin46-SMGL NA] _________
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-____ ERROR at setup of test_distribution_version[stdin47-Archlinux rolling] ____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-______ ERROR at setup of test_distribution_version[stdin48-Arch Linux NA] ______
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-____ ERROR at setup of test_distribution_version[stdin49-ClearLinux 26580] _____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_ ERROR at setup of test_distribution_version[stdin50-Arch Linux no arch-release NA] _
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-___ ERROR at setup of test_distribution_version[stdin51-Cumulus Linux 3.7.3] ___
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-___ ERROR at setup of test_distribution_version[stdin52-Cumulus Linux 2.5.4] ___
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-_____ ERROR at setup of test_distribution_version[stdin53-Linux Mint 18.2] _____
-file /home/user/projects/ansible/test/units/module_utils/test_distribution_version.py, line 1849
-  @pytest.mark.parametrize("stdin, testcase", product([{}], TESTSETS), ids=lambda x: x.get('name'), indirect=['stdin'])
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 49
-  @pytest.fixture
-  def am(stdin, request):
-file /home/user/projects/ansible/test/units/module_utils/conftest.py, line 16
-  @pytest.fixture
-  def stdin(mocker, request):
-E       fixture 'mocker' not found
->       available fixtures: am, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, record_xml_attribute, record_xml_property, recwarn, stdin, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
->       use 'pytest --fixtures [testpath]' for help on them.
-
-/home/user/projects/ansible/test/units/module_utils/conftest.py:16
-=========================== 54 error in 1.14 seconds ===========================
+test/units/module_utils/test_distribution_version.py:1965: AssertionError
+----------------------------- Captured stdout call -----------------------------
+faked /etc/os-release for Kali 2020.2
+faked /etc/os-release for Kali 2020.2
+faked /etc/os-release for Kali 2020.2
+faked /usr/lib/os-release for Kali 2020.2
+faked /etc/os-release for Kali 2020.2
+===================== 1 failed, 53 passed in 0.88 seconds ======================

@@ -5,16 +5,16 @@ RUN EVERY COMMAND
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.017s
+Ran 1 test in 0.028s
 
 OK
 RUN EVERY COMMAND
 1
 python -m unittest -q tornado.test.web_test.StaticFileTest.test_static_with_range_neg_past_start
 
-WARNING:tornado.access:416 HEAD /static/robots.txt (127.0.0.1) 17.71ms
+WARNING:tornado.access:416 HEAD /static/robots.txt (127.0.0.1) 5.36ms
 WARNING:tornado.access:416 GET /static/robots.txt (127.0.0.1) 0.41ms
 ----------------------------------------------------------------------
-Ran 1 test in 0.055s
+Ran 1 test in 0.041s
 
 OK

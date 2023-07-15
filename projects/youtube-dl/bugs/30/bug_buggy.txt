@@ -7,19 +7,19 @@ RUN EVERY COMMAND
 ERROR: test_format_filtering (test.test_YoutubeDL.TestFormatSelection)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/youtube-dl/test/test_YoutubeDL.py", line 367, in test_format_filtering
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/test/test_YoutubeDL.py", line 367, in test_format_filtering
     ydl.process_ie_result(info_dict)
-  File "/home/user/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 713, in process_ie_result
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 713, in process_ie_result
     return self.process_video_result(ie_result, download=download)
-  File "/home/user/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 1272, in process_video_result
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 1272, in process_video_result
     formats_to_download = list(format_selector(formats))
-  File "/home/user/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 990, in selector_function
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 990, in selector_function
     for format in f(formats):
-  File "/home/user/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 1021, in selector_function
+  File "/home/user/BugsInPy/temp/projects/youtube-dl/youtube_dl/YoutubeDL.py", line 1021, in selector_function
     yield formats[format_idx]
 IndexError: list index out of range
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.188s
+Ran 1 test in 0.159s
 
 FAILED (errors=1)

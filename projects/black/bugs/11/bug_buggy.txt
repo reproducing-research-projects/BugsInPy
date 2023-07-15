@@ -500,11 +500,11 @@ file_input
 FAIL: test_comments6 (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/523f2d89d53ebeb9a9749b027281b908/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/523f2d89d53ebeb9a9749b027281b908/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 369, in test_comments6
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 369, in test_comments6
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 156, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 156, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: 'from[32 chars]ef f(\n    a,  # type: int\n):\n    pass\n\n\n[1362 chars]nt\n' != 'from[32 chars]ef f(a,):  # type: int\n    pass\n\n\n# test t[1330 chars]nt\n'
   from typing import Any, Tuple
@@ -580,6 +580,6 @@ AssertionError: 'from[32 chars]ef f(\n    a,  # type: int\n):\n    pass\n\n\n[13
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.053s
+Ran 1 test in 0.087s
 
 FAILED (failures=1)

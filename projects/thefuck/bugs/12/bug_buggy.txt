@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 3 items
 
@@ -16,7 +16,7 @@ tests/rules/test_no_command.py FFF                                       [100%]
 =================================== FAILURES ===================================
 ________________ test_not_match[qweqwe-qweqwe: not found-None] _________________
 
-mocker = <pytest_mock.plugin.MockFixture object at 0x7fd35f5b02e8>
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f06ca32f0f0>
 script = 'qweqwe', stderr = 'qweqwe: not found', which = None
 
     @pytest.mark.usefixtures('no_memoize')
@@ -29,17 +29,17 @@ script = 'qweqwe', stderr = 'qweqwe: not found', which = None
 
 tests/rules/test_no_command.py:36: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
     return self._start_patch(self.mock_module.patch, *args, **kwargs)
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
     mocked = p.start()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
     result = self.__enter__()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <unittest.mock._patch object at 0x7fd35f5c2f28>
+self = <unittest.mock._patch object at 0x7f06ca30ae10>
 
     def get_original(self):
         target = self.getter()
@@ -62,12 +62,12 @@ self = <unittest.mock._patch object at 0x7fd35f5c2f28>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
+E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
 __________________ test_not_match[vom file.py-some text-None] __________________
 
-mocker = <pytest_mock.plugin.MockFixture object at 0x7fd35f39f978>
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f06ca3122b0>
 script = 'vom file.py', stderr = 'some text', which = None
 
     @pytest.mark.usefixtures('no_memoize')
@@ -80,17 +80,17 @@ script = 'vom file.py', stderr = 'some text', which = None
 
 tests/rules/test_no_command.py:36: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
     return self._start_patch(self.mock_module.patch, *args, **kwargs)
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
     mocked = p.start()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
     result = self.__enter__()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <unittest.mock._patch object at 0x7fd35effdda0>
+self = <unittest.mock._patch object at 0x7f06ca1891d0>
 
     def get_original(self):
         target = self.getter()
@@ -113,12 +113,12 @@ self = <unittest.mock._patch object at 0x7fd35effdda0>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
+E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
 ________________ test_not_match[vim file.py-vim: not found-vim] ________________
 
-mocker = <pytest_mock.plugin.MockFixture object at 0x7fd35f323198>
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f06ca1e2390>
 script = 'vim file.py', stderr = 'vim: not found', which = 'vim'
 
     @pytest.mark.usefixtures('no_memoize')
@@ -131,17 +131,17 @@ script = 'vim file.py', stderr = 'vim: not found', which = 'vim'
 
 tests/rules/test_no_command.py:36: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
     return self._start_patch(self.mock_module.patch, *args, **kwargs)
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
     mocked = p.start()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
     result = self.__enter__()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <unittest.mock._patch object at 0x7fd35f322860>
+self = <unittest.mock._patch object at 0x7f06ca2125f8>
 
     def get_original(self):
         target = self.getter()
@@ -164,10 +164,10 @@ self = <unittest.mock._patch object at 0x7fd35f322860>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
+E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
-=========================== 3 failed in 0.61 seconds ===========================
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
+=========================== 3 failed in 0.62 seconds ===========================
 RUN EVERY COMMAND
 1
 pytest tests/rules/test_no_command.py::test_not_match
@@ -175,7 +175,7 @@ pytest tests/rules/test_no_command.py::test_not_match
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 3 items
 
@@ -184,7 +184,7 @@ tests/rules/test_no_command.py FFF                                       [100%]
 =================================== FAILURES ===================================
 ____________________ test_match[vom file.py-vom: not found] ____________________
 
-mocker = <pytest_mock.plugin.MockFixture object at 0x7f09799a1748>
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f58b8023588>
 script = 'vom file.py', stderr = 'vom: not found'
 
     @pytest.mark.usefixtures('no_memoize')
@@ -197,17 +197,17 @@ script = 'vom file.py', stderr = 'vom: not found'
 
 tests/rules/test_no_command.py:25: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
     return self._start_patch(self.mock_module.patch, *args, **kwargs)
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
     mocked = p.start()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
     result = self.__enter__()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <unittest.mock._patch object at 0x7f09798d8940>
+self = <unittest.mock._patch object at 0x7f58b7f5ec18>
 
     def get_original(self):
         target = self.getter()
@@ -230,12 +230,12 @@ self = <unittest.mock._patch object at 0x7f09798d8940>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
+E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
 ______________________ test_match[fucck-fucck: not found] ______________________
 
-mocker = <pytest_mock.plugin.MockFixture object at 0x7f097984a320>
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f58b7b2a470>
 script = 'fucck', stderr = 'fucck: not found'
 
     @pytest.mark.usefixtures('no_memoize')
@@ -248,17 +248,17 @@ script = 'fucck', stderr = 'fucck: not found'
 
 tests/rules/test_no_command.py:25: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
     return self._start_patch(self.mock_module.patch, *args, **kwargs)
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
     mocked = p.start()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
     result = self.__enter__()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <unittest.mock._patch object at 0x7f097986e7b8>
+self = <unittest.mock._patch object at 0x7f58b7ef0160>
 
     def get_original(self):
         target = self.getter()
@@ -281,12 +281,12 @@ self = <unittest.mock._patch object at 0x7f097986e7b8>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
+E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
 ________________ test_match[got commit-got: command not found] _________________
 
-mocker = <pytest_mock.plugin.MockFixture object at 0x7f09798d8c88>
+mocker = <pytest_mock.plugin.MockFixture object at 0x7f58b7dde198>
 script = 'got commit', stderr = 'got: command not found'
 
     @pytest.mark.usefixtures('no_memoize')
@@ -299,17 +299,17 @@ script = 'got commit', stderr = 'got: command not found'
 
 tests/rules/test_no_command.py:25: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:199: in __call__
     return self._start_patch(self.mock_module.patch, *args, **kwargs)
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/site-packages/pytest_mock/plugin.py:163: in _start_patch
     mocked = p.start()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1386: in start
     result = self.__enter__()
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1255: in __enter__
     original, local = self.get_original()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <unittest.mock._patch object at 0x7f09797f4b70>
+self = <unittest.mock._patch object at 0x7f58b7dad828>
 
     def get_original(self):
         target = self.getter()
@@ -332,7 +332,7 @@ self = <unittest.mock._patch object at 0x7f09797f4b70>
             raise AttributeError(
 >               "%s does not have the attribute %r" % (target, name)
             )
-E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
+E           AttributeError: <module 'thefuck.rules.no_command' from '/home/user/BugsInPy/temp/projects/thefuck/thefuck/rules/no_command.py'> does not have the attribute 'which'
 
-../../.conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
-=========================== 3 failed in 0.62 seconds ===========================
+/opt/conda/envs/9ef301ccd40ffe9f65b2830fff55cd07/lib/python3.7/unittest/mock.py:1229: AttributeError
+=========================== 3 failed in 0.48 seconds ===========================

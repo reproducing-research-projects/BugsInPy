@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.1, pytest-7.3.1, pluggy-1.0.0
-rootdir: /home/user/projects/matplotlib
+rootdir: /home/user/BugsInPy/temp/projects/matplotlib
 configfile: pytest.ini
 collected 1 item
 
@@ -20,10 +20,10 @@ _____________________________ test_invisible_axes ______________________________
         assert fig.canvas.inaxes((200, 200)) is not None
         ax.set_visible(False)
 >       assert fig.canvas.inaxes((200, 200)) is None
-E       assert <matplotlib.axes._subplots.AxesSubplot object at 0x7f69403e14f0> is None
-E        +  where <matplotlib.axes._subplots.AxesSubplot object at 0x7f69403e14f0> = <bound method FigureCanvasBase.inaxes of <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f69403bb040>>((200, 200))
-E        +    where <bound method FigureCanvasBase.inaxes of <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f69403bb040>> = <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f69403bb040>.inaxes
-E        +      where <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f69403bb040> = <Figure size 640x480 with 1 Axes>.canvas
+E       assert <matplotlib.axes._subplots.AxesSubplot object at 0x7f4eca64b400> is None
+E        +  where <matplotlib.axes._subplots.AxesSubplot object at 0x7f4eca64b400> = <bound method FigureCanvasBase.inaxes of <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f4eca624070>>((200, 200))
+E        +    where <bound method FigureCanvasBase.inaxes of <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f4eca624070>> = <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f4eca624070>.inaxes
+E        +      where <matplotlib.backends.backend_agg.FigureCanvasAgg object at 0x7f4eca624070> = <Figure size 640x480 with 1 Axes>.canvas
 
 lib/matplotlib/tests/test_axes.py:6636: AssertionError
 ------------------------------ Captured log setup ------------------------------
@@ -34,22 +34,22 @@ lib/matplotlib/__init__.py:201
 lib/matplotlib/__init__.py:201
 lib/matplotlib/__init__.py:201
 lib/matplotlib/__init__.py:201
-  /home/user/projects/matplotlib/lib/matplotlib/__init__.py:201: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/__init__.py:201: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     if LooseVersion(module.__version__) < minver:
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-  /home/user/.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     other = LooseVersion(other)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED lib/matplotlib/tests/test_axes.py::test_invisible_axes - assert <matpl...
-======================== 1 failed, 10 warnings in 2.16s ========================
-/home/user/projects/matplotlib/lib/matplotlib/backend_bases.py:59: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+======================== 1 failed, 10 warnings in 3.10s ========================
+/home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/backend_bases.py:59: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
   if LooseVersion(PILLOW_VERSION) >= "3.4":
-/home/user/.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
   other = LooseVersion(other)

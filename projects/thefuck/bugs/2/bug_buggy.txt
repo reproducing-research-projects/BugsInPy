@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck
+rootdir: /home/user/BugsInPy/temp/projects/thefuck
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 2 items
 
@@ -29,7 +29,7 @@ path = 'C:\\\\foo;C:\\\\bar;C:\\\\baz;C:\\\\foo\\\\bar', pathsep = ';'
 tests/test_utils.py:94: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <MagicMock name='Path' id='140440869805416'>
+self = <MagicMock name='Path' id='140027986210600'>
 calls = [call('C:\\\\foo'), call('C:\\\\bar'), call('C:\\\\baz'), call('C:\\\\foo\\\\bar')]
 any_order = True
 
@@ -78,7 +78,7 @@ any_order = True
 >           ) from cause
 E           AssertionError: 'Path' does not contain all of (call('C:\\\\foo'), call('C:\\\\bar'), call('C:\\\\baz'), call('C:\\\\foo\\\\bar')) in its call list, found [call('C'), call().iterdir(), call().iterdir().__iter__(), call().iterdir().__len__(), call('\\\\foo;C'), call().iterdir(), call().iterdir().__iter__(), call().iterdir().__len__(), call('\\\\bar;C'), call().iterdir(), call().iterdir().__iter__(), call().iterdir().__len__(), call('\\\\baz;C'), call().iterdir(), call().iterdir().__iter__(), call().iterdir().__len__(), call('\\\\foo\\\\bar'), call().iterdir(), call().iterdir().__iter__(), call().iterdir().__len__()] instead
 
-../../.conda/envs/4faeb4ebe0f3172628d2252dbbaf6b53/lib/python3.7/site-packages/mock/mock.py:971: AssertionError
+/opt/conda/envs/4faeb4ebe0f3172628d2252dbbaf6b53/lib/python3.7/site-packages/mock/mock.py:971: AssertionError
 =========================== short test summary info ============================
 FAILED tests/test_utils.py::test_get_all_executables_pathsep[C:\\\\foo;C:\\\\bar;C:\\\\baz;C:\\\\foo\\\\bar-;]
-========================= 1 failed, 1 passed in 0.46s ==========================
+========================= 1 failed, 1 passed in 0.80s ==========================

@@ -10,13 +10,13 @@ ERROR: test_pipeline_media (unittest.loader._FailedTest)
 ----------------------------------------------------------------------
 ImportError: Failed to import test module: test_pipeline_media
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/15f0149b1fbf715d94535d380cb72343/lib/python3.8/unittest/loader.py", line 154, in loadTestsFromName
+  File "/opt/conda/envs/15f0149b1fbf715d94535d380cb72343/lib/python3.8/unittest/loader.py", line 154, in loadTestsFromName
     module = __import__(module_name)
-  File "/home/user/projects/scrapy/tests/test_pipeline_media.py", line 11, in <module>
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_pipeline_media.py", line 11, in <module>
     from scrapy.pipelines.media import MediaPipeline
-  File "/home/user/projects/scrapy/scrapy/pipelines/media.py", line 11, in <module>
+  File "/home/user/BugsInPy/temp/projects/scrapy/scrapy/pipelines/media.py", line 11, in <module>
     from scrapy.utils.log import failure_to_exc_info
-ImportError: cannot import name 'failure_to_exc_info' from 'scrapy.utils.log' (/home/user/projects/scrapy/scrapy/utils/log.py)
+ImportError: cannot import name 'failure_to_exc_info' from 'scrapy.utils.log' (/home/user/BugsInPy/temp/projects/scrapy/scrapy/utils/log.py)
 
 
 ----------------------------------------------------------------------
@@ -32,11 +32,11 @@ ERROR: test_utils_log (unittest.loader._FailedTest)
 ----------------------------------------------------------------------
 ImportError: Failed to import test module: test_utils_log
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/15f0149b1fbf715d94535d380cb72343/lib/python3.8/unittest/loader.py", line 154, in loadTestsFromName
+  File "/opt/conda/envs/15f0149b1fbf715d94535d380cb72343/lib/python3.8/unittest/loader.py", line 154, in loadTestsFromName
     module = __import__(module_name)
-  File "/home/user/projects/scrapy/tests/test_utils_log.py", line 10, in <module>
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_log.py", line 10, in <module>
     from scrapy.utils.log import (failure_to_exc_info, TopLevelFormatter,
-ImportError: cannot import name 'failure_to_exc_info' from 'scrapy.utils.log' (/home/user/projects/scrapy/scrapy/utils/log.py)
+ImportError: cannot import name 'failure_to_exc_info' from 'scrapy.utils.log' (/home/user/BugsInPy/temp/projects/scrapy/scrapy/utils/log.py)
 
 
 ----------------------------------------------------------------------
@@ -52,11 +52,11 @@ ERROR: test_utils_log (unittest.loader._FailedTest)
 ----------------------------------------------------------------------
 ImportError: Failed to import test module: test_utils_log
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/15f0149b1fbf715d94535d380cb72343/lib/python3.8/unittest/loader.py", line 154, in loadTestsFromName
+  File "/opt/conda/envs/15f0149b1fbf715d94535d380cb72343/lib/python3.8/unittest/loader.py", line 154, in loadTestsFromName
     module = __import__(module_name)
-  File "/home/user/projects/scrapy/tests/test_utils_log.py", line 10, in <module>
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_utils_log.py", line 10, in <module>
     from scrapy.utils.log import (failure_to_exc_info, TopLevelFormatter,
-ImportError: cannot import name 'failure_to_exc_info' from 'scrapy.utils.log' (/home/user/projects/scrapy/scrapy/utils/log.py)
+ImportError: cannot import name 'failure_to_exc_info' from 'scrapy.utils.log' (/home/user/BugsInPy/temp/projects/scrapy/scrapy/utils/log.py)
 
 
 ----------------------------------------------------------------------

@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
-rootdir: /home/user/projects/ansible, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
 collected 1 item
 
 test/units/module_utils/common/validation/test_check_required_arguments.py F [100%]
@@ -32,4 +32,4 @@ E         + missing required arguments: bar, foo
 E         ?                             +++++
 
 test/units/module_utils/common/validation/test_check_required_arguments.py:73: AssertionError
-=========================== 1 failed in 0.16 seconds ===========================
+=========================== 1 failed in 0.14 seconds ===========================

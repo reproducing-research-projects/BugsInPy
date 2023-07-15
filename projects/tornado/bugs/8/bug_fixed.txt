@@ -3,8 +3,8 @@ RUN EVERY COMMAND
 0
 
 
-WARNING:tornado.access:400 GET /echo (127.0.0.1) 0.21ms
+WARNING:tornado.access:400 GET /echo (127.0.0.1) 0.24ms
 ----------------------------------------------------------------------
-Ran 1 test in 0.004s
+Ran 1 test in 0.005s
 
 OK

@@ -7,7 +7,7 @@ RUN EVERY COMMAND
 FAIL: test_redirect_302_relative (tests.test_downloadermiddleware_redirect.RedirectMiddlewareTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/projects/scrapy/tests/test_downloadermiddleware_redirect.py", line 118, in test_redirect_302_relative
+  File "/home/user/BugsInPy/temp/projects/scrapy/tests/test_downloadermiddleware_redirect.py", line 118, in test_redirect_302_relative
     self.assertEqual(req2.url, url3)
 AssertionError: 'http://www.example.com/i8n.example2.com/302' != 'http://i8n.example2.com/302'
 - http://www.example.com/i8n.example2.com/302
@@ -16,6 +16,6 @@ AssertionError: 'http://www.example.com/i8n.example2.com/302' != 'http://i8n.exa
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.412s
+Ran 1 test in 0.572s
 
 FAILED (failures=1)

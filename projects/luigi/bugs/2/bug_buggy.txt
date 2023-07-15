@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/luigi
+rootdir: /home/user/BugsInPy/temp/projects/luigi
 plugins: sugar-0.9.3, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
@@ -26,7 +26,7 @@ self = <contrib.beam_dataflow_test.BeamDataflowTest testMethod=test_get_target_p
 test/contrib/beam_dataflow_test.py:288: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-target = <luigi.contrib.bigquery.BigQueryTarget object at 0x7f8447cd9d60>
+target = <luigi.contrib.bigquery.BigQueryTarget object at 0x7f0ddc950dc0>
 
     @staticmethod
     def get_target_path(target):
@@ -39,7 +39,7 @@ E           AttributeError: 'BigQueryTarget' object has no attribute 'project_id
 src/luigi/luigi/contrib/beam_dataflow.py:477: AttributeError
 =============================== warnings summary ===============================
 src/luigi/luigi/__init__.py:75
-  /home/user/projects/luigi/src/luigi/luigi/__init__.py:75: DeprecationWarning: 
+  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/__init__.py:75: DeprecationWarning: 
           Autoloading range tasks by default has been deprecated and will be removed in a future version.
           To get the behavior now add an option to luigi.cfg:
   
@@ -53,4 +53,4 @@ src/luigi/luigi/__init__.py:75
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED test/contrib/beam_dataflow_test.py::BeamDataflowTest::test_get_target_path
-========================= 1 failed, 1 warning in 0.81s =========================
+========================= 1 failed, 1 warning in 0.97s =========================

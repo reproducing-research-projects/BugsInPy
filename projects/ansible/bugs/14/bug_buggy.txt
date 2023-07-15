@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
-rootdir: /home/user/projects/ansible, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
 collected 2 items
 
 test/units/galaxy/test_api.py .F                                         [100%]
@@ -13,7 +13,7 @@ test/units/galaxy/test_api.py .F                                         [100%]
 =================================== FAILURES ===================================
 ________________ test_get_role_versions_pagination[responses1] _________________
 
-monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7e763a74a8>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fc933a42400>
 responses = [{'count': 2, 'next': '/roles/432/versions/?page=2&page_size=50', 'next_link': '/api/v1/roles/432/versions/?page=2&pag...ious': None, ...}, {'count': 2, 'next': None, 'next_link': None, 'previous': '/roles/432/versions/?page_size=50', ...}]
 
     @pytest.mark.parametrize('responses', [
@@ -67,4 +67,4 @@ E             ?                   ----
 E             + https://galaxy.com/api/v1/roles/432/versions/?page=2&page_size=50
 
 test/units/galaxy/test_api.py:909: AssertionError
-====================== 1 failed, 1 passed in 1.84 seconds ======================
+====================== 1 failed, 1 passed in 1.75 seconds ======================

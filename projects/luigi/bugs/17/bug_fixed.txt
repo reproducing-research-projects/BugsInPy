@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/luigi
+rootdir: /home/user/BugsInPy/temp/projects/luigi
 plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
@@ -70,4 +70,4 @@ INFO: Loaded []
 INFO     luigi-interface:configuration.py:69 Loaded []
 =========================== short test summary info ============================
 FAILED test/scheduler_test.py::SchedulerTest::test_local_scheduler_task_history_status
-============================== 1 failed in 0.11s ===============================
+============================== 1 failed in 0.10s ===============================

@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/fastapi
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
 plugins: cov-2.9.0
 collected 1 item
 
@@ -26,16 +26,16 @@ E         Use -v to get the full diff
 
 tests/test_param_in_path_and_dependency.py:88: AssertionError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
-/home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
-  /home/user/.conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
     def run(*args, loop=None, executor=None, **kwargs):
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_param_in_path_and_dependency.py::test_reused_param - Assert...
-======================== 1 failed, 6 warnings in 0.99s =========================
+======================== 1 failed, 6 warnings in 2.24s =========================

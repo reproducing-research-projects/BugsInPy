@@ -37,11 +37,11 @@ file_input
 FAIL: test_beginning_backslash (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/6720714fabfb1cf1ab2248b54d458923/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/6720714fabfb1cf1ab2248b54d458923/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 646, in test_beginning_backslash
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 646, in test_beginning_backslash
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 168, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 168, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: 'print("hello, world")\n' != '\n\nprint("hello, world")\n'
 + 
@@ -50,6 +50,6 @@ AssertionError: 'print("hello, world")\n' != '\n\nprint("hello, world")\n'
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.006s
+Ran 1 test in 0.051s
 
 FAILED (failures=1)

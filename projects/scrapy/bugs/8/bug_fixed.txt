@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.001s
+Ran 1 test in 0.000s
 
 OK
 RUN EVERY COMMAND
@@ -13,6 +13,6 @@ RUN EVERY COMMAND
 python -m unittest -q tests.test_item.ItemMetaTest.test_new_method_propagates_classcell
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.020s
+Ran 1 test in 0.000s
 
 OK

@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.8.3, pytest-5.2.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/sanic, inifile: tox.ini
+rootdir: /home/user/BugsInPy/temp/projects/sanic, inifile: tox.ini
 plugins: sugar-0.9.3, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
@@ -15,7 +15,7 @@ tests/test_blueprints.py F                                               [100%]
 =================================== FAILURES ===================================
 ___________________________ test_bp_middleware_order ___________________________
 
-app = <sanic.app.Sanic object at 0x7efce4e76c70>
+app = <sanic.app.Sanic object at 0x7f989bacfdf0>
 
     def test_bp_middleware_order(app):
         blueprint = Blueprint("test_bp_middleware_order")
@@ -55,15 +55,15 @@ E         Use -v to get the full diff
 
 tests/test_blueprints.py:304: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-[2023-07-14 07:08:48 +0000] [1904] [INFO] http://127.0.0.1:57015/
-[2023-07-14 07:08:48 +0000] - (sanic.access)[INFO][127.0.0.1:56728]: GET http://127.0.0.1:57015/  200 2
-[2023-07-14 07:08:48 +0000] [1904] [INFO] Starting worker [1904]
-[2023-07-14 07:08:48 +0000] [1904] [INFO] Stopping worker [1904]
-[2023-07-14 07:08:48 +0000] [1904] [INFO] Server Stopped
+[2023-07-15 04:03:41 +0000] [3098] [INFO] http://127.0.0.1:46501/
+[2023-07-15 04:03:41 +0000] - (sanic.access)[INFO][127.0.0.1:39992]: GET http://127.0.0.1:46501/  200 2
+[2023-07-15 04:03:41 +0000] [3098] [INFO] Starting worker [3098]
+[2023-07-15 04:03:41 +0000] [3098] [INFO] Stopping worker [3098]
+[2023-07-15 04:03:41 +0000] [3098] [INFO] Server Stopped
 ------------------------------ Captured log call -------------------------------
-INFO     sanic.root:testing.py:29 http://127.0.0.1:57015/
+INFO     sanic.root:testing.py:29 http://127.0.0.1:46501/
 INFO     sanic.access:server.py:449 
-INFO     sanic.root:server.py:855 Starting worker [1904]
-INFO     sanic.root:server.py:858 Stopping worker [1904]
+INFO     sanic.root:server.py:855 Starting worker [3098]
+INFO     sanic.root:server.py:858 Stopping worker [3098]
 INFO     sanic.root:app.py:1180 Server Stopped
-============================== 1 failed in 0.30s ===============================
+============================== 1 failed in 0.58s ===============================

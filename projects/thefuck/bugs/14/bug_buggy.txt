@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
 benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
-rootdir: /home/user/projects/thefuck, inifile:
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
 plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
 collected 4 items
 
@@ -15,8 +15,8 @@ tests/shells/test_fish.py FFFF                                           [100%]
 =================================== FAILURES ===================================
 ______________ TestFish.test_get_overridden_aliases[cut,git,sed] _______________
 
-self = <tests.shells.test_fish.TestFish object at 0x7ff2c4df3898>
-shell = <thefuck.shells.fish.Fish object at 0x7ff2c4e4b358>
+self = <tests.shells.test_fish.TestFish object at 0x7f73d3f818d0>
+shell = <thefuck.shells.fish.Fish object at 0x7f73d41d74a8>
 tf_overridden = None
 
     @pytest.mark.parametrize('aliases', [
@@ -33,8 +33,8 @@ E         Use -v to get the full diff
 tests/shells/test_fish.py:31: AssertionError
 _____________ TestFish.test_get_overridden_aliases[cut, git, sed] ______________
 
-self = <tests.shells.test_fish.TestFish object at 0x7ff2c4e425f8>
-shell = <thefuck.shells.fish.Fish object at 0x7ff2c4c9f358>
+self = <tests.shells.test_fish.TestFish object at 0x7f73d41c85c0>
+shell = <thefuck.shells.fish.Fish object at 0x7f73d40fe358>
 tf_overridden = None
 
     @pytest.mark.parametrize('aliases', [
@@ -51,8 +51,8 @@ E         Use -v to get the full diff
 tests/shells/test_fish.py:31: AssertionError
 ____________ TestFish.test_get_overridden_aliases[ cut,\tgit,sed\n] ____________
 
-self = <tests.shells.test_fish.TestFish object at 0x7ff2c4e17cf8>
-shell = <thefuck.shells.fish.Fish object at 0x7ff2c4caecf8>
+self = <tests.shells.test_fish.TestFish object at 0x7f73d41a8dd8>
+shell = <thefuck.shells.fish.Fish object at 0x7f73d4118d30>
 tf_overridden = None
 
     @pytest.mark.parametrize('aliases', [
@@ -69,8 +69,8 @@ E         Use -v to get the full diff
 tests/shells/test_fish.py:31: AssertionError
 _________ TestFish.test_get_overridden_aliases[\ncut,\n\ngit,\tsed\r] __________
 
-self = <tests.shells.test_fish.TestFish object at 0x7ff2c4c9f5c0>
-shell = <thefuck.shells.fish.Fish object at 0x7ff2c4c9b048>
+self = <tests.shells.test_fish.TestFish object at 0x7f73d40fe668>
+shell = <thefuck.shells.fish.Fish object at 0x7f73d4102080>
 tf_overridden = None
 
     @pytest.mark.parametrize('aliases', [
@@ -85,4 +85,4 @@ E       AssertionError: assert ['cut', 'git', 'sed'] == {'cd', 'cut', 'git..., '
 E         Use -v to get the full diff
 
 tests/shells/test_fish.py:31: AssertionError
-=========================== 4 failed in 0.18 seconds ===========================
+=========================== 4 failed in 0.27 seconds ===========================

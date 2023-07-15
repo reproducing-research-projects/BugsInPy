@@ -365,11 +365,11 @@ file_input
 FAIL: test_fmtonoff2 (tests.test_black.BlackTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/user/.conda/envs/6741dac5d765976207f88b8af094fa3c/lib/python3.8/unittest/mock.py", line 1325, in patched
+  File "/opt/conda/envs/6741dac5d765976207f88b8af094fa3c/lib/python3.8/unittest/mock.py", line 1325, in patched
     return func(*newargs, **newkeywargs)
-  File "/home/user/projects/black/tests/test_black.py", line 407, in test_fmtonoff2
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 407, in test_fmtonoff2
     self.assertFormatEqual(expected, actual)
-  File "/home/user/projects/black/tests/test_black.py", line 122, in assertFormatEqual
+  File "/home/user/BugsInPy/temp/projects/black/tests/test_black.py", line 122, in assertFormatEqual
     self.assertEqual(expected, actual)
 AssertionError: "impo[277 chars]s\n\ndef check_fader(test):\n    pass\n\ndef t[177 chars]on\n" != "impo[277 chars]s\n\n\ndef check_fader(test):\n    pass\n\n\nd[172 chars]on\n"
   import pytest
@@ -413,6 +413,6 @@ AssertionError: "impo[277 chars]s\n\ndef check_fader(test):\n    pass\n\ndef t[1
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.050s
+Ran 1 test in 0.036s
 
 FAILED (failures=1)

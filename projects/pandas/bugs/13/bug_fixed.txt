@@ -1,0 +1,28 @@
+pytest pandas/tests/arrays/categorical/test_missing.py::TestCategoricalMissing::test_use_inf_as_na
+pytest pandas/tests/arrays/categorical/test_missing.py::TestCategoricalMissing::test_use_inf_as_na_outside_context
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 4 items
+
+pandas/tests/arrays/categorical/test_missing.py ....                     [100%]
+
+============================== 4 passed in 0.03s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/arrays/categorical/test_missing.py::TestCategoricalMissing::test_use_inf_as_na
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 4 items
+
+pandas/tests/arrays/categorical/test_missing.py ....                     [100%]
+
+============================== 4 passed in 0.02s ===============================

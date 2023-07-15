@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.8.1, pytest-7.3.1, pluggy-1.0.0
-rootdir: /home/user/projects/matplotlib
+rootdir: /home/user/BugsInPy/temp/projects/matplotlib
 configfile: pytest.ini
 collected 3 items
 
@@ -14,7 +14,7 @@ lib/matplotlib/tests/test_axes.py .FF                                    [100%]
 =================================== FAILURES ===================================
 _____________ test_hist_datetime_datasets_bins[datetime.datetime] ______________
 
-bins_preprocess = <function <lambda> at 0x7f1bb02ba040>
+bins_preprocess = <function <lambda> at 0x7fc17dd5fca0>
 
     @pytest.mark.parametrize("bins_preprocess",
                              [mpl.dates.date2num,
@@ -42,7 +42,7 @@ lib/matplotlib/axes/_axes.py:6643: in hist
     m, bins = np.histogram(x[i], bins, weights=w[i], **hist_kwargs)
 <__array_function__ internals>:200: in histogram
     ???
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:866: in histogram
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:866: in histogram
     cum_n += _search_sorted_inclusive(sa, bin_edges)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
@@ -63,12 +63,12 @@ v = array([datetime.datetime(2019, 1, 1, 0, 0),
         ))
 E       TypeError: '<' not supported between instances of 'float' and 'datetime.datetime'
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:461: TypeError
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:461: TypeError
 ------------------------------ Captured log setup ------------------------------
 WARNING  matplotlib.testing:__init__.py:41 Could not set locale to English/United States. Some date-related tests may fail.
 _______________ test_hist_datetime_datasets_bins[np.datetime64] ________________
 
-bins_preprocess = <function <lambda> at 0x7f1bb02ba0d0>
+bins_preprocess = <function <lambda> at 0x7fc17dd5fd30>
 
     @pytest.mark.parametrize("bins_preprocess",
                              [mpl.dates.date2num,
@@ -96,7 +96,7 @@ lib/matplotlib/axes/_axes.py:6643: in hist
     m, bins = np.histogram(x[i], bins, weights=w[i], **hist_kwargs)
 <__array_function__ internals>:200: in histogram
     ???
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:866: in histogram
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:866: in histogram
     cum_n += _search_sorted_inclusive(sa, bin_edges)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
@@ -116,7 +116,7 @@ v = array(['2019-01-01T00:00:00.000000', '2019-02-01T00:00:00.000000',
         ))
 E       TypeError: '<' not supported between instances of 'float' and 'datetime.datetime'
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:461: TypeError
+/opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/numpy/lib/histograms.py:461: TypeError
 ------------------------------ Captured log setup ------------------------------
 WARNING  matplotlib.testing:__init__.py:41 Could not set locale to English/United States. Some date-related tests may fail.
 =============================== warnings summary ===============================
@@ -125,19 +125,19 @@ lib/matplotlib/__init__.py:201
 lib/matplotlib/__init__.py:201
 lib/matplotlib/__init__.py:201
 lib/matplotlib/__init__.py:201
-  /home/user/projects/matplotlib/lib/matplotlib/__init__.py:201: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/__init__.py:201: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     if LooseVersion(module.__version__) < minver:
 
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-../../.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
-  /home/user/.conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
     other = LooseVersion(other)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED lib/matplotlib/tests/test_axes.py::test_hist_datetime_datasets_bins[datetime.datetime]
 FAILED lib/matplotlib/tests/test_axes.py::test_hist_datetime_datasets_bins[np.datetime64]
-=================== 2 failed, 1 passed, 10 warnings in 3.63s ===================
+=================== 2 failed, 1 passed, 10 warnings in 5.55s ===================

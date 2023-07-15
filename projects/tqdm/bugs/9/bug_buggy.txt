@@ -6,7 +6,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_tqdm.py F                                               [100%]
@@ -27,14 +27,14 @@ E        +  where '  0%|          | 1.00/10.00K [00:01<2:46:38, 1.00it/s]' = for
 tqdm/tests/tests_tqdm.py:52: AssertionError
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_tqdm.py::test_si_format - AssertionError: assert '10....
-============================== 1 failed in 0.46s ===============================
+============================== 1 failed in 0.57s ===============================
 RUN EVERY COMMAND
 1
 python3 -m pytest tqdm/tests/tests_tqdm.py::test_si_format
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_tqdm.py F                                               [100%]
@@ -51,7 +51,7 @@ _________________________________ test_update __________________________________
 tqdm/tests/tests_tqdm.py:195: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <tqdm._tqdm.tqdm object at 0x7f4fcd358a58>
+self = <tqdm._tqdm.tqdm object at 0x7fde0aa3a400>
 
     def __len__(self):
 >       return len(self.iterable)
@@ -60,4 +60,4 @@ E       TypeError: object of type 'NoneType' has no len()
 tqdm/_tqdm.py:363: TypeError
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_tqdm.py::test_update - TypeError: object of type 'Non...
-============================== 1 failed in 0.37s ===============================
+============================== 1 failed in 0.54s ===============================

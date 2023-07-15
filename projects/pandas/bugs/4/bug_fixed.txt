@@ -3,7 +3,12 @@ RUN EVERY COMMAND
 0
 
 
-ImportError while loading conftest '/home/user/projects/pandas/pandas/conftest.py'.
-pandas/__init__.py:34: in <module>
-    raise ImportError(
-E   ImportError: C extension: 'NullFrequencyError' from 'pandas._libs.tslibs.timestamps' (/home/user/projects/pandas/pandas/_libs/tslibs/timestamps.cpython-38-x86_64-linux-gnu.so) not built. If you want to import pandas from the source directory, you may need to run 'python setup.py build_ext --inplace --force' to build the C extensions first.
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexes/multi/test_join.py .                                [100%]
+
+============================== 1 passed in 0.02s ===============================

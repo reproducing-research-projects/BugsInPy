@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_synchronisation.py F                                    [100%]
@@ -27,7 +27,7 @@ __________________________________ test_imap ___________________________________
 tqdm/tests/tests_synchronisation.py:180: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <[AttributeError("'tqdm' object has no attribute 'total'",) raised in repr()] tqdm object at 0x7f82ac3b1a90>
+self = <[AttributeError("'tqdm' object has no attribute 'total'",) raised in repr()] tqdm object at 0x7fb428546ac8>
 
     def __len__(self):
         return self.total if self.iterable is None else \
@@ -38,11 +38,11 @@ E       AttributeError: 'tqdm' object has no attribute 'total'
 
 tqdm/_tqdm.py:856: AttributeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
-  /home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     from imp import find_module, load_module, acquire_lock, release_lock
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_synchronisation.py::test_imap - AttributeError: 'tqdm...
-========================= 1 failed, 1 warning in 0.82s =========================
+========================= 1 failed, 1 warning in 1.24s =========================

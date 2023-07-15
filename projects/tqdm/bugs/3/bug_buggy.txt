@@ -5,7 +5,7 @@ RUN EVERY COMMAND
 
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/projects/tqdm
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
 collected 1 item
 
 tqdm/tests/tests_tqdm.py F                                               [100%]
@@ -53,8 +53,8 @@ tqdm/tests/tests_tqdm.py:1730: in internal
     assert get_bool_for_tqdm((x for x in []))
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-args = (<generator object test_bool.<locals>.internal.<locals>.<genexpr> at 0x7f7d4fbf18e0>,)
-kwargs = {'disable': False, 'file': <_io.StringIO object at 0x7f7d4fa759d8>}
+args = (<generator object test_bool.<locals>.internal.<locals>.<genexpr> at 0x7f760f3378e0>,)
+kwargs = {'disable': False, 'file': <_io.StringIO object at 0x7f760f127168>}
 t = 0it [00:00, ?it/s]
 
     def get_bool_for_tqdm(*args, **kwargs):
@@ -66,11 +66,11 @@ E           TypeError: 'NoneType' object cannot be interpreted as an integer
 
 tqdm/tests/tests_tqdm.py:1724: TypeError
 =============================== warnings summary ===============================
-/home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
-  /home/user/.conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     from imp import find_module, load_module, acquire_lock, release_lock
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 =========================== short test summary info ============================
 FAILED tqdm/tests/tests_tqdm.py::test_bool - TypeError: 'NoneType' object can...
-========================= 1 failed, 1 warning in 1.25s =========================
+========================= 1 failed, 1 warning in 1.85s =========================
