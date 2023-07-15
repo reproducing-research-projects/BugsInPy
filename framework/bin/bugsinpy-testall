@@ -38,7 +38,7 @@ case $1 in
     echo "$usage"
     exit 0;;
  -c)
-    rm -rf $bugsinpy_location/temp/projects
+    rm -rf "$temp_projects"
     exit 0;;
  -p)
     projects="${@:2}";;
@@ -111,9 +111,7 @@ for project_name in $projects; do
         bug_python_version=$(grep -o "3\..\.." $bug_info)
         conda_env_name=$(cat <(echo $bug_python_version) "$requirements" | md5sum | cut -d' ' -f 1)
 
-        if conda env list | grep -q "$conda_env_name"; then
-          touch "$work_dir/bugsinpy_compile_flag"
-        else
+        if ! conda env list | grep -q "$conda_env_name"; then
           conda create -n $conda_env_name -y python=$bug_python_version pytest &>> $work_dir/logs.txt
         fi
 
