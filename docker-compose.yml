@@ -1,0 +1,188 @@
+# Execute "docker compose down" before a new run
+# To run do "docker compose up --build" or "docker compose up setup <repo> --build"
+services:
+  setup:
+    build: .
+    image: bugsinpy-setup
+    pull_policy: never
+    volumes:
+      - ./temp:/home/user/BugsInPy/temp
+    command:
+      - /bin/bash
+      - -c
+      - |
+        bugsinpy-testall -c
+        echo Cleaning up temp folder ...
+        echo Reproducing bugs please wait ...
+        echo -------------------------
+        echo repo,bugid,version,result
+  pysnooper:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p PySnooper:
+    depends_on:
+      - setup
+  ansible:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p ansible:
+    depends_on:
+      - setup
+  black:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p black:
+    depends_on:
+      - setup
+  cookiecutter:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p cookiecutter:
+    depends_on:
+      - setup
+  fastapi:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p fastapi:
+    depends_on:
+      - setup
+  httpie:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p httpie:
+    depends_on:
+      - setup
+  keras:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p keras:
+    depends_on:
+      - setup
+  luigi:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p luigi:
+    depends_on:
+      - setup
+  matplotlib:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p matplotlib:
+    depends_on:
+      - setup
+  pandas:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p pandas:
+    depends_on:
+      - setup
+  spacy:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p spacy:
+    depends_on:
+      - setup
+  thefuck:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p thefuck:
+    depends_on:
+      - setup
+  youtube-dl:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p youtube-dl:
+    depends_on:
+      - setup
+  sanic:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p sanic:
+    depends_on:
+      - setup
+  scrapy:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p scrapy:
+    depends_on:
+      - setup
+  tornado:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p tornado:
+    depends_on:
+      - setup
+  tqdm:
+    pull_policy: never
+    image: bugsinpy-setup
+    volumes:
+      - ./projects:/home/user/BugsInPy/projects
+      - ./temp:/home/user/BugsInPy/temp
+    command: |
+      bugsinpy-testall -p tqdm:
+    depends_on:
+      - setup

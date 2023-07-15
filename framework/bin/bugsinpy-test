@@ -62,8 +62,17 @@ fi
 ###Activate environment
 cd "$work_dir"
 . /opt/conda/etc/profile.d/conda.sh
+# Cleanup requirements.txt from unwanted spaces
+sed -i -e '/^\s*#.*$/d' -e '/^\s*$/d' "$work_dir/bugsinpy_requirements.txt"
+# dos2unix is required to make sure requirements.txt is always the correct encoding
+dos2unix $work_dir/bugsinpy_requirements.txt &>/dev/null
+# Generate unique hash for the current enviroment
 bug_python_version=$(grep -o "3\..\.." "$work_dir/bugsinpy_bug.info")
-conda activate $bug_python_version
+conda_env_name=$(cat <(echo $bug_python_version) "$work_dir/bugsinpy_requirements.txt" | md5sum | cut -d' ' -f 1)
+if ! conda activate $conda_env_name; then
+   echo "Please use 'conda create -n $conda_env_name -y python=$bug_python_version' to create your enviroment first or bugsinpy-testall -p project_name:bug_id"
+   exit
+fi
 
 pytest="0"
 #read file run_test.sh

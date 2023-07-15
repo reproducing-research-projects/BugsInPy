@@ -1,15 +1,25 @@
 #!/bin/bash
 
-###bugsinpy-testall reproduces all the bugs for every project
-# test ok (reproduced successfully) test fail (unable to reproduce)
-# Full test logs in ~/projects/logs.txt
-# Output in ~/projects/output.csv
+###bugsinpy-testall reproduces all the bugs
+# similar to <repo>/verify.sh included in some projects
+# this approach improves current setup by having the proper enviroment
+# and replacing virtualenv with conda within the BugsInPy framework
+# the expected outputs for each test are added to every bug
+# "<repo>/bugs/<bugid>/bug_buggy.txt" shows buggy version output
+# "<repo>/bugs/<bugid>/bug_fixed.txt" shows fixed version output
+# an index result is provided in BugsInPy/projects/index.csv
+# the index contains reproducibility result status
+# "fail" a failure expected in buggy version
+# "error" a hard error not reproducible
+# "pass" a success expected in fixed version
+# "unknown" a unknown unexpected output probably an "error"
+# a temp full log file is provided in every <repo>/logs.txt
 
 usage="
        -h
              show this help
        -c
-             cleanup ~ directory
+             cleanup temp directory
        -p
              specify multiple project:start:end or project:end or project:
              Ex;
@@ -17,120 +27,116 @@ usage="
              black:5 ansible: (only reproduces test 5 for black and all for ansible)
 "
 
+dir_of_script=$(dirname $0)
+bugsinpy_location=$(realpath $dir_of_script/../..)
+temp_projects="$bugsinpy_location/temp/projects"
+index_file="$bugsinpy_location/projects/index.csv"
+
 case $1 in
  -[h?] | --help)
     echo "Usage: ${0##*/} [ --help ]"
     echo "$usage"
     exit 0;;
  -c)
-    read -p "Are you sure? [y/n]" -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-      rm -rfv ~/projects
-    fi
+    rm -rf "$temp_projects"
     exit 0;;
  -p)
     projects="${@:2}";;
 esac
 
-mkdir -p ~/projects
+mkdir -p $temp_projects
 
-echo $projects | grep -q ":"
-if [[ $? -ne 0 ]]; then
-  projects=$(ls ~/BugsInPy/projects)
+if ! echo $projects | grep -q ":"; then
+  projects=$(ls $bugsinpy_location/projects)
 fi
 
-echo "bugsinpy-testall reproduces all the bugs for every project"
-echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
-echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
-echo "See full tests logs in ~/logs.txt"
-echo "See results in ~/projects/output.csv"
-echo "Reproducing bugs please wait ..."
-echo "---------------"
-if [[ ! -f "$HOME/projects/output.csv" ]]; then
-  echo "repo,bugid,test" | tee -a ~/projects/output.csv
+if [ ! -f $index_file ]; then
+  echo "repo,bugid,version,result" > $index_file
 fi
-
-# Cleanup unfinished reproductions
-sed -i '/[0-9]$/d' ~/projects/output.csv
 
 # Iterate over the projects
-for project in $projects; do
+for project_name in $projects; do
 
   # Get the number of bugs in the project
-  echo $projects | grep -q ":"
-  if [[ $? -ne 0 ]]; then
-    start=1
-    finish=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
-  else
-    start=$(echo $project | cut -d ":" -f 2)
-    finish=$(echo $project | cut -d ":" -f 3)
-    project=$(echo $project | cut -d ":" -f 1)
+  if echo $projects | grep -q ":"; then
+    start=$(echo $project_name | cut -d ":" -f 2)
+    finish=$(echo $project_name | cut -d ":" -f 3)
+    project=$(echo $project_name | cut -d ":" -f 1)
     if [[ "$start" == "" ]]; then
-      finish=$(ls ~/BugsInPy/projects/$project/bugs | wc -l)
+      finish=$(ls $bugsinpy_location/projects/$project/bugs | wc -l)
       start=1
     elif [[ "$finish" == "" ]]; then
       finish=$start
     fi
+  else
+    start=1
+    finish=$(ls $bugsinpy_location/projects/$project_name/bugs | wc -l)
   fi
+
+  work_dir="$temp_projects/$project"
 
   # For each bug, execute the test
   for bug in $(seq $start $finish); do
 
-    grep "$project,$bug," ~/projects/output.csv
-    if [[ $? -eq 0 ]]; then
-      echo "$project bug $bug is already tested, remove entry manually in output.csv file or try -c to cleanup all"  &>> ~/logs.txt
-    else
-      if [[ ! -d "$HOME/BugsInPy/projects/$project/bugs/$bug" ]]; then
-        echo "$project has no bug $bug yet, skipping ..." &>> ~/logs.txt
-      else
+    bug_source_dir="$bugsinpy_location/projects/$project/bugs/$bug"
 
-        printf "$project,$bug" | tee -a ~/projects/output.csv
+    if ! grep "$project,$bug," $index_file && [ -d "$bug_source_dir" ]; then
 
-        # Test buggy (0) version
-        bugsinpy-checkout -p $project -v 0 -i $bug -w ~/projects &>> ~/logs.txt
-        cd ~/projects/$project
-        ###Required to use conda activate, included in docker continuumio/miniconda3
-        . /opt/conda/etc/profile.d/conda.sh &>> ~/logs.txt
-        ###Setup proper python version already installed using miniconda
-        bug_python_version=$(grep -o "3\..\.." "bugsinpy_bug.info") &>> ~/logs.txt
-        conda create -n $bug_python_version -y python=$bug_python_version pytest dos2unix  &>> ~/logs.txt
-        conda activate $bug_python_version &>> ~/logs.txt
-        # TODO: Develop custom fixes for failing libraries
-        # echo $work_dir | grep -q xyz
-        # if [[ $? -eq 0 ]]; then
-        #    conda install -y -c conda-forge xyz=2.2.5
-        # fi
-        pip install decorator future six python_toolbox &>> ~/logs.txt
+      # Make sure requirements.txt always exist even if empty
+      touch $bug_source_dir/requirements.txt
 
-        bugsinpy-compile &>> ~/logs.txt
-        bugsinpy-test &>> ~/logs.txt
+      bug_info="$work_dir/bugsinpy_bug.info"
 
-        # Make sure a failure is detected in buggy version and bug is reproducible
-        if [ ! -f "bugsinpy_fail.txt" ]; then
-          echo ",fail" | tee -a ~/projects/output.csv
+      # Test buggy (0) and fixed (1) versions
+      for version_id in 0 1; do
+
+        if [[ $version_id == "0" ]];then
+          version="buggy"
         else
-
-          # Test fixed (1) version
-          bugsinpy-checkout -p $project -v 1 -i $bug -w ~/projects &>> ~/logs.txt
-          cd ~/projects/$project
-          bugsinpy-compile &>> ~/logs.txt
-          bugsinpy-test &>> ~/logs.txt
-
-          # Test execution output and make sure fixed version passes test ok
-          if [ -f "bugsinpy_fail.txt" ]; then
-            echo ",fail" | tee -a ~/projects/output.csv
-          else
-            echo ",ok" | tee -a ~/projects/output.csv
-          fi
+          version="fixed"
         fi
 
-        ###Deactivate the environment
-        conda deactivate
-      fi
+        bugsinpy-checkout -p $project -v $version_id -i $bug -w $temp_projects &>> /dev/null
+        cd $work_dir
 
+        # Cleanup requirements.txt from unwanted spaces
+        # dos2unix is required to make sure requirements.txt is always the correct encoding
+        requirements="$work_dir/bugsinpy_requirements.txt"
+        sed -i -e '/^\s*#.*$/d' -e '/^\s*$/d' "$requirements"
+        dos2unix $requirements &>/dev/null
+
+        # Add environment
+        . /opt/conda/etc/profile.d/conda.sh &>> $work_dir/logs.txt
+        # Generate unique hash for the current enviroment
+        bug_python_version=$(grep -o "3\..\.." $bug_info)
+        conda_env_name=$(cat <(echo $bug_python_version) "$requirements" | md5sum | cut -d' ' -f 1)
+
+        if ! conda env list | grep -q "$conda_env_name"; then
+          conda create -n $conda_env_name -y python=$bug_python_version pytest &>> $work_dir/logs.txt
+        fi
+
+        bugsinpy-compile &>> $work_dir/logs.txt
+        bugsinpy-test &> "$bug_source_dir/bug_$version.txt"
+
+        # Check for keywords in test output
+        # buggy (0) expected to fail
+        # fixed (1) expected to pass
+        if grep -q "= FAILURES =" "$bug_source_dir/bug_$version.txt" || \
+          grep -q "FAILED (" "$bug_source_dir/bug_$version.txt"
+        then
+          echo "$project,$bug,$version,fail" | tee -a $index_file
+        elif grep -q "= ERRORS =" "$bug_source_dir/bug_$version.txt" || \
+          grep -q ": command not found" "$bug_source_dir/bug_$version.txt" || \
+          grep -q "You have not compile this project" "$bug_source_dir/bug_$version.txt"
+        then
+          echo "$project,$bug,$version,error" | tee -a $index_file
+        elif grep -qwE "passed|OK" "$bug_source_dir/bug_$version.txt"; then
+          echo "$project,$bug,$version,pass" | tee -a $index_file
+        else
+          echo "$project,$bug,$version,unknown" | tee -a $index_file
+        fi
+      done
+      # echo $LINENO # debug
     fi
   done
 done
-
-echo "done."
