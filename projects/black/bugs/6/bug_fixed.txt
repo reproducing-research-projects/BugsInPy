@@ -1,0 +1,18 @@
+python -m unittest -q tests.test_black.BlackTestCase.test_async_as_identifier
+python -m unittest -q tests.test_black.BlackTestCase.test_python37
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.025s
+
+OK
+RUN EVERY COMMAND
+1
+python -m unittest -q tests.test_black.BlackTestCase.test_async_as_identifier
+
+----------------------------------------------------------------------
+Ran 1 test in 0.101s
+
+OK

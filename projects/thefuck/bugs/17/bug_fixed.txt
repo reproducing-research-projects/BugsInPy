@@ -1,0 +1,30 @@
+pytest tests/shells/test_bash.py::TestBash::test_get_aliases
+pytest tests/shells/test_bash.py::TestBash::test_from_shell
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
+plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
+collected 1 item
+
+tests/shells/test_bash.py .                                              [100%]
+
+=========================== 1 passed in 0.13 seconds ===========================
+RUN EVERY COMMAND
+1
+pytest tests/shells/test_bash.py::TestBash::test_get_aliases
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.0, pytest-3.10.1, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/thefuck, inifile:
+plugins: mock-3.1.0, benchmark-3.2.3, docker-pexpect-0.9
+collected 4 items
+
+tests/shells/test_bash.py ....                                           [100%]
+
+=========================== 4 passed in 0.12 seconds ===========================

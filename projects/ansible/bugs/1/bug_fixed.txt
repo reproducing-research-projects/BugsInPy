@@ -1,0 +1,13 @@
+pytest test/units/galaxy/test_collection.py::test_verify_collections_no_version
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+collected 1 item
+
+test/units/galaxy/test_collection.py .                                   [100%]
+
+=========================== 1 passed in 3.64 seconds ===========================

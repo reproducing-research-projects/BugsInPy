@@ -1,0 +1,33 @@
+py.test spacy/tests/test_errors.py::test_add_codes
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.7, pytest-7.1.2, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/spacy, configfile: setup.cfg
+plugins: timeout-1.4.2
+collected 1 item
+
+spacy/tests/test_errors.py F                                             [100%]
+
+=================================== FAILURES ===================================
+________________________________ test_add_codes ________________________________
+
+    def test_add_codes():
+        assert Errors.E001 == "[E001] error description"
+>       assert isclass(Errors.__class__)
+E       assert False
+E        +  where False = isclass("[__class__] <class 'type'>")
+E        +    where "[__class__] <class 'type'>" = Errors.__class__
+
+spacy/tests/test_errors.py:13: AssertionError
+=============================== warnings summary ===============================
+spacy/lang/tokenizer_exceptions.py:45
+  /home/user/BugsInPy/temp/projects/spacy/spacy/lang/tokenizer_exceptions.py:45: DeprecationWarning: invalid escape sequence \.
+    "[A-Za-z0-9\u00a1-\uffff]\."
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED spacy/tests/test_errors.py::test_add_codes - assert False
+========================= 1 failed, 1 warning in 0.40s =========================

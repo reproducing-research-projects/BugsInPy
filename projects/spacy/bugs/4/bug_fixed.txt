@@ -1,0 +1,11 @@
+py.test spacy/tests/regression/test_issue4665.py::test_issue4665
+RUN EVERY COMMAND
+0
+
+
+ImportError while loading conftest '/home/user/BugsInPy/temp/projects/spacy/spacy/tests/conftest.py'.
+spacy/__init__.py:12: in <module>
+    from . import pipeline
+spacy/pipeline/__init__.py:4: in <module>
+    from .pipes import Tagger, DependencyParser, EntityRecognizer, EntityLinker
+E   ModuleNotFoundError: No module named 'spacy.pipeline.pipes'

@@ -1,0 +1,14 @@
+pytest test/units/module_utils/facts/hardware/test_linux_get_cpu_info.py::test_get_cpu_info_missing_arch
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+plugins: mock-1.2
+collected 1 item
+
+test/units/module_utils/facts/hardware/test_linux_get_cpu_info.py .      [100%]
+
+=========================== 1 passed in 0.19 seconds ===========================

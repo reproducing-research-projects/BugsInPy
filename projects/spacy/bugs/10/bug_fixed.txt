@@ -1,0 +1,14 @@
+py.test spacy/tests/matcher/test_matcher_api.py::test_matcher_valid_callback
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.7, pytest-4.0.2, py-1.11.0, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/spacy, inifile:
+plugins: timeout-1.4.2
+collected 1 item
+
+spacy/tests/matcher/test_matcher_api.py .                                [100%]
+
+=========================== 1 passed in 0.42 seconds ===========================

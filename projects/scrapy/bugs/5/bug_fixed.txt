@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_http_response.BaseResponseTest.test_follow_None_url
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

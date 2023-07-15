@@ -1,0 +1,25 @@
+py.test spacy/tests/matcher/test_matcher_logic.py::test_matcher_remove
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.7, pytest-7.1.2, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/spacy, configfile: setup.cfg
+plugins: timeout-1.4.2
+collected 1 item
+
+spacy/tests/matcher/test_matcher_logic.py .                              [100%]
+
+=============================== warnings summary ===============================
+../../../../../../opt/conda/envs/82a7ff21736ff1259b914dfdcdcda196/lib/python3.7/site-packages/plac_ext.py:6
+  /opt/conda/envs/82a7ff21736ff1259b914dfdcdcda196/lib/python3.7/site-packages/plac_ext.py:6: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    import imp
+
+spacy/tests/matcher/test_matcher_logic.py::test_matcher_remove
+spacy/tests/matcher/test_matcher_logic.py::test_matcher_remove
+  /home/user/BugsInPy/temp/projects/spacy/spacy/util.py:345: DeprecationWarning: SelectableGroups dict interface is deprecated. Use select.
+    for entry_point in AVAILABLE_ENTRY_POINTS.get(key, []):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 3 warnings in 0.07s =========================

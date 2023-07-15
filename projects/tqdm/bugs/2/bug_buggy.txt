@@ -1,0 +1,39 @@
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_format_meter
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py F                                               [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_format_meter _______________________________
+
+    def test_format_meter():
+        """Test statistics and progress bar formatting"""
+        try:
+            unich = unichr
+        except NameError:
+            unich = chr
+    
+        format_meter = tqdm.format_meter
+    
+>       assert format_meter(0, 1000, 13) == \
+            "  0%|          | 0/1000 [00:13<?, ?it/s]"
+E       AssertionError: assert None == '  0%|          | 0/1000 [00:13<?, ?it/s]'
+E        +  where None = <function tqdm.format_meter at 0x7f0fc1c198c8>(0, 1000, 13)
+
+tqdm/tests/tests_tqdm.py:259: AssertionError
+=============================== warnings summary ===============================
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    from imp import find_module, load_module, acquire_lock, release_lock
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tqdm/tests/tests_tqdm.py::test_format_meter - AssertionError: assert N...
+========================= 1 failed, 1 warning in 1.52s =========================

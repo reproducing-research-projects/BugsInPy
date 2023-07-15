@@ -1,0 +1,14 @@
+pytest test/units/playbook/test_collectionsearch.py::test_collection_static_warning
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+plugins: mock-1.2
+collected 1 item
+
+test/units/playbook/test_collectionsearch.py .                           [100%]
+
+=========================== 1 passed in 2.17 seconds ===========================

@@ -1,0 +1,31 @@
+pytest -q -s tests/test_pysnooper.py::test_custom_repr_single
+RUN EVERY COMMAND
+0
+
+
+
+==================================== ERRORS ====================================
+___________________ ERROR collecting tests/test_pysnooper.py ___________________
+tests/test_pysnooper.py:11: in <module>
+    from pysnooper.utils import truncate
+pysnooper/__init__.py:20: in <module>
+    from .tracer import Tracer as snoop
+pysnooper/tracer.py:18: in <module>
+    if pycompat.PY2:
+E   AttributeError: module 'pysnooper.pycompat' has no attribute 'PY2'
+=============================== warnings summary ===============================
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/_pytest/config/__init__.py:1248
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/_pytest/config/__init__.py:1248: PytestRemovedIn8Warning: The --strict option is deprecated, use --strict-markers instead.
+    self.issue_config_time_warning(
+
+pysnooper/variables.py:3
+pysnooper/variables.py:3
+  /home/user/BugsInPy/temp/projects/PySnooper/pysnooper/variables.py:3: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
+    from collections import Mapping, Sequence
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_pysnooper.py - AttributeError: module 'pysnooper.pycompat' h...
+3 warnings, 1 error in 1.40s
+ERROR: not found: /home/user/BugsInPy/temp/projects/PySnooper/tests/test_pysnooper.py::test_custom_repr_single
+(no name '/home/user/BugsInPy/temp/projects/PySnooper/tests/test_pysnooper.py::test_custom_repr_single' in any of [<Module test_pysnooper.py>])

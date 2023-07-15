@@ -1,0 +1,62 @@
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_format_meter
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py F                                               [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_format_meter _______________________________
+
+    def test_format_meter():
+        """ Test statistics and progress bar formatting """
+        try:
+            unich = unichr
+        except NameError:
+            unich = chr
+    
+        format_meter = tqdm.format_meter
+    
+        assert format_meter(0, 1000, 13) == \
+            "  0%|          | 0/1000 [00:13<?, ?it/s]"
+        assert format_meter(0, 1000, 13, ncols=68, prefix='desc: ') == \
+            "desc:   0%|                                | 0/1000 [00:13<?, ?it/s]"
+        assert format_meter(231, 1000, 392) == \
+            " 23%|" + unich(0x2588) * 2 + unich(0x258e) + \
+            "       | 231/1000 [06:32<21:44,  1.70s/it]"
+        assert format_meter(10000, 1000, 13) == \
+            "10000it [00:13, 769.23it/s]"
+        assert format_meter(231, 1000, 392, ncols=56, ascii=True) == \
+            " 23%|" + '#' * 3 + '6' + \
+            "            | 231/1000 [06:32<21:44,  1.70s/it]"
+        assert format_meter(100000, 1000, 13, unit_scale=True, unit='iB') == \
+            "100KiB [00:13, 7.69KiB/s]"
+        assert format_meter(100, 1000, 12, ncols=0, rate=7.33) == \
+            " 10% 100/1000 [00:12<02:02,  7.33it/s]"
+        # Check that bar_format correctly adapts {bar} size to the rest
+>       assert format_meter(20, 100, 12, ncols=13, rate=8.1,
+                            bar_format=r'{l_bar}{bar}|{n_fmt}/{total_fmt}') == \
+            " 20%|" + unich(0x258f) + "|20/100"
+E       AssertionError: assert ' 20%|▏| 20/1...9,  8.10it/s]' == ' 20%|▏|20/100'
+E         -  20%|▏|20/100
+E         +  20%|▏| 20/100 [00:12<00:09,  8.10it/s]
+
+tqdm/tests/tests_tqdm.py:218: AssertionError
+=============================== warnings summary ===============================
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    from imp import find_module, load_module, acquire_lock, release_lock
+
+tqdm/_main.py:59
+  /home/user/BugsInPy/temp/projects/tqdm/tqdm/_main.py:59: DeprecationWarning: invalid escape sequence \s
+    argv = re.split('\s*(--\S+)[=\s]*', ' '.join(sys.argv[1:]))
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tqdm/tests/tests_tqdm.py::test_format_meter - AssertionError: assert '...
+======================== 1 failed, 2 warnings in 1.31s =========================

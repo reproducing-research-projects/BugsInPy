@@ -1,0 +1,277 @@
+tox tests/test_hooks.py::TestFindHooks::test_find_hook
+tox tests/test_hooks.py::TestExternalHooks::test_run_hook
+RUN EVERY COMMAND
+0
+
+
+lint recreate: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint
+lint installdeps: pre-commit>=1.20.0
+lint installed: cfgv==3.3.1,distlib==0.3.6,filelock==3.4.1,identify==2.4.4,importlib-metadata==4.8.3,importlib-resources==5.2.3,nodeenv==1.6.0,platformdirs==2.4.0,pre-commit==2.17.0,PyYAML==6.0,toml==0.10.2,typing-extensions==4.1.1,virtualenv==20.17.1,zipp==3.6.0
+lint run-test-pre: PYTHONHASHSEED='1942306892'
+lint run-test: commands[0] | python -m pre_commit run tests/test_hooks.py::TestFindHooks::test_find_hook
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to /root/.cache/pre-commit/patch1689392265-2582.
+[INFO] Initializing environment for https://gitlab.com/pycqa/flake8.
+[INFO] Restored changes from /root/.cache/pre-commit/patch1689392265-2582.
+An unexpected error has occurred: CalledProcessError: command: ('/usr/bin/git', 'fetch', 'origin', '--tags')
+return code: 128
+expected return code: 0
+stdout: (none)
+stderr:
+    fatal: could not read Username for 'https://gitlab.com': No such device or address
+    
+Check the log at /root/.cache/pre-commit/pre-commit.log
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint/bin/python -m pre_commit run tests/test_hooks.py::TestFindHooks::test_find_hook (exited with code 3)
+py36 recreate: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36
+py36 installdeps: -rtest_requirements.txt
+py36 installed: attrs==22.2.0,coverage==6.2,freezegun==1.2.2,importlib-metadata==4.8.3,iniconfig==1.1.1,packaging==21.3,pluggy==1.0.0,py==1.11.0,pyparsing==3.1.0,pytest==7.0.1,pytest-cov==4.0.0,pytest-mock==3.6.1,python-dateutil==2.8.2,six==1.16.0,tomli==1.2.3,typing-extensions==4.1.1,zipp==3.6.0
+py36 run-test-pre: PYTHONHASHSEED='1942306892'
+py36 run-test: commands[0] | pip install -e .
+Obtaining file:///home/user/BugsInPy/temp/projects/cookiecutter
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Collecting click>=7.0
+  Using cached click-8.0.4-py3-none-any.whl (97 kB)
+Collecting poyo>=0.5.0
+  Using cached poyo-0.5.0-py2.py3-none-any.whl (10 kB)
+Collecting python-slugify>=4.0.0
+  Using cached python_slugify-6.1.2-py2.py3-none-any.whl (9.4 kB)
+Collecting MarkupSafe<2.0.0
+  Using cached MarkupSafe-1.1.1-cp36-cp36m-manylinux2010_x86_64.whl (32 kB)
+Collecting requests>=2.23.0
+  Using cached requests-2.27.1-py2.py3-none-any.whl (63 kB)
+Collecting binaryornot>=0.4.4
+  Using cached binaryornot-0.4.4-py2.py3-none-any.whl (9.0 kB)
+Collecting Jinja2<3.0.0
+  Using cached Jinja2-2.11.3-py2.py3-none-any.whl (125 kB)
+Collecting jinja2-time>=0.2.0
+  Using cached jinja2_time-0.2.0-py2.py3-none-any.whl (6.4 kB)
+Requirement already satisfied: importlib-metadata; python_version < "3.8" in ./.tox/py36/lib/python3.6/site-packages (from click>=7.0->cookiecutter==2.0.0) (4.8.3)
+Collecting text-unidecode>=1.3
+  Using cached text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
+Collecting urllib3<1.27,>=1.21.1
+  Using cached urllib3-1.26.16-py2.py3-none-any.whl (143 kB)
+Collecting idna<4,>=2.5; python_version >= "3"
+  Using cached idna-3.4-py3-none-any.whl (61 kB)
+Collecting certifi>=2017.4.17
+  Using cached certifi-2023.5.7-py3-none-any.whl (156 kB)
+Collecting charset-normalizer~=2.0.0; python_version >= "3"
+  Using cached charset_normalizer-2.0.12-py3-none-any.whl (39 kB)
+Collecting chardet>=3.0.2
+  Using cached chardet-5.0.0-py3-none-any.whl (193 kB)
+Collecting arrow
+  Using cached arrow-1.2.3-py3-none-any.whl (66 kB)
+Requirement already satisfied: typing-extensions>=3.6.4; python_version < "3.8" in ./.tox/py36/lib/python3.6/site-packages (from importlib-metadata; python_version < "3.8"->click>=7.0->cookiecutter==2.0.0) (4.1.1)
+Requirement already satisfied: zipp>=0.5 in ./.tox/py36/lib/python3.6/site-packages (from importlib-metadata; python_version < "3.8"->click>=7.0->cookiecutter==2.0.0) (3.6.0)
+Requirement already satisfied: python-dateutil>=2.7.0 in ./.tox/py36/lib/python3.6/site-packages (from arrow->jinja2-time>=0.2.0->cookiecutter==2.0.0) (2.8.2)
+Requirement already satisfied: six>=1.5 in ./.tox/py36/lib/python3.6/site-packages (from python-dateutil>=2.7.0->arrow->jinja2-time>=0.2.0->cookiecutter==2.0.0) (1.16.0)
+Installing collected packages: click, poyo, text-unidecode, python-slugify, MarkupSafe, urllib3, idna, certifi, charset-normalizer, requests, chardet, binaryornot, Jinja2, arrow, jinja2-time, cookiecutter
+  Running setup.py develop for cookiecutter
+Successfully installed Jinja2-2.11.3 MarkupSafe-1.1.1 arrow-1.2.3 binaryornot-0.4.4 certifi-2023.5.7 chardet-5.0.0 charset-normalizer-2.0.12 click-8.0.4 cookiecutter idna-3.4 jinja2-time-0.2.0 poyo-0.5.0 python-slugify-6.1.2 requests-2.27.1 text-unidecode-1.3 urllib3-1.26.16
+WARNING: You are using pip version 20.1.1; however, version 21.3.1 is available.
+You should consider upgrading via the '/home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/python -m pip install --upgrade pip' command.
+py36 run-test: commands[1] | pytest --cov=cookiecutter tests/test_hooks.py::TestFindHooks::test_find_hook
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-7.0.1, pluggy-1.0.0 -- /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/python
+cachedir: .tox/py36/.pytest_cache
+rootdir: /home/user/BugsInPy/temp/projects/cookiecutter, configfile: setup.cfg
+plugins: mock-3.6.1, cov-4.0.0
+collecting ... collected 1 item
+
+tests/test_hooks.py::TestFindHooks::test_find_hook FAILED                [100%]
+
+=================================== FAILURES ===================================
+_________________________ TestFindHooks.test_find_hook _________________________
+
+self = <tests.test_hooks.TestFindHooks object at 0x7fb534c6fbe0>
+
+    def test_find_hook(self):
+        """Finds the specified hook."""
+        with utils.work_in(self.repo_path):
+            expected_pre = os.path.abspath('hooks/pre_gen_project.py')
+            actual_hook_path = hooks.find_hook('pre_gen_project')
+>           assert expected_pre == actual_hook_path[0]
+E           AssertionError: assert '/home/user/BugsInPy/temp/projects/cookiecutter/tests/test-hooks/hooks/pre_gen_project.py' == '/'
+E             - /
+E             + /home/user/BugsInPy/temp/projects/cookiecutter/tests/test-hooks/hooks/pre_gen_project.py
+
+tests/test_hooks.py:91: AssertionError
+
+----------- coverage: platform linux, python 3.6.9-final-0 -----------
+Name                          Stmts   Miss  Cover   Missing
+-----------------------------------------------------------
+cookiecutter/__init__.py          1      0   100%
+cookiecutter/__main__.py          1      1     0%   2
+cookiecutter/cli.py              51     51     0%   2-170
+cookiecutter/config.py           53     53     0%   2-124
+cookiecutter/environment.py      20     13    35%   23-36, 44-49, 64
+cookiecutter/exceptions.py       23      4    83%   120-122, 126
+cookiecutter/extensions.py       26     26     0%   2-51
+cookiecutter/find.py             17     17     0%   2-31
+cookiecutter/generate.py        173    173     0%   2-372
+cookiecutter/hooks.py            60     32    47%   54-55, 61, 70-90, 100-111, 122-127
+cookiecutter/log.py              21     21     0%   2-51
+cookiecutter/main.py             29     29     0%   7-109
+cookiecutter/prompt.py           90     75    17%   19, 32, 41, 54-78, 86-96, 107-119, 139-156, 164-168, 177-226
+cookiecutter/replay.py           27     27     0%   6-51
+cookiecutter/repository.py       39     39     0%   2-127
+cookiecutter/utils.py            48     25    48%   21-22, 38-45, 68-69, 84-107
+cookiecutter/vcs.py              53     53     0%   2-120
+cookiecutter/zipfile.py          56     56     0%   2-112
+-----------------------------------------------------------
+TOTAL                           788    695    12%
+
+=========================== short test summary info ============================
+FAILED tests/test_hooks.py::TestFindHooks::test_find_hook - AssertionError: a...
+============================== 1 failed in 0.68s ===============================
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/pytest --cov=cookiecutter tests/test_hooks.py::TestFindHooks::test_find_hook (exited with code 1)
+py37 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py37
+ERROR: InterpreterNotFound: python3.7
+py38 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py38
+ERROR: InterpreterNotFound: python3.8
+pypy3 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/pypy3
+ERROR: InterpreterNotFound: pypy3
+___________________________________ summary ____________________________________
+ERROR:   lint: commands failed
+ERROR:   py36: commands failed
+ERROR:  py37: InterpreterNotFound: python3.7
+ERROR:  py38: InterpreterNotFound: python3.8
+ERROR:  pypy3: InterpreterNotFound: pypy3
+RUN EVERY COMMAND
+1
+tox tests/test_hooks.py::TestFindHooks::test_find_hook
+
+lint installed: cfgv==3.3.1,distlib==0.3.6,filelock==3.4.1,identify==2.4.4,importlib-metadata==4.8.3,importlib-resources==5.2.3,nodeenv==1.6.0,platformdirs==2.4.0,pre-commit==2.17.0,PyYAML==6.0,toml==0.10.2,typing-extensions==4.1.1,virtualenv==20.17.1,zipp==3.6.0
+lint run-test-pre: PYTHONHASHSEED='2594423239'
+lint run-test: commands[0] | python -m pre_commit run tests/test_hooks.py::TestExternalHooks::test_run_hook
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to /root/.cache/pre-commit/patch1689392318-2654.
+[INFO] Initializing environment for https://gitlab.com/pycqa/flake8.
+[INFO] Restored changes from /root/.cache/pre-commit/patch1689392318-2654.
+An unexpected error has occurred: CalledProcessError: command: ('/usr/bin/git', 'fetch', 'origin', '--tags')
+return code: 128
+expected return code: 0
+stdout: (none)
+stderr:
+    fatal: could not read Username for 'https://gitlab.com': No such device or address
+    
+Check the log at /root/.cache/pre-commit/pre-commit.log
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint/bin/python -m pre_commit run tests/test_hooks.py::TestExternalHooks::test_run_hook (exited with code 3)
+py36 installed: arrow==1.2.3,attrs==22.2.0,binaryornot==0.4.4,certifi==2023.5.7,chardet==5.0.0,charset-normalizer==2.0.12,click==8.0.4,-e git+https://github.com/cookiecutter/cookiecutter@d7e7b28811e474e14d1bed747115e47dcdd15ba3#egg=cookiecutter,coverage==6.2,freezegun==1.2.2,idna==3.4,importlib-metadata==4.8.3,iniconfig==1.1.1,Jinja2==2.11.3,jinja2-time==0.2.0,MarkupSafe==1.1.1,packaging==21.3,pluggy==1.0.0,poyo==0.5.0,py==1.11.0,pyparsing==3.1.0,pytest==7.0.1,pytest-cov==4.0.0,pytest-mock==3.6.1,python-dateutil==2.8.2,python-slugify==6.1.2,requests==2.27.1,six==1.16.0,text-unidecode==1.3,tomli==1.2.3,typing-extensions==4.1.1,urllib3==1.26.16,zipp==3.6.0
+py36 run-test-pre: PYTHONHASHSEED='2594423239'
+py36 run-test: commands[0] | pip install -e .
+Obtaining file:///home/user/BugsInPy/temp/projects/cookiecutter
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Requirement already satisfied: requests>=2.23.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (2.27.1)
+Requirement already satisfied: Jinja2<3.0.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (2.11.3)
+Requirement already satisfied: click>=7.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (8.0.4)
+Requirement already satisfied: binaryornot>=0.4.4 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (0.4.4)
+Requirement already satisfied: poyo>=0.5.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (0.5.0)
+Requirement already satisfied: MarkupSafe<2.0.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (1.1.1)
+Requirement already satisfied: python-slugify>=4.0.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (6.1.2)
+Requirement already satisfied: jinja2-time>=0.2.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (0.2.0)
+Requirement already satisfied: charset-normalizer~=2.0.0; python_version >= "3" in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (2.0.12)
+Requirement already satisfied: idna<4,>=2.5; python_version >= "3" in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (3.4)
+Requirement already satisfied: certifi>=2017.4.17 in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (2023.5.7)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (1.26.16)
+Requirement already satisfied: importlib-metadata; python_version < "3.8" in ./.tox/py36/lib/python3.6/site-packages (from click>=7.0->cookiecutter==2.0.0) (4.8.3)
+Requirement already satisfied: chardet>=3.0.2 in ./.tox/py36/lib/python3.6/site-packages (from binaryornot>=0.4.4->cookiecutter==2.0.0) (5.0.0)
+Requirement already satisfied: text-unidecode>=1.3 in ./.tox/py36/lib/python3.6/site-packages (from python-slugify>=4.0.0->cookiecutter==2.0.0) (1.3)
+Requirement already satisfied: arrow in ./.tox/py36/lib/python3.6/site-packages (from jinja2-time>=0.2.0->cookiecutter==2.0.0) (1.2.3)
+Requirement already satisfied: typing-extensions>=3.6.4; python_version < "3.8" in ./.tox/py36/lib/python3.6/site-packages (from importlib-metadata; python_version < "3.8"->click>=7.0->cookiecutter==2.0.0) (4.1.1)
+Requirement already satisfied: zipp>=0.5 in ./.tox/py36/lib/python3.6/site-packages (from importlib-metadata; python_version < "3.8"->click>=7.0->cookiecutter==2.0.0) (3.6.0)
+Requirement already satisfied: python-dateutil>=2.7.0 in ./.tox/py36/lib/python3.6/site-packages (from arrow->jinja2-time>=0.2.0->cookiecutter==2.0.0) (2.8.2)
+Requirement already satisfied: six>=1.5 in ./.tox/py36/lib/python3.6/site-packages (from python-dateutil>=2.7.0->arrow->jinja2-time>=0.2.0->cookiecutter==2.0.0) (1.16.0)
+Installing collected packages: cookiecutter
+  Attempting uninstall: cookiecutter
+    Found existing installation: cookiecutter 2.0.0
+    Uninstalling cookiecutter-2.0.0:
+      Successfully uninstalled cookiecutter-2.0.0
+  Running setup.py develop for cookiecutter
+Successfully installed cookiecutter
+WARNING: You are using pip version 20.1.1; however, version 21.3.1 is available.
+You should consider upgrading via the '/home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/python -m pip install --upgrade pip' command.
+py36 run-test: commands[1] | pytest --cov=cookiecutter tests/test_hooks.py::TestExternalHooks::test_run_hook
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-7.0.1, pluggy-1.0.0 -- /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/python
+cachedir: .tox/py36/.pytest_cache
+rootdir: /home/user/BugsInPy/temp/projects/cookiecutter, configfile: setup.cfg
+plugins: mock-3.6.1, cov-4.0.0
+collecting ... collected 1 item
+
+tests/test_hooks.py::TestExternalHooks::test_run_hook FAILED             [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestExternalHooks.test_run_hook ________________________
+
+self = <tests.test_hooks.TestExternalHooks object at 0x7f441efb6fd0>
+
+    def test_run_hook(self):
+        """Execute hook from specified template in specified output \
+        directory."""
+        tests_dir = os.path.join(self.repo_path, 'input{{hooks}}')
+        with utils.work_in(self.repo_path):
+            hooks.run_hook('pre_gen_project', tests_dir, {})
+            assert os.path.isfile(os.path.join(tests_dir, 'python_pre.txt'))
+>           assert os.path.isfile(os.path.join(tests_dir, 'shell_pre.txt'))
+E           AssertionError: assert False
+E            +  where False = <function isfile at 0x7f4420d75c80>('/home/user/BugsInPy/temp/projects/cookiecutter/tests/test-hooks/input{{hooks}}/shell_pre.txt')
+E            +    where <function isfile at 0x7f4420d75c80> = <module 'posixpath' from '/opt/conda/envs/e1918bc774e14d4d9dca5a9720022972/lib/python3.6/posixpath.py'>.isfile
+E            +      where <module 'posixpath' from '/opt/conda/envs/e1918bc774e14d4d9dca5a9720022972/lib/python3.6/posixpath.py'> = os.path
+E            +    and   '/home/user/BugsInPy/temp/projects/cookiecutter/tests/test-hooks/input{{hooks}}/shell_pre.txt' = <function join at 0x7f4420d1d620>('/home/user/BugsInPy/temp/projects/cookiecutter/tests/test-hooks/input{{hooks}}', 'shell_pre.txt')
+E            +      where <function join at 0x7f4420d1d620> = <module 'posixpath' from '/opt/conda/envs/e1918bc774e14d4d9dca5a9720022972/lib/python3.6/posixpath.py'>.join
+E            +        where <module 'posixpath' from '/opt/conda/envs/e1918bc774e14d4d9dca5a9720022972/lib/python3.6/posixpath.py'> = os.path
+
+tests/test_hooks.py:188: AssertionError
+----------------------------- Captured stdout call -----------------------------
+pre generation hook
+
+----------- coverage: platform linux, python 3.6.9-final-0 -----------
+Name                          Stmts   Miss  Cover   Missing
+-----------------------------------------------------------
+cookiecutter/__init__.py          1      0   100%
+cookiecutter/__main__.py          1      1     0%   2
+cookiecutter/cli.py              51     51     0%   2-170
+cookiecutter/config.py           53     53     0%   2-124
+cookiecutter/environment.py      20      3    85%   35-36, 49
+cookiecutter/exceptions.py       23      4    83%   120-122, 126
+cookiecutter/extensions.py       26      6    77%   18, 31-35, 49
+cookiecutter/find.py             17     17     0%   2-31
+cookiecutter/generate.py        173    173     0%   2-372
+cookiecutter/hooks.py            60     11    82%   54-55, 61, 74, 82-90, 124-125
+cookiecutter/log.py              21     21     0%   2-51
+cookiecutter/main.py             29     29     0%   7-109
+cookiecutter/prompt.py           90     75    17%   19, 32, 41, 54-78, 86-96, 107-119, 139-156, 164-168, 177-226
+cookiecutter/replay.py           27     27     0%   6-51
+cookiecutter/repository.py       39     39     0%   2-127
+cookiecutter/utils.py            48     23    52%   21-22, 38-45, 84-107
+cookiecutter/vcs.py              53     53     0%   2-120
+cookiecutter/zipfile.py          56     56     0%   2-112
+-----------------------------------------------------------
+TOTAL                           788    642    19%
+
+=========================== short test summary info ============================
+FAILED tests/test_hooks.py::TestExternalHooks::test_run_hook - AssertionError...
+============================== 1 failed in 1.62s ===============================
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/pytest --cov=cookiecutter tests/test_hooks.py::TestExternalHooks::test_run_hook (exited with code 1)
+py37 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py37
+ERROR: InterpreterNotFound: python3.7
+py38 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py38
+ERROR: InterpreterNotFound: python3.8
+pypy3 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/pypy3
+ERROR: InterpreterNotFound: pypy3
+___________________________________ summary ____________________________________
+ERROR:   lint: commands failed
+ERROR:   py36: commands failed
+ERROR:  py37: InterpreterNotFound: python3.7
+ERROR:  py38: InterpreterNotFound: python3.8
+ERROR:  pypy3: InterpreterNotFound: pypy3

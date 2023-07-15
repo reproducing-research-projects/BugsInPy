@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_black.BlackTestCase.test_symlink_out_of_root_directory
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK

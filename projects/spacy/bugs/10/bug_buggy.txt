@@ -1,0 +1,27 @@
+py.test spacy/tests/matcher/test_matcher_api.py::test_matcher_valid_callback
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.7, pytest-4.0.2, py-1.11.0, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/spacy, inifile:
+plugins: timeout-1.4.2
+collected 1 item
+
+spacy/tests/matcher/test_matcher_api.py F                                [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_matcher_valid_callback __________________________
+
+en_vocab = <spacy.vocab.Vocab object at 0x7f7d2c43b0e0>
+
+    def test_matcher_valid_callback(en_vocab):
+        """Test that on_match can only be None or callable."""
+        matcher = Matcher(en_vocab)
+        with pytest.raises(ValueError):
+>           matcher.add("TEST", [], [{"TEXT": "test"}])
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+spacy/tests/matcher/test_matcher_api.py:419: Failed
+=========================== 1 failed in 0.44 seconds ===========================

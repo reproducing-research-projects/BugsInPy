@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_command_version.VersionTest.test_output
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.643s
+
+OK

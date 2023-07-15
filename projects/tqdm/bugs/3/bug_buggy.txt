@@ -1,0 +1,76 @@
+python3 -m pytest tqdm/tests/tests_tqdm.py::test_bool
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/tqdm
+collected 1 item
+
+tqdm/tests/tests_tqdm.py F                                               [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_bool ___________________________________
+
+    @with_setup(pretest, posttest)
+    def test_bool():
+        """Test boolean cast"""
+    
+        def internal(our_file, disable):
+            with trange(10, file=our_file, disable=disable) as t:
+                assert t
+            with trange(0, file=our_file, disable=disable) as t:
+                assert not t
+    
+            def get_bool_for_tqdm(*args, **kwargs):
+                kwargs['file'] = our_file
+                kwargs['disable'] = disable
+                with tqdm(*args, **kwargs) as t:
+                    return bool(t)
+    
+            assert get_bool_for_tqdm(total=10)
+            assert not get_bool_for_tqdm(total=0)
+            assert not get_bool_for_tqdm([])
+            assert get_bool_for_tqdm([0])
+            assert get_bool_for_tqdm((x for x in []))
+            assert get_bool_for_tqdm((x for x in [1,2,3]))
+            try:
+                get_bool_for_tqdm()
+            except TypeError:
+                pass
+            else:
+                raise TypeError(
+                    "Expected tqdm() with neither total nor iterable to fail")
+    
+        # test with and without disable
+        with closing(StringIO()) as our_file:
+>           internal(our_file, False)
+
+tqdm/tests/tests_tqdm.py:1742: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tqdm/tests/tests_tqdm.py:1730: in internal
+    assert get_bool_for_tqdm((x for x in []))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<generator object test_bool.<locals>.internal.<locals>.<genexpr> at 0x7f760f3378e0>,)
+kwargs = {'disable': False, 'file': <_io.StringIO object at 0x7f760f127168>}
+t = 0it [00:00, ?it/s]
+
+    def get_bool_for_tqdm(*args, **kwargs):
+        kwargs['file'] = our_file
+        kwargs['disable'] = disable
+        with tqdm(*args, **kwargs) as t:
+>           return bool(t)
+E           TypeError: 'NoneType' object cannot be interpreted as an integer
+
+tqdm/tests/tests_tqdm.py:1724: TypeError
+=============================== warnings summary ===============================
+/opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12
+  /opt/conda/envs/30e3dc759bf3510e44715fc0a8fe8406/lib/python3.6/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    from imp import find_module, load_module, acquire_lock, release_lock
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tqdm/tests/tests_tqdm.py::test_bool - TypeError: 'NoneType' object can...
+========================= 1 failed, 1 warning in 1.85s =========================

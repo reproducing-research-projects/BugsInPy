@@ -1,0 +1,75 @@
+pytest tests/test_forms_from_non_typing_sequences.py::test_python_list_param_as_form
+pytest tests/test_forms_from_non_typing_sequences.py::test_python_set_param_as_form
+pytest tests/test_forms_from_non_typing_sequences.py::test_python_tuple_param_as_form
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_forms_from_non_typing_sequences.py .                          [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.41s =========================
+RUN EVERY COMMAND
+1
+pytest tests/test_forms_from_non_typing_sequences.py::test_python_list_param_as_form
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_forms_from_non_typing_sequences.py .                          [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.32s =========================
+RUN EVERY COMMAND
+2
+pytest tests/test_forms_from_non_typing_sequences.py::test_python_set_param_as_form
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/fastapi
+plugins: cov-2.9.0
+collected 1 item
+
+tests/test_forms_from_non_typing_sequences.py .                          [100%]
+
+=============================== warnings summary ===============================
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+/opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10
+  /opt/conda/envs/e22995067de84b5655026e5ebb62b5bf/lib/python3.8/site-packages/aiofiles/os.py:10: DeprecationWarning: "@coroutine" decorator is deprecated since Python 3.8, use "async def" instead
+    def run(*args, loop=None, executor=None, **kwargs):
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.36s =========================

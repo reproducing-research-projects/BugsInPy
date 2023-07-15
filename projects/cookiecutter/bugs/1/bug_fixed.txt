@@ -1,0 +1,108 @@
+tox tests/test_generate_context.py::test_generate_context_decodes_non_ascii_chars
+RUN EVERY COMMAND
+0
+
+
+lint installed: cfgv==3.3.1,distlib==0.3.6,filelock==3.4.1,identify==2.4.4,importlib-metadata==4.8.3,importlib-resources==5.2.3,nodeenv==1.6.0,platformdirs==2.4.0,pre-commit==2.17.0,PyYAML==6.0,toml==0.10.2,typing-extensions==4.1.1,virtualenv==20.17.1,zipp==3.6.0
+lint run-test-pre: PYTHONHASHSEED='3409267202'
+lint run-test: commands[0] | python -m pre_commit run tests/test_generate_context.py::test_generate_context_decodes_non_ascii_chars
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to /root/.cache/pre-commit/patch1689391928-1641.
+[INFO] Initializing environment for https://gitlab.com/pycqa/flake8.
+[INFO] Restored changes from /root/.cache/pre-commit/patch1689391928-1641.
+An unexpected error has occurred: CalledProcessError: command: ('/usr/bin/git', 'fetch', 'origin', '--tags')
+return code: 128
+expected return code: 0
+stdout: (none)
+stderr:
+    fatal: could not read Username for 'https://gitlab.com': No such device or address
+    
+Check the log at /root/.cache/pre-commit/pre-commit.log
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint/bin/python -m pre_commit run tests/test_generate_context.py::test_generate_context_decodes_non_ascii_chars (exited with code 3)
+py36 installed: arrow==1.2.3,attrs==22.2.0,binaryornot==0.4.4,certifi==2023.5.7,chardet==5.0.0,charset-normalizer==2.0.12,click==8.0.4,-e git+https://github.com/cookiecutter/cookiecutter@c15633745df6abdb24e02746b82aadb20b8cdf8c#egg=cookiecutter,coverage==6.2,freezegun==1.2.2,idna==3.4,importlib-metadata==4.8.3,iniconfig==1.1.1,Jinja2==2.11.3,jinja2-time==0.2.0,MarkupSafe==1.1.1,packaging==21.3,pluggy==1.0.0,poyo==0.5.0,py==1.11.0,pyparsing==3.1.0,pytest==7.0.1,pytest-cov==4.0.0,pytest-mock==3.6.1,python-dateutil==2.8.2,python-slugify==6.1.2,requests==2.27.1,six==1.16.0,text-unidecode==1.3,tomli==1.2.3,typing-extensions==4.1.1,urllib3==1.26.16,zipp==3.6.0
+py36 run-test-pre: PYTHONHASHSEED='3409267202'
+py36 run-test: commands[0] | pip install -e .
+Obtaining file:///home/user/BugsInPy/temp/projects/cookiecutter
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Requirement already satisfied: click>=7.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (8.0.4)
+Requirement already satisfied: python-slugify>=4.0.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (6.1.2)
+Requirement already satisfied: Jinja2<3.0.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (2.11.3)
+Requirement already satisfied: requests>=2.23.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (2.27.1)
+Requirement already satisfied: jinja2-time>=0.2.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (0.2.0)
+Requirement already satisfied: MarkupSafe<2.0.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (1.1.1)
+Requirement already satisfied: binaryornot>=0.4.4 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (0.4.4)
+Requirement already satisfied: poyo>=0.5.0 in ./.tox/py36/lib/python3.6/site-packages (from cookiecutter==2.0.0) (0.5.0)
+Requirement already satisfied: importlib-metadata; python_version < "3.8" in ./.tox/py36/lib/python3.6/site-packages (from click>=7.0->cookiecutter==2.0.0) (4.8.3)
+Requirement already satisfied: text-unidecode>=1.3 in ./.tox/py36/lib/python3.6/site-packages (from python-slugify>=4.0.0->cookiecutter==2.0.0) (1.3)
+Requirement already satisfied: charset-normalizer~=2.0.0; python_version >= "3" in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (2.0.12)
+Requirement already satisfied: certifi>=2017.4.17 in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (2023.5.7)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (1.26.16)
+Requirement already satisfied: idna<4,>=2.5; python_version >= "3" in ./.tox/py36/lib/python3.6/site-packages (from requests>=2.23.0->cookiecutter==2.0.0) (3.4)
+Requirement already satisfied: arrow in ./.tox/py36/lib/python3.6/site-packages (from jinja2-time>=0.2.0->cookiecutter==2.0.0) (1.2.3)
+Requirement already satisfied: chardet>=3.0.2 in ./.tox/py36/lib/python3.6/site-packages (from binaryornot>=0.4.4->cookiecutter==2.0.0) (5.0.0)
+Requirement already satisfied: typing-extensions>=3.6.4; python_version < "3.8" in ./.tox/py36/lib/python3.6/site-packages (from importlib-metadata; python_version < "3.8"->click>=7.0->cookiecutter==2.0.0) (4.1.1)
+Requirement already satisfied: zipp>=0.5 in ./.tox/py36/lib/python3.6/site-packages (from importlib-metadata; python_version < "3.8"->click>=7.0->cookiecutter==2.0.0) (3.6.0)
+Requirement already satisfied: python-dateutil>=2.7.0 in ./.tox/py36/lib/python3.6/site-packages (from arrow->jinja2-time>=0.2.0->cookiecutter==2.0.0) (2.8.2)
+Requirement already satisfied: six>=1.5 in ./.tox/py36/lib/python3.6/site-packages (from python-dateutil>=2.7.0->arrow->jinja2-time>=0.2.0->cookiecutter==2.0.0) (1.16.0)
+Installing collected packages: cookiecutter
+  Attempting uninstall: cookiecutter
+    Found existing installation: cookiecutter 2.0.0
+    Uninstalling cookiecutter-2.0.0:
+      Successfully uninstalled cookiecutter-2.0.0
+  Running setup.py develop for cookiecutter
+Successfully installed cookiecutter
+WARNING: You are using pip version 20.1.1; however, version 21.3.1 is available.
+You should consider upgrading via the '/home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/python -m pip install --upgrade pip' command.
+py36 run-test: commands[1] | pytest --cov=cookiecutter tests/test_generate_context.py::test_generate_context_decodes_non_ascii_chars
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-7.0.1, pluggy-1.0.0 -- /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/python
+cachedir: .tox/py36/.pytest_cache
+rootdir: /home/user/BugsInPy/temp/projects/cookiecutter, configfile: setup.cfg
+plugins: mock-3.6.1, cov-4.0.0
+collecting ... collected 1 item
+
+tests/test_generate_context.py::test_generate_context_decodes_non_ascii_chars PASSED [100%]
+
+----------- coverage: platform linux, python 3.6.9-final-0 -----------
+Name                          Stmts   Miss  Cover   Missing
+-----------------------------------------------------------
+cookiecutter/__init__.py          1      0   100%
+cookiecutter/__main__.py          1      1     0%   2
+cookiecutter/cli.py              55     55     0%   2-185
+cookiecutter/config.py           53     53     0%   2-124
+cookiecutter/environment.py      20     13    35%   23-36, 44-49, 64
+cookiecutter/exceptions.py       23      4    83%   120-122, 126
+cookiecutter/extensions.py       26     26     0%   2-51
+cookiecutter/find.py             17     12    29%   16-31
+cookiecutter/generate.py        175    141    19%   38-45, 50-67, 87-96, 106, 108, 135-189, 196-218, 223-226, 241-252, 272-380
+cookiecutter/hooks.py            64     47    27%   29-36, 51-64, 73-93, 103-114, 125-131
+cookiecutter/log.py              21     21     0%   2-51
+cookiecutter/main.py             30     30     0%   7-115
+cookiecutter/prompt.py           90     75    17%   19, 32, 41, 54-78, 86-96, 107-119, 139-156, 164-168, 177-226
+cookiecutter/replay.py           27     27     0%   6-51
+cookiecutter/repository.py       39     39     0%   2-127
+cookiecutter/utils.py            48     32    33%   21-22, 30, 38-45, 54-60, 68-69, 84-107
+cookiecutter/vcs.py              53     53     0%   2-120
+cookiecutter/zipfile.py          56     56     0%   2-112
+-----------------------------------------------------------
+TOTAL                           799    685    14%
+
+
+============================== 1 passed in 1.07s ===============================
+py37 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py37
+ERROR: InterpreterNotFound: python3.7
+py38 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py38
+ERROR: InterpreterNotFound: python3.8
+pypy3 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/pypy3
+ERROR: InterpreterNotFound: pypy3
+___________________________________ summary ____________________________________
+ERROR:   lint: commands failed
+  py36: commands succeeded
+ERROR:  py37: InterpreterNotFound: python3.7
+ERROR:  py38: InterpreterNotFound: python3.8
+ERROR:  pypy3: InterpreterNotFound: pypy3

@@ -1,0 +1,78 @@
+tox tests/test_read_user_choice.py::test_click_invocation
+RUN EVERY COMMAND
+0
+
+
+GLOB sdist-make: /home/user/BugsInPy/temp/projects/cookiecutter/setup.py
+lint installed: cfgv==3.3.1,distlib==0.3.6,filelock==3.4.1,identify==2.4.4,importlib-metadata==4.8.3,importlib-resources==5.2.3,nodeenv==1.6.0,platformdirs==2.4.0,pre-commit==2.17.0,PyYAML==6.0,toml==0.10.2,typing-extensions==4.1.1,virtualenv==20.17.1,zipp==3.6.0
+lint run-test-pre: PYTHONHASHSEED='1890966867'
+lint run-test: commands[0] | python -m pre_commit run tests/test_read_user_choice.py::test_click_invocation
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to /root/.cache/pre-commit/patch1689393113-4849.
+[INFO] Initializing environment for https://gitlab.com/pycqa/flake8.
+[INFO] Restored changes from /root/.cache/pre-commit/patch1689393113-4849.
+An unexpected error has occurred: CalledProcessError: command: ('/usr/bin/git', 'fetch', 'origin', '--tags')
+return code: 128
+expected return code: 0
+stdout: (none)
+stderr:
+    fatal: could not read Username for 'https://gitlab.com': No such device or address
+    
+Check the log at /root/.cache/pre-commit/pre-commit.log
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint/bin/python -m pre_commit run tests/test_read_user_choice.py::test_click_invocation (exited with code 3)
+py27 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py27
+ERROR: InterpreterNotFound: python2.7
+py35 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py35
+ERROR: InterpreterNotFound: python3.5
+py36 inst-nodeps: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.6.0.zip
+py36 installed: arrow==1.2.3,attrs==22.2.0,binaryornot==0.4.4,certifi==2023.5.7,chardet==5.0.0,charset-normalizer==2.0.12,click==8.0.4,cookiecutter @ file:///home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.6.0.zip,coverage==6.2,freezegun==1.2.2,future==0.18.3,idna==3.4,importlib-metadata==4.8.3,iniconfig==1.1.1,Jinja2==3.0.3,jinja2-time==0.2.0,MarkupSafe==2.0.1,packaging==21.3,pluggy==1.0.0,poyo==0.5.0,py==1.11.0,pyparsing==3.1.0,pytest==7.0.1,pytest-catchlog==1.2.2,pytest-cov==4.0.0,pytest-mock==3.6.1,python-dateutil==2.8.2,requests==2.27.1,six==1.16.0,tomli==1.2.3,typing-extensions==4.1.1,urllib3==1.26.16,whichcraft==0.6.1,zipp==3.6.0
+py36 run-test-pre: PYTHONHASHSEED='1890966867'
+py36 run-test: commands[0] | pytest --cov=cookiecutter tests/test_read_user_choice.py::test_click_invocation
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-7.0.1, pluggy-1.0.0
+cachedir: .tox/py36/.pytest_cache
+rootdir: /home/user/BugsInPy/temp/projects/cookiecutter, configfile: setup.cfg
+plugins: mock-3.6.1, cov-4.0.0, catchlog-1.2.2
+collected 4 items
+
+tests/test_read_user_choice.py ....                                      [100%]
+
+----------- coverage: platform linux, python 3.6.9-final-0 -----------
+Name                          Stmts   Miss  Cover
+-------------------------------------------------
+cookiecutter/__init__.py          2      0   100%
+cookiecutter/__main__.py          3      3     0%
+cookiecutter/cli.py              50     50     0%
+cookiecutter/config.py           52     52     0%
+cookiecutter/environment.py      21     13    38%
+cookiecutter/exceptions.py       24      4    83%
+cookiecutter/extensions.py        9      9     0%
+cookiecutter/find.py             18     18     0%
+cookiecutter/generate.py        166    166     0%
+cookiecutter/hooks.py            61     61     0%
+cookiecutter/log.py              22     22     0%
+cookiecutter/main.py             31     31     0%
+cookiecutter/prompt.py           90     63    30%
+cookiecutter/replay.py           30     30     0%
+cookiecutter/repository.py       39     39     0%
+cookiecutter/utils.py            50     32    36%
+cookiecutter/vcs.py              54     54     0%
+cookiecutter/zipfile.py          61     61     0%
+-------------------------------------------------
+TOTAL                           783    708    10%
+
+
+============================== 4 passed in 0.37s ===============================
+/home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/lib/python3.6/site-packages/_pytest/config/__init__.py:455: PytestConfigWarning: pytest-catchlog plugin has been merged into the core, please remove it from your requirements.
+  name.replace("_", "-")
+py37 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py37
+ERROR: InterpreterNotFound: python3.7
+pypy create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/pypy
+ERROR: InterpreterNotFound: pypy
+___________________________________ summary ____________________________________
+ERROR:   lint: commands failed
+ERROR:  py27: InterpreterNotFound: python2.7
+ERROR:  py35: InterpreterNotFound: python3.5
+  py36: commands succeeded
+ERROR:  py37: InterpreterNotFound: python3.7
+ERROR:  pypy: InterpreterNotFound: pypy

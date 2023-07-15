@@ -1,0 +1,9 @@
+python -m unittest -q test.test_utils.TestUtil.test_get_element_by_attribute
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK

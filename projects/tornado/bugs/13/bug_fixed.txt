@@ -1,0 +1,9 @@
+python -m unittest -q tornado.test.http1connection_test.HTTP1ConnectionTest.test_http10_no_content_length
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.019s
+
+OK

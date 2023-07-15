@@ -1,0 +1,11 @@
+python -m unittest -q tests.test_downloadermiddleware_robotstxt.RobotsTxtMiddlewareTest.test_robotstxt_immediate_error
+RUN EVERY COMMAND
+0
+
+
+Error downloading <GET http://site.local/robots.txt>: DNS lookup failed: Robotstxt address not found.
+twisted.internet.error.DNSLookupError: DNS lookup failed: Robotstxt address not found.
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+OK

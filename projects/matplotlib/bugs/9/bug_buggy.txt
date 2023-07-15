@@ -1,0 +1,58 @@
+pytest lib/matplotlib/tests/test_polar.py::test_polar_invertedylim_rorigin
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.1, pytest-7.3.1, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/matplotlib
+configfile: pytest.ini
+collected 1 item
+
+lib/matplotlib/tests/test_polar.py F                                     [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_polar_invertedylim_rorigin[png] _____________________
+
+expected = '/home/user/BugsInPy/temp/projects/matplotlib/result_images/test_polar/polar_invertedylim_rorigin-expected.png'
+actual = PosixPath('/home/user/BugsInPy/temp/projects/matplotlib/result_images/test_polar/polar_invertedylim_rorigin.png')
+tol = 0
+
+    def _raise_on_image_difference(expected, actual, tol):
+        __tracebackhide__ = True
+    
+        err = compare_images(expected, actual, tol, in_decorator=True)
+        if err:
+            for key in ["actual", "expected"]:
+                err[key] = os.path.relpath(err[key])
+>           raise ImageComparisonFailure(
+                'images not close (RMS %(rms).3f):\n\t%(actual)s\n\t%(expected)s '
+                 % err)
+E           matplotlib.testing.exceptions.ImageComparisonFailure: images not close (RMS 6.526):
+E           	result_images/test_polar/polar_invertedylim_rorigin.png
+E           	result_images/test_polar/polar_invertedylim_rorigin-expected.png
+
+lib/matplotlib/testing/decorators.py:139: ImageComparisonFailure
+------------------------------ Captured log setup ------------------------------
+WARNING  matplotlib.testing:__init__.py:40 Could not set locale to English/United States. Some date-related tests may fail.
+=============================== warnings summary ===============================
+lib/matplotlib/__init__.py:169
+lib/matplotlib/__init__.py:169
+lib/matplotlib/__init__.py:169
+lib/matplotlib/__init__.py:169
+lib/matplotlib/__init__.py:169
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/__init__.py:169: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if LooseVersion(module.__version__) < minver:
+
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    other = LooseVersion(other)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED lib/matplotlib/tests/test_polar.py::test_polar_invertedylim_rorigin[png]
+======================== 1 failed, 10 warnings in 2.35s ========================

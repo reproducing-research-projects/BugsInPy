@@ -1,0 +1,15 @@
+pytest test/units/module_utils/test_distribution_version.py::test_distribution_version
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
+plugins: mock-1.2
+collected 54 items
+
+test/units/module_utils/test_distribution_version.py ................... [ 35%]
+...................................                                      [100%]
+
+========================== 54 passed in 0.75 seconds ===========================

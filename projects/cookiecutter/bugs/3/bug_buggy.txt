@@ -1,0 +1,846 @@
+tox tests/test_read_user_choice.py::test_click_invocation
+RUN EVERY COMMAND
+0
+
+
+GLOB sdist-make: /home/user/BugsInPy/temp/projects/cookiecutter/setup.py
+lint recreate: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint
+lint installdeps: pre-commit>=1.17.0
+lint installed: cfgv==3.3.1,distlib==0.3.6,filelock==3.4.1,identify==2.4.4,importlib-metadata==4.8.3,importlib-resources==5.2.3,nodeenv==1.6.0,platformdirs==2.4.0,pre-commit==2.17.0,PyYAML==6.0,toml==0.10.2,typing-extensions==4.1.1,virtualenv==20.17.1,zipp==3.6.0
+lint run-test-pre: PYTHONHASHSEED='2188846974'
+lint run-test: commands[0] | python -m pre_commit run tests/test_read_user_choice.py::test_click_invocation
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to /root/.cache/pre-commit/patch1689392891-4249.
+[INFO] Initializing environment for https://github.com/pre-commit/pre-commit-hooks.
+[INFO] Initializing environment for https://gitlab.com/pycqa/flake8.
+[INFO] Restored changes from /root/.cache/pre-commit/patch1689392891-4249.
+An unexpected error has occurred: CalledProcessError: command: ('/usr/bin/git', 'fetch', 'origin', '--tags')
+return code: 128
+expected return code: 0
+stdout: (none)
+stderr:
+    fatal: could not read Username for 'https://gitlab.com': No such device or address
+    
+Check the log at /root/.cache/pre-commit/pre-commit.log
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/lint/bin/python -m pre_commit run tests/test_read_user_choice.py::test_click_invocation (exited with code 3)
+py27 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py27
+ERROR: InterpreterNotFound: python2.7
+py35 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py35
+ERROR: InterpreterNotFound: python3.5
+py36 recreate: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36
+py36 installdeps: -rtest_requirements.txt
+py36 inst: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.6.0.zip
+py36 installed: arrow==1.2.3,attrs==22.2.0,binaryornot==0.4.4,certifi==2023.5.7,chardet==5.0.0,charset-normalizer==2.0.12,click==8.0.4,cookiecutter @ file:///home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.6.0.zip,coverage==6.2,freezegun==1.2.2,future==0.18.3,idna==3.4,importlib-metadata==4.8.3,iniconfig==1.1.1,Jinja2==3.0.3,jinja2-time==0.2.0,MarkupSafe==2.0.1,packaging==21.3,pluggy==1.0.0,poyo==0.5.0,py==1.11.0,pyparsing==3.1.0,pytest==7.0.1,pytest-catchlog==1.2.2,pytest-cov==4.0.0,pytest-mock==3.6.1,python-dateutil==2.8.2,requests==2.27.1,six==1.16.0,tomli==1.2.3,typing-extensions==4.1.1,urllib3==1.26.16,whichcraft==0.6.1,zipp==3.6.0
+py36 run-test-pre: PYTHONHASHSEED='2188846974'
+py36 run-test: commands[0] | pytest --cov=cookiecutter tests/test_read_user_choice.py::test_click_invocation
+============================= test session starts ==============================
+platform linux -- Python 3.6.9, pytest-7.0.1, pluggy-1.0.0
+cachedir: .tox/py36/.pytest_cache
+rootdir: /home/user/BugsInPy/temp/projects/cookiecutter, configfile: setup.cfg
+plugins: mock-3.6.1, cov-4.0.0, catchlog-1.2.2
+collected 4 items
+
+tests/test_read_user_choice.py FFFF                                      [100%]
+
+=================================== FAILURES ===================================
+________________________ test_click_invocation[1-hello] ________________________
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986666823072'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986666823072'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986667209840'>}
+introspection = "\nKwargs:\nassert {'default': '...86667209840'>} == {'default': '...86667209840'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986666823072'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>}
+expected = (('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',), {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>})
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7f512f912950>
+actual = call('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986667209840'>)
+cause = None
+
+    def assert_called_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock."""
+        self = _mock_self
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            raise AssertionError('Expected call: %s\nNot called' % (expected,))
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher((args, kwargs))
+        actual = self._call_matcher(self.call_args)
+        if expected != actual:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986667209840'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986667209840'>)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:814: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_once_with at 0x7f512efae840>
+args = (<MagicMock name='prompt' id='139986666823072'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986666823072'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>}
+self = <MagicMock name='prompt' id='139986666823072'>
+
+    def assert_called_once_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called exactly once and that that call was
+        with the specified arguments."""
+        self = _mock_self
+        if not self.call_count == 1:
+            msg = ("Expected '%s' to be called once. Called %s times." %
+                   (self._mock_name or 'mock', self.call_count))
+            raise AssertionError(msg)
+>       return self.assert_called_with(*args, **kwargs)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:825: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<MagicMock name='prompt' id='139986666823072'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>}
+__tracebackhide__ = True
+
+    def wrap_assert_called_with(*args: Any, **kwargs: Any) -> None:
+        __tracebackhide__ = True
+>       assert_wrapper(_mock_module_originals["assert_called_with"], *args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:447: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986666823072'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986667209840'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986666823072'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986667209840'>}
+introspection = "\nKwargs:\nassert {'default': '...86667209840'>} == {'default': '...86667209840'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+            __wrapped_mock_method__(*args, **kwargs)
+            return
+        except AssertionError as e:
+            if getattr(e, "_mock_introspection_applied", 0):
+                msg = str(e)
+            else:
+                __mock_self = args[0]
+                msg = str(e)
+                if __mock_self.call_args is not None:
+                    actual_args, actual_kwargs = __mock_self.call_args
+                    introspection = ""
+                    try:
+                        assert actual_args == args[1:]
+                    except AssertionError as e_args:
+                        introspection += "\nArgs:\n" + str(e_args)
+                    try:
+                        assert actual_kwargs == kwargs
+                    except AssertionError as e_kwargs:
+                        introspection += "\nKwargs:\n" + str(e_kwargs)
+                    if introspection:
+                        msg += "\n\npytest introspection follows:\n" + introspection
+            e = AssertionError(msg)
+            e._mock_introspection_applied = True  # type:ignore[attr-defined]
+>           raise e
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986667209840'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986667209840'>)
+E           
+E           pytest introspection follows:
+E           
+E           Kwargs:
+E           assert {'default': '...86667209840'>} == {'default': '...86667209840'>}
+E             Omitting 2 identical items, use -vv to show
+E             Right contains 1 more item:
+E             {'show_choices': False}
+E             Use -v to get the full diff
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:437: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+mocker = <pytest_mock.plugin.MockerFixture object at 0x7f512f929ba8>
+user_choice = 1, expected_value = 'hello'
+
+    @pytest.mark.parametrize('user_choice, expected_value', enumerate(OPTIONS, 1))
+    def test_click_invocation(mocker, user_choice, expected_value):
+        choice = mocker.patch('click.Choice')
+        choice.return_value = click.Choice(OPTIONS)
+    
+        prompt = mocker.patch('click.prompt')
+        prompt.return_value = '{}'.format(user_choice)
+    
+        assert read_user_choice('varname', OPTIONS) == expected_value
+    
+        prompt.assert_called_once_with(
+            EXPECTED_PROMPT,
+            type=click.Choice(OPTIONS),
+            default='1',
+>           show_choices=False
+        )
+E       AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986667209840'>)
+E       Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986667209840'>)
+E       
+E       pytest introspection follows:
+E       
+E       Kwargs:
+E       assert {'default': '...86667209840'>} == {'default': '...86667209840'>}
+E         Omitting 2 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'show_choices': False}
+E         Use -v to get the full diff
+
+tests/test_read_user_choice.py:33: AssertionError
+________________________ test_click_invocation[2-world] ________________________
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986643301992'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986643301992'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986644657376'>}
+introspection = "\nKwargs:\nassert {'default': '...86644657376'>} == {'default': '...86644657376'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986643301992'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>}
+expected = (('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',), {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>})
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7f512e4707b8>
+actual = call('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644657376'>)
+cause = None
+
+    def assert_called_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock."""
+        self = _mock_self
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            raise AssertionError('Expected call: %s\nNot called' % (expected,))
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher((args, kwargs))
+        actual = self._call_matcher(self.call_args)
+        if expected != actual:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986644657376'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644657376'>)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:814: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_once_with at 0x7f512efae840>
+args = (<MagicMock name='prompt' id='139986643301992'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986643301992'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>}
+self = <MagicMock name='prompt' id='139986643301992'>
+
+    def assert_called_once_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called exactly once and that that call was
+        with the specified arguments."""
+        self = _mock_self
+        if not self.call_count == 1:
+            msg = ("Expected '%s' to be called once. Called %s times." %
+                   (self._mock_name or 'mock', self.call_count))
+            raise AssertionError(msg)
+>       return self.assert_called_with(*args, **kwargs)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:825: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<MagicMock name='prompt' id='139986643301992'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>}
+__tracebackhide__ = True
+
+    def wrap_assert_called_with(*args: Any, **kwargs: Any) -> None:
+        __tracebackhide__ = True
+>       assert_wrapper(_mock_module_originals["assert_called_with"], *args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:447: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986643301992'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644657376'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986643301992'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986644657376'>}
+introspection = "\nKwargs:\nassert {'default': '...86644657376'>} == {'default': '...86644657376'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+            __wrapped_mock_method__(*args, **kwargs)
+            return
+        except AssertionError as e:
+            if getattr(e, "_mock_introspection_applied", 0):
+                msg = str(e)
+            else:
+                __mock_self = args[0]
+                msg = str(e)
+                if __mock_self.call_args is not None:
+                    actual_args, actual_kwargs = __mock_self.call_args
+                    introspection = ""
+                    try:
+                        assert actual_args == args[1:]
+                    except AssertionError as e_args:
+                        introspection += "\nArgs:\n" + str(e_args)
+                    try:
+                        assert actual_kwargs == kwargs
+                    except AssertionError as e_kwargs:
+                        introspection += "\nKwargs:\n" + str(e_kwargs)
+                    if introspection:
+                        msg += "\n\npytest introspection follows:\n" + introspection
+            e = AssertionError(msg)
+            e._mock_introspection_applied = True  # type:ignore[attr-defined]
+>           raise e
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986644657376'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644657376'>)
+E           
+E           pytest introspection follows:
+E           
+E           Kwargs:
+E           assert {'default': '...86644657376'>} == {'default': '...86644657376'>}
+E             Omitting 2 identical items, use -vv to show
+E             Right contains 1 more item:
+E             {'show_choices': False}
+E             Use -v to get the full diff
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:437: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+mocker = <pytest_mock.plugin.MockerFixture object at 0x7f512f905048>
+user_choice = 2, expected_value = 'world'
+
+    @pytest.mark.parametrize('user_choice, expected_value', enumerate(OPTIONS, 1))
+    def test_click_invocation(mocker, user_choice, expected_value):
+        choice = mocker.patch('click.Choice')
+        choice.return_value = click.Choice(OPTIONS)
+    
+        prompt = mocker.patch('click.prompt')
+        prompt.return_value = '{}'.format(user_choice)
+    
+        assert read_user_choice('varname', OPTIONS) == expected_value
+    
+        prompt.assert_called_once_with(
+            EXPECTED_PROMPT,
+            type=click.Choice(OPTIONS),
+            default='1',
+>           show_choices=False
+        )
+E       AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986644657376'>)
+E       Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644657376'>)
+E       
+E       pytest introspection follows:
+E       
+E       Kwargs:
+E       assert {'default': '...86644657376'>} == {'default': '...86644657376'>}
+E         Omitting 2 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'show_choices': False}
+E         Use -v to get the full diff
+
+tests/test_read_user_choice.py:33: AssertionError
+_________________________ test_click_invocation[3-foo] _________________________
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986643729432'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986643729432'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986643525192'>}
+introspection = "\nKwargs:\nassert {'default': '...86643525192'>} == {'default': '...86643525192'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986643729432'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>}
+expected = (('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',), {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>})
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7f512e470e18>
+actual = call('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986643525192'>)
+cause = None
+
+    def assert_called_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock."""
+        self = _mock_self
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            raise AssertionError('Expected call: %s\nNot called' % (expected,))
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher((args, kwargs))
+        actual = self._call_matcher(self.call_args)
+        if expected != actual:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986643525192'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986643525192'>)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:814: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_once_with at 0x7f512efae840>
+args = (<MagicMock name='prompt' id='139986643729432'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986643729432'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>}
+self = <MagicMock name='prompt' id='139986643729432'>
+
+    def assert_called_once_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called exactly once and that that call was
+        with the specified arguments."""
+        self = _mock_self
+        if not self.call_count == 1:
+            msg = ("Expected '%s' to be called once. Called %s times." %
+                   (self._mock_name or 'mock', self.call_count))
+            raise AssertionError(msg)
+>       return self.assert_called_with(*args, **kwargs)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:825: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<MagicMock name='prompt' id='139986643729432'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>}
+__tracebackhide__ = True
+
+    def wrap_assert_called_with(*args: Any, **kwargs: Any) -> None:
+        __tracebackhide__ = True
+>       assert_wrapper(_mock_module_originals["assert_called_with"], *args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:447: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986643729432'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986643525192'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986643729432'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986643525192'>}
+introspection = "\nKwargs:\nassert {'default': '...86643525192'>} == {'default': '...86643525192'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+            __wrapped_mock_method__(*args, **kwargs)
+            return
+        except AssertionError as e:
+            if getattr(e, "_mock_introspection_applied", 0):
+                msg = str(e)
+            else:
+                __mock_self = args[0]
+                msg = str(e)
+                if __mock_self.call_args is not None:
+                    actual_args, actual_kwargs = __mock_self.call_args
+                    introspection = ""
+                    try:
+                        assert actual_args == args[1:]
+                    except AssertionError as e_args:
+                        introspection += "\nArgs:\n" + str(e_args)
+                    try:
+                        assert actual_kwargs == kwargs
+                    except AssertionError as e_kwargs:
+                        introspection += "\nKwargs:\n" + str(e_kwargs)
+                    if introspection:
+                        msg += "\n\npytest introspection follows:\n" + introspection
+            e = AssertionError(msg)
+            e._mock_introspection_applied = True  # type:ignore[attr-defined]
+>           raise e
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986643525192'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986643525192'>)
+E           
+E           pytest introspection follows:
+E           
+E           Kwargs:
+E           assert {'default': '...86643525192'>} == {'default': '...86643525192'>}
+E             Omitting 2 identical items, use -vv to show
+E             Right contains 1 more item:
+E             {'show_choices': False}
+E             Use -v to get the full diff
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:437: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+mocker = <pytest_mock.plugin.MockerFixture object at 0x7f512e3b51d0>
+user_choice = 3, expected_value = 'foo'
+
+    @pytest.mark.parametrize('user_choice, expected_value', enumerate(OPTIONS, 1))
+    def test_click_invocation(mocker, user_choice, expected_value):
+        choice = mocker.patch('click.Choice')
+        choice.return_value = click.Choice(OPTIONS)
+    
+        prompt = mocker.patch('click.prompt')
+        prompt.return_value = '{}'.format(user_choice)
+    
+        assert read_user_choice('varname', OPTIONS) == expected_value
+    
+        prompt.assert_called_once_with(
+            EXPECTED_PROMPT,
+            type=click.Choice(OPTIONS),
+            default='1',
+>           show_choices=False
+        )
+E       AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986643525192'>)
+E       Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986643525192'>)
+E       
+E       pytest introspection follows:
+E       
+E       Kwargs:
+E       assert {'default': '...86643525192'>} == {'default': '...86643525192'>}
+E         Omitting 2 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'show_choices': False}
+E         Use -v to get the full diff
+
+tests/test_read_user_choice.py:33: AssertionError
+_________________________ test_click_invocation[4-bar] _________________________
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986644401736'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986644401736'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986644773520'>}
+introspection = "\nKwargs:\nassert {'default': '...86644773520'>} == {'default': '...86644773520'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986644401736'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>}
+expected = (('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',), {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>})
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7f512e3b7510>
+actual = call('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644773520'>)
+cause = None
+
+    def assert_called_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock."""
+        self = _mock_self
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            raise AssertionError('Expected call: %s\nNot called' % (expected,))
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher((args, kwargs))
+        actual = self._call_matcher(self.call_args)
+        if expected != actual:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986644773520'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644773520'>)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:814: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_once_with at 0x7f512efae840>
+args = (<MagicMock name='prompt' id='139986644401736'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+>           __wrapped_mock_method__(*args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+_mock_self = <MagicMock name='prompt' id='139986644401736'>
+args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>}
+self = <MagicMock name='prompt' id='139986644401736'>
+
+    def assert_called_once_with(_mock_self, *args, **kwargs):
+        """assert that the mock was called exactly once and that that call was
+        with the specified arguments."""
+        self = _mock_self
+        if not self.call_count == 1:
+            msg = ("Expected '%s' to be called once. Called %s times." %
+                   (self._mock_name or 'mock', self.call_count))
+            raise AssertionError(msg)
+>       return self.assert_called_with(*args, **kwargs)
+
+/opt/conda/envs/76d4d4db462c2965aaa44339b7ec9c46/lib/python3.6/unittest/mock.py:825: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<MagicMock name='prompt' id='139986644401736'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>}
+__tracebackhide__ = True
+
+    def wrap_assert_called_with(*args: Any, **kwargs: Any) -> None:
+        __tracebackhide__ = True
+>       assert_wrapper(_mock_module_originals["assert_called_with"], *args, **kwargs)
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:447: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+__wrapped_mock_method__ = <function NonCallableMock.assert_called_with at 0x7f512efae7b8>
+args = (<MagicMock name='prompt' id='139986644401736'>, 'Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4')
+kwargs = {'default': '1', 'show_choices': False, 'type': <MagicMock name='Choice()' id='139986644773520'>}
+__tracebackhide__ = True
+msg = "Expected call: prompt('Select varname:\\n1 - hello\\n2 - world\\n3 - foo\\n4 - bar\\nChoose from 1, 2, 3, 4', default...ntical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+__mock_self = <MagicMock name='prompt' id='139986644401736'>
+actual_args = ('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4',)
+actual_kwargs = {'default': '1', 'type': <MagicMock name='Choice()' id='139986644773520'>}
+introspection = "\nKwargs:\nassert {'default': '...86644773520'>} == {'default': '...86644773520'>}\n  Omitting 2 identical items, use -vv to show\n  Right contains 1 more item:\n  {'show_choices': False}\n  Use -v to get the full diff"
+@py_assert2 = None, @py_assert1 = False
+
+    def assert_wrapper(
+        __wrapped_mock_method__: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> None:
+        __tracebackhide__ = True
+        try:
+            __wrapped_mock_method__(*args, **kwargs)
+            return
+        except AssertionError as e:
+            if getattr(e, "_mock_introspection_applied", 0):
+                msg = str(e)
+            else:
+                __mock_self = args[0]
+                msg = str(e)
+                if __mock_self.call_args is not None:
+                    actual_args, actual_kwargs = __mock_self.call_args
+                    introspection = ""
+                    try:
+                        assert actual_args == args[1:]
+                    except AssertionError as e_args:
+                        introspection += "\nArgs:\n" + str(e_args)
+                    try:
+                        assert actual_kwargs == kwargs
+                    except AssertionError as e_kwargs:
+                        introspection += "\nKwargs:\n" + str(e_kwargs)
+                    if introspection:
+                        msg += "\n\npytest introspection follows:\n" + introspection
+            e = AssertionError(msg)
+            e._mock_introspection_applied = True  # type:ignore[attr-defined]
+>           raise e
+E           AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986644773520'>)
+E           Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644773520'>)
+E           
+E           pytest introspection follows:
+E           
+E           Kwargs:
+E           assert {'default': '...86644773520'>} == {'default': '...86644773520'>}
+E             Omitting 2 identical items, use -vv to show
+E             Right contains 1 more item:
+E             {'show_choices': False}
+E             Use -v to get the full diff
+
+.tox/py36/lib/python3.6/site-packages/pytest_mock/plugin.py:437: AssertionError
+
+During handling of the above exception, another exception occurred:
+
+mocker = <pytest_mock.plugin.MockerFixture object at 0x7f512e39b3c8>
+user_choice = 4, expected_value = 'bar'
+
+    @pytest.mark.parametrize('user_choice, expected_value', enumerate(OPTIONS, 1))
+    def test_click_invocation(mocker, user_choice, expected_value):
+        choice = mocker.patch('click.Choice')
+        choice.return_value = click.Choice(OPTIONS)
+    
+        prompt = mocker.patch('click.prompt')
+        prompt.return_value = '{}'.format(user_choice)
+    
+        assert read_user_choice('varname', OPTIONS) == expected_value
+    
+        prompt.assert_called_once_with(
+            EXPECTED_PROMPT,
+            type=click.Choice(OPTIONS),
+            default='1',
+>           show_choices=False
+        )
+E       AssertionError: Expected call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', show_choices=False, type=<MagicMock name='Choice()' id='139986644773520'>)
+E       Actual call: prompt('Select varname:\n1 - hello\n2 - world\n3 - foo\n4 - bar\nChoose from 1, 2, 3, 4', default='1', type=<MagicMock name='Choice()' id='139986644773520'>)
+E       
+E       pytest introspection follows:
+E       
+E       Kwargs:
+E       assert {'default': '...86644773520'>} == {'default': '...86644773520'>}
+E         Omitting 2 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'show_choices': False}
+E         Use -v to get the full diff
+
+tests/test_read_user_choice.py:33: AssertionError
+
+----------- coverage: platform linux, python 3.6.9-final-0 -----------
+Name                          Stmts   Miss  Cover
+-------------------------------------------------
+cookiecutter/__init__.py          2      0   100%
+cookiecutter/__main__.py          3      3     0%
+cookiecutter/cli.py              50     50     0%
+cookiecutter/config.py           52     52     0%
+cookiecutter/environment.py      21     13    38%
+cookiecutter/exceptions.py       24      4    83%
+cookiecutter/extensions.py        9      9     0%
+cookiecutter/find.py             18     18     0%
+cookiecutter/generate.py        166    166     0%
+cookiecutter/hooks.py            61     61     0%
+cookiecutter/log.py              22     22     0%
+cookiecutter/main.py             31     31     0%
+cookiecutter/prompt.py           90     63    30%
+cookiecutter/replay.py           30     30     0%
+cookiecutter/repository.py       39     39     0%
+cookiecutter/utils.py            50     32    36%
+cookiecutter/vcs.py              54     54     0%
+cookiecutter/zipfile.py          61     61     0%
+-------------------------------------------------
+TOTAL                           783    708    10%
+
+=========================== short test summary info ============================
+FAILED tests/test_read_user_choice.py::test_click_invocation[1-hello] - Asser...
+FAILED tests/test_read_user_choice.py::test_click_invocation[2-world] - Asser...
+FAILED tests/test_read_user_choice.py::test_click_invocation[3-foo] - Asserti...
+FAILED tests/test_read_user_choice.py::test_click_invocation[4-bar] - Asserti...
+============================== 4 failed in 2.62s ===============================
+/home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/lib/python3.6/site-packages/_pytest/config/__init__.py:455: PytestConfigWarning: pytest-catchlog plugin has been merged into the core, please remove it from your requirements.
+  name.replace("_", "-")
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py36/bin/pytest --cov=cookiecutter tests/test_read_user_choice.py::test_click_invocation (exited with code 1)
+py37 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py37
+ERROR: InterpreterNotFound: python3.7
+pypy create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/pypy
+ERROR: InterpreterNotFound: pypy
+___________________________________ summary ____________________________________
+ERROR:   lint: commands failed
+ERROR:  py27: InterpreterNotFound: python2.7
+ERROR:  py35: InterpreterNotFound: python3.5
+ERROR:   py36: commands failed
+ERROR:  py37: InterpreterNotFound: python3.7
+ERROR:  pypy: InterpreterNotFound: pypy

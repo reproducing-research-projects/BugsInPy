@@ -1,0 +1,178 @@
+pytest test/test_event_callbacks.py::TestEventCallbacks::test_failure
+pytest test/test_event_callbacks.py::TestEventCallbacks::test_processing_time_handler_failure
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/luigi
+plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
+collected 1 item
+
+test/test_event_callbacks.py F                                           [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestEventCallbacks.test_failure ________________________
+
+self = <test_event_callbacks.TestEventCallbacks testMethod=test_failure>
+
+    def test_failure(self):
+        t, successes, failures, exceptions = self._run_empty_task(True)
+>       self.assertEqual(successes, [])
+E       AssertionError: Lists differ: [EmptyTask(fail=True)] != []
+E       
+E       First list contains 1 additional elements.
+E       First extra element 0:
+E       EmptyTask(fail=True)
+E       
+E       - [EmptyTask(fail=True)]
+E       + []
+
+test/test_event_callbacks.py:87: AssertionError
+----------------------------- Captured stderr call -----------------------------
+DEBUG: Checking if EmptyTask(fail=True) is complete
+INFO: Scheduled EmptyTask(fail=True) (PENDING)
+INFO: Done scheduling tasks
+INFO: Running Worker with 1 processes
+DEBUG: Asking scheduler for work...
+DEBUG: Pending tasks: 1
+INFO: [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) running   EmptyTask(fail=True)
+INFO: [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) done      EmptyTask(fail=True)
+ERROR: [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) failed    EmptyTask(fail=True)
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
+    raise DummyException()
+test_event_callbacks.DummyException
+INFO: Skipping error email. Set `error-email` in the `core` section of the luigi config file to receive error emails.
+DEBUG: 1 running tasks, waiting for next task to finish
+DEBUG: Asking scheduler for work...
+INFO: Done
+INFO: There are no more tasks to run at this time
+INFO: Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) was stopped. Shutting down Keep-Alive thread
+------------------------------ Captured log call -------------------------------
+DEBUG    luigi-interface:worker.py:266 Checking if EmptyTask(fail=True) is complete
+INFO     luigi-interface:worker.py:543 Scheduled EmptyTask(fail=True) (PENDING)
+INFO     luigi-interface:interface.py:172 Done scheduling tasks
+INFO     luigi-interface:worker.py:735 Running Worker with 1 processes
+DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
+DEBUG    luigi-interface:worker.py:762 Pending tasks: 1
+INFO     luigi-interface:worker.py:169 [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) running   EmptyTask(fail=True)
+INFO     luigi-interface:worker.py:203 [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) done      EmptyTask(fail=True)
+ERROR    luigi-interface:worker.py:212 [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) failed    EmptyTask(fail=True)
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
+    raise DummyException()
+test_event_callbacks.DummyException
+INFO     luigi-interface:notifications.py:178 Skipping error email. Set `error-email` in the `core` section of the luigi config file to receive error emails.
+DEBUG    luigi-interface:worker.py:744 1 running tasks, waiting for next task to finish
+DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
+INFO     luigi-interface:worker.py:562 Done
+INFO     luigi-interface:worker.py:563 There are no more tasks to run at this time
+INFO     luigi-interface:worker.py:314 Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) was stopped. Shutting down Keep-Alive thread
+=============================== warnings summary ===============================
+test/test_event_callbacks.py::TestEventCallbacks::test_failure
+  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py:268: UserWarning: Task EmptyTask(fail=True) without outputs has no custom complete() method
+    is_complete = task.complete()
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED test/test_event_callbacks.py::TestEventCallbacks::test_failure - Asser...
+========================= 1 failed, 1 warning in 0.13s =========================
+RUN EVERY COMMAND
+1
+pytest test/test_event_callbacks.py::TestEventCallbacks::test_failure
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/user/BugsInPy/temp/projects/luigi
+plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
+collected 1 item
+
+test/test_event_callbacks.py F                                           [100%]
+
+=================================== FAILURES ===================================
+___________ TestEventCallbacks.test_processing_time_handler_failure ____________
+
+self = <test_event_callbacks.TestEventCallbacks testMethod=test_processing_time_handler_failure>
+
+    def test_processing_time_handler_failure(self):
+        t, result = self._run_processing_time_handler(True)
+>       self.assertEqual(result, [])
+E       AssertionError: Lists differ: [(EmptyTask(fail=True), 42.0)] != []
+E       
+E       First list contains 1 additional elements.
+E       First extra element 0:
+E       (EmptyTask(fail=True), 42.0)
+E       
+E       - [(EmptyTask(fail=True), 42.0)]
+E       + []
+
+test/test_event_callbacks.py:127: AssertionError
+----------------------------- Captured stderr call -----------------------------
+DEBUG: Checking if EmptyTask(fail=True) is complete
+INFO: Scheduled EmptyTask(fail=True) (PENDING)
+INFO: Done scheduling tasks
+INFO: Running Worker with 1 processes
+DEBUG: Asking scheduler for work...
+DEBUG: Pending tasks: 1
+INFO: [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) running   EmptyTask(fail=True)
+INFO: [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) done      EmptyTask(fail=True)
+ERROR: [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) failed    EmptyTask(fail=True)
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
+    raise DummyException()
+test_event_callbacks.DummyException
+INFO: Skipping error email. Set `error-email` in the `core` section of the luigi config file to receive error emails.
+DEBUG: 1 running tasks, waiting for next task to finish
+DEBUG: Asking scheduler for work...
+INFO: Done
+INFO: There are no more tasks to run at this time
+INFO: Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) was stopped. Shutting down Keep-Alive thread
+------------------------------ Captured log call -------------------------------
+DEBUG    luigi-interface:worker.py:266 Checking if EmptyTask(fail=True) is complete
+INFO     luigi-interface:worker.py:543 Scheduled EmptyTask(fail=True) (PENDING)
+INFO     luigi-interface:interface.py:172 Done scheduling tasks
+INFO     luigi-interface:worker.py:735 Running Worker with 1 processes
+DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
+DEBUG    luigi-interface:worker.py:762 Pending tasks: 1
+INFO     luigi-interface:worker.py:169 [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) running   EmptyTask(fail=True)
+INFO     luigi-interface:worker.py:203 [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) done      EmptyTask(fail=True)
+ERROR    luigi-interface:worker.py:212 [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) failed    EmptyTask(fail=True)
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
+    raise DummyException()
+test_event_callbacks.DummyException
+INFO     luigi-interface:notifications.py:178 Skipping error email. Set `error-email` in the `core` section of the luigi config file to receive error emails.
+DEBUG    luigi-interface:worker.py:744 1 running tasks, waiting for next task to finish
+DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
+INFO     luigi-interface:worker.py:562 Done
+INFO     luigi-interface:worker.py:563 There are no more tasks to run at this time
+INFO     luigi-interface:worker.py:314 Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) was stopped. Shutting down Keep-Alive thread
+=============================== warnings summary ===============================
+test/test_event_callbacks.py::TestEventCallbacks::test_processing_time_handler_failure
+  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py:268: UserWarning: Task EmptyTask(fail=True) without outputs has no custom complete() method
+    is_complete = task.complete()
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED test/test_event_callbacks.py::TestEventCallbacks::test_processing_time_handler_failure
+========================= 1 failed, 1 warning in 0.09s =========================

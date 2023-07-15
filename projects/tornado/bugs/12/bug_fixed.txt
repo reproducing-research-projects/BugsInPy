@@ -1,0 +1,9 @@
+python -m unittest -q tornado.test.auth_test.AuthTest.test_facebook_login
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.038s
+
+OK

@@ -1,0 +1,14 @@
+pytest tests/test_downloads.py::TestDownloadUtils::test_unique_filename
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-3.2.1, py-1.8.1, pluggy-0.4.0
+rootdir: /home/user/BugsInPy/temp/projects/httpie, inifile: pytest.ini
+plugins: httpbin-1.0.0
+collected 11 items
+
+tests/test_downloads.py ...........
+
+========================== 11 passed in 0.40 seconds ===========================

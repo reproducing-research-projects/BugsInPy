@@ -1,0 +1,11 @@
+python -m unittest -q tests.test_downloader_handlers.HttpProxyTestCase.test_download_with_proxy_https_timeout
+RUN EVERY COMMAND
+0
+
+
+/home/user/BugsInPy/temp/projects/scrapy/scrapy/core/downloader/handlers/http11.py:147: DeprecationWarning: <scrapy.core.downloader.contextfactory.ScrapyClientContextFactory object at 0x7ff3bb503d30> was passed as the HTTPS policy for an Agent, but it does not provide IPolicyForHTTPS.  Since Twisted 14.0, you must pass a provider of IPolicyForHTTPS.
+  super(TunnelingAgent, self).__init__(reactor, contextFactory,
+----------------------------------------------------------------------
+Ran 1 test in 0.204s
+
+OK

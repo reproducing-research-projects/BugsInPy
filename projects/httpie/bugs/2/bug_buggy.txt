@@ -1,0 +1,50 @@
+pytest tests/test_redirects.py::TestRedirects::test_max_redirects
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/httpie, inifile: pytest.ini
+plugins: httpbin-1.0.0
+collected 1 item
+
+tests/test_redirects.py F                                                [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestRedirects.test_max_redirects _______________________
+Traceback (most recent call last):
+  File "/home/user/BugsInPy/temp/projects/httpie/tests/test_redirects.py", line 22, in test_max_redirects
+    assert r.exit_status == ExitStatus.ERROR_TOO_MANY_REDIRECTS
+AssertionError: assert 0 == 6
+ +  where 0 = 'HTTP/1.1 200 OK\r\nAccess-Control-Allow-Credentials: true\r\nAccess-Control-Allow-Origin: *\r\nConnection: Close\r\nC...  "User-Agent": "HTTPie/1.0.0-dev"\n    },\n    "origin": "127.0.0.1",\n    "url": "http://127.0.0.1:45661/get"\n}\n\n'.exit_status
+ +  and   6 = ExitStatus.ERROR_TOO_MANY_REDIRECTS
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [15/Jul/2023 03:34:52] "GET /redirect/3 HTTP/1.1" 302 247
+127.0.0.1 - - [15/Jul/2023 03:34:52] "GET /relative-redirect/2 HTTP/1.1" 302 0
+127.0.0.1 - - [15/Jul/2023 03:34:52] "GET /relative-redirect/1 HTTP/1.1" 302 0
+127.0.0.1 - - [15/Jul/2023 03:34:52] "GET /get HTTP/1.1" 200 212
+=============================== warnings summary ===============================
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/output/formatters/xml.py:8: DeprecationWarning: invalid escape sequence \?
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:56
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:56
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:56: DeprecationWarning: invalid escape sequence \d
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:57
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:57
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/downloads.py:57: DeprecationWarning: invalid escape sequence \*
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:463
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:463
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:463: DeprecationWarning: invalid escape sequence \=
+
+/opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:11
+  /opt/conda/envs/6b298c1f8a21a3e606bfa2fcf2e1c0e6/lib/python3.7/site-packages/httpie-1.0.0.dev0-py3.7.egg/httpie/input.py:11: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_redirects.py::TestRedirects::test_max_redirects - assert 0 ...
+======================== 1 failed, 9 warnings in 1.48s =========================

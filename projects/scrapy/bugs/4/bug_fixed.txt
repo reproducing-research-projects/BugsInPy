@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_contracts.ContractsManagerTest.test_errback
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.239s
+
+OK

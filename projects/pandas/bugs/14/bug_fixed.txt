@@ -1,0 +1,42 @@
+pytest pandas/tests/arithmetic/test_datetime64.py::TestDatetime64DateOffsetArithmetic::test_dt64arr_add_sub_offset_array
+pytest pandas/tests/arithmetic/test_timedelta64.py::TestTimedeltaArraylikeAddSubOps::test_td64arr_add_offset_index
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1008 items
+
+pandas/tests/arithmetic/test_datetime64.py ............................. [  2%]
+........................................................................ [ 10%]
+........................................................................ [ 17%]
+........................................................................ [ 24%]
+........................................................................ [ 31%]
+........................................................................ [ 38%]
+........................................................................ [ 45%]
+........................................................................ [ 52%]
+........................................................................ [ 60%]
+........................................................................ [ 67%]
+........................................................................ [ 74%]
+........................................................................ [ 81%]
+........................................................................ [ 88%]
+........................................................................ [ 95%]
+...........................................                              [100%]
+
+============================= 1008 passed in 3.68s =============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/arithmetic/test_datetime64.py::TestDatetime64DateOffsetArithmetic::test_dt64arr_add_sub_offset_array
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 9 items
+
+pandas/tests/arithmetic/test_timedelta64.py ..s..s...                    [100%]
+
+========================= 7 passed, 2 skipped in 0.11s =========================

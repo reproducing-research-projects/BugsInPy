@@ -1,0 +1,9 @@
+python -m unittest -q tornado.test.ioloop_test.TestIOLoopCurrent.test_force_current
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

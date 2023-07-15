@@ -1,0 +1,25 @@
+py.test spacy/tests/pipeline/test_analysis.py::test_analysis_validate_attrs_remove_pipe
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.7, pytest-7.1.2, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/spacy, configfile: setup.cfg
+plugins: timeout-1.4.2
+collected 1 item
+
+spacy/tests/pipeline/test_analysis.py .                                  [100%]
+
+=============================== warnings summary ===============================
+spacy/tests/pipeline/test_analysis.py::test_analysis_validate_attrs_remove_pipe
+  /home/user/BugsInPy/temp/projects/spacy/spacy/util.py:338: DeprecationWarning: SelectableGroups dict interface is deprecated. Use select.
+    for entry_point in AVAILABLE_ENTRY_POINTS.get(key, []):
+
+spacy/tests/pipeline/test_analysis.py::test_analysis_validate_attrs_remove_pipe
+  /opt/conda/envs/3601883d2dbafc9b57170c2a07c6a814/lib/python3.7/site-packages/_pytest/python.py:192: PytestRemovedIn8Warning: Passing None has been deprecated.
+  See https://docs.pytest.org/en/latest/how-to/capture-warnings.html#additional-use-cases-of-warnings-in-tests for alternatives in common use cases.
+    result = testfunction(**testargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 2 warnings in 0.20s =========================

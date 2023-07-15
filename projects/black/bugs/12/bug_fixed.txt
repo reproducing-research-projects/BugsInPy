@@ -1,0 +1,9 @@
+python -m unittest -q tests.test_black.BlackTestCase.test_bracket_match
+RUN EVERY COMMAND
+0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.022s
+
+OK

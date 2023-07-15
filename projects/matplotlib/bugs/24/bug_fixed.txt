@@ -1,0 +1,36 @@
+pytest lib/matplotlib/tests/test_axes.py::test_set_ticks_inverted
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.1, pytest-7.3.1, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/matplotlib
+configfile: pytest.ini
+collected 1 item
+
+lib/matplotlib/tests/test_axes.py .                                      [100%]
+
+=============================== warnings summary ===============================
+lib/matplotlib/__init__.py:200
+lib/matplotlib/__init__.py:200
+lib/matplotlib/__init__.py:200
+lib/matplotlib/__init__.py:200
+lib/matplotlib/__init__.py:200
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/__init__.py:200: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if LooseVersion(module.__version__) < minver:
+
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+../../../../../../opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/96e55cef081ba1a7fa5bef32944f9ae7/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    other = LooseVersion(other)
+
+lib/matplotlib/tests/test_axes.py::test_set_ticks_inverted
+  /home/user/BugsInPy/temp/projects/matplotlib/lib/matplotlib/axes/_base.py:3270: DeprecationWarning: In future, it will be an error for 'np.bool_' scalars to be interpreted as an index
+    left, right = sorted([left, right], reverse=reverse)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 11 warnings in 3.98s ========================

@@ -1,0 +1,14 @@
+py.test spacy/tests/test_errors.py::test_add_codes
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.7.7, pytest-7.1.2, pluggy-1.0.0
+rootdir: /home/user/BugsInPy/temp/projects/spacy, configfile: setup.cfg
+plugins: timeout-1.4.2
+collected 1 item
+
+spacy/tests/test_errors.py .                                             [100%]
+
+============================== 1 passed in 0.05s ===============================
