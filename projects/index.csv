@@ -691,4 +691,3 @@ pandas,13,buggy,fail
 pandas,13,fixed,pass
 pandas,14,buggy,fail
 pandas,14,fixed,pass
-pandas,15,buggy,fail
