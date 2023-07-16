@@ -87,8 +87,8 @@ cookiecutter,2,buggy,fail
 cookiecutter,2,fixed,pass
 cookiecutter,3,buggy,fail
 cookiecutter,3,fixed,pass
-cookiecutter,4,buggy,unknown
-cookiecutter,4,fixed,unknown
+cookiecutter,4,buggy,error
+cookiecutter,4,fixed,error
 fastapi,1,buggy,fail
 fastapi,1,fixed,pass
 fastapi,2,buggy,fail
@@ -157,8 +157,8 @@ keras,12,buggy,fail
 keras,12,fixed,pass
 keras,13,buggy,fail
 keras,13,fixed,pass
-keras,14,buggy,unknown
-keras,14,fixed,unknown
+keras,14,buggy,error
+keras,14,fixed,error
 keras,15,buggy,pass
 keras,15,fixed,pass
 keras,16,buggy,fail
@@ -337,10 +337,10 @@ matplotlib,24,buggy,fail
 matplotlib,24,fixed,pass
 matplotlib,25,buggy,fail
 matplotlib,25,fixed,pass
-matplotlib,26,buggy,unknown
-matplotlib,26,fixed,unknown
-matplotlib,27,buggy,unknown
-matplotlib,27,fixed,unknown
+matplotlib,26,buggy,error
+matplotlib,26,fixed,error
+matplotlib,27,buggy,error
+matplotlib,27,fixed,error
 matplotlib,28,buggy,fail
 matplotlib,28,fixed,pass
 matplotlib,29,buggy,fail
