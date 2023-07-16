@@ -7,13 +7,13 @@
 # The expected outputs for each test are added to every bug.
 # "<repo>/bugs/<bugid>/bug_buggy.txt" shows the buggy version output.
 # "<repo>/bugs/<bugid>/bug_fixed.txt" shows the fixed version output.
-# An index result is provided in BugsInPy/projects/index.csv.
+# An index result is provided in BugsInPy/projects/bugsinpy-index.csv.
 # The index contains reproducibility result status:
 # - "fail": a failure expected in the buggy version.
 # - "error": a hard error not reproducible.
 # - "pass": a success expected in the fixed version.
 # - "unknown": an unknown unexpected output, probably an "error".
-# A temporary full log file is provided in every <repo>/logs.txt.
+# A temporary full log file is provided in every temp/<repo>/logs.txt.
 
 usage="
        -h
@@ -30,7 +30,8 @@ usage="
 dir_of_script=$(dirname $0)
 bugsinpy_location=$(realpath $dir_of_script/../..)
 temp_projects="$bugsinpy_location/temp/projects"
-index_file="$bugsinpy_location/projects/index.csv"
+index_name="bugsinpy-index.csv"
+index_file="$bugsinpy_location/projects/$index_name"
 
 case $1 in
  -[h?] | --help)
@@ -47,7 +48,7 @@ esac
 mkdir -p $temp_projects
 
 if ! echo $projects | grep -q ":"; then
-  projects=$(ls $bugsinpy_location/projects)
+  projects=$(ls $bugsinpy_location/projects | grep -v $index_name)
 fi
 
 if [ ! -f $index_file ]; then
