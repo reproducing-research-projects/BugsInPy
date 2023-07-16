@@ -58,9 +58,9 @@ Here's a summary of how the script works:
 
 1. The script takes command-line arguments to control its behavior. It provides options to display help, perform cleanup, and specify projects or ranges of bugs to reproduce and test.
 
-2. It creates a `~/projects` directory to store the output and logs.
+2. It creates a `temp/projects` directory to store the output and logs.
 
-3. The script iterates over the specified projects or all projects in the `~/BugsInPy/projects` directory.
+3. The script iterates over the specified projects or all projects in the `BugsInPy/projects` directory.
 
 4. For each project, it determines the range of bugs to reproduce and test.
 
@@ -70,10 +70,15 @@ Here's a summary of how the script works:
       - Uses `bugsinpy-checkout` to checkout the buggy version.
       - Activates the proper Python environment using Miniconda (specified in the `bugsinpy_bug.info` file).
       - Compiles the project (if required) and runs the tests using `bugsinpy-test`.
-   c. Checks if the buggy version fails the test. If it does, it proceeds to test the fixed (1) version:
+      - Check if the buggy version fails as expected for the test specific to the bug and save the output in the `BugsInPy/projects/<repo>/bugs/<bugid>/bug_buggy.txt`.
+      - Updates the `BugsInPy/projects/index.csv` with the results `<repo>,<bugid>,buggy,fail`
+   c. The it proceeds to test the fixed (1) version:
       - Uses `bugsinpy-checkout` to checkout the fixed version.
       - Compiles the project (if required) and runs the tests.
-   d. Records the test results (`ok` if the fixed version passes the test, `fail` otherwise) in `~/projects/output.csv`.
+      - Activates the proper Python environment using Miniconda (specified in the `bugsinpy_bug.info` file).
+      - Compiles the project (if required) and runs the tests using `bugsinpy-test`.
+      - Check if the fixed version pass as expected for the test specific to the bug and save the output in the `BugsInPy/projects/<repo>/bugs/<bugid>/bug_fixed.txt`.
+      - Updates the `BugsInPy/projects/index.csv` with the results `<repo>,<bugid>,fixed,pass`
 
 6. The script deactivates the Conda environment and repeats the process for the next bug in the project.
 
