@@ -155,8 +155,8 @@ keras,11,buggy,pass
 keras,11,fixed,pass
 keras,12,buggy,fail
 keras,12,fixed,pass
-keras,13,buggy,unknown
-keras,13,fixed,unknown
+keras,13,buggy,fail
+keras,13,fixed,pass
 keras,14,buggy,pass
 keras,14,fixed,pass
 keras,15,buggy,fail
@@ -335,8 +335,8 @@ matplotlib,23,buggy,fail
 matplotlib,23,fixed,pass
 matplotlib,24,buggy,fail
 matplotlib,24,fixed,pass
-matplotlib,25,buggy,unknown
-matplotlib,25,fixed,unknown
+matplotlib,25,buggy,fail
+matplotlib,25,fixed,pass
 matplotlib,26,buggy,unknown
 matplotlib,26,fixed,unknown
 matplotlib,27,buggy,unknown
@@ -443,8 +443,8 @@ pandas,47,buggy,fail
 pandas,47,fixed,pass
 pandas,48,buggy,fail
 pandas,48,fixed,pass
-pandas,49,buggy,unknown
-pandas,49,fixed,unknown
+pandas,49,buggy,fail
+pandas,49,fixed,pass
 pandas,50,buggy,fail
 pandas,50,fixed,pass
 pandas,51,buggy,fail
@@ -530,7 +530,7 @@ pandas,90,fixed,pass
 pandas,91,buggy,fail
 pandas,91,fixed,pass
 pandas,92,buggy,fail
-pandas,92,fixed,unknown
+pandas,92,fixed,pass
 pandas,93,buggy,fail
 pandas,93,fixed,pass
 pandas,94,buggy,fail
@@ -641,10 +641,10 @@ pandas,146,buggy,fail
 pandas,146,fixed,pass
 pandas,147,buggy,fail
 pandas,147,fixed,pass
-pandas,148,buggy,error
-pandas,148,fixed,error
-pandas,149,buggy,fail
-pandas,149,fixed,unknown
+pandas,148,buggy,fail
+pandas,148,fixed,pass
+pandas,149,buggy,error
+pandas,149,fixed,error
 pandas,150,buggy,fail
 pandas,150,fixed,pass
 pandas,151,buggy,fail
@@ -684,7 +684,7 @@ pandas,167,fixed,pass
 pandas,168,buggy,fail
 pandas,168,fixed,pass
 pandas,169,buggy,fail
-pandas,169,fixed,unknown
+pandas,169,fixed,pass
 PySnooper,1,buggy,pass
 PySnooper,1,fixed,pass
 PySnooper,2,buggy,error
