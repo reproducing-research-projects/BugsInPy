@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:23.3.1-0
+FROM docker.io/continuumio/miniconda3:23.3.1-0
 MAINTAINER faustinoaq <faustino.aguilar@up.ac.pa>
 
 RUN apt-get update

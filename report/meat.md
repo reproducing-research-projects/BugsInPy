@@ -104,12 +104,6 @@ done
 ```
 \normalsize
 
-
-## Pip and PyPI work
-
-
-
-
 # Results
 
 ## Why the percentage of success and failure for the reproducibility of bugs?
