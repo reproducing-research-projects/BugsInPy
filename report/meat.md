@@ -72,7 +72,10 @@ Packages installed by Conda neither use nor modify the system version of those p
 Conda package repositories store packages containing pre-compiled binaries and metadata for each platform, so installing is rather quick.
 
 The original BugsInPy scripts install all Python packages using Pip.
-However, some packages may require external setup that Pip is unable to do; for example, Matplotlib requires certain system libraries <!-- TODO --> which Pip cannot install, so any bug whose environment depends on Matplotlibn will not be installable on a blank machine.
+Pip is the default package builder and installer for Python.
+Pip can invoke the compiler to build dependencies from source <!-- TODO cite --> or download prebuilt binary files.
+Projects do this for their own C source, however they don't do this for shared libraries, because the build system can be quite complex, and system administrators would rather have one version of that shared library on the system managed by the system package manager. <!-- TODO elaborate -->
+Therefore, some packages may require external setup that Pip is unable to do; for example, Matplotlib requires certain system libraries <!-- TODO --> which Pip cannot install, so any bug whose environment depends on Matplotlibn will not be installable on a blank machine.
 Presumably the original authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Debian and simply install those with Conda instead.
 
 
@@ -104,10 +107,7 @@ done
 
 ## Pip and PyPI work
 
-Pip is the default package builder and installer for Python.
-Pip can invoke the compiler to build dependencies from source <!-- TODO cite -->.
-Projects do this for their own C source, however they don't do this for shared libraries, because the build system can be quite involved, and system administrators would rather have one version of that shared library. <!-- TODO elaborate -->
-Additionally Pip repositories can store a binary format per platform, called wheels, which do not require compilation.
+
 
 
 # Results

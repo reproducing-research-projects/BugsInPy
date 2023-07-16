@@ -78,5 +78,3 @@ Here's a summary of how the script works:
 6. The script deactivates the Conda environment and repeats the process for the next bug in the project.
 
 The `bugsinpy-testall` script improves reproducibility by providing a standardized and automated approach to reproduce and test bugs in Python projects. It ensures that bugs are tested consistently across different projects, enabling easier verification of bug fixes and facilitating the replication of test results. By logging the output and test results, it helps track the status of bug reproduction and provides a central record for analysis and further investigation.
-
->>>>>>> 86f758c (Added revisions)
