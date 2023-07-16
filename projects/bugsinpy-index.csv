@@ -169,8 +169,8 @@ keras,18,buggy,fail
 keras,18,fixed,pass
 keras,19,buggy,fail
 keras,19,fixed,pass
-keras,20,buggy,error
-keras,20,fixed,error
+keras,20,buggy,fail
+keras,20,fixed,pass
 keras,21,buggy,error
 keras,21,fixed,error
 keras,22,buggy,error
@@ -569,7 +569,7 @@ pandas,110,buggy,fail
 pandas,110,fixed,pass
 pandas,111,buggy,fail
 pandas,111,fixed,pass
-pandas,112,buggy,error
+pandas,112,buggy,fail
 pandas,112,fixed,pass
 pandas,113,buggy,fail
 pandas,113,fixed,pass
