@@ -123,6 +123,7 @@ for project_name in $projects; do
         # buggy (0) expected to fail
         # fixed (1) expected to pass
         if grep -q "= ERRORS =" "$bug_source_dir/bug_$version.txt" || \
+          grep -q "ImportError while loading" "$bug_source_dir/bug_$version.txt" || \
           grep -q ": command not found" "$bug_source_dir/bug_$version.txt" || \
           grep -q "You have not compile this project" "$bug_source_dir/bug_$version.txt"
         then
