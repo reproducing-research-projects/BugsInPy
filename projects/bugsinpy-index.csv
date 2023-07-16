@@ -87,8 +87,8 @@ cookiecutter,2,buggy,fail
 cookiecutter,2,fixed,pass
 cookiecutter,3,buggy,fail
 cookiecutter,3,fixed,pass
-cookiecutter,4,buggy,fail
-cookiecutter,4,fixed,pass
+cookiecutter,4,buggy,unknown
+cookiecutter,4,fixed,unknown
 fastapi,1,buggy,fail
 fastapi,1,fixed,pass
 fastapi,2,buggy,fail
@@ -685,10 +685,10 @@ pandas,168,buggy,fail
 pandas,168,fixed,pass
 pandas,169,buggy,fail
 pandas,169,fixed,unknown
-PySnooper,1,buggy,error
-PySnooper,1,fixed,error
-PySnooper,2,buggy,fail
-PySnooper,2,fixed,pass
+PySnooper,1,buggy,pass
+PySnooper,1,fixed,pass
+PySnooper,2,buggy,error
+PySnooper,2,fixed,error
 PySnooper,3,buggy,fail
 PySnooper,3,fixed,pass
 sanic,1,buggy,pass
