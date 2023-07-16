@@ -10,9 +10,8 @@
 # An index result is provided in BugsInPy/projects/bugsinpy-index.csv.
 # The index contains reproducibility result status:
 # - "fail": a failure expected in the buggy version.
-# - "error": a hard error not reproducible.
 # - "pass": a success expected in the fixed version.
-# - "unknown": an unknown unexpected output, probably an "error".
+# - "error": a hard error that prevents the test from being executed.
 # A temporary full log file is provided in every temp/<repo>/logs.txt.
 
 usage="
