@@ -931,8 +931,8 @@ youtube-dl,7,buggy,fail
 youtube-dl,7,fixed,pass
 youtube-dl,8,buggy,fail
 youtube-dl,8,fixed,pass
-youtube-dl,9,buggy,unknown
-youtube-dl,9,fixed,unknown
+youtube-dl,9,buggy,fail
+youtube-dl,9,fixed,pass
 youtube-dl,10,buggy,fail
 youtube-dl,10,fixed,pass
 youtube-dl,11,buggy,fail
