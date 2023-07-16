@@ -122,7 +122,12 @@ for project_name in $projects; do
         # Check for keywords in test output
         # buggy (0) expected to fail
         # fixed (1) expected to pass
-        if grep -q "= FAILURES =" "$bug_source_dir/bug_$version.txt" || \
+        if grep -q "= ERRORS =" "$bug_source_dir/bug_$version.txt" || \
+          grep -q ": command not found" "$bug_source_dir/bug_$version.txt" || \
+          grep -q "You have not compile this project" "$bug_source_dir/bug_$version.txt"
+        then
+          echo "$project,$bug,$version,error" | tee -a $index_file
+        elif grep -q "= FAILURES =" "$bug_source_dir/bug_$version.txt" || \
           grep -q "FAILED (" "$bug_source_dir/bug_$version.txt" || \
           [ -f "$work_dir/bugsinpy_fail.txt" ]
         then
