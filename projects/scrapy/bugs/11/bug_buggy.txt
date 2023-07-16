@@ -12,6 +12,6 @@ Traceback (most recent call last):
 FileNotFoundError: [Errno 2] No such file or directory: '/home/user/BugsInPy/temp/projects/scrapy/tests/sample_data/compressed/unexpected-eof.gz'
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.008s
+Ran 1 test in 0.000s
 
 FAILED (errors=1)

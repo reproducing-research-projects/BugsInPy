@@ -10,10 +10,10 @@ ansible,4,fixed,pass
 ansible,5,buggy,fail
 ansible,5,fixed,pass
 ansible,6,buggy,fail
-ansible,6,fixed,fail
+ansible,6,fixed,pass
 ansible,7,buggy,fail
 ansible,7,fixed,pass
-ansible,8,buggy,pass
+ansible,8,buggy,fail
 ansible,8,fixed,pass
 ansible,9,buggy,fail
 ansible,9,fixed,pass
@@ -21,9 +21,9 @@ ansible,10,buggy,fail
 ansible,10,fixed,pass
 ansible,11,buggy,fail
 ansible,11,fixed,pass
-ansible,12,buggy,pass
+ansible,12,buggy,fail
 ansible,12,fixed,pass
-ansible,13,buggy,pass
+ansible,13,buggy,fail
 ansible,13,fixed,pass
 ansible,14,buggy,fail
 ansible,14,fixed,pass
@@ -157,8 +157,8 @@ keras,12,buggy,fail
 keras,12,fixed,pass
 keras,13,buggy,fail
 keras,13,fixed,pass
-keras,14,buggy,error
-keras,14,fixed,error
+keras,14,buggy,unknown
+keras,14,fixed,unknown
 keras,15,buggy,pass
 keras,15,fixed,pass
 keras,16,buggy,fail

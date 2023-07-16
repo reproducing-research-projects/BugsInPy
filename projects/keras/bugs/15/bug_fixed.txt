@@ -181,7 +181,7 @@ keras/callbacks.py:20
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 ========================== slowest 20 test durations ===========================
-2.48s call     tests/keras/test_callbacks.py::test_CSVLogger
+0.45s call     tests/keras/test_callbacks.py::test_CSVLogger
 
 (0.00 durations hidden.  Use -vv to show these durations.)
-======================= 1 passed, 59 warnings in 13.88s ========================
+======================== 1 passed, 59 warnings in 2.08s ========================

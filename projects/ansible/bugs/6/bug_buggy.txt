@@ -16,7 +16,7 @@ test/units/galaxy/test_collection_install.py .FF                         [100%]
 _____________ test_build_requirement_from_path_with_manifest[1.1] ______________
 
 version = 1.1
-collection_artifact = (b'/tmp/pytest-of-root/pytest-0/test-\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input1/ansib...\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input1/ansible_namespace-collection-0.1.0.tar.gz')
+collection_artifact = (b'/tmp/pytest-of-root/pytest-8/test-\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input1/ansib...\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input1/ansible_namespace-collection-0.1.0.tar.gz')
 
     @pytest.mark.parametrize('version', ['1.1.1', 1.1, 1])
     def test_build_requirement_from_path_with_manifest(version, collection_artifact):
@@ -34,34 +34,48 @@ collection_artifact = (b'/tmp/pytest-of-root/pytest-0/test-\xc3\x85\xc3\x91\xc5\
         with open(manifest_path, 'wb') as manifest_obj:
             manifest_obj.write(to_bytes(manifest_value))
     
-        actual = collection.CollectionRequirement.from_path(collection_artifact[0], True)
-    
-        # While the folder name suggests a different collection, we treat MANIFEST.json as the source of truth.
-        assert actual.namespace == u'namespace'
-        assert actual.name == u'name'
-        assert actual.b_path == collection_artifact[0]
-        assert actual.api is None
-        assert actual.skip is True
->       assert actual.versions == set([to_text(version)])
-E       AssertionError: assert {'*'} == {'1.1'}
-E         Extra items in the left set:
-E         '*'
-E         Extra items in the right set:
-E         '1.1'
-E         Use -v to get the full diff
+>       actual = collection.CollectionRequirement.from_path(collection_artifact[0], True)
 
-test/units/galaxy/test_collection_install.py:192: AssertionError
+test/units/galaxy/test_collection_install.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:305: in from_path
+    metadata=meta, files=files, skip=True)
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:88: in __init__
+    self.add_requirement(parent, requirement)
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:120: in add_requirement
+    new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:120: in <genexpr>
+    new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ansible.galaxy.collection.CollectionRequirement object at 0x7f51d9bc2160>
+version = 1.1, requirements = 1.1, parent = None
+
+    def _meets_requirements(self, version, requirements, parent):
+        """
+        Supports version identifiers can be '==', '!=', '>', '>=', '<', '<=', '*'. Each requirement is delimited by ','
+        """
+        op_map = {
+            '!=': operator.ne,
+            '==': operator.eq,
+            '=': operator.eq,
+            '>=': operator.ge,
+            '>': operator.gt,
+            '<=': operator.le,
+            '<': operator.lt,
+        }
+    
+>       for req in list(requirements.split(',')):
+E       AttributeError: 'float' object has no attribute 'split'
+
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:213: AttributeError
 ---------------------------- Captured stdout setup -----------------------------
 - Collection ansible_namespace.collection was created successfully
-Created collection for ansible_namespace.collection at /tmp/pytest-of-root/pytest-0/test-ÅÑŚÌβŁÈ Collections Input1/ansible_namespace-collection-0.1.0.tar.gz
------------------------------ Captured stderr call -----------------------------
-[WARNING]: Collection at '/tmp/pytest-of-root/pytest-0/test-ÅÑŚÌβŁÈ Collections
-Input1/ansible_namespace/collection' does not have a valid version set, falling
-back to '*'. Found version: '1.1'
+Created collection for ansible_namespace.collection at /tmp/pytest-of-root/pytest-8/test-ÅÑŚÌβŁÈ Collections Input1/ansible_namespace-collection-0.1.0.tar.gz
 ______________ test_build_requirement_from_path_with_manifest[1] _______________
 
 version = 1
-collection_artifact = (b'/tmp/pytest-of-root/pytest-0/test-\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input2/ansib...\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input2/ansible_namespace-collection-0.1.0.tar.gz')
+collection_artifact = (b'/tmp/pytest-of-root/pytest-8/test-\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input2/ansib...\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input2/ansible_namespace-collection-0.1.0.tar.gz')
 
     @pytest.mark.parametrize('version', ['1.1.1', 1.1, 1])
     def test_build_requirement_from_path_with_manifest(version, collection_artifact):
@@ -79,31 +93,45 @@ collection_artifact = (b'/tmp/pytest-of-root/pytest-0/test-\xc3\x85\xc3\x91\xc5\
         with open(manifest_path, 'wb') as manifest_obj:
             manifest_obj.write(to_bytes(manifest_value))
     
-        actual = collection.CollectionRequirement.from_path(collection_artifact[0], True)
-    
-        # While the folder name suggests a different collection, we treat MANIFEST.json as the source of truth.
-        assert actual.namespace == u'namespace'
-        assert actual.name == u'name'
-        assert actual.b_path == collection_artifact[0]
-        assert actual.api is None
-        assert actual.skip is True
->       assert actual.versions == set([to_text(version)])
-E       AssertionError: assert {'*'} == {'1'}
-E         Extra items in the left set:
-E         '*'
-E         Extra items in the right set:
-E         '1'
-E         Use -v to get the full diff
+>       actual = collection.CollectionRequirement.from_path(collection_artifact[0], True)
 
-test/units/galaxy/test_collection_install.py:192: AssertionError
+test/units/galaxy/test_collection_install.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:305: in from_path
+    metadata=meta, files=files, skip=True)
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:88: in __init__
+    self.add_requirement(parent, requirement)
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:120: in add_requirement
+    new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:120: in <genexpr>
+    new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ansible.galaxy.collection.CollectionRequirement object at 0x7f51d9b17ac8>
+version = 1, requirements = 1, parent = None
+
+    def _meets_requirements(self, version, requirements, parent):
+        """
+        Supports version identifiers can be '==', '!=', '>', '>=', '<', '<=', '*'. Each requirement is delimited by ','
+        """
+        op_map = {
+            '!=': operator.ne,
+            '==': operator.eq,
+            '=': operator.eq,
+            '>=': operator.ge,
+            '>': operator.gt,
+            '<=': operator.le,
+            '<': operator.lt,
+        }
+    
+>       for req in list(requirements.split(',')):
+E       AttributeError: 'int' object has no attribute 'split'
+
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:213: AttributeError
 ---------------------------- Captured stdout setup -----------------------------
 - Collection ansible_namespace.collection was created successfully
-Created collection for ansible_namespace.collection at /tmp/pytest-of-root/pytest-0/test-ÅÑŚÌβŁÈ Collections Input2/ansible_namespace-collection-0.1.0.tar.gz
------------------------------ Captured stderr call -----------------------------
-[WARNING]: Collection at '/tmp/pytest-of-root/pytest-0/test-ÅÑŚÌβŁÈ Collections
-Input2/ansible_namespace/collection' does not have a valid version set, falling
-back to '*'. Found version: '1'
-====================== 2 failed, 1 passed in 3.64 seconds ======================
+Created collection for ansible_namespace.collection at /tmp/pytest-of-root/pytest-8/test-ÅÑŚÌβŁÈ Collections Input2/ansible_namespace-collection-0.1.0.tar.gz
+====================== 2 failed, 1 passed in 0.89 seconds ======================
 RUN EVERY COMMAND
 1
 pytest test/units/galaxy/test_collection_install.py::test_build_requirement_from_path_with_manifest
@@ -113,9 +141,63 @@ platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
 collected 1 item
 
-test/units/galaxy/test_collection_install.py .                           [100%]
+test/units/galaxy/test_collection_install.py F                           [100%]
 
-=========================== 1 passed in 2.87 seconds ===========================
+=================================== FAILURES ===================================
+_________________ test_build_requirement_from_path_no_version __________________
+
+collection_artifact = (b'/tmp/pytest-of-root/pytest-9/test-\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input0/ansib...\xc3\x85\xc3\x91\xc5\x9a\xc3\x8c\xce\xb2\xc5\x81\xc3\x88 Collections Input0/ansible_namespace-collection-0.1.0.tar.gz')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7ff7a6a3a1d0>
+
+    def test_build_requirement_from_path_no_version(collection_artifact, monkeypatch):
+        manifest_path = os.path.join(collection_artifact[0], b'MANIFEST.json')
+        manifest_value = json.dumps({
+            'collection_info': {
+                'namespace': 'namespace',
+                'name': 'name',
+                'version': '',
+                'dependencies': {}
+            }
+        })
+        with open(manifest_path, 'wb') as manifest_obj:
+            manifest_obj.write(to_bytes(manifest_value))
+    
+        mock_display = MagicMock()
+        monkeypatch.setattr(Display, 'display', mock_display)
+    
+>       actual = collection.CollectionRequirement.from_path(collection_artifact[0], True)
+
+test/units/galaxy/test_collection_install.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:305: in from_path
+    metadata=meta, files=files, skip=True)
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:88: in __init__
+    self.add_requirement(parent, requirement)
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:120: in add_requirement
+    new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:120: in <genexpr>
+    new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:229: in _meets_requirements
+    if not op(LooseVersion(version), LooseVersion(requirement)):
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/distutils/version.py:46: in __eq__
+    c = self._cmp(other)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'LooseVersion' object has no attribute 'vstring'") raised in repr()] LooseVersion object at 0x7ff7a6a2b6a0>
+other = <[AttributeError("'LooseVersion' object has no attribute 'vstring'") raised in repr()] LooseVersion object at 0x7ff7a6a2b630>
+
+    def _cmp (self, other):
+        if isinstance(other, str):
+            other = LooseVersion(other)
+    
+>       if self.version == other.version:
+E       AttributeError: 'LooseVersion' object has no attribute 'version'
+
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/distutils/version.py:335: AttributeError
+---------------------------- Captured stdout setup -----------------------------
+- Collection ansible_namespace.collection was created successfully
+Created collection for ansible_namespace.collection at /tmp/pytest-of-root/pytest-9/test-ÅÑŚÌβŁÈ Collections Input0/ansible_namespace-collection-0.1.0.tar.gz
+=========================== 1 failed in 0.68 seconds ===========================
 RUN EVERY COMMAND
 2
 pytest test/units/galaxy/test_collection_install.py::test_build_requirement_from_path_no_version
@@ -125,6 +207,39 @@ platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
 collected 1 item
 
-test/units/galaxy/test_collection_install.py .                           [100%]
+test/units/galaxy/test_collection_install.py F                           [100%]
 
-=========================== 1 passed in 2.90 seconds ===========================
+=================================== FAILURES ===================================
+_________ test_add_collection_requirement_to_unknown_installed_version _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe570865e48>
+
+    def test_add_collection_requirement_to_unknown_installed_version(monkeypatch):
+        mock_display = MagicMock()
+        monkeypatch.setattr(Display, 'display', mock_display)
+    
+        req = collection.CollectionRequirement('namespace', 'name', None, 'https://galaxy.com', ['*'], '*', False,
+                                               skip=True)
+    
+>       req.add_requirement('parent.collection', '1.0.0')
+
+test/units/galaxy/test_collection_install.py:544: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ansible.galaxy.collection.CollectionRequirement object at 0x7fe5708765f8>
+parent = 'parent.collection', requirement = '1.0.0'
+
+    def add_requirement(self, parent, requirement):
+        self.required_by.append((parent, requirement))
+        new_versions = set(v for v in self.versions if self._meets_requirements(v, requirement, parent))
+        if len(new_versions) == 0:
+            if self.skip:
+                force_flag = '--force-with-deps' if parent else '--force'
+                version = self.latest_version if self.latest_version != '*' else 'unknown'
+                msg = "Cannot meet requirement %s:%s as it is already installed at version '%s'. Use %s to overwrite" \
+                      % (to_text(self), requirement, version, force_flag)
+>               raise AnsibleError(msg)
+E               ansible.errors.AnsibleError: Cannot meet requirement namespace.name:1.0.0 as it is already installed at version 'unknown'. Use --force-with-deps to overwrite
+
+/opt/conda/envs/bdadf60111059c1c5aebbf31698bc2b1/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/galaxy/collection.py:127: AnsibleError
+=========================== 1 failed in 0.58 seconds ===========================

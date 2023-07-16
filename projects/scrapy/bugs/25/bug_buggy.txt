@@ -17,6 +17,6 @@ AssertionError: 'http://a.com/test_form' != 'http://b.com/test_form'
 
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.079s
+Ran 1 test in 0.002s
 
 FAILED (failures=1)
