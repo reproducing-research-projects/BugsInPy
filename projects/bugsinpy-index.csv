@@ -322,7 +322,7 @@ matplotlib,16,fixed,pass
 matplotlib,17,buggy,fail
 matplotlib,17,fixed,pass
 matplotlib,18,buggy,fail
-matplotlib,18,fixed,pass
+matplotlib,18,fixed,fail
 matplotlib,19,buggy,fail
 matplotlib,19,fixed,pass
 matplotlib,20,buggy,fail
@@ -341,8 +341,8 @@ matplotlib,26,buggy,error
 matplotlib,26,fixed,error
 matplotlib,27,buggy,error
 matplotlib,27,fixed,error
-matplotlib,28,buggy,fail
-matplotlib,28,fixed,pass
+matplotlib,28,buggy,error
+matplotlib,28,fixed,error
 matplotlib,29,buggy,fail
 matplotlib,29,fixed,pass
 matplotlib,30,buggy,fail
@@ -376,11 +376,11 @@ pandas,13,fixed,pass
 pandas,14,buggy,fail
 pandas,14,fixed,pass
 pandas,15,buggy,fail
-pandas,15,fixed,pass
+pandas,15,fixed,error
 pandas,16,buggy,fail
 pandas,16,fixed,pass
 pandas,17,buggy,fail
-pandas,17,fixed,pass
+pandas,17,fixed,error
 pandas,18,buggy,fail
 pandas,18,fixed,pass
 pandas,19,buggy,fail
@@ -532,7 +532,7 @@ pandas,91,fixed,pass
 pandas,92,buggy,fail
 pandas,92,fixed,pass
 pandas,93,buggy,fail
-pandas,93,fixed,pass
+pandas,93,fixed,error
 pandas,94,buggy,fail
 pandas,94,fixed,pass
 pandas,95,buggy,fail
@@ -787,8 +787,8 @@ spacy,2,buggy,fail
 spacy,2,fixed,pass
 spacy,3,buggy,fail
 spacy,3,fixed,pass
-spacy,4,buggy,fail
-spacy,4,fixed,pass
+spacy,4,buggy,error
+spacy,4,fixed,error
 spacy,5,buggy,fail
 spacy,5,fixed,pass
 spacy,6,buggy,fail
