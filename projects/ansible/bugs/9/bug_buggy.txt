@@ -7,15 +7,96 @@ RUN EVERY COMMAND
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
 plugins: mock-1.2
+collected 13 items
 
-==================================== ERRORS ====================================
-_ ERROR collecting test/units/modules/packaging/os/test_redhat_subscription.py _
-ImportError while importing test module '/home/user/BugsInPy/temp/projects/ansible/test/units/modules/packaging/os/test_redhat_subscription.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-test/units/modules/packaging/os/test_redhat_subscription.py:11: in <module>
-    from ansible.modules.packaging.os import redhat_subscription
-E   ImportError: cannot import name 'redhat_subscription'
-=========================== 1 error in 0.18 seconds ============================
-ERROR: not found: /home/user/BugsInPy/temp/projects/ansible/test/units/modules/packaging/os/test_redhat_subscription.py::test_redhat_subscribtion
-(no name '/home/user/BugsInPy/temp/projects/ansible/test/units/modules/packaging/os/test_redhat_subscription.py::test_redhat_subscribtion' in any of [<Module 'test_redhat_subscription.py'>])
+test/units/modules/packaging/os/test_redhat_subscription.py ..........FF [ 92%]
+.                                                                        [100%]
+
+=================================== FAILURES ===================================
+___ test_redhat_subscribtion[test_registeration_username_password_pool_ids] ____
+
+mocker = <pytest_mock.MockFixture object at 0x7f040d2567f0>
+capfd = <_pytest.capture.CaptureFixture object at 0x7f040d2532b0>
+patch_redhat_subscription = None
+testcase = {'changed': True, 'id': 'test_registeration_username_password_pool_ids', 'msg': "System successfully registered to 'No...tbin/subscription-manager', 'attach', '--pool', 'ff8080816b8e967f016b8e99747107e9'], {'check_rc': True}, (0, '', ''))]}
+
+    @pytest.mark.parametrize('patch_ansible_module, testcase', TEST_CASES, ids=TEST_CASES_IDS, indirect=['patch_ansible_module'])
+    @pytest.mark.usefixtures('patch_ansible_module')
+    def test_redhat_subscribtion(mocker, capfd, patch_redhat_subscription, testcase):
+        """
+        Run unit tests for test cases listen in TEST_CASES
+        """
+    
+        # Mock function used for running commands first
+        call_results = [item[2] for item in testcase['run_command.calls']]
+        mock_run_command = mocker.patch.object(
+            basic.AnsibleModule,
+            'run_command',
+            side_effect=call_results)
+    
+        # Try to run test case
+        with pytest.raises(SystemExit):
+            redhat_subscription.main()
+    
+        out, err = capfd.readouterr()
+        results = json.loads(out)
+    
+        assert 'changed' in results
+        assert results['changed'] == testcase['changed']
+        if 'msg' in results:
+            assert results['msg'] == testcase['msg']
+    
+        assert basic.AnsibleModule.run_command.call_count == len(testcase['run_command.calls'])
+        if basic.AnsibleModule.run_command.call_count:
+            call_args_list = [(item[0][0], item[1]) for item in basic.AnsibleModule.run_command.call_args_list]
+            expected_call_args_list = [(item[0], item[1]) for item in testcase['run_command.calls']]
+>           assert call_args_list == expected_call_args_list
+E           AssertionError: assert [(['/testbin/...k_rc': True})] == [(['/testbin/s...k_rc': True})]
+E             At index 3 diff: (['/testbin/subscription-manager', 'attach', '--pool', 'ff8080816b8e967f016b8e99632804a6', '--quantity', '1'], {'check_rc': True}) != (['/testbin/subscription-manager', 'attach', '--pool', 'ff8080816b8e967f016b8e99632804a6'], {'check_rc': True})
+E             Use -v to get the full diff
+
+test/units/modules/packaging/os/test_redhat_subscription.py:848: AssertionError
+__ test_redhat_subscribtion[test_registeration_username_password_one_pool_id] __
+
+mocker = <pytest_mock.MockFixture object at 0x7f040d339f98>
+capfd = <_pytest.capture.CaptureFixture object at 0x7f040d339550>
+patch_redhat_subscription = None
+testcase = {'changed': True, 'id': 'test_registeration_username_password_one_pool_id', 'msg': "System successfully registered to ...tbin/subscription-manager', 'attach', '--pool', 'ff8080816b8e967f016b8e99632804a6'], {'check_rc': True}, (0, '', ''))]}
+
+    @pytest.mark.parametrize('patch_ansible_module, testcase', TEST_CASES, ids=TEST_CASES_IDS, indirect=['patch_ansible_module'])
+    @pytest.mark.usefixtures('patch_ansible_module')
+    def test_redhat_subscribtion(mocker, capfd, patch_redhat_subscription, testcase):
+        """
+        Run unit tests for test cases listen in TEST_CASES
+        """
+    
+        # Mock function used for running commands first
+        call_results = [item[2] for item in testcase['run_command.calls']]
+        mock_run_command = mocker.patch.object(
+            basic.AnsibleModule,
+            'run_command',
+            side_effect=call_results)
+    
+        # Try to run test case
+        with pytest.raises(SystemExit):
+            redhat_subscription.main()
+    
+        out, err = capfd.readouterr()
+        results = json.loads(out)
+    
+        assert 'changed' in results
+        assert results['changed'] == testcase['changed']
+        if 'msg' in results:
+            assert results['msg'] == testcase['msg']
+    
+        assert basic.AnsibleModule.run_command.call_count == len(testcase['run_command.calls'])
+        if basic.AnsibleModule.run_command.call_count:
+            call_args_list = [(item[0][0], item[1]) for item in basic.AnsibleModule.run_command.call_args_list]
+            expected_call_args_list = [(item[0], item[1]) for item in testcase['run_command.calls']]
+>           assert call_args_list == expected_call_args_list
+E           AssertionError: assert [(['/testbin/...k_rc': True})] == [(['/testbin/s...k_rc': True})]
+E             At index 3 diff: (['/testbin/subscription-manager', 'attach', '--pool', 'ff8080816b8e967f016b8e99632804a6', '--quantity', '1'], {'check_rc': True}) != (['/testbin/subscription-manager', 'attach', '--pool', 'ff8080816b8e967f016b8e99632804a6'], {'check_rc': True})
+E             Use -v to get the full diff
+
+test/units/modules/packaging/os/test_redhat_subscription.py:848: AssertionError
+===================== 2 failed, 11 passed in 0.12 seconds ======================
