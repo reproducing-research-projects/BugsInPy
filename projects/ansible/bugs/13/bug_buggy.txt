@@ -6,9 +6,30 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
-plugins: mock-1.2
 collected 1 item
 
-test/units/cli/test_galaxy.py .                                          [100%]
+test/units/cli/test_galaxy.py F                                          [100%]
 
-=========================== 1 passed in 2.83 seconds ===========================
+=================================== FAILURES ===================================
+_______________________ test_collection_install_with_url _______________________
+
+collection_install = (<MagicMock id='140127118734952'>, <MagicMock id='140127118744768'>, '/tmp/pytest-of-root/pytest-4/test-ÅÑŚÌβŁÈ Output0')
+
+    def test_collection_install_with_url(collection_install):
+        mock_install, dummy, output_dir = collection_install
+    
+        galaxy_args = ['ansible-galaxy', 'collection', 'install', 'https://foo/bar/foo-bar-v1.0.0.tar.gz',
+                       '--collections-path', output_dir]
+        GalaxyCLI(args=galaxy_args).run()
+    
+        collection_path = os.path.join(output_dir, 'ansible_collections')
+        assert os.path.isdir(collection_path)
+    
+        assert mock_install.call_count == 1
+>       assert mock_install.call_args[0][0] == [('https://foo/bar/foo-bar-v1.0.0.tar.gz', '*', None)]
+E       AssertionError: assert [('https', '/...ar.gz', None)] == [('https://foo...', '*', None)]
+E         At index 0 diff: ('https', '//foo/bar/foo-bar-v1.0.0.tar.gz', None) != ('https://foo/bar/foo-bar-v1.0.0.tar.gz', '*', None)
+E         Use -v to get the full diff
+
+test/units/cli/test_galaxy.py:904: AssertionError
+=========================== 1 failed in 0.69 seconds ===========================

@@ -6,9 +6,89 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
-plugins: mock-1.2
 collected 4 items
 
-test/units/plugins/lookup/test_env.py ....                               [100%]
+test/units/plugins/lookup/test_env.py FFFF                               [100%]
 
-=========================== 4 passed in 1.58 seconds ===========================
+=================================== FAILURES ===================================
+_________________________ test_env_var_value[foo-bar] __________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f40a2566278>
+env_var = 'foo', exp_value = 'bar'
+
+    @pytest.mark.parametrize('env_var,exp_value', [
+        ('foo', 'bar'),
+        ('equation', 'a=b*100')
+    ])
+    def test_env_var_value(monkeypatch, env_var, exp_value):
+        monkeypatch.setattr('ansible.utils.py3compat.environ.get', lambda x, y: exp_value)
+    
+        env_lookup = lookup_loader.get('env')
+        retval = env_lookup.run([env_var], None)
+>       assert retval == [exp_value]
+E       AssertionError: assert [''] == ['bar']
+E         At index 0 diff: '' != 'bar'
+E         Use -v to get the full diff
+
+test/units/plugins/lookup/test_env.py:23: AssertionError
+_____________________ test_env_var_value[equation-a=b*100] _____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f40a256eba8>
+env_var = 'equation', exp_value = 'a=b*100'
+
+    @pytest.mark.parametrize('env_var,exp_value', [
+        ('foo', 'bar'),
+        ('equation', 'a=b*100')
+    ])
+    def test_env_var_value(monkeypatch, env_var, exp_value):
+        monkeypatch.setattr('ansible.utils.py3compat.environ.get', lambda x, y: exp_value)
+    
+        env_lookup = lookup_loader.get('env')
+        retval = env_lookup.run([env_var], None)
+>       assert retval == [exp_value]
+E       AssertionError: assert [''] == ['a=b*100']
+E         At index 0 diff: '' != 'a=b*100'
+E         Use -v to get the full diff
+
+test/units/plugins/lookup/test_env.py:23: AssertionError
+____________ test_utf8_env_var_value[simple_var-alpha-\u03b2-gamma] ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f40a2568d30>
+env_var = 'simple_var', exp_value = 'alpha-β-gamma'
+
+    @pytest.mark.parametrize('env_var,exp_value', [
+        ('simple_var', 'alpha-β-gamma'),
+        ('the_var', 'ãnˈsiβle')
+    ])
+    def test_utf8_env_var_value(monkeypatch, env_var, exp_value):
+        monkeypatch.setattr('ansible.utils.py3compat.environ.get', lambda x, y: exp_value)
+    
+        env_lookup = lookup_loader.get('env')
+        retval = env_lookup.run([env_var], None)
+>       assert retval == [exp_value]
+E       AssertionError: assert [''] == ['alpha-β-gamma']
+E         At index 0 diff: '' != 'alpha-β-gamma'
+E         Use -v to get the full diff
+
+test/units/plugins/lookup/test_env.py:35: AssertionError
+____________ test_utf8_env_var_value[the_var-\xe3n\u02c8si\u03b2le] ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f40a256e7f0>
+env_var = 'the_var', exp_value = 'ãnˈsiβle'
+
+    @pytest.mark.parametrize('env_var,exp_value', [
+        ('simple_var', 'alpha-β-gamma'),
+        ('the_var', 'ãnˈsiβle')
+    ])
+    def test_utf8_env_var_value(monkeypatch, env_var, exp_value):
+        monkeypatch.setattr('ansible.utils.py3compat.environ.get', lambda x, y: exp_value)
+    
+        env_lookup = lookup_loader.get('env')
+        retval = env_lookup.run([env_var], None)
+>       assert retval == [exp_value]
+E       AssertionError: assert [''] == ['ãnˈsiβle']
+E         At index 0 diff: '' != 'ãnˈsiβle'
+E         Use -v to get the full diff
+
+test/units/plugins/lookup/test_env.py:35: AssertionError
+=========================== 4 failed in 0.69 seconds ===========================

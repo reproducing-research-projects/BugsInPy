@@ -10,4 +10,4 @@ collected 1 item
 
 test/units/plugins/shell/test_powershell.py .                            [100%]
 
-=========================== 1 passed in 1.65 seconds ===========================
+=========================== 1 passed in 0.48 seconds ===========================

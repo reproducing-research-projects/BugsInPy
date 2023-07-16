@@ -8,6 +8,21 @@ platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
 collected 1 item
 
-test/units/plugins/shell/test_powershell.py .                            [100%]
+test/units/plugins/shell/test_powershell.py F                            [100%]
 
-=========================== 1 passed in 1.74 seconds ===========================
+=================================== FAILURES ===================================
+______________________________ test_join_path_unc ______________________________
+
+    def test_join_path_unc():
+        pwsh = ShellModule()
+        unc_path_parts = ['\\\\host\\share\\dir1\\\\dir2\\', '\\dir3/dir4', 'dir5', 'dir6\\']
+        expected = '\\\\host\\share\\dir1\\dir2\\dir3\\dir4\\dir5\\dir6'
+        actual = pwsh.join_path(*unc_path_parts)
+>       assert actual == expected
+E       AssertionError: assert 'host\\share\...4\\dir5\\dir6' == '\\\\host\\sha...4\\dir5\\dir6'
+E         - host\share\dir1\dir2\dir3\dir4\dir5\dir6
+E         + \\host\share\dir1\dir2\dir3\dir4\dir5\dir6
+E         ? ++
+
+test/units/plugins/shell/test_powershell.py:61: AssertionError
+=========================== 1 failed in 0.56 seconds ===========================

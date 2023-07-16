@@ -6,9 +6,8 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
-plugins: mock-1.2
 collected 1 item
 
 test/units/cli/test_galaxy.py .                                          [100%]
 
-=========================== 1 passed in 1.77 seconds ===========================
+=========================== 1 passed in 0.64 seconds ===========================
