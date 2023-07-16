@@ -785,8 +785,8 @@ spacy,1,buggy,fail
 spacy,1,fixed,pass
 spacy,2,buggy,fail
 spacy,2,fixed,pass
-spacy,3,buggy,unknown
-spacy,3,fixed,unknown
+spacy,3,buggy,fail
+spacy,3,fixed,pass
 spacy,4,buggy,fail
 spacy,4,fixed,pass
 spacy,5,buggy,fail
