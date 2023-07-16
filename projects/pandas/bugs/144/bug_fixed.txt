@@ -1,0 +1,25 @@
+pytest pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/plotting/test_series.py .                                   [100%]
+
+=============================== warnings summary ===============================
+pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+pandas/tests/plotting/test_series.py::TestSeriesPlots::test_xtick_barPlot
+  /home/user/BugsInPy/temp/projects/pandas/pandas/plotting/_matplotlib/compat.py:13: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    op(LooseVersion(mpl.__version__), LooseVersion(version))
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 6 warnings in 0.13s =========================

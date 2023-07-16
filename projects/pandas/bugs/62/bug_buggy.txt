@@ -1,0 +1,1860 @@
+pytest pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 66 items
+
+pandas/tests/indexing/test_indexing.py .FFFFFFF..F...................... [ 50%]
+...........FFFFFFFFFFFFFFFFFFFFFF                                        [100%]
+
+=================================== FAILURES ===================================
+___ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-Float64Index] ____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002313fa0>
+index = Float64Index([-14.642438245538514,  -9.544686315441952,  10.855456321406576,
+                28.91305409482987,  43.927155164105145],
+             dtype='float64')
+obj = -14.642438    0
+-9.544686     0
+ 10.855456    0
+ 28.913054    0
+ 43.927155    4
+dtype: int64
+idxr = -14.642438    0
+-9.544686     0
+ 10.855456    0
+ 28.913054    0
+ 43.927155    4
+dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-Index0] _______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002484850>
+index = Index(['lYjKLaXdLb', 'aGbAfPHqag', 'uWl0rUcvDp', 'aAd9zzYKv6', 'Nv1bKOEvkJ'], dtype='object')
+obj = lYjKLaXdLb    0
+aGbAfPHqag    0
+uWl0rUcvDp    0
+aAd9zzYKv6    0
+Nv1bKOEvkJ    4
+dtype: int64
+idxr = lYjKLaXdLb    0
+aGbAfPHqag    0
+uWl0rUcvDp    0
+aAd9zzYKv6    0
+Nv1bKOEvkJ    4
+dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-Index1] _______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0024eca90>
+index = Index(['ק6דכך35וכג', 'ז4טג0וכעסש', 'מןהכח3ךהצט', 'ב72נבט3גפ5', '1ירעצא8שנ6'], dtype='object')
+obj = ק6דכך35וכג    0
+ז4טג0וכעסש    0
+מןהכח3ךהצט    0
+ב72נבט3גפ5    0
+1ירעצא8שנ6    0
+dtype: int64
+idxr = ק6דכך35וכג    0
+ז4טג0וכעסש    0
+מןהכח3ךהצט    0
+ב72נבט3גפ5    0
+1ירעצא8שנ6    0
+dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+___ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-DatetimeIndex] ___
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002568a60>
+index = DatetimeIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+               '2000-01-07'],
+              dtype='datetime64[ns]', freq='B')
+obj = 2000-01-03    0
+2000-01-04    0
+2000-01-05    0
+2000-01-06    0
+2000-01-07    0
+Freq: B, dtype: int64
+idxr = 2000-01-03    0
+2000-01-04    0
+2000-01-05    0
+2000-01-06    0
+2000-01-07    0
+Freq: B, dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-PeriodIndex] ____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00268f340>
+index = PeriodIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+             '2000-01-07'],
+            dtype='period[B]', freq='B')
+obj = 2000-01-03    0
+2000-01-04    1
+2000-01-05    0
+2000-01-06    0
+2000-01-07    0
+Freq: B, dtype: int64
+idxr = 2000-01-03    0
+2000-01-04    1
+2000-01-05    0
+2000-01-06    0
+2000-01-07    0
+Freq: B, dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+__ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-TimedeltaIndex] ___
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0026b2a90>
+index = TimedeltaIndex(['1 days', '2 days', '3 days', '4 days', '5 days'], dtype='timedelta64[ns]', freq='D')
+obj = 1 days    0
+2 days    0
+3 days    0
+4 days    0
+5 days    4
+Freq: D, dtype: int64
+idxr = 1 days    0
+2 days    0
+3 days    0
+4 days    0
+5 days    4
+Freq: D, dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-Index2] _______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0023195e0>
+index = Index([False, True, False, False, False], dtype='object')
+obj = False    0
+True     0
+False    0
+False    0
+False    4
+dtype: int64
+idxr = False    0
+True     0
+False    0
+False    0
+False    4
+dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+_ TestFancy.test_setitem_ndarray_3d[<lambda>-setitem-Series-CategoricalIndex] __
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002565a90>
+index = CategoricalIndex(['xTow', 'KW3l', 'ffcI', 'xTow', 'KW3l'], categories=['xTow', 'KW3l', 'ffcI'], ordered=False, dtype='category')
+obj = xTow    0
+KW3l    0
+ffcI    2
+xTow    0
+KW3l    0
+dtype: int64
+idxr = xTow    0
+KW3l    0
+ffcI    2
+xTow    0
+KW3l    0
+dtype: int64
+idxr_id = 'setitem'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-Int64Index] ______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002559ac0>
+index = Int64Index([0, 1, 2, 3, 4], dtype='int64')
+obj = 0    0
+1    0
+2    0
+3    3
+4    0
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0021431d0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+_____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-Float64Index] _____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00268f2e0>
+index = Float64Index([-14.642438245538514,  -9.544686315441952,  10.855456321406576,
+                28.91305409482987,  43.927155164105145],
+             dtype='float64')
+obj = -14.642438    0
+-9.544686     1
+ 10.855456    0
+ 28.913054    0
+ 43.927155    4
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0021437c0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+________ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-Index0] ________
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0024846a0>
+index = Index(['lYjKLaXdLb', 'aGbAfPHqag', 'uWl0rUcvDp', 'aAd9zzYKv6', 'Nv1bKOEvkJ'], dtype='object')
+obj = lYjKLaXdLb    0
+aGbAfPHqag    0
+uWl0rUcvDp    0
+aAd9zzYKv6    0
+Nv1bKOEvkJ    4
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002457b80>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+________ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-Index1] ________
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0024ec970>
+index = Index(['ק6דכך35וכג', 'ז4טג0וכעסש', 'מןהכח3ךהצט', 'ב72נבט3גפ5', '1ירעצא8שנ6'], dtype='object')
+obj = ק6דכך35וכג    0
+ז4טג0וכעסש    0
+מןהכח3ךהצט    0
+ב72נבט3גפ5    0
+1ירעצא8שנ6    4
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0024573b0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-DatetimeIndex] _____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00261d3d0>
+index = DatetimeIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+               '2000-01-07'],
+              dtype='datetime64[ns]', freq='B')
+obj = 2000-01-03    0
+2000-01-04    0
+2000-01-05    0
+2000-01-06    3
+2000-01-07    0
+Freq: B, dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00215c220>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+_____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-PeriodIndex] ______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002313f10>
+index = PeriodIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+             '2000-01-07'],
+            dtype='period[B]', freq='B')
+obj = 2000-01-03    0
+2000-01-04    0
+2000-01-05    2
+2000-01-06    3
+2000-01-07    0
+Freq: B, dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00215cd10>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-TimedeltaIndex] ____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002319c10>
+index = TimedeltaIndex(['1 days', '2 days', '3 days', '4 days', '5 days'], dtype='timedelta64[ns]', freq='D')
+obj = 1 days    0
+2 days    0
+3 days    0
+4 days    0
+5 days    0
+Freq: D, dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002143590>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+________ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-Index2] ________
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0023854f0>
+index = Index([False, True, False, False, False], dtype='object')
+obj = False    0
+True     0
+False    0
+False    0
+False    0
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0021438b0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-RangeIndex] ______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002357670>
+index = RangeIndex(start=0, stop=5, step=1)
+obj = 0    0
+1    0
+2    0
+3    0
+4    0
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0024579f0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-IntervalIndex] _____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002666580>
+index = IntervalIndex([(0.0, 20.0], (20.0, 40.0], (40.0, 60.0], (60.0, 80.0], (80.0, 100.0]],
+              closed='right',
+              dtype='interval[float64]')
+obj = (0.0, 20.0]      0
+(20.0, 40.0]     0
+(40.0, 60.0]     0
+(60.0, 80.0]     0
+(80.0, 100.0]    0
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002174ea0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+___ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-Series-CategoricalIndex] ___
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00263af10>
+index = CategoricalIndex(['xTow', 'KW3l', 'ffcI', 'xTow', 'KW3l'], categories=['xTow', 'KW3l', 'ffcI'], ordered=False, dtype='category')
+obj = xTow    0
+KW3l    0
+ffcI    0
+xTow    0
+KW3l    0
+dtype: int64
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002625360>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Int64Index] _____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0025b3160>
+index = Int64Index([0, 1, 2, 3, 4], dtype='int64')
+obj =      0    1    2    3    4
+0  0.0  0.0  0.0  0.0  0.0
+1  0.0  0.0  0.0  0.0  0.0
+2  0.0  0.0  0.0  0.0  0.0
+3  0.0  0.0  0.0  0.0  0.0
+4  0.0  0.0  0.0  0.0  0.0
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002625950>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+___ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Float64Index] ____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00261dd60>
+index = Float64Index([-14.642438245538514,  -9.544686315441952,  10.855456321406576,
+                28.91305409482987,  43.927155164105145],
+             dtype='float64')
+obj =             -14.642438  -9.544686    10.855456   28.913054   43.927155
+-14.642438    1.064875   -1.924364    0.685035 ...    0.000000    0.000000    0.000000    0.000000
+ 43.927155    0.000000    0.000000    0.000000    0.000000    0.000000
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0026309a0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Index0] _______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002148520>
+index = Index(['lYjKLaXdLb', 'aGbAfPHqag', 'uWl0rUcvDp', 'aAd9zzYKv6', 'Nv1bKOEvkJ'], dtype='object')
+obj =             lYjKLaXdLb  aGbAfPHqag  uWl0rUcvDp  aAd9zzYKv6  Nv1bKOEvkJ
+lYjKLaXdLb         0.0         0.0         0.0 ...         0.0         0.0         0.0         0.0
+Nv1bKOEvkJ         0.0         0.0         0.0         0.0         0.0
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002174ea0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Index1] _______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002148070>
+index = Index(['ק6דכך35וכג', 'ז4טג0וכעסש', 'מןהכח3ךהצט', 'ב72נבט3גפ5', '1ירעצא8שנ6'], dtype='object')
+obj =             ק6דכך35וכג  ז4טג0וכעסש  מןהכח3ךהצט  ב72נבט3גפ5  1ירעצא8שנ6
+ק6דכך35וכג    0.000000    0.000000    0.000000 ...    0.000000    0.000000    0.000000    0.000000
+1ירעצא8שנ6   -0.053715    1.451815   -1.103754    0.583699   -0.057672
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00215c7c0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+___ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-DatetimeIndex] ___
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002489d60>
+index = DatetimeIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+               '2000-01-07'],
+              dtype='datetime64[ns]', freq='B')
+obj =             2000-01-03  2000-01-04  2000-01-05  2000-01-06  2000-01-07
+2000-01-03    0.000000    0.000000    0.000000 ...    0.934494    1.839252   -0.129231   -0.189664
+2000-01-07    0.000000    0.000000    0.000000    0.000000    0.000000
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00208ed60>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-PeriodIndex] ____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb0024e7df0>
+index = PeriodIndex(['2000-01-03', '2000-01-04', '2000-01-05', '2000-01-06',
+             '2000-01-07'],
+            dtype='period[B]', freq='B')
+obj =             2000-01-03  2000-01-04  2000-01-05  2000-01-06  2000-01-07
+2000-01-03         0.0         0.0         0.0 ...         0.0         0.0         0.0         0.0
+2000-01-07         0.0         0.0         0.0         0.0         0.0
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002630900>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+__ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-TimedeltaIndex] ___
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002153fa0>
+index = TimedeltaIndex(['1 days', '2 days', '3 days', '4 days', '5 days'], dtype='timedelta64[ns]', freq='D')
+obj =         1 days  2 days  3 days  4 days  5 days
+1 days     0.0     0.0     0.0     0.0     0.0
+2 days     0.0     0.0  ...0     0.0     0.0     0.0
+4 days     0.0     0.0     0.0     0.0     0.0
+5 days     0.0     0.0     0.0     0.0     0.0
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb0026254f0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+______ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Index2] _______
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002424100>
+index = Index([False, True, False, False, False], dtype='object')
+obj =           False     True      False     False     False
+False  0.000000  0.000000  0.000000  0.000000  0.000000
+True  ....208192
+False  0.000000  0.000000  0.000000  0.000000  0.000000
+False -1.446068 -0.209372 -0.373038  1.352416 -1.848342
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00237aae0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+____ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-RangeIndex] _____
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00214b5e0>
+index = RangeIndex(start=0, stop=5, step=1)
+obj =      0    1    2    3    4
+0  0.0  0.0  0.0  0.0  0.0
+1  0.0  0.0  0.0  0.0  0.0
+2  0.0  0.0  0.0  0.0  0.0
+3  0.0  0.0  0.0  0.0  0.0
+4  0.0  0.0  0.0  0.0  0.0
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00237a900>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+___ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-IntervalIndex] ___
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb002568f10>
+index = IntervalIndex([(0.0, 20.0], (20.0, 40.0], (40.0, 60.0], (60.0, 80.0], (80.0, 100.0]],
+              closed='right',
+              dtype='interval[float64]')
+obj =                (0.0, 20.0]  (20.0, 40.0]  ...  (60.0, 80.0]  (80.0, 100.0]
+(0.0, 20.0]            0.0           0.0  ....    0.0            0.0
+(80.0, 100.0]          0.0           0.0  ...           0.0            0.0
+
+[5 rows x 5 columns]
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb00266c130>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+_ TestFancy.test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-CategoricalIndex] __
+
+self = <pandas.tests.indexing.test_indexing.TestFancy object at 0x7fb00209e640>
+index = CategoricalIndex(['xTow', 'KW3l', 'ffcI', 'xTow', 'KW3l'], categories=['xTow', 'KW3l', 'ffcI'], ordered=False, dtype='category')
+obj =           xTow     KW3l      ffcI      xTow      KW3l
+xTow  0.000000  0.00000  0.000000  0.000000  0.000000
+KW3l  0.00...0  0.000000
+xTow  0.000000  0.00000  0.000000  0.000000  0.000000
+KW3l -0.335377  0.52164 -1.406969  0.615186  0.807146
+idxr = <pandas.core.indexing._iLocIndexer object at 0x7fb002457bd0>
+idxr_id = 'iloc'
+
+    @pytest.mark.parametrize(
+        "index", tm.all_index_generator(5), ids=lambda x: type(x).__name__
+    )
+    @pytest.mark.parametrize(
+        "obj",
+        [
+            lambda i: Series(np.arange(len(i)), index=i),
+            lambda i: DataFrame(np.random.randn(len(i), len(i)), index=i, columns=i),
+        ],
+        ids=["Series", "DataFrame"],
+    )
+    @pytest.mark.parametrize(
+        "idxr, idxr_id",
+        [
+            (lambda x: x, "setitem"),
+            (lambda x: x.loc, "loc"),
+            (lambda x: x.iloc, "iloc"),
+        ],
+    )
+    def test_setitem_ndarray_3d(self, index, obj, idxr, idxr_id):
+        # GH 25567
+        obj = obj(index)
+        idxr = idxr(obj)
+        nd3 = np.random.randint(5, size=(2, 2, 2))
+    
+        if idxr_id == "iloc":
+            err = ValueError
+            msg = f"Cannot set values with ndim > {obj.ndim}"
+        elif (
+            isinstance(index, pd.IntervalIndex)
+            and idxr_id == "setitem"
+            and obj.ndim == 1
+        ):
+            err = AttributeError
+            msg = (
+                "'pandas._libs.interval.IntervalTree' object has no attribute 'get_loc'"
+            )
+        else:
+            err = ValueError
+            msg = r"Buffer has wrong number of dimensions \(expected 1, got 3\)|"
+    
+        with pytest.raises(err, match=msg):
+>           idxr[nd3] = 0
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+pandas/tests/indexing/test_indexing.py:153: Failed
+=========================== short test summary info ============================
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-Float64Index]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-Index0]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-Index1]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-DatetimeIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-PeriodIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-TimedeltaIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-Index2]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-setitem-Series-CategoricalIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-Int64Index]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-Float64Index]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-Index0]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-Index1]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-DatetimeIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-PeriodIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-TimedeltaIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-Index2]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-RangeIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-IntervalIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-Series-CategoricalIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Int64Index]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Float64Index]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Index0]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Index1]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-DatetimeIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-PeriodIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-TimedeltaIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-Index2]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-RangeIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-IntervalIndex]
+FAILED pandas/tests/indexing/test_indexing.py::TestFancy::test_setitem_ndarray_3d[<lambda>-iloc-DataFrame-CategoricalIndex]
+======================== 30 failed, 36 passed in 1.40s =========================

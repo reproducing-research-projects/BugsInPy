@@ -1,0 +1,14 @@
+pytest pandas/tests/io/formats/test_to_csv.py::TestToCSV::test_to_csv_na_rep_long_string
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/io/formats/test_to_csv.py .                                 [100%]
+
+============================== 1 passed in 0.05s ===============================

@@ -1,0 +1,2897 @@
+pytest pandas/tests/groupby/test_function.py::test_series_groupby_nunique
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 48 items
+
+pandas/tests/groupby/test_function.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 70%]
+FFFFFFFFFFFFFF                                                           [100%]
+
+=================================== FAILURES ===================================
+________________ test_series_groupby_nunique[False-False-10-n0] ________________
+
+n = 100, m = 10, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [5.0, 9.0, 4.0, 9.0, 8.0, 0.0, 8.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 0.0, 4.0, 9.0, 8.0, 1.0, 1.0, 4.0, 9.0, 1.0, 8.0, 5.0, 0.0, 7.0, 7.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 7.0, 8.0, 0.0, 3.0, 1.0, 2.0, 6.0, 1.0, 8.0, 7.0, 0.0, 7.0, 4.0, 4.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 1.0, 5.0, 2.0, 3.0, 3.0, 4.0, 6.0, 1.0, 3.0, 3.0, 8.0, 2.0, 2.0, 5.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 4.0, 7.0, 7.0, 2.0, 0.0, 4.0, 8.0, 1.0, 6.0, 0.0, 5.0, 7.0, 1.0, 1.0, 4.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 3.0, 0.0, 6.0, 9.0, 7.0, 1.0, 1.0, 7.0, 9.0, 5.0, 9.0, 7.0, 8.0]
+E   [right]: [5.0, 9.0, 4.0, 9.0, 8.0, 0.0, 8.0, nan, nan, nan, 5.0, 0.0, 4.0, 9.0, 8.0, 1.0, 1.0, 4.0, 9.0, 1.0, 8.0, 5.0, 0.0, 7.0, 7.0, 3.0, nan, nan, nan, 5.0, 7.0, 8.0, 0.0, 3.0, 1.0, 2.0, 6.0, 1.0, 8.0, 7.0, 0.0, 7.0, 4.0, 4.0, 3.0, nan, nan, nan, 7.0, 1.0, 5.0, 2.0, 3.0, 3.0, 4.0, 6.0, 1.0, 3.0, 3.0, 8.0, 2.0, 2.0, 5.0, 5.0, nan, nan, nan, 2.0, 4.0, 7.0, 7.0, 2.0, 0.0, 4.0, 8.0, 1.0, 6.0, 0.0, 5.0, 7.0, 1.0, 1.0, 4.0, nan, nan, nan, 3.0, 3.0, 0.0, 6.0, 9.0, 7.0, 1.0, 1.0, 7.0, 9.0, 5.0, 9.0, 7.0, 8.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-False-10-n1] ________________
+
+n = 1000, m = 10, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [1.0, 5.0, 5.0, 0.0, 3.0, 8.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 9.0, 8.0, 1.0, 7.0, 6.0, 9.0, 4.0, 7.0, 9.0, 2.0, 3.0, 3.0, 5.0, 0.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 2.0, 5.0, 9.0, 9.0, 4.0, 5.0, 2.0, 4.0, 7.0, 2.0, 1.0, 2.0, 9.0, 5.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 8.0, 3.0, 8.0, 1.0, 1.0, 9.0, 1.0, 1.0, 6.0, 6.0, 2.0, 4.0, 5.0, 3.0, 8.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 1.0, 4.0, 4.0, 6.0, 8.0, 6.0, 3.0, 9.0, 0.0, 2.0, 5.0, 3.0, 2.0, 1.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 9.0, 2.0, 0.0, 3.0, 4.0, 7.0, 7.0, 7.0, 3.0, 8.0, 1.0, 1.0, 0.0, ...]
+E   [right]: [1.0, 5.0, 5.0, 0.0, 3.0, 8.0, 7.0, nan, nan, nan, 0.0, 9.0, 8.0, 1.0, 7.0, 6.0, 9.0, 4.0, 7.0, 9.0, 2.0, 3.0, 3.0, 5.0, 0.0, 0.0, nan, nan, nan, 7.0, 2.0, 5.0, 9.0, 9.0, 4.0, 5.0, 2.0, 4.0, 7.0, 2.0, 1.0, 2.0, 9.0, 5.0, 6.0, nan, nan, nan, 8.0, 3.0, 8.0, 1.0, 1.0, 9.0, 1.0, 1.0, 6.0, 6.0, 2.0, 4.0, 5.0, 3.0, 8.0, 5.0, nan, nan, nan, 5.0, 1.0, 4.0, 4.0, 6.0, 8.0, 6.0, 3.0, 9.0, 0.0, 2.0, 5.0, 3.0, 2.0, 1.0, 1.0, nan, nan, nan, 0.0, 9.0, 2.0, 0.0, 3.0, 4.0, 7.0, 7.0, 7.0, 3.0, 8.0, 1.0, 1.0, 0.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-False-10-n2] ________________
+
+n = 10000, m = 10, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [5.0, 0.0, 6.0, 5.0, 6.0, 3.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 0.0, 5.0, 3.0, 9.0, 9.0, 5.0, 0.0, 5.0, 3.0, 6.0, 4.0, 8.0, 6.0, 4.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 4.0, 3.0, 9.0, 4.0, 4.0, 4.0, 6.0, 5.0, 8.0, 4.0, 6.0, 1.0, 3.0, 5.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 3.0, 1.0, 0.0, 0.0, 4.0, 1.0, 8.0, 0.0, 3.0, 7.0, 6.0, 9.0, 5.0, 9.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 7.0, 3.0, 1.0, 1.0, 1.0, 9.0, 2.0, 2.0, 7.0, 6.0, 5.0, 0.0, 3.0, 6.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 8.0, 9.0, 5.0, 3.0, 0.0, 6.0, 0.0, 8.0, 5.0, 0.0, 9.0, 0.0, 4.0, 3.0, ...]
+E   [right]: [5.0, 0.0, 6.0, 5.0, 6.0, 3.0, 5.0, nan, nan, nan, 1.0, 0.0, 5.0, 3.0, 9.0, 9.0, 5.0, 0.0, 5.0, 3.0, 6.0, 4.0, 8.0, 6.0, 4.0, 1.0, nan, nan, nan, 3.0, 4.0, 3.0, 9.0, 4.0, 4.0, 4.0, 6.0, 5.0, 8.0, 4.0, 6.0, 1.0, 3.0, 5.0, 0.0, nan, nan, nan, 4.0, 3.0, 1.0, 0.0, 0.0, 4.0, 1.0, 8.0, 0.0, 3.0, 7.0, 6.0, 9.0, 5.0, 9.0, 5.0, nan, nan, nan, 2.0, 7.0, 3.0, 1.0, 1.0, 1.0, 9.0, 2.0, 2.0, 7.0, 6.0, 5.0, 0.0, 3.0, 6.0, 7.0, nan, nan, nan, 8.0, 9.0, 5.0, 3.0, 0.0, 6.0, 0.0, 8.0, 5.0, 0.0, 9.0, 0.0, 4.0, 3.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-False-10-n3] ________________
+
+n = 100000, m = 10, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [5.0, 4.0, 0.0, 0.0, 5.0, 1.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 7.0, 7.0, 2.0, 9.0, 1.0, 4.0, 3.0, 8.0, 2.0, 2.0, 1.0, 9.0, 5.0, 2.0, 8.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 9.0, 4.0, 7.0, 9.0, 1.0, 8.0, 4.0, 1.0, 1.0, 6.0, 9.0, 2.0, 8.0, 2.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 0.0, 4.0, 6.0, 8.0, 3.0, 5.0, 3.0, 6.0, 9.0, 9.0, 2.0, 4.0, 3.0, 9.0, 9.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 7.0, 9.0, 6.0, 5.0, 5.0, 0.0, 5.0, 9.0, 0.0, 9.0, 0.0, 3.0, 0.0, 4.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 5.0, 2.0, 4.0, 9.0, 2.0, 4.0, 4.0, 3.0, 2.0, 7.0, 5.0, 7.0, 4.0, ...]
+E   [right]: [5.0, 4.0, 0.0, 0.0, 5.0, 1.0, 1.0, nan, nan, nan, 6.0, 7.0, 7.0, 2.0, 9.0, 1.0, 4.0, 3.0, 8.0, 2.0, 2.0, 1.0, 9.0, 5.0, 2.0, 8.0, nan, nan, nan, 0.0, 9.0, 4.0, 7.0, 9.0, 1.0, 8.0, 4.0, 1.0, 1.0, 6.0, 9.0, 2.0, 8.0, 2.0, 3.0, nan, nan, nan, 2.0, 0.0, 4.0, 6.0, 8.0, 3.0, 5.0, 3.0, 6.0, 9.0, 9.0, 2.0, 4.0, 3.0, 9.0, 9.0, nan, nan, nan, 3.0, 7.0, 9.0, 6.0, 5.0, 5.0, 0.0, 5.0, 9.0, 0.0, 9.0, 0.0, 3.0, 0.0, 4.0, 6.0, nan, nan, nan, 4.0, 5.0, 2.0, 4.0, 9.0, 2.0, 4.0, 4.0, 3.0, 2.0, 7.0, 5.0, 7.0, 4.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-100-n0] ________________
+
+n = 100, m = 100, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [95.0, 51.0, 72.0, 92.0, 80.0, 33.0, 49.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 72.0, 94.0, 24.0, 79.0, 43.0, 15.0, 22.0, 70.0, 89.0, 94.0, 27.0, 23.0, 42.0, 14.0, 77.0, 99.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 26.0, 86.0, 89.0, 17.0, 4.0, 66.0, 34.0, 0.0, 77.0, 23.0, 67.0, 49.0, 84.0, 98.0, 12.0, 10.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 33.0, 97.0, 55.0, 82.0, 45.0, 12.0, 65.0, 49.0, 9.0, 51.0, 18.0, 51.0, 2.0, 34.0, 20.0, 49.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 60.0, 56.0, 91.0, 27.0, 10.0, 97.0, 25.0, 92.0, 80.0, 10.0, 35.0, 8.0, 77.0, 15.0, 48.0, 43.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 70.0, 34.0, 37.0, 92.0, 45.0, 52.0, 37.0, 98.0, 33.0, 4.0, 68.0, 16.0, 43.0, 25.0]
+E   [right]: [95.0, 51.0, 72.0, 92.0, 80.0, 33.0, 49.0, nan, nan, nan, 72.0, 94.0, 24.0, 79.0, 43.0, 15.0, 22.0, 70.0, 89.0, 94.0, 27.0, 23.0, 42.0, 14.0, 77.0, 99.0, nan, nan, nan, 26.0, 86.0, 89.0, 17.0, 4.0, 66.0, 34.0, 0.0, 77.0, 23.0, 67.0, 49.0, 84.0, 98.0, 12.0, 10.0, nan, nan, nan, 33.0, 97.0, 55.0, 82.0, 45.0, 12.0, 65.0, 49.0, 9.0, 51.0, 18.0, 51.0, 2.0, 34.0, 20.0, 49.0, nan, nan, nan, 60.0, 56.0, 91.0, 27.0, 10.0, 97.0, 25.0, 92.0, 80.0, 10.0, 35.0, 8.0, 77.0, 15.0, 48.0, 43.0, nan, nan, nan, 70.0, 34.0, 37.0, 92.0, 45.0, 52.0, 37.0, 98.0, 33.0, 4.0, 68.0, 16.0, 43.0, 25.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-100-n1] ________________
+
+n = 1000, m = 100, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [31.0, 78.0, 97.0, 96.0, 47.0, 84.0, 70.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 73.0, 74.0, 75.0, 89.0, 31.0, 6.0, 84.0, 67.0, 37.0, 24.0, 30.0, 29.0, 15.0, 68.0, 70.0, 57.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 92.0, 89.0, 81.0, 84.0, 70.0, 56.0, 66.0, 11.0, 33.0, 75.0, 31.0, 72.0, 84.0, 65.0, 39.0, 46.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 40.0, 27.0, 68.0, 68.0, 66.0, 28.0, 27.0, 49.0, 67.0, 82.0, 29.0, 2.0, 5.0, 32.0, 76.0, 56.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 58.0, 45.0, 63.0, 78.0, 69.0, 18.0, 70.0, 28.0, 19.0, 69.0, 4.0, 6.0, 59.0, 5.0, 82.0, 34.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 11.0, 75.0, 55.0, 27.0, 85.0, 63.0, 49.0, 73.0, 12.0, 1.0, 32.0, 68.0, 47.0, 63.0, ...]
+E   [right]: [31.0, 78.0, 97.0, 96.0, 47.0, 84.0, 70.0, nan, nan, nan, 73.0, 74.0, 75.0, 89.0, 31.0, 6.0, 84.0, 67.0, 37.0, 24.0, 30.0, 29.0, 15.0, 68.0, 70.0, 57.0, nan, nan, nan, 92.0, 89.0, 81.0, 84.0, 70.0, 56.0, 66.0, 11.0, 33.0, 75.0, 31.0, 72.0, 84.0, 65.0, 39.0, 46.0, nan, nan, nan, 40.0, 27.0, 68.0, 68.0, 66.0, 28.0, 27.0, 49.0, 67.0, 82.0, 29.0, 2.0, 5.0, 32.0, 76.0, 56.0, nan, nan, nan, 58.0, 45.0, 63.0, 78.0, 69.0, 18.0, 70.0, 28.0, 19.0, 69.0, 4.0, 6.0, 59.0, 5.0, 82.0, 34.0, nan, nan, nan, 11.0, 75.0, 55.0, 27.0, 85.0, 63.0, 49.0, 73.0, 12.0, 1.0, 32.0, 68.0, 47.0, 63.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-100-n2] ________________
+
+n = 10000, m = 100, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [26.0, 74.0, 27.0, 15.0, 15.0, 89.0, 26.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 51.0, 33.0, 17.0, 21.0, 68.0, 72.0, 23.0, 9.0, 46.0, 60.0, 64.0, 80.0, 71.0, 91.0, 87.0, 61.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 84.0, 78.0, 34.0, 50.0, 69.0, 49.0, 73.0, 38.0, 74.0, 57.0, 11.0, 62.0, 63.0, 79.0, 35.0, 13.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 40.0, 69.0, 88.0, 27.0, 32.0, 47.0, 24.0, 17.0, 50.0, 63.0, 70.0, 17.0, 8.0, 36.0, 59.0, 34.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 20.0, 15.0, 44.0, 86.0, 95.0, 32.0, 84.0, 44.0, 37.0, 1.0, 47.0, 23.0, 10.0, 16.0, 89.0, 78.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 74.0, 92.0, 9.0, 22.0, 89.0, 84.0, 58.0, 39.0, 12.0, 72.0, 5.0, 59.0, 25.0, 26.0, ...]
+E   [right]: [26.0, 74.0, 27.0, 15.0, 15.0, 89.0, 26.0, nan, nan, nan, 51.0, 33.0, 17.0, 21.0, 68.0, 72.0, 23.0, 9.0, 46.0, 60.0, 64.0, 80.0, 71.0, 91.0, 87.0, 61.0, nan, nan, nan, 84.0, 78.0, 34.0, 50.0, 69.0, 49.0, 73.0, 38.0, 74.0, 57.0, 11.0, 62.0, 63.0, 79.0, 35.0, 13.0, nan, nan, nan, 40.0, 69.0, 88.0, 27.0, 32.0, 47.0, 24.0, 17.0, 50.0, 63.0, 70.0, 17.0, 8.0, 36.0, 59.0, 34.0, nan, nan, nan, 20.0, 15.0, 44.0, 86.0, 95.0, 32.0, 84.0, 44.0, 37.0, 1.0, 47.0, 23.0, 10.0, 16.0, 89.0, 78.0, nan, nan, nan, 74.0, 92.0, 9.0, 22.0, 89.0, 84.0, 58.0, 39.0, 12.0, 72.0, 5.0, 59.0, 25.0, 26.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-100-n3] ________________
+
+n = 100000, m = 100, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [75.0, 3.0, 36.0, 7.0, 77.0, 75.0, 61.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 34.0, 8.0, 9.0, 55.0, 10.0, 48.0, 54.0, 32.0, 52.0, 39.0, 26.0, 44.0, 85.0, 81.0, 16.0, 17.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 97.0, 85.0, 69.0, 72.0, 6.0, 8.0, 29.0, 34.0, 71.0, 90.0, 15.0, 28.0, 40.0, 24.0, 10.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 87.0, 78.0, 82.0, 29.0, 46.0, 47.0, 6.0, 44.0, 76.0, 38.0, 6.0, 29.0, 74.0, 98.0, 13.0, 32.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 54.0, 56.0, 63.0, 4.0, 86.0, 0.0, 74.0, 95.0, 4.0, 4.0, 98.0, 4.0, 6.0, 4.0, 37.0, 91.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 82.0, 61.0, 42.0, 8.0, 89.0, 26.0, 63.0, 78.0, 97.0, 18.0, 82.0, 94.0, 13.0, 27.0, ...]
+E   [right]: [75.0, 3.0, 36.0, 7.0, 77.0, 75.0, 61.0, nan, nan, nan, 34.0, 8.0, 9.0, 55.0, 10.0, 48.0, 54.0, 32.0, 52.0, 39.0, 26.0, 44.0, 85.0, 81.0, 16.0, 17.0, nan, nan, nan, 3.0, 97.0, 85.0, 69.0, 72.0, 6.0, 8.0, 29.0, 34.0, 71.0, 90.0, 15.0, 28.0, 40.0, 24.0, 10.0, nan, nan, nan, 87.0, 78.0, 82.0, 29.0, 46.0, 47.0, 6.0, 44.0, 76.0, 38.0, 6.0, 29.0, 74.0, 98.0, 13.0, 32.0, nan, nan, nan, 54.0, 56.0, 63.0, 4.0, 86.0, 0.0, 74.0, 95.0, 4.0, 4.0, 98.0, 4.0, 6.0, 4.0, 37.0, 91.0, nan, nan, nan, 82.0, 61.0, 42.0, 8.0, 89.0, 26.0, 63.0, 78.0, 97.0, 18.0, 82.0, 94.0, 13.0, 27.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-1000-n0] _______________
+
+n = 100, m = 1000, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [223.0, 70.0, 852.0, 863.0, 954.0, 977.0, 167.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 460.0, 327.0, 153.0, 547.0, 165.0, 957.0, 477.0, 51.0, 201.0, 358.0, 249.0, 248.0, 720.0, 284.0, 930.0, 644.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 254.0, 950.0, 992.0, 134.0, 506.0, 413.0, 876.0, 434.0, 696.0, 384.0, 161.0, 462.0, 786.0, 932.0, 739.0, 144.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 782.0, 397.0, 425.0, 848.0, 459.0, 285.0, 241.0, 14.0, 875.0, 272.0, 490.0, 407.0, 620.0, 913.0, 446.0, 151.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 68.0, 206.0, 234.0, 903.0, 520.0, 961.0, 689.0, 221.0, 829.0, 279.0, 551.0, 188.0, 798.0, 465.0, 984.0, 739.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 848.0, 537.0, 996.0, 863.0, 351.0, 843.0, 6.0, 824.0, 206.0, 996.0, 576.0, 496.0, 123.0, 77.0]
+E   [right]: [223.0, 70.0, 852.0, 863.0, 954.0, 977.0, 167.0, nan, nan, nan, 460.0, 327.0, 153.0, 547.0, 165.0, 957.0, 477.0, 51.0, 201.0, 358.0, 249.0, 248.0, 720.0, 284.0, 930.0, 644.0, nan, nan, nan, 254.0, 950.0, 992.0, 134.0, 506.0, 413.0, 876.0, 434.0, 696.0, 384.0, 161.0, 462.0, 786.0, 932.0, 739.0, 144.0, nan, nan, nan, 782.0, 397.0, 425.0, 848.0, 459.0, 285.0, 241.0, 14.0, 875.0, 272.0, 490.0, 407.0, 620.0, 913.0, 446.0, 151.0, nan, nan, nan, 68.0, 206.0, 234.0, 903.0, 520.0, 961.0, 689.0, 221.0, 829.0, 279.0, 551.0, 188.0, 798.0, 465.0, 984.0, 739.0, nan, nan, nan, 848.0, 537.0, 996.0, 863.0, 351.0, 843.0, 6.0, 824.0, 206.0, 996.0, 576.0, 496.0, 123.0, 77.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-1000-n1] _______________
+
+n = 1000, m = 1000, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [665.0, 586.0, 409.0, 220.0, 946.0, 379.0, 917.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 997.0, 556.0, 414.0, 753.0, 695.0, 582.0, 387.0, 704.0, 241.0, 339.0, 308.0, 681.0, 660.0, 888.0, 351.0, 119.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 531.0, 609.0, 809.0, 344.0, 239.0, 565.0, 157.0, 568.0, 353.0, 267.0, 555.0, 784.0, 694.0, 306.0, 866.0, 542.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 341.0, 901.0, 380.0, 834.0, 632.0, 793.0, 340.0, 584.0, 728.0, 992.0, 52.0, 414.0, 844.0, 53.0, 714.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 447.0, 67.0, 234.0, 996.0, 217.0, 716.0, 184.0, 834.0, 856.0, 617.0, 677.0, 270.0, 270.0, 52.0, 131.0, 499.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 443.0, 16.0, 898.0, 79.0, 255.0, 230.0, 312.0, 685.0, 692.0, 805.0, 573.0, 954.0, 391.0, 537.0, ...]
+E   [right]: [665.0, 586.0, 409.0, 220.0, 946.0, 379.0, 917.0, nan, nan, nan, 997.0, 556.0, 414.0, 753.0, 695.0, 582.0, 387.0, 704.0, 241.0, 339.0, 308.0, 681.0, 660.0, 888.0, 351.0, 119.0, nan, nan, nan, 531.0, 609.0, 809.0, 344.0, 239.0, 565.0, 157.0, 568.0, 353.0, 267.0, 555.0, 784.0, 694.0, 306.0, 866.0, 542.0, nan, nan, nan, 6.0, 341.0, 901.0, 380.0, 834.0, 632.0, 793.0, 340.0, 584.0, 728.0, 992.0, 52.0, 414.0, 844.0, 53.0, 714.0, nan, nan, nan, 447.0, 67.0, 234.0, 996.0, 217.0, 716.0, 184.0, 834.0, 856.0, 617.0, 677.0, 270.0, 270.0, 52.0, 131.0, 499.0, nan, nan, nan, 443.0, 16.0, 898.0, 79.0, 255.0, 230.0, 312.0, 685.0, 692.0, 805.0, 573.0, 954.0, 391.0, 537.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-1000-n2] _______________
+
+n = 10000, m = 1000, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [642.0, 312.0, 455.0, 801.0, 166.0, 559.0, 138.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 506.0, 45.0, 325.0, 730.0, 670.0, 191.0, 638.0, 171.0, 149.0, 307.0, 843.0, 302.0, 297.0, 938.0, 135.0, 134.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 461.0, 268.0, 644.0, 728.0, 106.0, 505.0, 956.0, 67.0, 497.0, 433.0, 736.0, 534.0, 901.0, 310.0, 368.0, 177.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 354.0, 297.0, 672.0, 877.0, 76.0, 998.0, 524.0, 453.0, 876.0, 540.0, 236.0, 725.0, 538.0, 497.0, 713.0, 838.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 339.0, 211.0, 938.0, 580.0, 627.0, 329.0, 780.0, 387.0, 543.0, 514.0, 176.0, 696.0, 899.0, 714.0, 716.0, 362.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 969.0, 149.0, 526.0, 338.0, 566.0, 264.0, 604.0, 448.0, 522.0, 447.0, 296.0, 898.0, 368.0, 921.0, ...]
+E   [right]: [642.0, 312.0, 455.0, 801.0, 166.0, 559.0, 138.0, nan, nan, nan, 506.0, 45.0, 325.0, 730.0, 670.0, 191.0, 638.0, 171.0, 149.0, 307.0, 843.0, 302.0, 297.0, 938.0, 135.0, 134.0, nan, nan, nan, 461.0, 268.0, 644.0, 728.0, 106.0, 505.0, 956.0, 67.0, 497.0, 433.0, 736.0, 534.0, 901.0, 310.0, 368.0, 177.0, nan, nan, nan, 354.0, 297.0, 672.0, 877.0, 76.0, 998.0, 524.0, 453.0, 876.0, 540.0, 236.0, 725.0, 538.0, 497.0, 713.0, 838.0, nan, nan, nan, 339.0, 211.0, 938.0, 580.0, 627.0, 329.0, 780.0, 387.0, 543.0, 514.0, 176.0, 696.0, 899.0, 714.0, 716.0, 362.0, nan, nan, nan, 969.0, 149.0, 526.0, 338.0, 566.0, 264.0, 604.0, 448.0, 522.0, 447.0, 296.0, 898.0, 368.0, 921.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-False-1000-n3] _______________
+
+n = 100000, m = 1000, sort = False, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [205.0, 180.0, 928.0, 847.0, 813.0, 960.0, 661.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 487.0, 809.0, 576.0, 149.0, 953.0, 568.0, 796.0, 58.0, 448.0, 585.0, 274.0, 156.0, 513.0, 78.0, 710.0, 589.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 81.0, 779.0, 926.0, 615.0, 982.0, 38.0, 468.0, 890.0, 343.0, 237.0, 896.0, 779.0, 490.0, 204.0, 663.0, 775.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 194.0, 804.0, 327.0, 877.0, 814.0, 159.0, 673.0, 26.0, 230.0, 980.0, 25.0, 686.0, 771.0, 546.0, 404.0, 183.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 361.0, 61.0, 288.0, 658.0, 33.0, 642.0, 402.0, 593.0, 829.0, 23.0, 396.0, 110.0, 440.0, 36.0, 383.0, 669.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 110.0, 338.0, 194.0, 986.0, 692.0, 249.0, 24.0, 585.0, 116.0, 745.0, 503.0, 317.0, 191.0, 939.0, ...]
+E   [right]: [205.0, 180.0, 928.0, 847.0, 813.0, 960.0, 661.0, nan, nan, nan, 487.0, 809.0, 576.0, 149.0, 953.0, 568.0, 796.0, 58.0, 448.0, 585.0, 274.0, 156.0, 513.0, 78.0, 710.0, 589.0, nan, nan, nan, 81.0, 779.0, 926.0, 615.0, 982.0, 38.0, 468.0, 890.0, 343.0, 237.0, 896.0, 779.0, 490.0, 204.0, 663.0, 775.0, nan, nan, nan, 194.0, 804.0, 327.0, 877.0, 814.0, 159.0, 673.0, 26.0, 230.0, 980.0, 25.0, 686.0, 771.0, 546.0, 404.0, 183.0, nan, nan, nan, 361.0, 61.0, 288.0, 658.0, 33.0, 642.0, 402.0, 593.0, 829.0, 23.0, 396.0, 110.0, 440.0, 36.0, 383.0, 669.0, nan, nan, nan, 110.0, 338.0, 194.0, 986.0, 692.0, 249.0, 24.0, 585.0, 116.0, 745.0, 503.0, 317.0, 191.0, 939.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-10-n0] _________________
+
+n = 100, m = 10, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [3.0, 8.0, 0.0, 1.0, 6.0, 7.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 9.0, 2.0, 6.0, 3.0, 5.0, 6.0, 4.0, 0.0, 7.0, 0.0, 1.0, 2.0, 8.0, 1.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 0.0, 8.0, 5.0, 5.0, 5.0, 8.0, 5.0, 3.0, 8.0, 1.0, 5.0, 9.0, 1.0, 7.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 7.0, 6.0, 5.0, 1.0, 6.0, 5.0, 2.0, 1.0, 7.0, 5.0, 1.0, 2.0, 2.0, 3.0, 4.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 5.0, 4.0, 2.0, 7.0, 7.0, 6.0, 6.0, 6.0, 9.0, 9.0, 7.0, 5.0, 9.0, 9.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 4.0, 9.0, 3.0, 0.0, 5.0, 6.0, 0.0, 2.0, 7.0, 8.0, 4.0, 8.0, 8.0]
+E   [right]: [3.0, 8.0, 0.0, 1.0, 6.0, 7.0, 6.0, nan, nan, nan, 9.0, 9.0, 2.0, 6.0, 3.0, 5.0, 6.0, 4.0, 0.0, 7.0, 0.0, 1.0, 2.0, 8.0, 1.0, 3.0, nan, nan, nan, 9.0, 0.0, 8.0, 5.0, 5.0, 5.0, 8.0, 5.0, 3.0, 8.0, 1.0, 5.0, 9.0, 1.0, 7.0, 3.0, nan, nan, nan, 1.0, 7.0, 6.0, 5.0, 1.0, 6.0, 5.0, 2.0, 1.0, 7.0, 5.0, 1.0, 2.0, 2.0, 3.0, 4.0, nan, nan, nan, 0.0, 5.0, 4.0, 2.0, 7.0, 7.0, 6.0, 6.0, 6.0, 9.0, 9.0, 7.0, 5.0, 9.0, 9.0, 3.0, nan, nan, nan, 5.0, 4.0, 9.0, 3.0, 0.0, 5.0, 6.0, 0.0, 2.0, 7.0, 8.0, 4.0, 8.0, 8.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-10-n1] _________________
+
+n = 1000, m = 10, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [4.0, 4.0, 4.0, 3.0, 2.0, 6.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 7.0, 7.0, 8.0, 1.0, 5.0, 6.0, 7.0, 4.0, 5.0, 1.0, 0.0, 7.0, 2.0, 4.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 7.0, 9.0, 2.0, 2.0, 4.0, 3.0, 0.0, 9.0, 8.0, 5.0, 7.0, 5.0, 8.0, 5.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 5.0, 7.0, 1.0, 5.0, 7.0, 0.0, 9.0, 3.0, 3.0, 5.0, 6.0, 4.0, 4.0, 2.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 8.0, 0.0, 5.0, 5.0, 5.0, 4.0, 0.0, 9.0, 3.0, 4.0, 9.0, 1.0, 1.0, 7.0, 5.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 6.0, 3.0, 7.0, 5.0, 3.0, 1.0, 9.0, 1.0, 8.0, 4.0, 4.0, 7.0, 1.0, ...]
+E   [right]: [4.0, 4.0, 4.0, 3.0, 2.0, 6.0, 0.0, nan, nan, nan, 3.0, 7.0, 7.0, 8.0, 1.0, 5.0, 6.0, 7.0, 4.0, 5.0, 1.0, 0.0, 7.0, 2.0, 4.0, 5.0, nan, nan, nan, 5.0, 7.0, 9.0, 2.0, 2.0, 4.0, 3.0, 0.0, 9.0, 8.0, 5.0, 7.0, 5.0, 8.0, 5.0, 6.0, nan, nan, nan, 5.0, 5.0, 7.0, 1.0, 5.0, 7.0, 0.0, 9.0, 3.0, 3.0, 5.0, 6.0, 4.0, 4.0, 2.0, 7.0, nan, nan, nan, 8.0, 0.0, 5.0, 5.0, 5.0, 4.0, 0.0, 9.0, 3.0, 4.0, 9.0, 1.0, 1.0, 7.0, 5.0, 1.0, nan, nan, nan, 7.0, 6.0, 3.0, 7.0, 5.0, 3.0, 1.0, 9.0, 1.0, 8.0, 4.0, 4.0, 7.0, 1.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-10-n2] _________________
+
+n = 10000, m = 10, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [5.0, 4.0, 1.0, 9.0, 8.0, 9.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 8.0, 4.0, 6.0, 7.0, 2.0, 7.0, 7.0, 0.0, 1.0, 8.0, 3.0, 6.0, 7.0, 6.0, 8.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 9.0, 4.0, 6.0, 4.0, 2.0, 2.0, 1.0, 5.0, 3.0, 2.0, 5.0, 1.0, 1.0, 6.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 4.0, 6.0, 3.0, 0.0, 8.0, 2.0, 3.0, 7.0, 5.0, 0.0, 9.0, 9.0, 9.0, 7.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 5.0, 1.0, 3.0, 9.0, 3.0, 8.0, 3.0, 1.0, 2.0, 5.0, 3.0, 5.0, 1.0, 1.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 7.0, 5.0, 2.0, 7.0, 0.0, 0.0, 3.0, 2.0, 2.0, 0.0, 4.0, 7.0, 4.0, ...]
+E   [right]: [5.0, 4.0, 1.0, 9.0, 8.0, 9.0, 6.0, nan, nan, nan, 5.0, 8.0, 4.0, 6.0, 7.0, 2.0, 7.0, 7.0, 0.0, 1.0, 8.0, 3.0, 6.0, 7.0, 6.0, 8.0, nan, nan, nan, 4.0, 9.0, 4.0, 6.0, 4.0, 2.0, 2.0, 1.0, 5.0, 3.0, 2.0, 5.0, 1.0, 1.0, 6.0, 6.0, nan, nan, nan, 7.0, 4.0, 6.0, 3.0, 0.0, 8.0, 2.0, 3.0, 7.0, 5.0, 0.0, 9.0, 9.0, 9.0, 7.0, 1.0, nan, nan, nan, 6.0, 5.0, 1.0, 3.0, 9.0, 3.0, 8.0, 3.0, 1.0, 2.0, 5.0, 3.0, 5.0, 1.0, 1.0, 7.0, nan, nan, nan, 0.0, 7.0, 5.0, 2.0, 7.0, 0.0, 0.0, 3.0, 2.0, 2.0, 0.0, 4.0, 7.0, 4.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-10-n3] _________________
+
+n = 100000, m = 10, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [8.0, 6.0, 4.0, 6.0, 7.0, 7.0, 4.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 9.0, 9.0, 0.0, 6.0, 6.0, 1.0, 7.0, 7.0, 0.0, 7.0, 1.0, 5.0, 8.0, 5.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 6.0, 5.0, 5.0, 8.0, 4.0, 1.0, 8.0, 5.0, 8.0, 8.0, 5.0, 1.0, 1.0, 2.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 8.0, 6.0, 3.0, 2.0, 7.0, 9.0, 9.0, 3.0, 3.0, 6.0, 0.0, 9.0, 4.0, 7.0, 4.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 8.0, 1.0, 9.0, 8.0, 9.0, 4.0, 5.0, 7.0, 5.0, 2.0, 3.0, 8.0, 2.0, 0.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 9.0, 6.0, 8.0, 5.0, 7.0, 7.0, 3.0, 9.0, 7.0, 1.0, 3.0, 3.0, 7.0, ...]
+E   [right]: [8.0, 6.0, 4.0, 6.0, 7.0, 7.0, 4.0, nan, nan, nan, 4.0, 9.0, 9.0, 0.0, 6.0, 6.0, 1.0, 7.0, 7.0, 0.0, 7.0, 1.0, 5.0, 8.0, 5.0, 6.0, nan, nan, nan, 4.0, 6.0, 5.0, 5.0, 8.0, 4.0, 1.0, 8.0, 5.0, 8.0, 8.0, 5.0, 1.0, 1.0, 2.0, 7.0, nan, nan, nan, 8.0, 6.0, 3.0, 2.0, 7.0, 9.0, 9.0, 3.0, 3.0, 6.0, 0.0, 9.0, 4.0, 7.0, 4.0, 5.0, nan, nan, nan, 1.0, 8.0, 1.0, 9.0, 8.0, 9.0, 4.0, 5.0, 7.0, 5.0, 2.0, 3.0, 8.0, 2.0, 0.0, 1.0, nan, nan, nan, 5.0, 9.0, 6.0, 8.0, 5.0, 7.0, 7.0, 3.0, 9.0, 7.0, 1.0, 3.0, 3.0, 7.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-100-n0] ________________
+
+n = 100, m = 100, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [68.0, 83.0, 68.0, 93.0, 29.0, 8.0, 85.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 87.0, 94.0, 19.0, 43.0, 62.0, 23.0, 76.0, 65.0, 30.0, 46.0, 24.0, 1.0, 51.0, 87.0, 28.0, 88.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 14.0, 8.0, 19.0, 30.0, 33.0, 70.0, 16.0, 26.0, 4.0, 2.0, 54.0, 69.0, 70.0, 20.0, 16.0, 50.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 15.0, 13.0, 44.0, 72.0, 91.0, 89.0, 18.0, 20.0, 68.0, 67.0, 62.0, 26.0, 96.0, 11.0, 24.0, 47.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 20.0, 42.0, 46.0, 27.0, 38.0, 60.0, 8.0, 43.0, 33.0, 0.0, 44.0, 56.0, 41.0, 74.0, 80.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 94.0, 78.0, 35.0, 28.0, 54.0, 13.0, 33.0, 75.0, 21.0, 80.0, 73.0, 0.0, 85.0, 20.0]
+E   [right]: [68.0, 83.0, 68.0, 93.0, 29.0, 8.0, 85.0, nan, nan, nan, 87.0, 94.0, 19.0, 43.0, 62.0, 23.0, 76.0, 65.0, 30.0, 46.0, 24.0, 1.0, 51.0, 87.0, 28.0, 88.0, nan, nan, nan, 14.0, 8.0, 19.0, 30.0, 33.0, 70.0, 16.0, 26.0, 4.0, 2.0, 54.0, 69.0, 70.0, 20.0, 16.0, 50.0, nan, nan, nan, 15.0, 13.0, 44.0, 72.0, 91.0, 89.0, 18.0, 20.0, 68.0, 67.0, 62.0, 26.0, 96.0, 11.0, 24.0, 47.0, nan, nan, nan, 20.0, 42.0, 46.0, 27.0, 38.0, 60.0, 8.0, 43.0, 33.0, 0.0, 44.0, 56.0, 41.0, 74.0, 80.0, 5.0, nan, nan, nan, 94.0, 78.0, 35.0, 28.0, 54.0, 13.0, 33.0, 75.0, 21.0, 80.0, 73.0, 0.0, 85.0, 20.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-100-n1] ________________
+
+n = 1000, m = 100, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [27.0, 83.0, 13.0, 2.0, 20.0, 98.0, 51.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 34.0, 18.0, 1.0, 12.0, 45.0, 37.0, 59.0, 51.0, 69.0, 61.0, 14.0, 29.0, 84.0, 39.0, 27.0, 32.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 5.0, 18.0, 42.0, 13.0, 14.0, 73.0, 13.0, 89.0, 15.0, 34.0, 51.0, 50.0, 3.0, 18.0, 81.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 20.0, 24.0, 7.0, 12.0, 67.0, 72.0, 14.0, 56.0, 43.0, 20.0, 3.0, 27.0, 81.0, 18.0, 0.0, 65.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 78.0, 62.0, 91.0, 23.0, 25.0, 14.0, 89.0, 58.0, 90.0, 32.0, 38.0, 42.0, 4.0, 84.0, 4.0, 81.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 94.0, 5.0, 44.0, 66.0, 11.0, 50.0, 97.0, 3.0, 1.0, 14.0, 95.0, 97.0, 53.0, 46.0, ...]
+E   [right]: [27.0, 83.0, 13.0, 2.0, 20.0, 98.0, 51.0, nan, nan, nan, 34.0, 18.0, 1.0, 12.0, 45.0, 37.0, 59.0, 51.0, 69.0, 61.0, 14.0, 29.0, 84.0, 39.0, 27.0, 32.0, nan, nan, nan, 1.0, 5.0, 18.0, 42.0, 13.0, 14.0, 73.0, 13.0, 89.0, 15.0, 34.0, 51.0, 50.0, 3.0, 18.0, 81.0, nan, nan, nan, 20.0, 24.0, 7.0, 12.0, 67.0, 72.0, 14.0, 56.0, 43.0, 20.0, 3.0, 27.0, 81.0, 18.0, 0.0, 65.0, nan, nan, nan, 78.0, 62.0, 91.0, 23.0, 25.0, 14.0, 89.0, 58.0, 90.0, 32.0, 38.0, 42.0, 4.0, 84.0, 4.0, 81.0, nan, nan, nan, 94.0, 5.0, 44.0, 66.0, 11.0, 50.0, 97.0, 3.0, 1.0, 14.0, 95.0, 97.0, 53.0, 46.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-100-n2] ________________
+
+n = 10000, m = 100, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [20.0, 54.0, 23.0, 74.0, 13.0, 66.0, 13.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 15.0, 40.0, 6.0, 53.0, 77.0, 78.0, 10.0, 5.0, 69.0, 24.0, 63.0, 20.0, 3.0, 46.0, 73.0, 10.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 25.0, 50.0, 59.0, 34.0, 41.0, 28.0, 75.0, 70.0, 95.0, 57.0, 12.0, 74.0, 35.0, 64.0, 15.0, 52.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 80.0, 3.0, 90.0, 81.0, 74.0, 45.0, 38.0, 95.0, 12.0, 16.0, 44.0, 55.0, 50.0, 71.0, 77.0, 14.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 21.0, 79.0, 79.0, 88.0, 83.0, 98.0, 80.0, 99.0, 16.0, 39.0, 4.0, 23.0, 41.0, 51.0, 99.0, 17.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 57.0, 67.0, 52.0, 49.0, 94.0, 76.0, 83.0, 98.0, 53.0, 62.0, 5.0, 77.0, 59.0, 49.0, ...]
+E   [right]: [20.0, 54.0, 23.0, 74.0, 13.0, 66.0, 13.0, nan, nan, nan, 15.0, 40.0, 6.0, 53.0, 77.0, 78.0, 10.0, 5.0, 69.0, 24.0, 63.0, 20.0, 3.0, 46.0, 73.0, 10.0, nan, nan, nan, 25.0, 50.0, 59.0, 34.0, 41.0, 28.0, 75.0, 70.0, 95.0, 57.0, 12.0, 74.0, 35.0, 64.0, 15.0, 52.0, nan, nan, nan, 80.0, 3.0, 90.0, 81.0, 74.0, 45.0, 38.0, 95.0, 12.0, 16.0, 44.0, 55.0, 50.0, 71.0, 77.0, 14.0, nan, nan, nan, 21.0, 79.0, 79.0, 88.0, 83.0, 98.0, 80.0, 99.0, 16.0, 39.0, 4.0, 23.0, 41.0, 51.0, 99.0, 17.0, nan, nan, nan, 57.0, 67.0, 52.0, 49.0, 94.0, 76.0, 83.0, 98.0, 53.0, 62.0, 5.0, 77.0, 59.0, 49.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[False-True-100-n3] ________________
+
+n = 100000, m = 100, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [70.0, 36.0, 88.0, 56.0, 79.0, 1.0, 14.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 17.0, 57.0, 70.0, 33.0, 89.0, 0.0, 9.0, 73.0, 63.0, 53.0, 71.0, 16.0, 1.0, 10.0, 21.0, 40.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 35.0, 60.0, 25.0, 31.0, 95.0, 73.0, 54.0, 56.0, 41.0, 86.0, 53.0, 50.0, 8.0, 21.0, 19.0, 27.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 41.0, 67.0, 16.0, 19.0, 51.0, 92.0, 0.0, 79.0, 59.0, 81.0, 73.0, 9.0, 38.0, 61.0, 63.0, 51.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 71.0, 83.0, 96.0, 71.0, 73.0, 84.0, 82.0, 62.0, 96.0, 79.0, 94.0, 81.0, 55.0, 24.0, 97.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 73.0, 0.0, 45.0, 10.0, 31.0, 58.0, 82.0, 82.0, 38.0, 31.0, 1.0, 32.0, 82.0, 99.0, ...]
+E   [right]: [70.0, 36.0, 88.0, 56.0, 79.0, 1.0, 14.0, nan, nan, nan, 17.0, 57.0, 70.0, 33.0, 89.0, 0.0, 9.0, 73.0, 63.0, 53.0, 71.0, 16.0, 1.0, 10.0, 21.0, 40.0, nan, nan, nan, 35.0, 60.0, 25.0, 31.0, 95.0, 73.0, 54.0, 56.0, 41.0, 86.0, 53.0, 50.0, 8.0, 21.0, 19.0, 27.0, nan, nan, nan, 41.0, 67.0, 16.0, 19.0, 51.0, 92.0, 0.0, 79.0, 59.0, 81.0, 73.0, 9.0, 38.0, 61.0, 63.0, 51.0, nan, nan, nan, 2.0, 71.0, 83.0, 96.0, 71.0, 73.0, 84.0, 82.0, 62.0, 96.0, 79.0, 94.0, 81.0, 55.0, 24.0, 97.0, nan, nan, nan, 73.0, 0.0, 45.0, 10.0, 31.0, 58.0, 82.0, 82.0, 38.0, 31.0, 1.0, 32.0, 82.0, 99.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-True-1000-n0] ________________
+
+n = 100, m = 1000, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [267.0, 872.0, 570.0, 342.0, 534.0, 402.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 592.0, 688.0, 350.0, 67.0, 577.0, 663.0, 555.0, 694.0, 536.0, 494.0, 185.0, 773.0, 908.0, 876.0, 734.0, 860.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 253.0, 819.0, 209.0, 485.0, 681.0, 387.0, 131.0, 615.0, 123.0, 875.0, 884.0, 969.0, 157.0, 579.0, 951.0, 749.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 787.0, 889.0, 803.0, 510.0, 343.0, 906.0, 54.0, 266.0, 335.0, 438.0, 173.0, 720.0, 271.0, 248.0, 925.0, 431.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 890.0, 308.0, 192.0, 201.0, 925.0, 478.0, 803.0, 101.0, 499.0, 666.0, 915.0, 748.0, 999.0, 460.0, 170.0, 322.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 815.0, 741.0, 113.0, 649.0, 847.0, 214.0, 891.0, 960.0, 544.0, 277.0, 60.0, 515.0, 901.0, 251.0]
+E   [right]: [267.0, 872.0, 570.0, 342.0, 534.0, 402.0, 7.0, nan, nan, nan, 592.0, 688.0, 350.0, 67.0, 577.0, 663.0, 555.0, 694.0, 536.0, 494.0, 185.0, 773.0, 908.0, 876.0, 734.0, 860.0, nan, nan, nan, 253.0, 819.0, 209.0, 485.0, 681.0, 387.0, 131.0, 615.0, 123.0, 875.0, 884.0, 969.0, 157.0, 579.0, 951.0, 749.0, nan, nan, nan, 787.0, 889.0, 803.0, 510.0, 343.0, 906.0, 54.0, 266.0, 335.0, 438.0, 173.0, 720.0, 271.0, 248.0, 925.0, 431.0, nan, nan, nan, 890.0, 308.0, 192.0, 201.0, 925.0, 478.0, 803.0, 101.0, 499.0, 666.0, 915.0, 748.0, 999.0, 460.0, 170.0, 322.0, nan, nan, nan, 815.0, 741.0, 113.0, 649.0, 847.0, 214.0, 891.0, 960.0, 544.0, 277.0, 60.0, 515.0, 901.0, 251.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-True-1000-n1] ________________
+
+n = 1000, m = 1000, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [515.0, 313.0, 650.0, 747.0, 854.0, 356.0, 458.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 779.0, 803.0, 626.0, 844.0, 954.0, 419.0, 719.0, 80.0, 38.0, 804.0, 434.0, 614.0, 426.0, 139.0, 423.0, 913.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 668.0, 582.0, 151.0, 287.0, 266.0, 441.0, 370.0, 309.0, 292.0, 997.0, 945.0, 509.0, 478.0, 948.0, 990.0, 724.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 51.0, 818.0, 666.0, 762.0, 748.0, 829.0, 770.0, 227.0, 524.0, 362.0, 135.0, 818.0, 366.0, 954.0, 908.0, 979.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 281.0, 185.0, 150.0, 433.0, 630.0, 962.0, 682.0, 363.0, 32.0, 897.0, 497.0, 977.0, 972.0, 104.0, 552.0, 854.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 374.0, 875.0, 136.0, 522.0, 990.0, 848.0, 388.0, 997.0, 777.0, 501.0, 204.0, 451.0, 248.0, 360.0, ...]
+E   [right]: [515.0, 313.0, 650.0, 747.0, 854.0, 356.0, 458.0, nan, nan, nan, 779.0, 803.0, 626.0, 844.0, 954.0, 419.0, 719.0, 80.0, 38.0, 804.0, 434.0, 614.0, 426.0, 139.0, 423.0, 913.0, nan, nan, nan, 668.0, 582.0, 151.0, 287.0, 266.0, 441.0, 370.0, 309.0, 292.0, 997.0, 945.0, 509.0, 478.0, 948.0, 990.0, 724.0, nan, nan, nan, 51.0, 818.0, 666.0, 762.0, 748.0, 829.0, 770.0, 227.0, 524.0, 362.0, 135.0, 818.0, 366.0, 954.0, 908.0, 979.0, nan, nan, nan, 281.0, 185.0, 150.0, 433.0, 630.0, 962.0, 682.0, 363.0, 32.0, 897.0, 497.0, 977.0, 972.0, 104.0, 552.0, 854.0, nan, nan, nan, 374.0, 875.0, 136.0, 522.0, 990.0, 848.0, 388.0, 997.0, 777.0, 501.0, 204.0, 451.0, 248.0, 360.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-True-1000-n2] ________________
+
+n = 10000, m = 1000, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [866.0, 254.0, 317.0, 848.0, 920.0, 806.0, 602.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 691.0, 891.0, 883.0, 283.0, 205.0, 552.0, 149.0, 231.0, 386.0, 232.0, 596.0, 321.0, 609.0, 978.0, 550.0, 73.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 736.0, 343.0, 879.0, 660.0, 482.0, 450.0, 934.0, 209.0, 759.0, 928.0, 130.0, 388.0, 342.0, 100.0, 927.0, 674.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 315.0, 147.0, 539.0, 59.0, 988.0, 593.0, 711.0, 347.0, 32.0, 31.0, 275.0, 927.0, 895.0, 58.0, 988.0, 437.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 193.0, 1.0, 853.0, 370.0, 305.0, 55.0, 210.0, 308.0, 470.0, 609.0, 21.0, 843.0, 344.0, 786.0, 393.0, 515.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 192.0, 260.0, 120.0, 129.0, 819.0, 583.0, 820.0, 964.0, 885.0, 383.0, 758.0, 669.0, 764.0, 175.0, ...]
+E   [right]: [866.0, 254.0, 317.0, 848.0, 920.0, 806.0, 602.0, nan, nan, nan, 691.0, 891.0, 883.0, 283.0, 205.0, 552.0, 149.0, 231.0, 386.0, 232.0, 596.0, 321.0, 609.0, 978.0, 550.0, 73.0, nan, nan, nan, 736.0, 343.0, 879.0, 660.0, 482.0, 450.0, 934.0, 209.0, 759.0, 928.0, 130.0, 388.0, 342.0, 100.0, 927.0, 674.0, nan, nan, nan, 315.0, 147.0, 539.0, 59.0, 988.0, 593.0, 711.0, 347.0, 32.0, 31.0, 275.0, 927.0, 895.0, 58.0, 988.0, 437.0, nan, nan, nan, 193.0, 1.0, 853.0, 370.0, 305.0, 55.0, 210.0, 308.0, 470.0, 609.0, 21.0, 843.0, 344.0, 786.0, 393.0, 515.0, nan, nan, nan, 192.0, 260.0, 120.0, 129.0, 819.0, 583.0, 820.0, 964.0, 885.0, 383.0, 758.0, 669.0, 764.0, 175.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[False-True-1000-n3] ________________
+
+n = 100000, m = 1000, sort = True, dropna = False
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [138.0, 972.0, 391.0, 678.0, 702.0, 883.0, 667.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 402.0, 824.0, 168.0, 86.0, 676.0, 81.0, 645.0, 49.0, 209.0, 247.0, 947.0, 391.0, 89.0, 806.0, 806.0, 33.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 441.0, 892.0, 84.0, 102.0, 774.0, 771.0, 190.0, 583.0, 823.0, 338.0, 154.0, 440.0, 93.0, 719.0, 652.0, 682.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 352.0, 554.0, 344.0, 393.0, 222.0, 762.0, 576.0, 453.0, 795.0, 661.0, 38.0, 852.0, 346.0, 306.0, 302.0, 621.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 471.0, 551.0, 75.0, 82.0, 726.0, 862.0, 354.0, 589.0, 18.0, 570.0, 94.0, 352.0, 912.0, 604.0, 554.0, 889.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 871.0, 740.0, 285.0, 775.0, 613.0, 129.0, 559.0, 215.0, 119.0, 820.0, 807.0, 882.0, 111.0, 897.0, ...]
+E   [right]: [138.0, 972.0, 391.0, 678.0, 702.0, 883.0, 667.0, nan, nan, nan, 402.0, 824.0, 168.0, 86.0, 676.0, 81.0, 645.0, 49.0, 209.0, 247.0, 947.0, 391.0, 89.0, 806.0, 806.0, 33.0, nan, nan, nan, 441.0, 892.0, 84.0, 102.0, 774.0, 771.0, 190.0, 583.0, 823.0, 338.0, 154.0, 440.0, 93.0, 719.0, 652.0, 682.0, nan, nan, nan, 352.0, 554.0, 344.0, 393.0, 222.0, 762.0, 576.0, 453.0, 795.0, 661.0, 38.0, 852.0, 346.0, 306.0, 302.0, 621.0, nan, nan, nan, 471.0, 551.0, 75.0, 82.0, 726.0, 862.0, 354.0, 589.0, 18.0, 570.0, 94.0, 352.0, 912.0, 604.0, 554.0, 889.0, nan, nan, nan, 871.0, 740.0, 285.0, 775.0, 613.0, 129.0, 559.0, 215.0, 119.0, 820.0, 807.0, 882.0, 111.0, 897.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-10-n0] _________________
+
+n = 100, m = 10, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [5.0, 1.0, 3.0, 8.0, 2.0, 4.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 7.0, 7.0, 2.0, 2.0, 0.0, 5.0, 9.0, 7.0, 8.0, 2.0, 8.0, 2.0, 2.0, 0.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 9.0, 8.0, 8.0, 1.0, 5.0, 0.0, 5.0, 1.0, 9.0, 0.0, 3.0, 8.0, 0.0, 8.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 4.0, 1.0, 2.0, 3.0, 0.0, 9.0, 8.0, 7.0, 8.0, 1.0, 7.0, 7.0, 7.0, 8.0, 9.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 7.0, 8.0, 9.0, 1.0, 1.0, 4.0, 2.0, 6.0, 1.0, 1.0, 4.0, 4.0, 6.0, 6.0, 2.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 8.0, 6.0, 6.0, 2.0, 7.0, 9.0, 5.0, 0.0, 6.0, 8.0, 4.0, 7.0, 6.0]
+E   [right]: [5.0, 1.0, 3.0, 8.0, 2.0, 4.0, 0.0, nan, nan, nan, 2.0, 7.0, 7.0, 2.0, 2.0, 0.0, 5.0, 9.0, 7.0, 8.0, 2.0, 8.0, 2.0, 2.0, 0.0, 7.0, nan, nan, nan, 3.0, 9.0, 8.0, 8.0, 1.0, 5.0, 0.0, 5.0, 1.0, 9.0, 0.0, 3.0, 8.0, 0.0, 8.0, 1.0, nan, nan, nan, 7.0, 4.0, 1.0, 2.0, 3.0, 0.0, 9.0, 8.0, 7.0, 8.0, 1.0, 7.0, 7.0, 7.0, 8.0, 9.0, nan, nan, nan, 7.0, 7.0, 8.0, 9.0, 1.0, 1.0, 4.0, 2.0, 6.0, 1.0, 1.0, 4.0, 4.0, 6.0, 6.0, 2.0, nan, nan, nan, 0.0, 8.0, 6.0, 6.0, 2.0, 7.0, 9.0, 5.0, 0.0, 6.0, 8.0, 4.0, 7.0, 6.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-10-n1] _________________
+
+n = 1000, m = 10, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [6.0, 4.0, 9.0, 8.0, 3.0, 7.0, 9.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 2.0, 5.0, 4.0, 7.0, 1.0, 6.0, 2.0, 1.0, 9.0, 4.0, 5.0, 6.0, 1.0, 7.0, 4.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 5.0, 4.0, 4.0, 6.0, 9.0, 9.0, 0.0, 7.0, 6.0, 2.0, 0.0, 0.0, 9.0, 5.0, 2.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 3.0, 4.0, 1.0, 4.0, 4.0, 1.0, 0.0, 8.0, 8.0, 3.0, 1.0, 0.0, 3.0, 0.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 9.0, 4.0, 0.0, 5.0, 2.0, 2.0, 5.0, 0.0, 5.0, 9.0, 4.0, 8.0, 2.0, 9.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 2.0, 3.0, 3.0, 2.0, 2.0, 4.0, 9.0, 0.0, 5.0, 9.0, 1.0, 9.0, 1.0, ...]
+E   [right]: [6.0, 4.0, 9.0, 8.0, 3.0, 7.0, 9.0, nan, nan, nan, 7.0, 2.0, 5.0, 4.0, 7.0, 1.0, 6.0, 2.0, 1.0, 9.0, 4.0, 5.0, 6.0, 1.0, 7.0, 4.0, nan, nan, nan, 2.0, 5.0, 4.0, 4.0, 6.0, 9.0, 9.0, 0.0, 7.0, 6.0, 2.0, 0.0, 0.0, 9.0, 5.0, 2.0, nan, nan, nan, 9.0, 3.0, 4.0, 1.0, 4.0, 4.0, 1.0, 0.0, 8.0, 8.0, 3.0, 1.0, 0.0, 3.0, 0.0, 7.0, nan, nan, nan, 9.0, 9.0, 4.0, 0.0, 5.0, 2.0, 2.0, 5.0, 0.0, 5.0, 9.0, 4.0, 8.0, 2.0, 9.0, 3.0, nan, nan, nan, 7.0, 2.0, 3.0, 3.0, 2.0, 2.0, 4.0, 9.0, 0.0, 5.0, 9.0, 1.0, 9.0, 1.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-10-n2] _________________
+
+n = 10000, m = 10, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [9.0, 8.0, 0.0, 6.0, 4.0, 8.0, 9.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 3.0, 6.0, 8.0, 3.0, 3.0, 2.0, 0.0, 1.0, 3.0, 0.0, 6.0, 8.0, 9.0, 7.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 3.0, 3.0, 6.0, 5.0, 5.0, 3.0, 1.0, 3.0, 2.0, 4.0, 8.0, 4.0, 3.0, 6.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 3.0, 4.0, 1.0, 1.0, 0.0, 7.0, 8.0, 6.0, 5.0, 8.0, 9.0, 7.0, 2.0, 8.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 1.0, 1.0, 0.0, 7.0, 8.0, 3.0, 2.0, 2.0, 8.0, 9.0, 6.0, 9.0, 6.0, 1.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 2.0, 8.0, 8.0, 1.0, 1.0, 8.0, 0.0, 3.0, 0.0, 0.0, 1.0, 6.0, 3.0, ...]
+E   [right]: [9.0, 8.0, 0.0, 6.0, 4.0, 8.0, 9.0, nan, nan, nan, 2.0, 3.0, 6.0, 8.0, 3.0, 3.0, 2.0, 0.0, 1.0, 3.0, 0.0, 6.0, 8.0, 9.0, 7.0, 6.0, nan, nan, nan, 2.0, 3.0, 3.0, 6.0, 5.0, 5.0, 3.0, 1.0, 3.0, 2.0, 4.0, 8.0, 4.0, 3.0, 6.0, 6.0, nan, nan, nan, 0.0, 3.0, 4.0, 1.0, 1.0, 0.0, 7.0, 8.0, 6.0, 5.0, 8.0, 9.0, 7.0, 2.0, 8.0, 3.0, nan, nan, nan, 0.0, 1.0, 1.0, 0.0, 7.0, 8.0, 3.0, 2.0, 2.0, 8.0, 9.0, 6.0, 9.0, 6.0, 1.0, 6.0, nan, nan, nan, 9.0, 2.0, 8.0, 8.0, 1.0, 1.0, 8.0, 0.0, 3.0, 0.0, 0.0, 1.0, 6.0, 3.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-10-n3] _________________
+
+n = 100000, m = 10, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [1.0, 1.0, 7.0, 5.0, 7.0, 8.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 7.0, 5.0, 3.0, 2.0, 2.0, 9.0, 0.0, 7.0, 1.0, 6.0, 2.0, 9.0, 2.0, 3.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 6.0, 9.0, 8.0, 7.0, 7.0, 2.0, 0.0, 6.0, 4.0, 4.0, 2.0, 2.0, 4.0, 7.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 8.0, 6.0, 2.0, 9.0, 6.0, 6.0, 3.0, 7.0, 1.0, 5.0, 7.0, 2.0, 0.0, 7.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 9.0, 0.0, 4.0, 3.0, 1.0, 1.0, 3.0, 2.0, 8.0, 9.0, 1.0, 6.0, 6.0, 2.0, 9.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 0.0, 3.0, 5.0, 9.0, 2.0, 6.0, 4.0, 0.0, 2.0, 4.0, 3.0, 0.0, 5.0, ...]
+E   [right]: [1.0, 1.0, 7.0, 5.0, 7.0, 8.0, 7.0, nan, nan, nan, 0.0, 7.0, 5.0, 3.0, 2.0, 2.0, 9.0, 0.0, 7.0, 1.0, 6.0, 2.0, 9.0, 2.0, 3.0, 5.0, nan, nan, nan, 6.0, 6.0, 9.0, 8.0, 7.0, 7.0, 2.0, 0.0, 6.0, 4.0, 4.0, 2.0, 2.0, 4.0, 7.0, 5.0, nan, nan, nan, 7.0, 8.0, 6.0, 2.0, 9.0, 6.0, 6.0, 3.0, 7.0, 1.0, 5.0, 7.0, 2.0, 0.0, 7.0, 7.0, nan, nan, nan, 9.0, 9.0, 0.0, 4.0, 3.0, 1.0, 1.0, 3.0, 2.0, 8.0, 9.0, 1.0, 6.0, 6.0, 2.0, 9.0, nan, nan, nan, 0.0, 0.0, 3.0, 5.0, 9.0, 2.0, 6.0, 4.0, 0.0, 2.0, 4.0, 3.0, 0.0, 5.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-100-n0] ________________
+
+n = 100, m = 100, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [12.0, 37.0, 56.0, 16.0, 52.0, 8.0, 10.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 68.0, 47.0, 3.0, 25.0, 40.0, 9.0, 66.0, 44.0, 40.0, 55.0, 83.0, 37.0, 58.0, 16.0, 11.0, 85.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 65.0, 46.0, 34.0, 66.0, 60.0, 66.0, 85.0, 4.0, 57.0, 79.0, 82.0, 33.0, 6.0, 35.0, 3.0, 24.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 12.0, 56.0, 29.0, 8.0, 58.0, 24.0, 3.0, 29.0, 28.0, 94.0, 4.0, 81.0, 76.0, 87.0, 37.0, 40.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 64.0, 29.0, 36.0, 41.0, 98.0, 93.0, 81.0, 77.0, 19.0, 38.0, 95.0, 32.0, 62.0, 70.0, 47.0, 11.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 62.0, 44.0, 49.0, 53.0, 63.0, 21.0, 94.0, 34.0, 19.0, 74.0, 62.0, 29.0, 38.0, 74.0]
+E   [right]: [12.0, 37.0, 56.0, 16.0, 52.0, 8.0, 10.0, nan, nan, nan, 68.0, 47.0, 3.0, 25.0, 40.0, 9.0, 66.0, 44.0, 40.0, 55.0, 83.0, 37.0, 58.0, 16.0, 11.0, 85.0, nan, nan, nan, 65.0, 46.0, 34.0, 66.0, 60.0, 66.0, 85.0, 4.0, 57.0, 79.0, 82.0, 33.0, 6.0, 35.0, 3.0, 24.0, nan, nan, nan, 12.0, 56.0, 29.0, 8.0, 58.0, 24.0, 3.0, 29.0, 28.0, 94.0, 4.0, 81.0, 76.0, 87.0, 37.0, 40.0, nan, nan, nan, 64.0, 29.0, 36.0, 41.0, 98.0, 93.0, 81.0, 77.0, 19.0, 38.0, 95.0, 32.0, 62.0, 70.0, 47.0, 11.0, nan, nan, nan, 62.0, 44.0, 49.0, 53.0, 63.0, 21.0, 94.0, 34.0, 19.0, 74.0, 62.0, 29.0, 38.0, 74.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-100-n1] ________________
+
+n = 1000, m = 100, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [63.0, 15.0, 94.0, 34.0, 58.0, 65.0, 55.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 74.0, 60.0, 65.0, 52.0, 6.0, 21.0, 24.0, 71.0, 97.0, 57.0, 69.0, 7.0, 18.0, 70.0, 1.0, 27.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 57.0, 37.0, 77.0, 42.0, 12.0, 94.0, 31.0, 60.0, 22.0, 29.0, 26.0, 36.0, 21.0, 96.0, 72.0, 73.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 33.0, 93.0, 31.0, 4.0, 96.0, 73.0, 74.0, 54.0, 59.0, 29.0, 47.0, 3.0, 83.0, 96.0, 83.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 14.0, 7.0, 16.0, 52.0, 72.0, 51.0, 60.0, 62.0, 90.0, 55.0, 58.0, 14.0, 71.0, 80.0, 8.0, 59.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 40.0, 72.0, 60.0, 78.0, 90.0, 36.0, 56.0, 72.0, 26.0, 64.0, 3.0, 7.0, 33.0, 38.0, ...]
+E   [right]: [63.0, 15.0, 94.0, 34.0, 58.0, 65.0, 55.0, nan, nan, nan, 74.0, 60.0, 65.0, 52.0, 6.0, 21.0, 24.0, 71.0, 97.0, 57.0, 69.0, 7.0, 18.0, 70.0, 1.0, 27.0, nan, nan, nan, 57.0, 37.0, 77.0, 42.0, 12.0, 94.0, 31.0, 60.0, 22.0, 29.0, 26.0, 36.0, 21.0, 96.0, 72.0, 73.0, nan, nan, nan, 33.0, 93.0, 31.0, 4.0, 96.0, 73.0, 74.0, 54.0, 59.0, 29.0, 47.0, 3.0, 83.0, 96.0, 83.0, 6.0, nan, nan, nan, 14.0, 7.0, 16.0, 52.0, 72.0, 51.0, 60.0, 62.0, 90.0, 55.0, 58.0, 14.0, 71.0, 80.0, 8.0, 59.0, nan, nan, nan, 40.0, 72.0, 60.0, 78.0, 90.0, 36.0, 56.0, 72.0, 26.0, 64.0, 3.0, 7.0, 33.0, 38.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-100-n2] ________________
+
+n = 10000, m = 100, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [62.0, 86.0, 46.0, 12.0, 73.0, 43.0, 93.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 56.0, 98.0, 63.0, 57.0, 17.0, 69.0, 75.0, 16.0, 32.0, 89.0, 39.0, 89.0, 75.0, 77.0, 90.0, 44.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 81.0, 71.0, 31.0, 58.0, 38.0, 67.0, 45.0, 89.0, 36.0, 9.0, 75.0, 11.0, 73.0, 22.0, 7.0, 86.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 38.0, 41.0, 38.0, 52.0, 62.0, 68.0, 75.0, 80.0, 59.0, 21.0, 36.0, 45.0, 75.0, 78.0, 39.0, 66.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 73.0, 91.0, 5.0, 47.0, 77.0, 12.0, 53.0, 15.0, 6.0, 74.0, 17.0, 14.0, 91.0, 85.0, 82.0, 19.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 14.0, 85.0, 71.0, 70.0, 35.0, 80.0, 38.0, 82.0, 96.0, 22.0, 6.0, 3.0, 16.0, 45.0, ...]
+E   [right]: [62.0, 86.0, 46.0, 12.0, 73.0, 43.0, 93.0, nan, nan, nan, 56.0, 98.0, 63.0, 57.0, 17.0, 69.0, 75.0, 16.0, 32.0, 89.0, 39.0, 89.0, 75.0, 77.0, 90.0, 44.0, nan, nan, nan, 81.0, 71.0, 31.0, 58.0, 38.0, 67.0, 45.0, 89.0, 36.0, 9.0, 75.0, 11.0, 73.0, 22.0, 7.0, 86.0, nan, nan, nan, 38.0, 41.0, 38.0, 52.0, 62.0, 68.0, 75.0, 80.0, 59.0, 21.0, 36.0, 45.0, 75.0, 78.0, 39.0, 66.0, nan, nan, nan, 73.0, 91.0, 5.0, 47.0, 77.0, 12.0, 53.0, 15.0, 6.0, 74.0, 17.0, 14.0, 91.0, 85.0, 82.0, 19.0, nan, nan, nan, 14.0, 85.0, 71.0, 70.0, 35.0, 80.0, 38.0, 82.0, 96.0, 22.0, 6.0, 3.0, 16.0, 45.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-False-100-n3] ________________
+
+n = 100000, m = 100, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [85.0, 68.0, 38.0, 30.0, 41.0, 69.0, 25.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 95.0, 73.0, 0.0, 84.0, 52.0, 73.0, 22.0, 14.0, 46.0, 99.0, 62.0, 35.0, 0.0, 24.0, 25.0, 52.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 81.0, 16.0, 39.0, 98.0, 14.0, 83.0, 52.0, 41.0, 82.0, 80.0, 81.0, 1.0, 48.0, 46.0, 58.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 66.0, 38.0, 78.0, 51.0, 16.0, 74.0, 11.0, 76.0, 93.0, 45.0, 80.0, 23.0, 42.0, 20.0, 56.0, 46.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 17.0, 51.0, 73.0, 49.0, 80.0, 23.0, 6.0, 78.0, 93.0, 70.0, 24.0, 46.0, 30.0, 0.0, 60.0, 44.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 11.0, 51.0, 63.0, 10.0, 7.0, 24.0, 39.0, 42.0, 80.0, 62.0, 79.0, 71.0, 21.0, 51.0, ...]
+E   [right]: [85.0, 68.0, 38.0, 30.0, 41.0, 69.0, 25.0, nan, nan, nan, 95.0, 73.0, 0.0, 84.0, 52.0, 73.0, 22.0, 14.0, 46.0, 99.0, 62.0, 35.0, 0.0, 24.0, 25.0, 52.0, nan, nan, nan, 4.0, 81.0, 16.0, 39.0, 98.0, 14.0, 83.0, 52.0, 41.0, 82.0, 80.0, 81.0, 1.0, 48.0, 46.0, 58.0, nan, nan, nan, 66.0, 38.0, 78.0, 51.0, 16.0, 74.0, 11.0, 76.0, 93.0, 45.0, 80.0, 23.0, 42.0, 20.0, 56.0, 46.0, nan, nan, nan, 17.0, 51.0, 73.0, 49.0, 80.0, 23.0, 6.0, 78.0, 93.0, 70.0, 24.0, 46.0, 30.0, 0.0, 60.0, 44.0, nan, nan, nan, 11.0, 51.0, 63.0, 10.0, 7.0, 24.0, 39.0, 42.0, 80.0, 62.0, 79.0, 71.0, 21.0, 51.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[True-False-1000-n0] ________________
+
+n = 100, m = 1000, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [767.0, 954.0, 952.0, 576.0, 716.0, 837.0, 258.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 123.0, 175.0, 346.0, 186.0, 547.0, 907.0, 558.0, 304.0, 965.0, 553.0, 626.0, 118.0, 36.0, 144.0, 249.0, 116.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 475.0, 732.0, 957.0, 850.0, 916.0, 424.0, 22.0, 143.0, 524.0, 815.0, 508.0, 211.0, 95.0, 334.0, 860.0, 488.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 30.0, 236.0, 409.0, 607.0, 237.0, 815.0, 450.0, 584.0, 729.0, 426.0, 312.0, 632.0, 715.0, 698.0, 782.0, 220.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 274.0, 628.0, 238.0, 467.0, 273.0, 682.0, 532.0, 149.0, 48.0, 753.0, 76.0, 903.0, 842.0, 717.0, 176.0, 698.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 769.0, 580.0, 785.0, 612.0, 617.0, 959.0, 116.0, 441.0, 732.0, 189.0, 264.0, 96.0, 90.0, 512.0]
+E   [right]: [767.0, 954.0, 952.0, 576.0, 716.0, 837.0, 258.0, nan, nan, nan, 123.0, 175.0, 346.0, 186.0, 547.0, 907.0, 558.0, 304.0, 965.0, 553.0, 626.0, 118.0, 36.0, 144.0, 249.0, 116.0, nan, nan, nan, 475.0, 732.0, 957.0, 850.0, 916.0, 424.0, 22.0, 143.0, 524.0, 815.0, 508.0, 211.0, 95.0, 334.0, 860.0, 488.0, nan, nan, nan, 30.0, 236.0, 409.0, 607.0, 237.0, 815.0, 450.0, 584.0, 729.0, 426.0, 312.0, 632.0, 715.0, 698.0, 782.0, 220.0, nan, nan, nan, 274.0, 628.0, 238.0, 467.0, 273.0, 682.0, 532.0, 149.0, 48.0, 753.0, 76.0, 903.0, 842.0, 717.0, 176.0, 698.0, nan, nan, nan, 769.0, 580.0, 785.0, 612.0, 617.0, 959.0, 116.0, 441.0, 732.0, 189.0, 264.0, 96.0, 90.0, 512.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[True-False-1000-n1] ________________
+
+n = 1000, m = 1000, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [940.0, 19.0, 286.0, 998.0, 364.0, 56.0, 326.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 922.0, 242.0, 612.0, 362.0, 435.0, 121.0, 12.0, 200.0, 135.0, 839.0, 819.0, 558.0, 923.0, 483.0, 944.0, 601.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 107.0, 209.0, 424.0, 64.0, 584.0, 164.0, 923.0, 801.0, 816.0, 65.0, 106.0, 908.0, 329.0, 820.0, 719.0, 424.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 361.0, 436.0, 297.0, 659.0, 596.0, 227.0, 774.0, 581.0, 431.0, 636.0, 349.0, 414.0, 558.0, 307.0, 470.0, 871.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 718.0, 26.0, 961.0, 400.0, 206.0, 546.0, 508.0, 96.0, 479.0, 340.0, 39.0, 313.0, 868.0, 763.0, 390.0, 314.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 108.0, 552.0, 165.0, 564.0, 455.0, 490.0, 717.0, 712.0, 774.0, 503.0, 998.0, 82.0, 264.0, 463.0, ...]
+E   [right]: [940.0, 19.0, 286.0, 998.0, 364.0, 56.0, 326.0, nan, nan, nan, 922.0, 242.0, 612.0, 362.0, 435.0, 121.0, 12.0, 200.0, 135.0, 839.0, 819.0, 558.0, 923.0, 483.0, 944.0, 601.0, nan, nan, nan, 107.0, 209.0, 424.0, 64.0, 584.0, 164.0, 923.0, 801.0, 816.0, 65.0, 106.0, 908.0, 329.0, 820.0, 719.0, 424.0, nan, nan, nan, 361.0, 436.0, 297.0, 659.0, 596.0, 227.0, 774.0, 581.0, 431.0, 636.0, 349.0, 414.0, 558.0, 307.0, 470.0, 871.0, nan, nan, nan, 718.0, 26.0, 961.0, 400.0, 206.0, 546.0, 508.0, 96.0, 479.0, 340.0, 39.0, 313.0, 868.0, 763.0, 390.0, 314.0, nan, nan, nan, 108.0, 552.0, 165.0, 564.0, 455.0, 490.0, 717.0, 712.0, 774.0, 503.0, 998.0, 82.0, 264.0, 463.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[True-False-1000-n2] ________________
+
+n = 10000, m = 1000, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [667.0, 93.0, 594.0, 928.0, 515.0, 602.0, 157.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 46.0, 727.0, 97.0, 530.0, 591.0, 254.0, 63.0, 399.0, 14.0, 929.0, 913.0, 141.0, 680.0, 213.0, 900.0, 145.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 508.0, 424.0, 854.0, 684.0, 506.0, 370.0, 561.0, 664.0, 318.0, 944.0, 659.0, 168.0, 839.0, 913.0, 68.0, 528.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 717.0, 85.0, 612.0, 329.0, 872.0, 58.0, 308.0, 47.0, 671.0, 716.0, 741.0, 672.0, 294.0, 764.0, 34.0, 714.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 137.0, 315.0, 186.0, 743.0, 535.0, 346.0, 159.0, 522.0, 662.0, 365.0, 633.0, 971.0, 501.0, 767.0, 187.0, 69.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 283.0, 385.0, 907.0, 554.0, 990.0, 54.0, 463.0, 566.0, 967.0, 410.0, 887.0, 182.0, 447.0, 600.0, ...]
+E   [right]: [667.0, 93.0, 594.0, 928.0, 515.0, 602.0, 157.0, nan, nan, nan, 46.0, 727.0, 97.0, 530.0, 591.0, 254.0, 63.0, 399.0, 14.0, 929.0, 913.0, 141.0, 680.0, 213.0, 900.0, 145.0, nan, nan, nan, 508.0, 424.0, 854.0, 684.0, 506.0, 370.0, 561.0, 664.0, 318.0, 944.0, 659.0, 168.0, 839.0, 913.0, 68.0, 528.0, nan, nan, nan, 717.0, 85.0, 612.0, 329.0, 872.0, 58.0, 308.0, 47.0, 671.0, 716.0, 741.0, 672.0, 294.0, 764.0, 34.0, 714.0, nan, nan, nan, 137.0, 315.0, 186.0, 743.0, 535.0, 346.0, 159.0, 522.0, 662.0, 365.0, 633.0, 971.0, 501.0, 767.0, 187.0, 69.0, nan, nan, nan, 283.0, 385.0, 907.0, 554.0, 990.0, 54.0, 463.0, 566.0, 967.0, 410.0, 887.0, 182.0, 447.0, 600.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_______________ test_series_groupby_nunique[True-False-1000-n3] ________________
+
+n = 100000, m = 1000, sort = False, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [207.0, 84.0, 123.0, 362.0, 331.0, 516.0, 411.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 875.0, 579.0, 498.0, 894.0, 96.0, 203.0, 388.0, 709.0, 666.0, 159.0, 214.0, 268.0, 309.0, 688.0, 10.0, 920.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 753.0, 916.0, 497.0, 162.0, 86.0, 946.0, 343.0, 37.0, 365.0, 657.0, 819.0, 302.0, 731.0, 927.0, 992.0, 14.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 697.0, 873.0, 276.0, 44.0, 505.0, 276.0, 351.0, 210.0, 494.0, 715.0, 458.0, 784.0, 933.0, 572.0, 921.0, 868.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 542.0, 774.0, 806.0, 384.0, 370.0, 977.0, 885.0, 683.0, 767.0, 146.0, 4.0, 199.0, 363.0, 38.0, 89.0, 386.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 157.0, 124.0, 324.0, 603.0, 563.0, 810.0, 10.0, 228.0, 256.0, 462.0, 858.0, 288.0, 167.0, 341.0, ...]
+E   [right]: [207.0, 84.0, 123.0, 362.0, 331.0, 516.0, 411.0, nan, nan, nan, 875.0, 579.0, 498.0, 894.0, 96.0, 203.0, 388.0, 709.0, 666.0, 159.0, 214.0, 268.0, 309.0, 688.0, 10.0, 920.0, nan, nan, nan, 753.0, 916.0, 497.0, 162.0, 86.0, 946.0, 343.0, 37.0, 365.0, 657.0, 819.0, 302.0, 731.0, 927.0, 992.0, 14.0, nan, nan, nan, 697.0, 873.0, 276.0, 44.0, 505.0, 276.0, 351.0, 210.0, 494.0, 715.0, 458.0, 784.0, 933.0, 572.0, 921.0, 868.0, nan, nan, nan, 542.0, 774.0, 806.0, 384.0, 370.0, 977.0, 885.0, 683.0, 767.0, 146.0, 4.0, 199.0, 363.0, 38.0, 89.0, 386.0, nan, nan, nan, 157.0, 124.0, 324.0, 603.0, 563.0, 810.0, 10.0, 228.0, 256.0, 462.0, 858.0, 288.0, 167.0, 341.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_________________ test_series_groupby_nunique[True-True-10-n0] _________________
+
+n = 100, m = 10, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [7.0, 3.0, 1.0, 5.0, 6.0, 2.0, 2.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 8.0, 0.0, 7.0, 3.0, 8.0, 9.0, 8.0, 2.0, 9.0, 3.0, 3.0, 6.0, 2.0, 7.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 4.0, 0.0, 3.0, 9.0, 6.0, 0.0, 2.0, 0.0, 9.0, 6.0, 4.0, 1.0, 0.0, 0.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 4.0, 2.0, 7.0, 2.0, 3.0, 0.0, 3.0, 6.0, 8.0, 7.0, 9.0, 7.0, 6.0, 2.0, 8.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 8.0, 8.0, 7.0, 3.0, 8.0, 2.0, 3.0, 1.0, 9.0, 4.0, 4.0, 6.0, 8.0, 1.0, 4.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 0.0, 0.0, 1.0, 6.0, 2.0, 8.0, 5.0, 5.0, 1.0, 0.0, 5.0, 4.0, 4.0]
+E   [right]: [7.0, 3.0, 1.0, 5.0, 6.0, 2.0, 2.0, nan, nan, nan, 9.0, 8.0, 0.0, 7.0, 3.0, 8.0, 9.0, 8.0, 2.0, 9.0, 3.0, 3.0, 6.0, 2.0, 7.0, 0.0, nan, nan, nan, 9.0, 4.0, 0.0, 3.0, 9.0, 6.0, 0.0, 2.0, 0.0, 9.0, 6.0, 4.0, 1.0, 0.0, 0.0, 7.0, nan, nan, nan, 2.0, 4.0, 2.0, 7.0, 2.0, 3.0, 0.0, 3.0, 6.0, 8.0, 7.0, 9.0, 7.0, 6.0, 2.0, 8.0, nan, nan, nan, 8.0, 8.0, 7.0, 3.0, 8.0, 2.0, 3.0, 1.0, 9.0, 4.0, 4.0, 6.0, 8.0, 1.0, 4.0, 7.0, nan, nan, nan, 5.0, 0.0, 0.0, 1.0, 6.0, 2.0, 8.0, 5.0, 5.0, 1.0, 0.0, 5.0, 4.0, 4.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_________________ test_series_groupby_nunique[True-True-10-n1] _________________
+
+n = 1000, m = 10, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [6.0, 8.0, 4.0, 4.0, 6.0, 8.0, 8.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 7.0, 9.0, 6.0, 7.0, 3.0, 6.0, 9.0, 9.0, 6.0, 9.0, 4.0, 8.0, 8.0, 6.0, 2.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 4.0, 6.0, 0.0, 0.0, 3.0, 7.0, 0.0, 6.0, 4.0, 0.0, 6.0, 1.0, 6.0, 2.0, 4.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 3.0, 0.0, 1.0, 0.0, 6.0, 2.0, 9.0, 3.0, 6.0, 2.0, 5.0, 3.0, 4.0, 4.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 4.0, 7.0, 3.0, 2.0, 1.0, 8.0, 5.0, 5.0, 3.0, 5.0, 0.0, 9.0, 8.0, 2.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 1.0, 6.0, 7.0, 8.0, 2.0, 7.0, 1.0, 6.0, 8.0, 3.0, 0.0, 5.0, 0.0, ...]
+E   [right]: [6.0, 8.0, 4.0, 4.0, 6.0, 8.0, 8.0, nan, nan, nan, 7.0, 9.0, 6.0, 7.0, 3.0, 6.0, 9.0, 9.0, 6.0, 9.0, 4.0, 8.0, 8.0, 6.0, 2.0, 0.0, nan, nan, nan, 2.0, 4.0, 6.0, 0.0, 0.0, 3.0, 7.0, 0.0, 6.0, 4.0, 0.0, 6.0, 1.0, 6.0, 2.0, 4.0, nan, nan, nan, 1.0, 3.0, 0.0, 1.0, 0.0, 6.0, 2.0, 9.0, 3.0, 6.0, 2.0, 5.0, 3.0, 4.0, 4.0, 3.0, nan, nan, nan, 1.0, 4.0, 7.0, 3.0, 2.0, 1.0, 8.0, 5.0, 5.0, 3.0, 5.0, 0.0, 9.0, 8.0, 2.0, 6.0, nan, nan, nan, 4.0, 1.0, 6.0, 7.0, 8.0, 2.0, 7.0, 1.0, 6.0, 8.0, 3.0, 0.0, 5.0, 0.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_________________ test_series_groupby_nunique[True-True-10-n2] _________________
+
+n = 10000, m = 10, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [7.0, 7.0, 9.0, 4.0, 8.0, 6.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 0.0, 0.0, 1.0, 2.0, 8.0, 3.0, 4.0, 1.0, 8.0, 5.0, 5.0, 4.0, 4.0, 4.0, 3.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 8.0, 6.0, 5.0, 7.0, 1.0, 6.0, 7.0, 3.0, 4.0, 4.0, 6.0, 5.0, 1.0, 1.0, 8.0, 8.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 0.0, 9.0, 0.0, 5.0, 8.0, 4.0, 2.0, 7.0, 1.0, 3.0, 2.0, 3.0, 1.0, 3.0, 3.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 5.0, 5.0, 6.0, 8.0, 2.0, 6.0, 3.0, 2.0, 3.0, 2.0, 1.0, 9.0, 8.0, 9.0, 2.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 4.0, 8.0, 7.0, 1.0, 6.0, 7.0, 5.0, 7.0, 1.0, 9.0, 3.0, 7.0, 6.0, ...]
+E   [right]: [7.0, 7.0, 9.0, 4.0, 8.0, 6.0, 1.0, nan, nan, nan, 4.0, 0.0, 0.0, 1.0, 2.0, 8.0, 3.0, 4.0, 1.0, 8.0, 5.0, 5.0, 4.0, 4.0, 4.0, 3.0, nan, nan, nan, 8.0, 6.0, 5.0, 7.0, 1.0, 6.0, 7.0, 3.0, 4.0, 4.0, 6.0, 5.0, 1.0, 1.0, 8.0, 8.0, nan, nan, nan, 0.0, 9.0, 0.0, 5.0, 8.0, 4.0, 2.0, 7.0, 1.0, 3.0, 2.0, 3.0, 1.0, 3.0, 3.0, 0.0, nan, nan, nan, 6.0, 5.0, 5.0, 6.0, 8.0, 2.0, 6.0, 3.0, 2.0, 3.0, 2.0, 1.0, 9.0, 8.0, 9.0, 2.0, nan, nan, nan, 6.0, 4.0, 8.0, 7.0, 1.0, 6.0, 7.0, 5.0, 7.0, 1.0, 9.0, 3.0, 7.0, 6.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+_________________ test_series_groupby_nunique[True-True-10-n3] _________________
+
+n = 100000, m = 10, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [2.0, 1.0, 2.0, 5.0, 5.0, 2.0, 6.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 4.0, 4.0, 9.0, 8.0, 6.0, 0.0, 5.0, 6.0, 9.0, 1.0, 0.0, 9.0, 3.0, 8.0, 1.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 5.0, 4.0, 5.0, 2.0, 6.0, 6.0, 2.0, 4.0, 9.0, 2.0, 5.0, 0.0, 0.0, 0.0, 6.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 2.0, 2.0, 1.0, 2.0, 9.0, 5.0, 8.0, 9.0, 8.0, 5.0, 3.0, 4.0, 7.0, 0.0, 0.0, 7.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 3.0, 2.0, 1.0, 6.0, 7.0, 9.0, 0.0, 3.0, 3.0, 9.0, 9.0, 7.0, 0.0, 6.0, 2.0, 1.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 9.0, 3.0, 5.0, 0.0, 3.0, 2.0, 4.0, 6.0, 6.0, 5.0, 6.0, 4.0, 6.0, 5.0, ...]
+E   [right]: [2.0, 1.0, 2.0, 5.0, 5.0, 2.0, 6.0, nan, nan, nan, 4.0, 4.0, 9.0, 8.0, 6.0, 0.0, 5.0, 6.0, 9.0, 1.0, 0.0, 9.0, 3.0, 8.0, 1.0, 7.0, nan, nan, nan, 5.0, 4.0, 5.0, 2.0, 6.0, 6.0, 2.0, 4.0, 9.0, 2.0, 5.0, 0.0, 0.0, 0.0, 6.0, 7.0, nan, nan, nan, 2.0, 2.0, 1.0, 2.0, 9.0, 5.0, 8.0, 9.0, 8.0, 5.0, 3.0, 4.0, 7.0, 0.0, 0.0, 7.0, nan, nan, nan, 3.0, 2.0, 1.0, 6.0, 7.0, 9.0, 0.0, 3.0, 3.0, 9.0, 9.0, 7.0, 0.0, 6.0, 2.0, 1.0, nan, nan, nan, 9.0, 3.0, 5.0, 0.0, 3.0, 2.0, 4.0, 6.0, 6.0, 5.0, 6.0, 4.0, 6.0, 5.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-100-n0] _________________
+
+n = 100, m = 100, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [6.0, 44.0, 39.0, 27.0, 7.0, 95.0, 54.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 6.0, 51.0, 32.0, 55.0, 76.0, 34.0, 82.0, 76.0, 92.0, 57.0, 45.0, 27.0, 74.0, 72.0, 94.0, 76.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 29.0, 18.0, 39.0, 33.0, 51.0, 97.0, 61.0, 52.0, 81.0, 97.0, 95.0, 78.0, 52.0, 83.0, 31.0, 13.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 43.0, 34.0, 92.0, 8.0, 81.0, 71.0, 53.0, 13.0, 28.0, 4.0, 73.0, 29.0, 15.0, 33.0, 13.0, 47.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 51.0, 86.0, 41.0, 87.0, 14.0, 83.0, 93.0, 30.0, 9.0, 54.0, 58.0, 27.0, 88.0, 39.0, 30.0, 79.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 64.0, 97.0, 39.0, 19.0, 71.0, 71.0, 69.0, 36.0, 5.0, 91.0, 84.0, 7.0, 76.0, 17.0]
+E   [right]: [6.0, 44.0, 39.0, 27.0, 7.0, 95.0, 54.0, nan, nan, nan, 6.0, 51.0, 32.0, 55.0, 76.0, 34.0, 82.0, 76.0, 92.0, 57.0, 45.0, 27.0, 74.0, 72.0, 94.0, 76.0, nan, nan, nan, 29.0, 18.0, 39.0, 33.0, 51.0, 97.0, 61.0, 52.0, 81.0, 97.0, 95.0, 78.0, 52.0, 83.0, 31.0, 13.0, nan, nan, nan, 43.0, 34.0, 92.0, 8.0, 81.0, 71.0, 53.0, 13.0, 28.0, 4.0, 73.0, 29.0, 15.0, 33.0, 13.0, 47.0, nan, nan, nan, 51.0, 86.0, 41.0, 87.0, 14.0, 83.0, 93.0, 30.0, 9.0, 54.0, 58.0, 27.0, 88.0, 39.0, 30.0, 79.0, nan, nan, nan, 64.0, 97.0, 39.0, 19.0, 71.0, 71.0, 69.0, 36.0, 5.0, 91.0, 84.0, 7.0, 76.0, 17.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-100-n1] _________________
+
+n = 1000, m = 100, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [66.0, 55.0, 48.0, 3.0, 62.0, 77.0, 22.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 99.0, 50.0, 0.0, 77.0, 82.0, 54.0, 94.0, 19.0, 97.0, 98.0, 61.0, 68.0, 63.0, 50.0, 25.0, 80.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 80.0, 70.0, 43.0, 63.0, 35.0, 33.0, 72.0, 66.0, 84.0, 58.0, 61.0, 24.0, 26.0, 1.0, 59.0, 62.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 68.0, 23.0, 20.0, 51.0, 57.0, 32.0, 60.0, 57.0, 86.0, 68.0, 10.0, 57.0, 4.0, 92.0, 59.0, 59.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 1.0, 53.0, 55.0, 36.0, 47.0, 4.0, 11.0, 51.0, 32.0, 11.0, 95.0, 47.0, 77.0, 57.0, 57.0, 0.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 42.0, 56.0, 41.0, 90.0, 80.0, 85.0, 30.0, 63.0, 22.0, 14.0, 33.0, 93.0, 27.0, 0.0, ...]
+E   [right]: [66.0, 55.0, 48.0, 3.0, 62.0, 77.0, 22.0, nan, nan, nan, 99.0, 50.0, 0.0, 77.0, 82.0, 54.0, 94.0, 19.0, 97.0, 98.0, 61.0, 68.0, 63.0, 50.0, 25.0, 80.0, nan, nan, nan, 80.0, 70.0, 43.0, 63.0, 35.0, 33.0, 72.0, 66.0, 84.0, 58.0, 61.0, 24.0, 26.0, 1.0, 59.0, 62.0, nan, nan, nan, 68.0, 23.0, 20.0, 51.0, 57.0, 32.0, 60.0, 57.0, 86.0, 68.0, 10.0, 57.0, 4.0, 92.0, 59.0, 59.0, nan, nan, nan, 1.0, 53.0, 55.0, 36.0, 47.0, 4.0, 11.0, 51.0, 32.0, 11.0, 95.0, 47.0, 77.0, 57.0, 57.0, 0.0, nan, nan, nan, 42.0, 56.0, 41.0, 90.0, 80.0, 85.0, 30.0, 63.0, 22.0, 14.0, 33.0, 93.0, 27.0, 0.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-100-n2] _________________
+
+n = 10000, m = 100, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [79.0, 59.0, 40.0, 9.0, 12.0, 17.0, 5.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 38.0, 70.0, 71.0, 67.0, 84.0, 45.0, 56.0, 40.0, 62.0, 53.0, 20.0, 83.0, 13.0, 15.0, 48.0, 60.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 39.0, 93.0, 78.0, 28.0, 34.0, 39.0, 88.0, 29.0, 44.0, 39.0, 0.0, 59.0, 73.0, 32.0, 47.0, 91.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 27.0, 83.0, 97.0, 35.0, 77.0, 81.0, 97.0, 41.0, 70.0, 21.0, 14.0, 11.0, 68.0, 46.0, 25.0, 83.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 91.0, 58.0, 46.0, 58.0, 53.0, 9.0, 2.0, 50.0, 63.0, 22.0, 65.0, 61.0, 47.0, 25.0, 31.0, 35.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 98.0, 97.0, 78.0, 99.0, 6.0, 15.0, 89.0, 58.0, 34.0, 40.0, 73.0, 11.0, 86.0, 80.0, ...]
+E   [right]: [79.0, 59.0, 40.0, 9.0, 12.0, 17.0, 5.0, nan, nan, nan, 38.0, 70.0, 71.0, 67.0, 84.0, 45.0, 56.0, 40.0, 62.0, 53.0, 20.0, 83.0, 13.0, 15.0, 48.0, 60.0, nan, nan, nan, 39.0, 93.0, 78.0, 28.0, 34.0, 39.0, 88.0, 29.0, 44.0, 39.0, 0.0, 59.0, 73.0, 32.0, 47.0, 91.0, nan, nan, nan, 27.0, 83.0, 97.0, 35.0, 77.0, 81.0, 97.0, 41.0, 70.0, 21.0, 14.0, 11.0, 68.0, 46.0, 25.0, 83.0, nan, nan, nan, 91.0, 58.0, 46.0, 58.0, 53.0, 9.0, 2.0, 50.0, 63.0, 22.0, 65.0, 61.0, 47.0, 25.0, 31.0, 35.0, nan, nan, nan, 98.0, 97.0, 78.0, 99.0, 6.0, 15.0, 89.0, 58.0, 34.0, 40.0, 73.0, 11.0, 86.0, 80.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-100-n3] _________________
+
+n = 100000, m = 100, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [45.0, 4.0, 89.0, 8.0, 37.0, 71.0, 93.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 72.0, 21.0, 52.0, 86.0, 21.0, 3.0, 36.0, 19.0, 7.0, 71.0, 40.0, 86.0, 91.0, 92.0, 86.0, 67.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 54.0, 86.0, 84.0, 26.0, 75.0, 76.0, 42.0, 49.0, 27.0, 13.0, 33.0, 50.0, 86.0, 31.0, 71.0, 44.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 17.0, 38.0, 58.0, 59.0, 1.0, 51.0, 70.0, 86.0, 16.0, 96.0, 79.0, 90.0, 10.0, 24.0, 61.0, 9.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 43.0, 71.0, 50.0, 54.0, 7.0, 9.0, 71.0, 21.0, 14.0, 13.0, 47.0, 84.0, 42.0, 74.0, 96.0, 63.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 54.0, 24.0, 48.0, 6.0, 62.0, 80.0, 85.0, 47.0, 16.0, 59.0, 21.0, 5.0, 64.0, 87.0, ...]
+E   [right]: [45.0, 4.0, 89.0, 8.0, 37.0, 71.0, 93.0, nan, nan, nan, 72.0, 21.0, 52.0, 86.0, 21.0, 3.0, 36.0, 19.0, 7.0, 71.0, 40.0, 86.0, 91.0, 92.0, 86.0, 67.0, nan, nan, nan, 54.0, 86.0, 84.0, 26.0, 75.0, 76.0, 42.0, 49.0, 27.0, 13.0, 33.0, 50.0, 86.0, 31.0, 71.0, 44.0, nan, nan, nan, 17.0, 38.0, 58.0, 59.0, 1.0, 51.0, 70.0, 86.0, 16.0, 96.0, 79.0, 90.0, 10.0, 24.0, 61.0, 9.0, nan, nan, nan, 43.0, 71.0, 50.0, 54.0, 7.0, 9.0, 71.0, 21.0, 14.0, 13.0, 47.0, 84.0, 42.0, 74.0, 96.0, 63.0, nan, nan, nan, 54.0, 24.0, 48.0, 6.0, 62.0, 80.0, 85.0, 47.0, 16.0, 59.0, 21.0, 5.0, 64.0, 87.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-1000-n0] ________________
+
+n = 100, m = 1000, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.0 %)
+E   [left]:  [306.0, 638.0, 211.0, 264.0, 734.0, 866.0, 632.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 783.0, 340.0, 430.0, 9.0, 510.0, 893.0, 554.0, 282.0, 245.0, 497.0, 670.0, 159.0, 973.0, 224.0, 122.0, 250.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 976.0, 403.0, 831.0, 15.0, 846.0, 230.0, 601.0, 985.0, 406.0, 933.0, 151.0, 330.0, 829.0, 361.0, 445.0, 882.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 362.0, 397.0, 522.0, 370.0, 198.0, 868.0, 40.0, 352.0, 25.0, 560.0, 617.0, 248.0, 683.0, 480.0, 266.0, 281.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 782.0, 843.0, 394.0, 767.0, 174.0, 389.0, 907.0, 789.0, 194.0, 107.0, 250.0, 134.0, 625.0, 875.0, 545.0, 11.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 965.0, 342.0, 235.0, 230.0, 817.0, 178.0, 190.0, 372.0, 822.0, 555.0, 370.0, 569.0, 669.0, 254.0]
+E   [right]: [306.0, 638.0, 211.0, 264.0, 734.0, 866.0, 632.0, nan, nan, nan, 783.0, 340.0, 430.0, 9.0, 510.0, 893.0, 554.0, 282.0, 245.0, 497.0, 670.0, 159.0, 973.0, 224.0, 122.0, 250.0, nan, nan, nan, 976.0, 403.0, 831.0, 15.0, 846.0, 230.0, 601.0, 985.0, 406.0, 933.0, 151.0, 330.0, 829.0, 361.0, 445.0, 882.0, nan, nan, nan, 362.0, 397.0, 522.0, 370.0, 198.0, 868.0, 40.0, 352.0, 25.0, 560.0, 617.0, 248.0, 683.0, 480.0, 266.0, 281.0, nan, nan, nan, 782.0, 843.0, 394.0, 767.0, 174.0, 389.0, 907.0, 789.0, 194.0, 107.0, 250.0, 134.0, 625.0, 875.0, 545.0, 11.0, nan, nan, nan, 965.0, 342.0, 235.0, 230.0, 817.0, 178.0, 190.0, 372.0, 822.0, 555.0, 370.0, 569.0, 669.0, 254.0]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-1000-n1] ________________
+
+n = 1000, m = 1000, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.9 %)
+E   [left]:  [875.0, 453.0, 332.0, 446.0, 381.0, 258.0, 458.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 258.0, 116.0, 141.0, 940.0, 368.0, 54.0, 427.0, 469.0, 474.0, 786.0, 217.0, 571.0, 898.0, 534.0, 538.0, 44.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 957.0, 962.0, 185.0, 12.0, 120.0, 393.0, 447.0, 790.0, 587.0, 16.0, 459.0, 115.0, 418.0, 978.0, 912.0, 23.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 672.0, 851.0, 643.0, 20.0, 244.0, 941.0, 705.0, 374.0, 206.0, 826.0, 591.0, 185.0, 561.0, 473.0, 665.0, 80.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 468.0, 439.0, 316.0, 269.0, 35.0, 69.0, 534.0, 437.0, 531.0, 799.0, 865.0, 563.0, 724.0, 567.0, 538.0, 587.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 630.0, 202.0, 371.0, 986.0, 464.0, 26.0, 883.0, 199.0, 356.0, 381.0, 279.0, 486.0, 215.0, 469.0, ...]
+E   [right]: [875.0, 453.0, 332.0, 446.0, 381.0, 258.0, 458.0, nan, nan, nan, 258.0, 116.0, 141.0, 940.0, 368.0, 54.0, 427.0, 469.0, 474.0, 786.0, 217.0, 571.0, 898.0, 534.0, 538.0, 44.0, nan, nan, nan, 957.0, 962.0, 185.0, 12.0, 120.0, 393.0, 447.0, 790.0, 587.0, 16.0, 459.0, 115.0, 418.0, 978.0, 912.0, 23.0, nan, nan, nan, 672.0, 851.0, 643.0, 20.0, 244.0, 941.0, 705.0, 374.0, 206.0, 826.0, 591.0, 185.0, 561.0, 473.0, 665.0, 80.0, nan, nan, nan, 468.0, 439.0, 316.0, 269.0, 35.0, 69.0, 534.0, 437.0, 531.0, 799.0, 865.0, 563.0, 724.0, 567.0, 538.0, 587.0, nan, nan, nan, 630.0, 202.0, 371.0, 986.0, 464.0, 26.0, 883.0, 199.0, 356.0, 381.0, 279.0, 486.0, 215.0, 469.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-1000-n2] ________________
+
+n = 10000, m = 1000, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.78 %)
+E   [left]:  [688.0, 63.0, 835.0, 905.0, 324.0, 903.0, 635.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 228.0, 129.0, 392.0, 466.0, 538.0, 804.0, 749.0, 906.0, 784.0, 23.0, 903.0, 742.0, 409.0, 105.0, 742.0, 258.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 269.0, 498.0, 490.0, 611.0, 394.0, 398.0, 801.0, 825.0, 111.0, 817.0, 709.0, 527.0, 713.0, 670.0, 93.0, 740.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 777.0, 730.0, 344.0, 591.0, 242.0, 308.0, 274.0, 597.0, 256.0, 164.0, 722.0, 447.0, 689.0, 23.0, 101.0, 491.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 142.0, 950.0, 238.0, 699.0, 287.0, 762.0, 398.0, 180.0, 139.0, 699.0, 995.0, 192.0, 293.0, 767.0, 687.0, 463.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 424.0, 869.0, 384.0, 31.0, 186.0, 978.0, 325.0, 712.0, 434.0, 508.0, 504.0, 123.0, 282.0, 326.0, ...]
+E   [right]: [688.0, 63.0, 835.0, 905.0, 324.0, 903.0, 635.0, nan, nan, nan, 228.0, 129.0, 392.0, 466.0, 538.0, 804.0, 749.0, 906.0, 784.0, 23.0, 903.0, 742.0, 409.0, 105.0, 742.0, 258.0, nan, nan, nan, 269.0, 498.0, 490.0, 611.0, 394.0, 398.0, 801.0, 825.0, 111.0, 817.0, 709.0, 527.0, 713.0, 670.0, 93.0, 740.0, nan, nan, nan, 777.0, 730.0, 344.0, 591.0, 242.0, 308.0, 274.0, 597.0, 256.0, 164.0, 722.0, 447.0, 689.0, 23.0, 101.0, 491.0, nan, nan, nan, 142.0, 950.0, 238.0, 699.0, 287.0, 762.0, 398.0, 180.0, 139.0, 699.0, 995.0, 192.0, 293.0, 767.0, 687.0, 463.0, nan, nan, nan, 424.0, 869.0, 384.0, 31.0, 186.0, 978.0, 325.0, 712.0, 434.0, 508.0, 504.0, 123.0, 282.0, 326.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+________________ test_series_groupby_nunique[True-True-1000-n3] ________________
+
+n = 100000, m = 1000, sort = True, dropna = True
+
+    @pytest.mark.parametrize("n", 10 ** np.arange(2, 6))
+    @pytest.mark.parametrize("m", [10, 100, 1000])
+    @pytest.mark.parametrize("sort", [False, True])
+    @pytest.mark.parametrize("dropna", [False, True])
+    def test_series_groupby_nunique(n, m, sort, dropna):
+        def check_nunique(df, keys, as_index=True):
+            original_df = df.copy()
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            left = gr["julie"].nunique(dropna=dropna)
+    
+            gr = df.groupby(keys, as_index=as_index, sort=sort)
+            right = gr["julie"].apply(Series.nunique, dropna=dropna)
+            if not as_index:
+                right = right.reset_index(drop=True)
+    
+            tm.assert_series_equal(left, right, check_names=False)
+            tm.assert_frame_equal(df, original_df)
+    
+        days = date_range("2015-08-23", periods=10)
+    
+        frame = DataFrame(
+            {
+                "jim": np.random.choice(list(ascii_lowercase), n),
+                "joe": np.random.choice(days, n),
+                "julie": np.random.randint(0, m, n),
+            }
+        )
+    
+        check_nunique(frame, ["jim"])
+        check_nunique(frame, ["jim", "joe"])
+    
+        frame.loc[1::17, "jim"] = None
+        frame.loc[3::37, "joe"] = None
+        frame.loc[7::19, "julie"] = None
+        frame.loc[8::19, "julie"] = None
+        frame.loc[9::19, "julie"] = None
+    
+>       check_nunique(frame, ["jim"])
+
+pandas/tests/groupby/test_function.py:1051: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pandas/tests/groupby/test_function.py:1030: in check_nunique
+    tm.assert_frame_equal(df, original_df)
+pandas/_libs/testing.pyx:65: in pandas._libs.testing.assert_almost_equal
+    cpdef assert_almost_equal(a, b,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   raise_assert_detail(obj, msg, lobj, robj)
+E   AssertionError: DataFrame.iloc[:, 2] (column name="julie") are different
+E   
+E   DataFrame.iloc[:, 2] (column name="julie") values are different (15.789 %)
+E   [left]:  [950.0, 748.0, 318.0, 44.0, 329.0, 301.0, 80.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 226.0, 131.0, 428.0, 785.0, 661.0, 265.0, 733.0, 815.0, 611.0, 365.0, 551.0, 978.0, 407.0, 539.0, 932.0, 935.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 967.0, 601.0, 113.0, 923.0, 248.0, 779.0, 11.0, 986.0, 649.0, 40.0, 656.0, 628.0, 155.0, 823.0, 873.0, 463.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 976.0, 242.0, 925.0, 361.0, 180.0, 973.0, 821.0, 420.0, 554.0, 673.0, 304.0, 337.0, 836.0, 975.0, 547.0, 185.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 159.0, 310.0, 57.0, 849.0, 402.0, 272.0, 936.0, 927.0, 926.0, 810.0, 148.0, 84.0, 629.0, 636.0, 866.0, 994.0, -9.223372036854776e+18, -9.223372036854776e+18, -9.223372036854776e+18, 51.0, 956.0, 483.0, 94.0, 627.0, 134.0, 993.0, 373.0, 849.0, 63.0, 248.0, 942.0, 419.0, 479.0, ...]
+E   [right]: [950.0, 748.0, 318.0, 44.0, 329.0, 301.0, 80.0, nan, nan, nan, 226.0, 131.0, 428.0, 785.0, 661.0, 265.0, 733.0, 815.0, 611.0, 365.0, 551.0, 978.0, 407.0, 539.0, 932.0, 935.0, nan, nan, nan, 967.0, 601.0, 113.0, 923.0, 248.0, 779.0, 11.0, 986.0, 649.0, 40.0, 656.0, 628.0, 155.0, 823.0, 873.0, 463.0, nan, nan, nan, 976.0, 242.0, 925.0, 361.0, 180.0, 973.0, 821.0, 420.0, 554.0, 673.0, 304.0, 337.0, 836.0, 975.0, 547.0, 185.0, nan, nan, nan, 159.0, 310.0, 57.0, 849.0, 402.0, 272.0, 936.0, 927.0, 926.0, 810.0, 148.0, 84.0, 629.0, 636.0, 866.0, 994.0, nan, nan, nan, 51.0, 956.0, 483.0, 94.0, 627.0, 134.0, 993.0, 373.0, 849.0, 63.0, 248.0, 942.0, 419.0, 479.0, ...]
+
+pandas/_libs/testing.pyx:174: AssertionError
+=========================== short test summary info ============================
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-10-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-10-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-10-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-10-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-100-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-100-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-100-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-100-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-1000-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-1000-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-1000-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-False-1000-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-10-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-10-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-10-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-10-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-100-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-100-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-100-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-100-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-1000-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-1000-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-1000-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[False-True-1000-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-10-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-10-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-10-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-10-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-100-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-100-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-100-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-100-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-1000-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-1000-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-1000-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-False-1000-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-10-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-10-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-10-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-10-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-100-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-100-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-100-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-100-n3]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-1000-n0]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-1000-n1]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-1000-n2]
+FAILED pandas/tests/groupby/test_function.py::test_series_groupby_nunique[True-True-1000-n3]
+============================= 48 failed in 36.62s ==============================

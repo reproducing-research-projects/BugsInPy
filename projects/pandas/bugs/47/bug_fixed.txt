@@ -1,0 +1,28 @@
+pytest pandas/tests/frame/indexing/test_indexing.py::TestDataFrameIndexing::test_setitem_list_missing_columns
+pytest pandas/tests/indexing/test_loc.py::TestLoc2::test_loc_setitem_missing_columns
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 6 items
+
+pandas/tests/frame/indexing/test_indexing.py ......                      [100%]
+
+============================== 6 passed in 0.25s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/frame/indexing/test_indexing.py::TestDataFrameIndexing::test_setitem_list_missing_columns
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 6 items
+
+pandas/tests/indexing/test_loc.py ......                                 [100%]
+
+============================== 6 passed in 0.09s ===============================

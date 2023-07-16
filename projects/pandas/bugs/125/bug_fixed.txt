@@ -1,0 +1,28 @@
+pytest pandas/tests/arrays/categorical/test_algos.py::test_replace
+pytest pandas/tests/frame/test_replace.py::TestDataFrameReplace::test_categorical_replace_with_dict
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 3 items
+
+pandas/tests/arrays/categorical/test_algos.py ...                        [100%]
+
+============================== 3 passed in 0.02s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/arrays/categorical/test_algos.py::test_replace
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 2 items
+
+pandas/tests/frame/test_replace.py ..                                    [100%]
+
+============================== 2 passed in 0.08s ===============================

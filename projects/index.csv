@@ -411,6 +411,8 @@ pandas,31,buggy,fail
 pandas,31,fixed,pass
 pandas,32,buggy,fail
 pandas,32,fixed,pass
+pandas,33,buggy,fail
+pandas,33,fixed,pass
 pandas,34,buggy,fail
 pandas,34,fixed,pass
 pandas,35,buggy,fail

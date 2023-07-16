@@ -1,0 +1,14 @@
+pytest pandas/tests/test_expressions.py::TestExpressions::test_frame_series_axis
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 12 items
+
+pandas/tests/test_expressions.py ...........x                            [100%]
+
+======================== 11 passed, 1 xfailed in 0.19s =========================

@@ -1,0 +1,33 @@
+pytest pandas/tests/arrays/interval/test_interval.py::TestSetitem::test_set_na
+pytest pandas/tests/series/methods/test_convert_dtypes.py::TestSeriesConvertDtypes::test_convert_dtypes
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 5 items
+
+pandas/tests/arrays/interval/test_interval.py .....                      [100%]
+
+============================== 5 passed in 0.05s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/arrays/interval/test_interval.py::TestSetitem::test_set_na
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 320 items
+
+pandas/tests/series/methods/test_convert_dtypes.py ..................... [  6%]
+........................................................................ [ 29%]
+........................................................................ [ 51%]
+........................................................................ [ 74%]
+........................................................................ [ 96%]
+...........                                                              [100%]
+
+============================= 320 passed in 1.24s ==============================

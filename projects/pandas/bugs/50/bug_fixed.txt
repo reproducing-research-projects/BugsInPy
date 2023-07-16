@@ -1,0 +1,14 @@
+pytest pandas/tests/extension/test_categorical.py::TestComparisonOps::test_not_equal_with_na
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 3 items
+
+pandas/tests/extension/test_categorical.py ...                           [100%]
+
+============================== 3 passed in 0.05s ===============================

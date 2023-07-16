@@ -1,0 +1,29 @@
+pytest pandas/tests/extension/test_integer.py::TestComparisonOps::test_compare_to_string
+pytest pandas/tests/extension/test_integer.py::TestComparisonOps::test_compare_to_int
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 8 items
+
+pandas/tests/extension/test_integer.py ........                          [100%]
+
+============================== 8 passed in 0.04s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/extension/test_integer.py::TestComparisonOps::test_compare_to_string
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 48 items
+
+pandas/tests/extension/test_integer.py ................................. [ 68%]
+...............                                                          [100%]
+
+============================== 48 passed in 0.11s ==============================

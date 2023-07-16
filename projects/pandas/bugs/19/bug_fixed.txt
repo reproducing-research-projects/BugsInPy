@@ -1,0 +1,42 @@
+pytest pandas/tests/indexing/multiindex/test_loc.py::TestMultiIndexLoc::test_loc_multiindex_list_missing_label
+pytest pandas/tests/indexing/multiindex/test_slice.py::TestMultiIndexSlicers::test_per_axis_per_level_getitem
+pytest pandas/tests/series/indexing/test_getitem.py::TestSeriesGetitemListLike::test_getitem_intlist_multiindex_numeric_level
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 3 items
+
+pandas/tests/indexing/multiindex/test_loc.py ...                         [100%]
+
+============================== 3 passed in 0.05s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/indexing/multiindex/test_loc.py::TestMultiIndexLoc::test_loc_multiindex_list_missing_label
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexing/multiindex/test_slice.py .                         [100%]
+
+============================== 1 passed in 0.15s ===============================
+RUN EVERY COMMAND
+2
+pytest pandas/tests/indexing/multiindex/test_slice.py::TestMultiIndexSlicers::test_per_axis_per_level_getitem
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 9 items
+
+pandas/tests/series/indexing/test_getitem.py .........                   [100%]
+
+============================== 9 passed in 0.06s ===============================

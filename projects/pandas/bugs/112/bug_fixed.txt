@@ -1,0 +1,40 @@
+pytest pandas/tests/frame/test_analytics.py::TestDataFrameAnalytics::test_round_interval_category_columns
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/frame/test_analytics.py .                                   [100%]
+
+=============================== warnings summary ===============================
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+pandas/util/_test_decorators.py:205
+  /home/user/BugsInPy/temp/projects/pandas/pandas/util/_test_decorators.py:205: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    _np_version < LooseVersion(ver_str), reason=reason, *args, **kwds
+
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+/opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345
+  /opt/conda/envs/cf249b496aae59f2a35047c28676df47/lib/python3.8/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    other = LooseVersion(other)
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+======================== 1 passed, 18 warnings in 0.15s ========================

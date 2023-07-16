@@ -1,0 +1,56 @@
+pytest pandas/tests/indexes/test_numeric.py::TestFloat64Index::test_invalid_dtype
+pytest pandas/tests/indexes/test_range.py::TestRangeIndex::test_constructor_same
+pytest pandas/tests/indexes/test_range.py::TestRangeIndex::test_constructor_range
+pytest pandas/tests/indexes/test_range.py::TestRangeIndex::test_constructor_corner
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 4 items
+
+pandas/tests/indexes/test_numeric.py ....                                [100%]
+
+============================== 4 passed in 0.13s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/indexes/test_numeric.py::TestFloat64Index::test_invalid_dtype
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/indexes/test_range.py .                                     [100%]
+
+============================== 1 passed in 0.13s ===============================
+RUN EVERY COMMAND
+2
+pytest pandas/tests/indexes/test_range.py::TestRangeIndex::test_constructor_same
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/indexes/test_range.py .                                     [100%]
+
+============================== 1 passed in 0.04s ===============================
+RUN EVERY COMMAND
+3
+pytest pandas/tests/indexes/test_range.py::TestRangeIndex::test_constructor_range
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/indexes/test_range.py .                                     [100%]
+
+============================== 1 passed in 0.04s ===============================
