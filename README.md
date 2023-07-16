@@ -40,7 +40,7 @@ The docker enviroments make sure all the dependencies and specific python versio
 Prerequisite is `docker` and `docker compose` please see [documentation](https://docs.docker.com/engine/install/)
 
 - Remove previous index and cleanup old containers before a new run:
-  - `rm projects/index.csv`
+  - `rm projects/bugsinpy-index.csv`
   - `docker compose down`
 - Reproduce all the bugs in a specific project:
   - `docker compose up setup youtube-dl --build`
