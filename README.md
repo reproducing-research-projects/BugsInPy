@@ -47,3 +47,34 @@ Prerequisite is `docker` and `docker compose` please see [documentation](https:/
 - Reproduce all projects bugs running buggy (0) and fixed (1) versions
   - ⚠️ Reproduce all projects may require a lot of resources, tested successfully on 4 cores 8 RAM 100GB free drive space
   - `docker compose up --build`
+
+# New script: `bugsinpy-testall`
+
+The `bugsinpy-testall` script automates the execution of the BugsInPy dataset, which contains bugs in various Python projects.
+The script reproduces the bugs, executes tests, and records the results.
+It enhances the reproducibility of Python projects by providing a standardized process for reproducing and testing bugs in different projects.
+
+Here's a summary of how the script works:
+
+1. The script takes command-line arguments to control its behavior. It provides options to display help, perform cleanup, and specify projects or ranges of bugs to reproduce and test.
+
+2. It creates a `~/projects` directory to store the output and logs.
+
+3. The script iterates over the specified projects or all projects in the `~/BugsInPy/projects` directory.
+
+4. For each project, it determines the range of bugs to reproduce and test.
+
+5. It executes the tests for each bug by performing the following steps:
+   a. Checks if the bug has already been tested and skips it if so.
+   b. Sets up the environment for testing the buggy (0) version:
+      - Uses `bugsinpy-checkout` to checkout the buggy version.
+      - Activates the proper Python environment using Miniconda (specified in the `bugsinpy_bug.info` file).
+      - Compiles the project (if required) and runs the tests using `bugsinpy-test`.
+   c. Checks if the buggy version fails the test. If it does, it proceeds to test the fixed (1) version:
+      - Uses `bugsinpy-checkout` to checkout the fixed version.
+      - Compiles the project (if required) and runs the tests.
+   d. Records the test results (`ok` if the fixed version passes the test, `fail` otherwise) in `~/projects/output.csv`.
+
+6. The script deactivates the Conda environment and repeats the process for the next bug in the project.
+
+The `bugsinpy-testall` script improves reproducibility by providing a standardized and automated approach to reproduce and test bugs in Python projects. It ensures that bugs are tested consistently across different projects, enabling easier verification of bug fixes and facilitating the replication of test results. By logging the output and test results, it helps track the status of bug reproduction and provides a central record for analysis and further investigation.
