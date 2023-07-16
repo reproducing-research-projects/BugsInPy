@@ -1,0 +1,17 @@
+pytest pandas/tests/indexes/period/test_indexing.py::TestWhere::test_where_invalid_dtypes
+RUN EVERY COMMAND
+0
+
+
+ImportError while loading conftest '/home/user/BugsInPy/temp/projects/pandas/pandas/conftest.py'.
+pandas/__init__.py:54: in <module>
+    from pandas.core.api import (
+pandas/core/api.py:15: in <module>
+    from pandas.core.arrays import Categorical
+pandas/core/arrays/__init__.py:9: in <module>
+    from .datetimes import DatetimeArray  # noqa: F401
+pandas/core/arrays/datetimes.py:45: in <module>
+    from pandas.core.arrays import datetimelike as dtl
+pandas/core/arrays/datetimelike.py:34: in <module>
+    from pandas.core.arrays import (
+E   ImportError: cannot import name 'DatetimeArray' from partially initialized module 'pandas.core.arrays' (most likely due to a circular import) (/home/user/BugsInPy/temp/projects/pandas/pandas/core/arrays/__init__.py)

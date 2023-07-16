@@ -1,0 +1,28 @@
+pytest pandas/tests/reductions/test_reductions.py::TestIndexReductions::test_timedelta_ops
+pytest pandas/tests/reductions/test_reductions.py::TestSeriesReductions::test_ops_consistency_on_empty
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/reductions/test_reductions.py .                             [100%]
+
+============================== 1 passed in 0.17s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/reductions/test_reductions.py::TestIndexReductions::test_timedelta_ops
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 4 items
+
+pandas/tests/reductions/test_reductions.py ....                          [100%]
+
+============================== 4 passed in 0.04s ===============================

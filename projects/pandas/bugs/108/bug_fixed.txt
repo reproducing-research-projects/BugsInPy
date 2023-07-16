@@ -1,0 +1,15 @@
+pytest pandas/tests/dtypes/cast/test_infer_dtype.py::test_infer_from_interval
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 40 items
+
+pandas/tests/dtypes/cast/test_infer_dtype.py ........................... [ 67%]
+.............                                                            [100%]
+
+============================== 40 passed in 0.09s ==============================

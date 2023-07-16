@@ -1,0 +1,28 @@
+pytest pandas/tests/io/test_pickle.py::test_pickle_buffer_roundtrip
+pytest pandas/tests/io/test_pickle.py::test_pickle_generalurl_read
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/io/test_pickle.py .                                         [100%]
+
+============================== 1 passed in 0.03s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/io/test_pickle.py::test_pickle_buffer_roundtrip
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 3 items
+
+pandas/tests/io/test_pickle.py ...                                       [100%]
+
+============================== 3 passed in 0.04s ===============================

@@ -1,0 +1,17 @@
+pytest pandas/tests/indexes/datetimes/test_insert.py::TestInsert::test_insert_mismatched_types_raises
+RUN EVERY COMMAND
+0
+
+
+ImportError while loading conftest '/home/user/BugsInPy/temp/projects/pandas/pandas/conftest.py'.
+pandas/__init__.py:54: in <module>
+    from pandas.core.api import (
+pandas/core/api.py:15: in <module>
+    from pandas.core.arrays import Categorical
+pandas/core/arrays/__init__.py:8: in <module>
+    from pandas.core.arrays.datetimes import DatetimeArray
+pandas/core/arrays/datetimes.py:47: in <module>
+    from pandas.core.arrays import datetimelike as dtl
+pandas/core/arrays/datetimelike.py:33: in <module>
+    from pandas.core.arrays import DatetimeArray, PeriodArray, TimedeltaArray
+E   ImportError: cannot import name 'DatetimeArray' from partially initialized module 'pandas.core.arrays' (most likely due to a circular import) (/home/user/BugsInPy/temp/projects/pandas/pandas/core/arrays/__init__.py)

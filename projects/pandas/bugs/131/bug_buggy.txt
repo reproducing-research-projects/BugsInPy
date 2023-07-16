@@ -1,0 +1,630 @@
+pytest pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical
+pytest pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 13 items
+
+pandas/tests/series/test_datetime_values.py FFFFFFFFFFFFF                [100%]
+
+=================================== FAILURES ===================================
+_______ TestSeriesDatetimeValues.test_dt_tz_localize_categorical['UTC'] ________
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbefc2d60>
+tz_aware_fixture = 'UTC'
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+____ TestSeriesDatetimeValues.test_dt_tz_localize_categorical['US/Eastern'] ____
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbef97f40>
+tz_aware_fixture = 'US/Eastern'
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+____ TestSeriesDatetimeValues.test_dt_tz_localize_categorical['Asia/Tokyo'] ____
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbebc7790>
+tz_aware_fixture = 'Asia/Tokyo'
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical['dateutil/US/Pacific'] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbef221c0>
+tz_aware_fixture = 'dateutil/US/Pacific'
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical['dateutil/Asia/Singapore'] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbef97f10>
+tz_aware_fixture = 'dateutil/Asia/Singapore'
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+______ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[tzutc()] _______
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbefc2460>
+tz_aware_fixture = tzutc()
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_____ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[tzlocal()] ______
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbeebaee0>
+tz_aware_fixture = tzlocal()
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[pytz.FixedOffset(300)] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbefc2d90>
+tz_aware_fixture = pytz.FixedOffset(300)
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_______ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[<UTC>] ________
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbef37550>
+tz_aware_fixture = <UTC>
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[pytz.FixedOffset(-300)] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbef04a30>
+tz_aware_fixture = pytz.FixedOffset(-300)
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[datetime.timezone.utc] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbef32a60>
+tz_aware_fixture = datetime.timezone.utc
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[datetime.timezone(datetime.timedelta(seconds=3600))] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbf031790>
+tz_aware_fixture = datetime.timezone(datetime.timedelta(seconds=3600))
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_localize_categorical[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f1dbeec3f70>
+tz_aware_fixture = datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')
+
+    def test_dt_tz_localize_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_localize(tz)
+        expected = datetimes.dt.tz_localize(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:356: AssertionError
+=========================== short test summary info ============================
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical['UTC']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical['US/Eastern']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical['Asia/Tokyo']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical['dateutil/US/Pacific']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical['dateutil/Asia/Singapore']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[tzutc()]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[tzlocal()]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[pytz.FixedOffset(300)]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[<UTC>]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[pytz.FixedOffset(-300)]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[datetime.timezone.utc]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[datetime.timezone(datetime.timedelta(seconds=3600))]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')]
+============================== 13 failed in 0.40s ==============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_localize_categorical
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 13 items
+
+pandas/tests/series/test_datetime_values.py FFFFFFFFFFFFF                [100%]
+
+=================================== FAILURES ===================================
+________ TestSeriesDatetimeValues.test_dt_tz_convert_categorical['UTC'] ________
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2e41f70>
+tz_aware_fixture = 'UTC'
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+____ TestSeriesDatetimeValues.test_dt_tz_convert_categorical['US/Eastern'] _____
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2dc4130>
+tz_aware_fixture = 'US/Eastern'
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+____ TestSeriesDatetimeValues.test_dt_tz_convert_categorical['Asia/Tokyo'] _____
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2d3eee0>
+tz_aware_fixture = 'Asia/Tokyo'
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical['dateutil/US/Pacific'] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2ce5d00>
+tz_aware_fixture = 'dateutil/US/Pacific'
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical['dateutil/Asia/Singapore'] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2d3e3d0>
+tz_aware_fixture = 'dateutil/Asia/Singapore'
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_______ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[tzutc()] _______
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2bbb070>
+tz_aware_fixture = tzutc()
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+______ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[tzlocal()] ______
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2bbd2b0>
+tz_aware_fixture = tzlocal()
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[pytz.FixedOffset(300)] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2bbbb20>
+tz_aware_fixture = pytz.FixedOffset(300)
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+________ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[<UTC>] ________
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2e258e0>
+tz_aware_fixture = <UTC>
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[pytz.FixedOffset(-300)] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d3004040>
+tz_aware_fixture = pytz.FixedOffset(-300)
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[datetime.timezone.utc] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d3000040>
+tz_aware_fixture = datetime.timezone.utc
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[datetime.timezone(datetime.timedelta(seconds=3600))] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2e64c10>
+tz_aware_fixture = datetime.timezone(datetime.timedelta(seconds=3600))
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+_ TestSeriesDatetimeValues.test_dt_tz_convert_categorical[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')] _
+
+self = <pandas.tests.series.test_datetime_values.TestSeriesDatetimeValues object at 0x7f97d2cc9580>
+tz_aware_fixture = datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')
+
+    def test_dt_tz_convert_categorical(self, tz_aware_fixture):
+        # GH 27952
+        tz = tz_aware_fixture
+        datetimes = pd.Series(
+            ["2019-01-01", "2019-01-01", "2019-01-02"], dtype="datetime64[ns, MET]"
+        )
+        categorical = datetimes.astype("category")
+        result = categorical.dt.tz_convert(tz)
+        expected = datetimes.dt.tz_convert(tz)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Series are different
+E       
+E       Series length are different
+E       [left]:  2, RangeIndex(start=0, stop=2, step=1)
+E       [right]: 3, RangeIndex(start=0, stop=3, step=1)
+
+pandas/tests/series/test_datetime_values.py:367: AssertionError
+=========================== short test summary info ============================
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical['UTC']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical['US/Eastern']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical['Asia/Tokyo']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical['dateutil/US/Pacific']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical['dateutil/Asia/Singapore']
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[tzutc()]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[tzlocal()]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[pytz.FixedOffset(300)]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[<UTC>]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[pytz.FixedOffset(-300)]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[datetime.timezone.utc]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[datetime.timezone(datetime.timedelta(seconds=3600))]
+FAILED pandas/tests/series/test_datetime_values.py::TestSeriesDatetimeValues::test_dt_tz_convert_categorical[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')]
+============================== 13 failed in 0.33s ==============================

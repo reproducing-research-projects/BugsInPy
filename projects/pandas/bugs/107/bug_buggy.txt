@@ -1,0 +1,643 @@
+pytest pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 28 items
+
+pandas/tests/frame/test_combine_concat.py F.FFFFFFFFFFFFFFFFFFFFFFFFFF   [100%]
+
+=================================== FAILURES ===================================
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[None-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6beb9370>
+tz_naive_fixture = None, timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, pytz.FixedOffset(60)]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['UTC'-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdda820>
+tz_naive_fixture = 'UTC', timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['UTC'-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdc9b20>
+tz_naive_fixture = 'UTC', timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['US/Eastern'-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bd47b50>
+tz_naive_fixture = 'US/Eastern', timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, US/Eastern]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['US/Eastern'-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bd42c10>
+tz_naive_fixture = 'US/Eastern', timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, US/Eastern]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['Asia/Tokyo'-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6beb9190>
+tz_naive_fixture = 'Asia/Tokyo', timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, Asia/Tokyo]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['Asia/Tokyo'-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdc9c10>
+tz_naive_fixture = 'Asia/Tokyo', timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, Asia/Tokyo]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['dateutil/US/Pacific'-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bd61fd0>
+tz_naive_fixture = 'dateutil/US/Pacific', timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzfile('/usr/share/zoneinfo/US/Pacific')]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['dateutil/US/Pacific'-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bda4dc0>
+tz_naive_fixture = 'dateutil/US/Pacific', timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzfile('/usr/share/zoneinfo/US/Pacific')]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['dateutil/Asia/Singapore'-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6be1f340>
+tz_naive_fixture = 'dateutil/Asia/Singapore'
+timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzfile('/usr/share/zoneinfo/Asia/Singapore')]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive['dateutil/Asia/Singapore'-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc3aa90>
+tz_naive_fixture = 'dateutil/Asia/Singapore', timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzfile('/usr/share/zoneinfo/Asia/Singapore')]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[tzutc()-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc3ad30>
+tz_naive_fixture = tzutc(), timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzutc()]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[tzutc()-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc3ad90>
+tz_naive_fixture = tzutc(), timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzutc()]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[tzlocal()-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdda910>
+tz_naive_fixture = tzlocal(), timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzlocal()]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[tzlocal()-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdda7c0>
+tz_naive_fixture = tzlocal(), timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, tzlocal()]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[pytz.FixedOffset(300)-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bd42b20>
+tz_naive_fixture = pytz.FixedOffset(300), timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, pytz.FixedOffset(300)]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[pytz.FixedOffset(300)-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc60580>
+tz_naive_fixture = pytz.FixedOffset(300), timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, pytz.FixedOffset(300)]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[<UTC>-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bd47d00>
+tz_naive_fixture = <UTC>, timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[<UTC>-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6ba06760>
+tz_naive_fixture = <UTC>, timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[pytz.FixedOffset(-300)-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc7e100>
+tz_naive_fixture = pytz.FixedOffset(-300)
+timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, pytz.FixedOffset(-300)]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[pytz.FixedOffset(-300)-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc7e550>
+tz_naive_fixture = pytz.FixedOffset(-300), timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, pytz.FixedOffset(-300)]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[datetime.timezone.utc-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bc3a2b0>
+tz_naive_fixture = datetime.timezone.utc, timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[datetime.timezone.utc-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6be1faf0>
+tz_naive_fixture = datetime.timezone.utc, timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(seconds=3600))-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdc9430>
+tz_naive_fixture = datetime.timezone(datetime.timedelta(seconds=3600))
+timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC+01:00]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(seconds=3600))-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bda4bb0>
+tz_naive_fixture = datetime.timezone(datetime.timedelta(seconds=3600))
+timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, UTC+01:00]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')-2019-07-19 07:04:57+0100] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bcbf520>
+tz_naive_fixture = datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')
+timestamp = '2019-07-19 07:04:57+0100'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, foo]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+_ TestDataFrameConcatCommon.test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')-2019-07-19 07:04:57] _
+
+self = <pandas.tests.frame.test_combine_concat.TestDataFrameConcatCommon object at 0x7f4e6bdd8610>
+tz_naive_fixture = datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')
+timestamp = '2019-07-19 07:04:57'
+
+    @pytest.mark.parametrize(
+        "timestamp", ["2019-07-19 07:04:57+0100", "2019-07-19 07:04:57"]
+    )
+    def test_append_timestamps_aware_or_naive(self, tz_naive_fixture, timestamp):
+        # GH 30238
+        tz = tz_naive_fixture
+        df = pd.DataFrame([pd.Timestamp(timestamp, tz=tz)])
+        result = df.append(df.iloc[0]).iloc[-1]
+        expected = pd.Series(pd.Timestamp(timestamp, tz=tz), name=0)
+>       tm.assert_series_equal(result, expected)
+E       AssertionError: Attributes of Series are different
+E       
+E       Attribute "dtype" are different
+E       [left]:  object
+E       [right]: datetime64[ns, foo]
+
+pandas/tests/frame/test_combine_concat.py:300: AssertionError
+=========================== short test summary info ============================
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[None-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['UTC'-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['UTC'-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['US/Eastern'-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['US/Eastern'-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['Asia/Tokyo'-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['Asia/Tokyo'-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['dateutil/US/Pacific'-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['dateutil/US/Pacific'-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['dateutil/Asia/Singapore'-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive['dateutil/Asia/Singapore'-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[tzutc()-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[tzutc()-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[tzlocal()-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[tzlocal()-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[pytz.FixedOffset(300)-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[pytz.FixedOffset(300)-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[<UTC>-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[<UTC>-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[pytz.FixedOffset(-300)-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[pytz.FixedOffset(-300)-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[datetime.timezone.utc-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[datetime.timezone.utc-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(seconds=3600))-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(seconds=3600))-2019-07-19 07:04:57]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')-2019-07-19 07:04:57+0100]
+FAILED pandas/tests/frame/test_combine_concat.py::TestDataFrameConcatCommon::test_append_timestamps_aware_or_naive[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')-2019-07-19 07:04:57]
+========================= 27 failed, 1 passed in 0.88s =========================

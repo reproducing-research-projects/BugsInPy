@@ -96,7 +96,7 @@ for project_name in $projects; do
           version="fixed"
         fi
 
-        bugsinpy-checkout -p $project -v $version_id -i $bug -w $temp_projects &>> /dev/null
+        bugsinpy-checkout -p $project -v $version_id -i $bug -w $temp_projects &>> $temp_projects/$project-checkout-logs.txt
         cd $work_dir
 
         # Cleanup requirements.txt from unwanted spaces

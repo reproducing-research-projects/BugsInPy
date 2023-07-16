@@ -1,0 +1,14 @@
+pytest pandas/tests/reshape/merge/test_merge_asof.py::TestAsOfMerge::test_int_type_tolerance
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 9 items
+
+pandas/tests/reshape/merge/test_merge_asof.py .........                  [100%]
+
+============================== 9 passed in 0.20s ===============================

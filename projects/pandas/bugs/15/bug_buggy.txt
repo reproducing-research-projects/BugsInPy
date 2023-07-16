@@ -14,7 +14,7 @@ pandas/tests/indexes/datetimes/test_datetime.py F                        [100%]
 =================================== FAILURES ===================================
 _________________ TestDatetimeIndex.test_pickle_after_set_freq _________________
 
-self = <pandas.tests.indexes.datetimes.test_datetime.TestDatetimeIndex object at 0x7f2cf8102c70>
+self = <pandas.tests.indexes.datetimes.test_datetime.TestDatetimeIndex object at 0x7f5b94b6ccd0>
 
     def test_pickle_after_set_freq(self):
         dti = date_range("20130101", periods=3, tz="US/Eastern", name="foo")
@@ -58,4 +58,4 @@ E                       AssertionError
 pandas/core/indexes/datetimes.py:55: AssertionError
 =========================== short test summary info ============================
 FAILED pandas/tests/indexes/datetimes/test_datetime.py::TestDatetimeIndex::test_pickle_after_set_freq
-============================== 1 failed in 0.14s ===============================
+============================== 1 failed in 0.17s ===============================

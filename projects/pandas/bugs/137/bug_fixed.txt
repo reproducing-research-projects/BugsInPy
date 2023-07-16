@@ -1,0 +1,28 @@
+pytest pandas/tests/extension/test_categorical.py::TestCasting::test_cast_category_to_extension_dtype
+pytest pandas/tests/reshape/merge/test_merge.py::test_merge_on_cat_and_ext_array
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 5 items
+
+pandas/tests/extension/test_categorical.py .....                         [100%]
+
+============================== 5 passed in 0.05s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/extension/test_categorical.py::TestCasting::test_cast_category_to_extension_dtype
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/reshape/merge/test_merge.py .                               [100%]
+
+============================== 1 passed in 0.13s ===============================

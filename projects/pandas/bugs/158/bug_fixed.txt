@@ -1,0 +1,28 @@
+pytest pandas/tests/series/test_alter_axes.py::TestSeriesAlterAxes::test_rename_with_custom_indexer
+pytest pandas/tests/series/test_alter_axes.py::TestSeriesAlterAxes::test_rename_with_custom_indexer_inplace
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/series/test_alter_axes.py .                                 [100%]
+
+============================== 1 passed in 0.04s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/series/test_alter_axes.py::TestSeriesAlterAxes::test_rename_with_custom_indexer
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.16.0
+collected 1 item
+
+pandas/tests/series/test_alter_axes.py .                                 [100%]
+
+============================== 1 passed in 0.02s ===============================

@@ -1,0 +1,28 @@
+pytest pandas/tests/indexing/test_iloc.py::TestiLoc2::test_iloc_setitem_categorical_updates_inplace
+pytest pandas/tests/internals/test_internals.py::TestShouldStore::test_should_store_categorical
+RUN EVERY COMMAND
+0
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/indexing/test_iloc.py .                                     [100%]
+
+============================== 1 passed in 0.05s ===============================
+RUN EVERY COMMAND
+1
+pytest pandas/tests/indexing/test_iloc.py::TestiLoc2::test_iloc_setitem_categorical_updates_inplace
+
+============================= test session starts ==============================
+platform linux -- Python 3.8.3, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: /home/user/BugsInPy/temp/projects/pandas, inifile: setup.cfg
+plugins: hypothesis-5.15.1
+collected 1 item
+
+pandas/tests/internals/test_internals.py .                               [100%]
+
+============================== 1 passed in 0.18s ===============================
