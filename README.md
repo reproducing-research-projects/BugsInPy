@@ -71,14 +71,14 @@ Here's a summary of how the script works:
       - Activates the proper Python environment using Miniconda (specified in the `bugsinpy_bug.info` file).
       - Compiles the project (if required) and runs the tests using `bugsinpy-test`.
       - Check if the buggy version fails as expected for the test specific to the bug and save the output in the `BugsInPy/projects/<repo>/bugs/<bugid>/bug_buggy.txt`.
-      - Updates the `BugsInPy/projects/index.csv` with the results `<repo>,<bugid>,buggy,fail`
+      - Updates the `BugsInPy/projects/bugsinpy-index.csv` with the results `<repo>,<bugid>,buggy,fail`
    c. The it proceeds to test the fixed (1) version:
       - Uses `bugsinpy-checkout` to checkout the fixed version.
       - Compiles the project (if required) and runs the tests.
       - Activates the proper Python environment using Miniconda (specified in the `bugsinpy_bug.info` file).
       - Compiles the project (if required) and runs the tests using `bugsinpy-test`.
       - Check if the fixed version pass as expected for the test specific to the bug and save the output in the `BugsInPy/projects/<repo>/bugs/<bugid>/bug_fixed.txt`.
-      - Updates the `BugsInPy/projects/index.csv` with the results `<repo>,<bugid>,fixed,pass`
+      - Updates the `BugsInPy/projects/bugsinpy-index.csv` with the results `<repo>,<bugid>,fixed,pass`
 
 6. The script deactivates the Conda environment and repeats the process for the next bug in the project.
 
