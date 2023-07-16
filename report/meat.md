@@ -1,175 +1,114 @@
+<!--
+
+This is a comment in Markdown (not rendered).
+
+Keep each sentence in this file on a new line.
+That line-break doesn't get rendered, and it makes line-based diff/merge work better.
+
+Also, a reminder on how to add citations:
+
+1. Create a Zotero database.
+2. Tag all the things you want to cite with a specific tag, e.g., "bugsinpy-reproduction"
+3. Click that tag and Ctrl+A to select all references with that tag.
+4. Right click > Export Items with format BibLaTeX into `bugsinpy/report/your_name.bib`
+5. insert `\addbibresource{your_name.bib}` to `main.tex`
+
+-->
+
 # Introduction
 
-BugsInPy is a curated dataset of real-world bugs in large Python projects. It provides a database of known bugs in Python code, along with the test cases that reveal the bugs. BugsInPy is intended to be used by researchers to develop and evaluate software defect detection tools.
-
-BugsInPy exists to provide a high-quality benchmark for testing and debugging tools targeting Python programs. By providing a large dataset of known bugs, BugsInPy helps researchers to test their tools on a variety of different bugs. This can help to ensure that the tools are effective in detecting real-world bugs.
+BugsInPy~\cite{widyasari_bugsinpy_2020} is a curated dataset of real-world bugs in large Python projects.
+BugsInPy is intended to be used by researchers to develop and evaluate software testing and debugging tools for Python on a diverse set of real-world bugs from multiple projects.
+This can help to ensure that the tools are effective in detecting real-world bugs.
 
 The BugsInPy dataset contains a variety of information about each bug, including:
 
-- The bug's location in the code
-- The bug's type
-- The bug's expected behavior
-- The test cases that reveal the bug
-- The tools that have been used to detect the bug
+- A buggy commit
+- A fixed commit
+- Test cases that indicate the bugs presence
+- A `requirements.txt` file
+- A script saying how to setup the environment
 
-BugsInPy also includes a database abstraction layer and a test execution framework. The database abstraction layer provides a way to access the dataset in a structured way. The test execution framework allows researchers to run the test cases that reveal the bugs.
+<!-- Double check source here -->
 
-BugsInPy is a valuable resource for researchers who are developing and evaluating software defect detection tools. The dataset provides a large and diverse set of bugs that can be used to test the effectiveness of these tools. BugsInPy also includes a variety of tools and resources that can help researchers to use the dataset effectively.
+BugsInPy includes a database abstraction layer and a test execution framework.
+The database abstraction layer provides a way to access the dataset in a structured way.
+The test execution framework allows researchers to run the test cases that reveal the bugs.
 
-The provided text follows a logical and comprehensive reading, covering various aspects related to the BugsInPy dataset, the methodology used, Docker-based reproducibility, the bugsinpy-testall script, Conda package management, and the results obtained from the bug reproduction process. The text explains the purpose of the dataset, its components, and how it can be used for testing and debugging tools targeting Python programs.
+BugsInPy is a valuable resource for researchers who are developing and evaluating software defect detection tools.
+The dataset provides a large and diverse set of bugs that can be used to test the effectiveness of these tools.
+BugsInPy also includes a variety of tools and resources that can help researchers to use the dataset effectively.
 
-The Dockerfile and its breakdown are described in a clear and step-by-step manner, highlighting how it improves reproducibility by providing a controlled execution environment for Python projects. The bugsinpy-testall script is provided, which outlines the automated process of reproducing and testing the BUgsInPy dataset. The inclusion of success and failure percentages in the results section helps to analyze the reproducibility of bugs across different projects and Python versions.
+We sought to use the BugsInPy framework to verify that the test cases could be set up, that the buggy commit fails, and that the fixed commit passes.
+This is a _reproduction_~\cite{acm_artifact_2020} of the original work, since we are using the original framework.
 
-The text also discusses the significance of Python version information in the bug dataset and how it aids in reproducing and investigating bugs accurately. It emphasizes the importance of using the same Python version to ensure reproducibility and facilitate the identification and resolution of issues. The advantages of reproducibility and the impact it has on the testing and debugging process are highlighted.
+Our contributions are:
 
-The discussion section covers both the ease and challenges of bug reproduction. It acknowledges that reproducing bugs can be complex and highlights factors such as code complexity, interdependencies, and intermittent nature of bugs that can make the process challenging. It also mentions the potential difficulties posed by projects with a large number of bugs or a high failure rate.
+- A new script which can invoke the BugsInPy framework _en masse_.
+- Modifications to the BugsInPy framework to install and use the correct version of Python.
+- The results of which bugs were reproducible (software environment installs, buggy version fails exactly that one test, fixed version passes all tests).
+
+This article proceeds with the methodology section, which explains what tools we used to run these codes reproducible.
+Then we summarize the results of our executions and analyze the failures.
+Finally, we engage in an open-ended discussion of our experiment with advice to authors of reproducible artifacts and those seeking to reproduce artifacts.
+
+<!--
+In the above section, don't mention Docker yet.
+That is an "implementation detail".
+Instead, use the term container or container image.
+-->
 
 # Methodology
 
-By using Docker, we can ensure that your Python project runs consistently across different environments, making it more reproducible. It eliminates potential conflicts with system dependencies and provides a self-contained execution environment.
+We use a provide a container build script to provide a consitent starting point in which our scripts will install the correct software environment.
+Running in a container also sandboxes modifications that the BugsInPy script wants to make (e.g., modifying `~/.bashrc`).
+While this image is available in this registry<!-- TODO: fill in this registry -->, we suggest users build the image themselves rather than depending on this registry to remain available.
 
-\footnotesize
-```Dockerfile
-FROM continuumio/miniconda3:23.3.1-0
-MAINTAINER faustinoaq <faustino.aguilar@up.ac.pa>
+For each bug, The BugsInPy script ignores the specified version of Python, deferring to the system default Python instead.
+Presumably, the BugsInPy authors manually changed their systme's version of Python according to the specification of each bug, but this is not an automated process, and that makes it difficult for future users.
+We modified this script to install the correct version of Python using Conda.
+Conda is a cross-platform package manager.
+Packages installed by Conda neither use nor modify the system version of those packages, so Conda can support different environments each with their own possibly conflicting requirements.
+Conda package repositories store packages containing pre-compiled binaries and metadata for each platform, so installing is rather quick.
 
-RUN useradd -ms /bin/bash user
-RUN apt-get update
-RUN apt-get -y install git nano build-essential
+The original BugsInPy scripts install all Python packages using Pip.
+However, some packages may require external setup that Pip is unable to do; for example, Matplotlib requires certain system libraries <!-- TODO --> which Pip cannot install, so any bug whose environment depends on Matplotlibn will not be installable on a blank machine.
+Presumably the original authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Debian and simply install those with Conda instead.
 
-WORKDIR /home/user
 
-COPY . /home/user/BugsInPy
+Building the environment from source can be quite costly, so we reuse environments when the Python package requirements and Python versions are exactly the same.
 
-RUN chown -R user:user /home/user/BugsInPy
-
-USER user
-
-RUN echo "export PATH=$PATH:/home/user/BugsInPy/framework/bin" \
-    >> /home/user/.bashrc
-
-CMD ["/bin/bash"]
-```
-\normalsize
-
-This Dockerfile sets up a Docker image for running a Python project using Miniconda and improves reproducibility by providing a controlled environment for project execution. Let's break it down step by step:
-
-1. `FROM continuumio/miniconda3:23.3.1-0`: This line specifies the base image for the Dockerfile, which is `continuumio/miniconda3` with the version tag `23.3.1-0`. Miniconda is a minimal version of Anaconda, which provides a Python environment and package management capabilities.
-
-2. `MAINTAINER faustinoaq <faustino.aguilar@up.ac.pa>`: This line specifies the author/maintainer of the Dockerfile.
-
-3. `RUN useradd -ms /bin/bash user`: This command creates a non-root user named "user" with `/bin/bash` as the default shell.
-
-4. `RUN apt-get update`: This command updates the package lists on the container to ensure the latest versions are available for installation.
-
-5. `RUN apt-get -y install git nano build-essential`: This line installs additional packages (`git`, `nano`, and `build-essential`) using `apt-get`. These packages are commonly used for version control, text editing, and building software.
-
-6. `WORKDIR /home/user`: This line sets the working directory inside the container to `/home/user`.
-
-7. `COPY . /home/user/BugsInPy`: This command copies the entire current directory (where the Dockerfile is located) into the container at `/home/user/BugsInPy`.
-
-8. `RUN chown -R user:user /home/user/BugsInPy`: This line changes the ownership of the `/home/user/BugsInPy` directory to the non-root user "user" created earlier. This ensures that the user has the necessary permissions to access and modify the files within the directory.
-
-9. `USER user`: This instruction switches the container to run as the non-root user "user". This is a security best practice to limit potential vulnerabilities.
-
-10. `RUN echo "export PATH=$PATH:/home/user/BugsInPy/framework/bin" >> /home/user/.bashrc`: This line appends the path `/home/user/BugsInPy/framework/bin` to the `PATH` environment variable in the user's `.bashrc` file. This allows the user to execute scripts or binaries located in that directory directly from the command line.
-
-11. `CMD ["/bin/bash"]`: This is the default command that will be executed when the container starts. It launches the Bash shell, providing an interactive terminal for the user.
-
-By using this Dockerfile, you can build a Docker image that encapsulates your Python project and its dependencies. This approach improves reproducibility by ensuring that the project runs in a controlled and isolated environment. The specified Miniconda version ensures consistency, and the installed packages and their versions are locked in the image. The user configuration helps avoid running the application as the root user, enhancing security and preventing accidental modifications to the host system.
-
-To use this Dockerfile for your Python project, follow these steps:
-
-1. Place the Dockerfile in the root directory of your project.
-
-2. Build the Docker image by running the following command in the same directory as the Dockerfile:
-   ```
-   docker build -t myproject .
-   ```
-   This command builds the Docker image using the Dockerfile and tags it with the name `myproject`. Make sure you have Docker installed on your system.
-
-3. Once the image is built, you can run a container based on it using the following command:
-   ```
-   docker run -it myproject
-   ```
-   This command starts an interactive container based on the `myproject` image. You will be dropped into a Bash shell inside the container, where you can execute commands and run your Python project.
+-----
 
 The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
 
 \footnotesize
 ```sh
-echo "test 'ok' means reproduced successfully, buggy version failed and fixed version passed"
-echo "test 'fail' means unable to reproduce, error happened or buggy version didn't fail test or fixed version didn't pass"
-echo "See full tests logs in ~/logs.txt"
-echo "See results in ~/projects/output.csv"
-# Iterate over the projects
-for project in $projects; do
-  # Get the number of bugs in the project
-  # More project handling...
-
-  # For each bug, execute the test
-  for bug in $(seq $start $finish); do
-    # Check if bug is already tested
-    grep "$project,$bug," ~/projects/output.csv
-    # More checks...
-
-    # Test buggy (0) version
-    # Checkout the buggy version
-    # Set up the Python environment using conda
-    # Compile and test the code
-    # Handle failures and update output.csv
-
-    # Test fixed (1) version
-    # Checkout the fixed version
-    # Compile and test the code
-    # Handle failures and update output.csv
-
-    # Deactivate the Python environment
+for each project in BugsInPy dataset:
+  For each bug for that project:
+    For version in {buggy, fixed}:
+      Checkout the buggy version
+      Env ID := hash(requirements.txt + python version)
+      If no env with Env ID already exists:
+        Use Conda to set up the env
+      Activate env with Env ID
+      Report environment errors
+      Run tests
+      Report test results
+      Deactivate env
   done
 done
 ```
 \normalsize
 
-The `bugsinpy-testall` script automates the execution of the BugsInPy dataset, which contains bugs in various Python projects. The script reproduces the bugs, executes tests, and records the results. It enhances the reproducibility of Python projects by providing a standardized process for reproducing and testing bugs in different projects.
-
-Here's a summary of how the script works:
-
-1. The script takes command-line arguments to control its behavior. It provides options to display help, perform cleanup, and specify projects or ranges of bugs to reproduce and test.
-
-2. It creates a `~/projects` directory to store the output and logs.
-
-3. The script iterates over the specified projects or all projects in the `~/BugsInPy/projects` directory.
-
-4. For each project, it determines the range of bugs to reproduce and test.
-
-5. It executes the tests for each bug by performing the following steps:
-   a. Checks if the bug has already been tested and skips it if so.
-   b. Sets up the environment for testing the buggy (0) version:
-      - Uses `bugsinpy-checkout` to checkout the buggy version.
-      - Activates the proper Python environment using Miniconda (specified in the `bugsinpy_bug.info` file).
-      - Compiles the project (if required) and runs the tests using `bugsinpy-test`.
-   c. Checks if the buggy version fails the test. If it does, it proceeds to test the fixed (1) version:
-      - Uses `bugsinpy-checkout` to checkout the fixed version.
-      - Compiles the project (if required) and runs the tests.
-   d. Records the test results (`ok` if the fixed version passes the test, `fail` otherwise) in `~/projects/output.csv`.
-
-6. The script deactivates the Conda environment and repeats the process for the next bug in the project.
-
-The `bugsinpy-testall` script improves reproducibility by providing a standardized and automated approach to reproduce and test bugs in Python projects. It ensures that bugs are tested consistently across different projects, enabling easier verification of bug fixes and facilitating the replication of test results. By logging the output and test results, it helps track the status of bug reproduction and provides a central record for analysis and further investigation.
-
-Now, let's answer your additional questions:
-
-## `bugsinpy-testall` script
-
-The `bugsinpy-testall` script automates the process of reproducing and testing bugs in Python projects. It iterates over specified projects or all projects in the `~/BugsInPy/projects` directory. For each project, it determines the range of bugs to reproduce and test. The script checks if a bug has already been tested and skips it if so. It sets up the environment for testing the buggy (0) version, runs the tests, and checks if the bug fails. If it fails, it proceeds to test the fixed (1) version and checks if it passes the test. The results are recorded in `~/projects/output.csv`.
-
-## Conda package manager
-
-Conda is a cross-platform package management system and environment management system. It allows users to create and manage isolated environments with specific versions of software packages. Conda packaging works by creating packages containing pre-compiled binaries and metadata. These packages can include Python libraries, dependencies, and other software tools. Conda allows for the creation of custom environments with specific package versions, enabling reproducibility by ensuring consistent software dependencies across different systems.
 
 ## Pip and PyPI work
 
-Pip is the default package installer for Python, which allows users to install and manage Python packages from the Python Package Index (PyPI) and other package repositories. PyPI is the official software repository for Python packages. When using Pip, it searches for packages on PyPI based on package names and versions specified in the requirements file or command-line arguments. Pip then downloads the package and its dependencies from PyPI and installs them into the Python environment. PyPI serves as a central repository for sharing and distributing Python packages, making it easier for developers to package and distribute their software for others to use.
+Pip is the default package builder and installer for Python.
+Pip can invoke the compiler to build dependencies from source <!-- TODO cite -->.
+Projects do this for their own C source, however they don't do this for shared libraries, because the build system can be quite involved, and system administrators would rather have one version of that shared library. <!-- TODO elaborate -->
+Additionally Pip repositories can store a binary format per platform, called wheels, which do not require compilation.
+
 
 # Results
 
@@ -181,7 +120,8 @@ Pip is the default package installer for Python, which allows users to install a
 - The percentage of success and failure provides insights into the overall quality and reliability of the codebase and the effectiveness of the bug fixing process.
 - It helps identify projects with higher rates of successful bug reproduction, indicating better code quality and easier bug fixing processes.
 
-Analyzing the success and failure percentages can inform the project maintainers about the areas that require further attention and improvement. It helps prioritize bug fixes, identify patterns in the types of bugs encountered, and allocate resources for improving the overall reliability and stability of the software.
+Analyzing the success and failure percentages can inform the project maintainers about the areas that require further attention and improvement.
+It helps prioritize bug fixes, identify patterns in the types of bugs encountered, and allocate resources for improving the overall reliability and stability of the software.
 
 The following is a table with the percentage of bug reproducibility for each project:
 
@@ -248,7 +188,8 @@ By using the same Python version specified in the bug, developers can accurately
 
 Reproducibility plays a significant role in software development, particularly in bug fixing and testing. Having access to the exact Python version used during the bug occurrence enhances the accuracy and reliability of the testing process. Developers can execute the same code with the same environment, ensuring that any fixes or improvements applied can be tested and validated consistently.
 
-In summary, the inclusion of Python version information in the bug dataset not only provides insights into the distribution of bugs across different versions but also enables developers to reproduce and investigate the bugs more effectively. This contributes to improved bug detection, diagnosis, and ultimately, the development of more reliable and stable software systems.
+In summary, the inclusion of Python version information in the bug dataset not only provides insights into the distribution of bugs across different versions but also enables developers to reproduce and investigate the bugs more effectively.
+This contributes to improved bug detection, diagnosis, and ultimately, the development of more reliable and stable software systems.
 
 # Discussion
 
