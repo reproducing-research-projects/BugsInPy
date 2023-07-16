@@ -47,7 +47,7 @@ esac
 mkdir -p $temp_projects
 
 if ! echo $projects | grep -q ":"; then
-  projects=$(ls $bugsinpy_location/projects)
+  projects=$(ls $bugsinpy_location/projects | grep -v index.csv)
 fi
 
 if [ ! -f $index_file ]; then
