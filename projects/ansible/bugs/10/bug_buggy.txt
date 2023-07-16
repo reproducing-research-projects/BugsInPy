@@ -7,19 +7,36 @@ RUN EVERY COMMAND
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
-plugins: mock-1.2
+collected 1 item
 
-==================================== ERRORS ====================================
-___________ ERROR collecting test/units/modules/system/test_pamd.py ____________
-ImportError while importing test module '/home/user/BugsInPy/temp/projects/ansible/test/units/modules/system/test_pamd.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-test/units/modules/system/test_pamd.py:4: in <module>
-    from ansible.modules.system.pamd import PamdRule
-E   ModuleNotFoundError: No module named 'ansible.modules.system.pamd'
-=========================== 1 error in 0.14 seconds ============================
-ERROR: not found: /home/user/BugsInPy/temp/projects/ansible/test/units/modules/system/test_pamd.py::PamdServiceTestCase::test_remove_first_rule
-(no name '/home/user/BugsInPy/temp/projects/ansible/test/units/modules/system/test_pamd.py::PamdServiceTestCase::test_remove_first_rule' in any of [<Module 'test_pamd.py'>])
+test/units/modules/system/test_pamd.py F                                 [100%]
+
+=================================== FAILURES ===================================
+__________________ PamdServiceTestCase.test_remove_first_rule __________________
+
+self = <units.modules.system.test_pamd.PamdServiceTestCase testMethod=test_remove_first_rule>
+
+    def test_remove_first_rule(self):
+        no_header_service = PamdService(self.no_header_system_auth_string)
+>       self.assertTrue(no_header_service.remove('auth', 'required', 'pam_env.so'))
+
+test/units/modules/system/test_pamd.py:365: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ansible.modules.system.pamd.PamdService object at 0x7f3ac2b83358>
+rule_type = 'auth', rule_control = 'required', rule_path = 'pam_env.so'
+
+    def remove(self, rule_type, rule_control, rule_path):
+        current_line = self._head
+        changed = 0
+    
+        while current_line is not None:
+            if current_line.matches(rule_type, rule_control, rule_path):
+>               if current_line.prev is not None:
+E               AttributeError: 'PamdRule' object has no attribute 'prev'
+
+/opt/conda/envs/e91cde33ffcafb3e40ee0f44cab38afc/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/modules/system/pamd.py:479: AttributeError
+=========================== 1 failed in 0.11 seconds ===========================
 RUN EVERY COMMAND
 1
 pytest test/units/modules/system/test_pamd.py::PamdServiceTestCase::test_remove_first_rule
@@ -27,16 +44,34 @@ pytest test/units/modules/system/test_pamd.py::PamdServiceTestCase::test_remove_
 ============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-3.10.1, py-1.11.0, pluggy-0.13.1
 rootdir: /home/user/BugsInPy/temp/projects/ansible, inifile:
-plugins: mock-1.2
+collected 1 item
 
-==================================== ERRORS ====================================
-___________ ERROR collecting test/units/modules/system/test_pamd.py ____________
-ImportError while importing test module '/home/user/BugsInPy/temp/projects/ansible/test/units/modules/system/test_pamd.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-test/units/modules/system/test_pamd.py:4: in <module>
-    from ansible.modules.system.pamd import PamdRule
-E   ModuleNotFoundError: No module named 'ansible.modules.system.pamd'
-=========================== 1 error in 0.09 seconds ============================
-ERROR: not found: /home/user/BugsInPy/temp/projects/ansible/test/units/modules/system/test_pamd.py::PamdServiceTestCase::test_remove_last_rule
-(no name '/home/user/BugsInPy/temp/projects/ansible/test/units/modules/system/test_pamd.py::PamdServiceTestCase::test_remove_last_rule' in any of [<Module 'test_pamd.py'>])
+test/units/modules/system/test_pamd.py F                                 [100%]
+
+=================================== FAILURES ===================================
+__________________ PamdServiceTestCase.test_remove_last_rule ___________________
+
+self = <units.modules.system.test_pamd.PamdServiceTestCase testMethod=test_remove_last_rule>
+
+    def test_remove_last_rule(self):
+>       self.assertTrue(self.pamd.remove('session', 'required', 'pam_unix.so'))
+
+test/units/modules/system/test_pamd.py:370: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ansible.modules.system.pamd.PamdService object at 0x7f5a76a36208>
+rule_type = 'session', rule_control = 'required', rule_path = 'pam_unix.so'
+
+    def remove(self, rule_type, rule_control, rule_path):
+        current_line = self._head
+        changed = 0
+    
+        while current_line is not None:
+            if current_line.matches(rule_type, rule_control, rule_path):
+                if current_line.prev is not None:
+                    current_line.prev.next = current_line.next
+>                   current_line.next.prev = current_line.prev
+E                   AttributeError: 'NoneType' object has no attribute 'prev'
+
+/opt/conda/envs/e91cde33ffcafb3e40ee0f44cab38afc/lib/python3.6/site-packages/ansible-2.10.0.dev0-py3.6.egg/ansible/modules/system/pamd.py:481: AttributeError
+=========================== 1 failed in 0.05 seconds ===========================
