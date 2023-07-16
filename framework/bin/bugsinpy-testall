@@ -1,19 +1,19 @@
 #!/bin/bash
 
-###bugsinpy-testall reproduces all the bugs
-# similar to <repo>/verify.sh included in some projects
-# this approach improves current setup by having the proper enviroment
-# and replacing virtualenv with conda within the BugsInPy framework
-# the expected outputs for each test are added to every bug
-# "<repo>/bugs/<bugid>/bug_buggy.txt" shows buggy version output
-# "<repo>/bugs/<bugid>/bug_fixed.txt" shows fixed version output
-# an index result is provided in BugsInPy/projects/index.csv
-# the index contains reproducibility result status
-# "fail" a failure expected in buggy version
-# "error" a hard error not reproducible
-# "pass" a success expected in fixed version
-# "unknown" a unknown unexpected output probably an "error"
-# a temp full log file is provided in every <repo>/logs.txt
+### bugsinpy-testall reproduces all the bugs
+# Similar to <repo>/verify.sh included in some projects.
+# This approach improves the current setup by having the proper environment
+# and replacing virtualenv with conda within the BugsInPy framework.
+# The expected outputs for each test are added to every bug.
+# "<repo>/bugs/<bugid>/bug_buggy.txt" shows the buggy version output.
+# "<repo>/bugs/<bugid>/bug_fixed.txt" shows the fixed version output.
+# An index result is provided in BugsInPy/projects/index.csv.
+# The index contains reproducibility result status:
+# - "fail": a failure expected in the buggy version.
+# - "error": a hard error not reproducible.
+# - "pass": a success expected in the fixed version.
+# - "unknown": an unknown unexpected output, probably an "error".
+# A temporary full log file is provided in every <repo>/logs.txt.
 
 usage="
        -h
