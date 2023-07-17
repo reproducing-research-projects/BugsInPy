@@ -230,13 +230,13 @@ Total (Fixed)         &     12 &     9 &   480 &    501 &  95.81 \\
 
 The tables provided above showcase the percentages of bug reproducibility for each project, categorized as "fail," "pass," or "error." The term "fail" refers to an expected failure in the buggy version, indicating successful bug reproduction. Conversely, "pass" indicates the successful resolution of the bug in the fixed version, with corresponding test cases passing. "Error" represents cases where a hard error prevents the execution of the test. Understanding these categories is essential for interpreting the reproducibility results accurately and assessing the effectiveness of the bug fixing process.
 
-The results demonstrate that the overall reproducibility of bugs in the BugsInPy dataset has improved significantly, with over 95% of all bugs being successfully reproduced and passing the tests. This indicates a high level of confidence in the correctness of the bug fixes and the reliability of the codebase.
+The results demonstrate that the overall reproducibility of bugs in the BugsInPy dataset is very high, with over 95% of all bugs being successfully reproduced and passing the tests. This indicates a high level of confidence in the correctness of the bug fixes and the reliability of the codebase.
 
 Analyzing the specific project results, we can observe variations in the success rates. Some projects, such as Ansible, Cookiecutter, FastAPI, Httpie, Sanic, Thefuck, Tornado, and Tqdm, show a 100% success rate in reproducing and passing the bug tests for both the buggy and fixed versions. On the other hand, projects like Pandas, Keras, Scrapy, and Matplotlib have a lower success rate in reproducing and passing the bug tests.
 
 These results provide valuable insights into the quality, reliability, and effectiveness of the bug fixing process for each project. Project maintainers can utilize these findings to prioritize bug fixes, allocate resources for improving code quality, and enhance the overall reliability and stability of the software.
 
-By achieving a high success rate in reproducing bugs and passing tests, the BugsInPy datasetdemonstrates the effectiveness of the bug fixing process and highlights the overall quality of the codebase. With over 95% of bugs being successfully reproduced and passing the tests, developers can have a high degree of confidence in the correctness of the fixes and the reliability of the software.
+By achieving a high success rate in reproducing bugs and passing tests, the BugsInPy dataset demonstrates the effectiveness of the bug fixing process and highlights the overall quality of the codebase. With over 95% of bugs being successfully reproduced and passing the tests, developers can have a high degree of confidence in the correctness of the fixes and the reliability of the software.
 
 The success rate also indicates that the projects in the BugsInPy dataset have undergone rigorous testing and debugging processes. This level of thoroughness contributes to improved software quality and can inspire trust among users and stakeholders.
 
