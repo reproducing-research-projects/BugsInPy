@@ -693,10 +693,10 @@ PySnooper,3,buggy,fail
 PySnooper,3,fixed,pass
 sanic,1,buggy,fail
 sanic,1,fixed,pass
-sanic,1,fixed,pass
 sanic,2,buggy,fail
 sanic,2,fixed,pass
 sanic,3,buggy,fail
+sanic,3,fixed,pass
 sanic,4,buggy,fail
 sanic,4,fixed,pass
 sanic,5,buggy,fail
