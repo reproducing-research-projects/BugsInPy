@@ -46,7 +46,7 @@ The dataset provides a large and diverse set of bugs that can be used to test th
 BugsInPy also includes a variety of tools and resources that can help researchers to use the dataset effectively.
 
 We sought to use the BugsInPy framework to verify that the test cases could be set up, that the buggy commit fails, and that the fixed commit passes.
-This is a _reproduction_ \cite{widyasari_bugsinpy_2020} of the original work, since we are using the original framework.
+This is a _reproduction_ \cite{acm_inc_staff_artifact_2020} of the original work, since we are using the original framework.
 
 Our contributions are:
 
@@ -78,7 +78,7 @@ We would like to answer the following questions:
 **RQ1.** How many of the bugs in BugsInPy are reproudcible with no "extra" work?
 For a bug to be reproducible, the software environment should install without failure, the buggy verison should fail the identified test case, and the fixed version should pass.
 
-**RQ2.** How many of those which are not reproducible can we "reescue"?
+**RQ2.** How many of those which are not reproducible can we rescue?
 We rescue a bug by modifying the scripts and data such that the bug is reproducible.
 
 As part of our rescue, we made the following changes:
@@ -116,7 +116,17 @@ This optimization helps reduce the time and resources required for environment s
 While it is tempting to use the same Conda environment for each project, there are multiple occasions where different bugs of the same project require different dependencies.
 For example, `ansible/bugs/{1,11,14}/requirements.txt` all vary subtly.
 
-5. 
+5. The BugsInPy framework correctly recognizes that installing the dependencies line by line `cat requirements.txt | filter | xargs -n 1 pip install`, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by pip.
+Specifically, when installing all dependencies at once, pip may ignore very old packages. However, installing the dependencies sequentially allows us to reproduce the bugs accurately.
+However, this results in failed  installations for projects that include the `-e git+https://...` syntax in their `requirements.txt` file, since they would get passed along as `pip install -e` and `pip install git+https://...`.
+This revised code ensures that each line from the requirements.txt file is properly processed and passed as an argument to the `pip install` command.
+<!-- TODO: check this -->
+
+By utilizing the modified approach, we were able to resolve the installation issues for specific repository dependencies. For instance, the installation of the `luigi` library from a specific GitHub repository now proceeds as expected, as evidenced by the successful cloning and checkout of the specified commit.
+
+To address this issue, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}. This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
+
+
 
 The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
 
@@ -181,13 +191,13 @@ To run the tests we use the BugsInPy framework script `bugsinpy-test`.
 \label{tab:unmodified-reproduction}
 \begin{tabular}{lrrrrr}
 \toprule
-Project   & Wall time (m) &  Error &    Both-pass &  Both-fail &      Expected &          Total \\
+Project   &  Error &    Both-pass &  Both-fail &      Expected &          Total \\
 \midrule
-PySnooper &             5 &      1 &            1 &          0 &             1 &              3 \\
-          &               & (33\%) &       (33\%) &      (0\%) &        (33\%) &        (100\%) \\
+PySnooper &      1 &            1 &          0 &             1 &              3 \\
+          & (33\%) &       (33\%) &      (0\%) &        (33\%) &        (100\%) \\
 \textit{Continue...} \\
 \midrule
-All       & & \textit{continue...} &             &            &               &                \\
+All       & & \textit{continue...} &           &            &                   \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -205,7 +215,7 @@ The last row shows the raw count as well as percentage of outcomes for all bugs 
 
 **RQ2.** We were able to rescue many of the broken test cases, as shown in \Cref{tab:unmodified-reproduction}.
 In that table, we show the quantity in our rescued dataset and the delta from the unmodified quantity, denoted x.
-For example, "x-2=1" is shown in PySnooper's error count, which means the rescued dataset has 2 fewer errors than the unmodified, for a total of 1 error.
+For example, "x-2=1" means the rescued dataset has 2 fewer errors than the unmodified, for a total of 1 error.
 
 \begin{table}[htbp]
 \centering
@@ -213,34 +223,47 @@ For example, "x-2=1" is shown in PySnooper's error count, which means the rescue
 \label{tab:rescued-reproduction}
 \begin{tabular}{lrrrrr}
 \toprule
-Project   & Wall time (m) &  Error      &   Both-pass &  Both-fail &    Expected &          Total \\
+Project   &  Error      &   Both-pass &  Both-fail &    Expected &          Total \\
 \midrule
-PySnooper &             5 & x-2=1       &       x+1=1 &          0 &           1 &              3 \\
-          &               & x-33\%=33\% & x+33\%=33\% &  x+0\%=0\% & x+33\%=33\% &        (100\%) \\
+PySnooper & x-2=1       &       x+1=1 &          0 &           1 &              3 \\
+          & x-33\%=33\% & x+33\%=33\% &  x+0\%=0\% & x+33\%=33\% &        (100\%) \\
 \textit{Continue...} \\
 \midrule
-All       & & \textit{continue...} &             &            &               &                \\
+All       &    & \textit{continue...} &             &            &                \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The tables provided above showcase the percentages of bug reproducibility for each project, categorized as "fail," "pass," or "error." The term "fail" refers to an expected failure in the buggy version, indicating successful bug reproduction. Conversely, "pass" indicates the successful resolution of the bug in the fixed version, with corresponding test cases passing. "Error" represents cases where a hard error prevents the execution of the test. Understanding these categories is essential for interpreting the reproducibility results accurately and assessing the effectiveness of the bug fixing process.
+Analyzing the specific project results, we can observe variations in the success rates. Some projects, such as Ansible, Cookiecutter, FastAPI, Httpie, Sanic, Thefuck, Tornado, and Tqdm, show a 100% success rate in reproducing and passing the bug tests for both the buggy and fixed versions.
+On the other hand, projects like Pandas, Keras, Scrapy, and Matplotlib have a lower success rate in reproducing and passing the bug tests.
 
-The results demonstrate that the overall reproducibility of bugs in the BugsInPy dataset is very high, with over 95% of all bugs being successfully reproduced and passing the tests. This indicates a high level of confidence in the correctness of the bug fixes and the reliability of the codebase.
+Note that our bugs are _repeatable_, which means that we can run our code twice and get the same result \cite{acm_inc_staff_artifact_2020}.
 
-Analyzing the specific project results, we can observe variations in the success rates. Some projects, such as Ansible, Cookiecutter, FastAPI, Httpie, Sanic, Thefuck, Tornado, and Tqdm, show a 100% success rate in reproducing and passing the bug tests for both the buggy and fixed versions. On the other hand, projects like Pandas, Keras, Scrapy, and Matplotlib have a lower success rate in reproducing and passing the bug tests.
+<!--
+These results provide valuable insights into the quality, reliability, and effectiveness of the bug fixing process for each project.
+Project maintainers can utilize these findings to prioritize bug fixes, allocate resources for improving code quality, and enhance the overall reliability and stability of the software.
 
-These results provide valuable insights into the quality, reliability, and effectiveness of the bug fixing process for each project. Project maintainers can utilize these findings to prioritize bug fixes, allocate resources for improving code quality, and enhance the overall reliability and stability of the software.
+Says more about the original dataset than anything else.
+-->
 
-By achieving a high success rate in reproducing bugs and passing tests, the BugsInPy dataset demonstrates the effectiveness of the bug fixing process and highlights the overall quality of the codebase. With over 95% of bugs being successfully reproduced and passing the tests, developers can have a high degree of confidence in the correctness of the fixes and the reliability of the software.
+By achieving a high success rate in reproducing bugs and passing tests, the BugsInPy dataset demonstrates the effectiveness of the bug fixing process and highlights the overall quality of the codebase.
+With over 95% of bugs being successfully reproduced and passing the tests, researchers have more bugs at their disposal for evaluating fuzzing, automatic program repair repair, and other research techniques.
 
-The success rate also indicates that the projects in the BugsInPy dataset have undergone rigorous testing and debugging processes. This level of thoroughness contributes to improved software quality and can inspire trust among users and stakeholders.
+The success rate also indicates that the projects in the BugsInPy dataset have undergone rigorous testing and debugging processes.
+This level of thoroughness contributes to improved software quality and can inspire trust among users and stakeholders.
 
-The variations in success rates among different projects provide further insights. Projects with a 100% success rate in reproducing and passing tests demonstrate excellent code quality and a robust bug fixing process. Conversely, projects with a lower success rate may require additional attention and improvements in their debugging and testing practices.
+<!--
+The variations in success rates among different projects provide further insights.
+Projects with a 100% success rate in reproducing and passing tests demonstrate excellent code quality and a robust bug fixing process.
+Conversely, projects with a lower success rate may require additional attention and improvements in their debugging and testing practices.
 
-The total line aggregates the numbers from all projects and calculates the overall percentages of success or failure for the reproducibility of bugs.
+Can't really draw that conclusion; could be lack of data.
+-->
 
-The table below presents the running time required to reproduce bugs in each project within the BugsInPy dataset, along with the respective containers:
+\Cref{tab:reproduction-time} presents the running time required to reproduce bugs in each project within the BugsInPy dataset, along with the respective containers.
+The provided running times are specific to the reproduction process on the given VM configuration, which had 8GB of RAM, 4 cores, and 100GB of free disk space.
+Reproduction times can vary depending on hardware resources, system configurations, and other environmental factors.
+The projects are sorted based on their running time in descending order, with the project "pandas" having the highest running time of 963 minutes, followed by "luigi," "scrapy," and so on.
 
 \begin{table}[htbp]
 \centering
@@ -248,38 +271,40 @@ The table below presents the running time required to reproduce bugs in each pro
 \label{tab:reproduction-time}
 \begin{tabular}{lrr}
 \toprule
-Project & Running Time (minutes) & Container \\
+Project & Running Time (minutes) \\
 \midrule
-pandas & 963 & /bugsinpy-pandas-1 \\
-luigi & 510 & /bugsinpy-luigi-1 \\
-scrapy & 268 & /bugsinpy-scrapy-1 \\
-keras & 230 & /bugsinpy-keras-1 \\
-black & 214 & /bugsinpy-black-1 \\
-fastapi & 197 & /bugsinpy-fastapi-1 \\
-thefuck & 195 & /bugsinpy-thefuck-1 \\
-sanic & 136 & /bugsinpy-sanic-1 \\
-spacy & 131 & /bugsinpy-spacy-1 \\
-ansible & 80 & /bugsinpy-ansible-1 \\
-tqdm & 36 & /bugsinpy-tqdm-1 \\
-youtube-dl & 59 & /bugsinpy-youtube-dl-1 \\
-cookiecutter & 40 & /bugsinpy-cookiecutter-1 \\
-httpie & 39 & /bugsinpy-httpie-1 \\
-matplotlib & 26 & /bugsinpy-matplotlib-1 \\
-tornado & 14 & /bugsinpy-tornado-1 \\
-pysnooper & 5 & /bugsinpy-pysnooper-1 \\
+pandas       & 963 \\
+luigi        & 510 \\
+scrapy       & 268 \\
+keras        & 230 \\
+black        & 214 \\
+fastapi      & 197 \\
+thefuck      & 195 \\
+sanic        & 136 \\
+spacy        & 131 \\
+ansible      & 80  \\
+tqdm         & 36  \\
+youtube-dl   & 59  \\
+cookiecutter & 40  \\
+httpie       & 39  \\
+matplotlib   & 26  \\
+tornado      & 14  \\
+pysnooper    & 5   \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The projects are sorted based on their running time in descending order, with the project "pandas" having the highest running time of 963 minutes, followed by "luigi," "scrapy," and so on.
+The running time to reproduce the bugs varies across different projects in the BugsInPy dataset.
+The reproduction process was conducted on a virtual machine (VM) with 8GB of RAM, 4 x86 cores, and 100GB of free disk space.
+The time taken for bug reproduction depends on various factors, including the complexity of the codebase, the number of bugs in the project, and the specific characteristics of each bug.
 
-The running time to reproduce the bugs varies across different projects in the BugsInPy dataset. The reproduction process was conducted on a virtual machine (VM) with 8GB of RAM, 4 x86 cores, and 100GB of free disk space. The time taken for bug reproduction depends on various factors, including the complexity of the codebase, the number of bugs in the project, and the specific characteristics of each bug.
+Additionally, it is noteworthy that the "pandas" project has the most bugs registered in the dataset, with a total of 169 bugs out of the 501 bugs analyzed.
+The reproduction of bugs in the "pandas" project required a relatively longer running time, taking approximately 963 minutes.
+The extended time may be attributed to factors such as the complexity of the codebase, the number of bugs present in the project, and the specific characteristics of the bugs encountered during the reproduction process.
 
-Additionally, it is noteworthy that the "pandas" project has the most bugs registered in the dataset, with a total of 169 bugs out of the 501 bugs analyzed. The reproduction of bugs in the "pandas" project required a relatively longer running time, taking approximately 963 minutes. The extended time may be attributed to factors such as the complexity of the codebase, the number of bugs present in the project, and the specific characteristics of the bugs encountered during the reproduction process.
-
-Please note that the provided running times are specific to the reproduction process on the given VM configuration, which had 8GB of RAM, 4 cores, and 100GB of free disk space. Reproduction times can vary depending on hardware resources, system configurations, and other environmental factors.
-
-The inclusion of Python version information in the bug dataset is crucial for ensuring the reproducibility of tests executed for bug detection and fixing. When developers encounter a bug, having access to the specific Python version used during its occurrence enables them to reproduce the bug in a controlled environment.
+The inclusion of Python version information in the bug dataset is crucial for ensuring the reproducibility of tests executed for bug detection and fixing.
+When developers encounter a bug, having access to the specific Python version used during its occurrence enables them to reproduce the bug in a controlled environment.
+Often, packages required by the software environment are only installable in a specific version of Python.
 
 \begin{table}[htbp]
 \centering
@@ -287,31 +312,23 @@ The inclusion of Python version information in the bug dataset is crucial for en
 \label{tab:reproduction-buggy}
 \begin{tabular}{lll}
 \toprule
-python\_version & count & percentage \\
+Python & Bugs \\
 \midrule
-3.6.9 & 31 & 6.19\% \\
-3.7.0 & 58 & 11.58\% \\
-3.7.3 & 50 & 9.98\% \\
-3.7.4 & 33 & 6.59\% \\
-3.7.7 & 9 & 1.80\% \\
-3.8.1 & 33 & 6.59\% \\
-3.8.3 & 287 & 57.28\% \\
+3.6.9 & 31  & 6\%   \\
+3.7.0 & 58  & 12\%  \\
+3.7.3 & 50  & 10\%  \\
+3.7.4 & 33  & 7\%   \\
+3.7.7 & 9   & 2\%   \\
+3.8.1 & 33  & 7\%   \\
+3.8.3 & 287 & 57\%  \\
 Total & 501 & 100\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The table provides a summary of Python versions and their corresponding counts in the bug dataset mentioned in the "bugsinpy" paper. The dataset contains bug information for various Python repositories, with each bug having a corresponding "bug.info" file specifying the Python version.
-
-The table includes the Python version, the count of bugs associated with each version, and the percentage of bugs represented by each version out of the total count. The percentages give us insights into the distribution of bugs across different Python versions in the dataset.
-
-Analyzing the table, we observe that the majority of bugs (57.28%) are reported in Python version 3.8.3, followed by version 3.7.0 (11.58%). Versions 3.7.3, 3.6.9, and 3.8.1 account for approximately 9.98%, 6.19%, and 6.59% of the bugs, respectively. Additionally, versions 3.7.4 and 3.7.7 contribute to 6.59% and 1.80% of the bugs, respectively.
-
-These percentages provide valuable insights into the distribution of bugs among different Python versions in the dataset. By referring to the "bugsinpy" paper and the associated bug.info files, further analysis can be performed to understand any patterns or trends related to specific Python versions and their corresponding bug occurrences.
-
-By using the same Python version specified in the bug, developers can accurately replicate the conditions under which the bug manifested. This consistency in the Python environment helps in understanding the root cause of the bug and facilitates the debugging process. It allows developers to examine the code, libraries, and dependencies associated with that particular Python version, increasing the likelihood of identifying and resolving the issue effectively.
-
-Reproducibility plays a significant role in software development, particularly in bug fixing and testing. Having access to the exact Python version used during the bug occurrence enhances the accuracy and reliability of the testing process. Developers can execute the same code with the same environment, ensuring that any fixes or improvements applied can be tested and validated consistently.
+\Cref{tab:reproduction-buggy} provides a summary of Python versions and their corresponding counts in the BugsInPy dataset.
+The percentages give us insights into the distribution of bugs across different Python versions in the dataset.
+The dataset certainly shows its age; Python 3.6 and 3.7 reached their official end-of-life and are not supported by CPython developers \cite{cpython_developers_status_nodate}.
 
 # Discussion
 
@@ -319,35 +336,37 @@ Reproducibility plays a significant role in software development, particularly i
 
 The ease of bug reproduction in the BugsInPy dataset can be attributed to several factors:
 
-1. Standardized and Automated Approach: The `bugsinpy-testall` script provides a standardized and automated approach to reproducing and testing bugs in Python projects. By automating essential steps such as environment setup, code checkout, compilation (if required), and test execution, the script streamlines the reproduction process and minimizes manual effort.
+1. **Automatation**: The `bugsinpy-testall` script provides an automated approach to reproducing and testing bugs in Python projects.
+The script streamlines the reproduction process, minimizes manual effort, and ensures we use a consistent procedure on each project.
+Note that these automation scripts must be carefully written and maintained.
+In particular, the original scripts did not have `set -e`, so some intermediate step might fail without alerting the user.
 
-2. Conda for Dependency Management: Leveraging Conda as the package and environment manager contributes to easy management of project dependencies. Conda ensures consistent environments across different systems, simplifying the setup process and minimizing compatibility issues.
+2. **Environment/Package manager**: Conda environment/package manager contributes to easy management of project dependencies.
+The key insight is that Conda can install packages to a local environment without interferring with global, system-wide packages.
+This makes it possible to define project-specific versions of libraries which would be normally managed by a platform-specific system-wide package manager.
 
-3. Comprehensive Logging: The `bugsinpy-testall` script maintains detailed logs of the test results, storing them in `~/projects/bugsinpy-index.csv`. This centralized logging system enables easy analysis of the test outcomes, provides a historical record for reference, and facilitates tracking the progress of bug reproduction.
+3. **Lack of non-deterministic bugs**: None of the bugs in our dataset are race-conditions.
+Our scope is limited to constructing a reproducible software environment consistent with the original bug, and then the bug will show itself deterministically.
 
 These factors collectively contribute to the ease of reproducing bugs in the BugsInPy dataset, providing a reliable and efficient framework for bug analysis and investigation.
-
-We discovered a significant issue with the `framework/bin/bugsinpy-compile` script. The current approach utilizes `xargs -n 1` to install dependencies, resulting in failed installations for projects that include the `-e git+https://` syntax in their requirements.txt file. This syntax is used to install projects in editable mode, allowing for local project paths or VCS URLs\cite{noauthor_pip_nodate_e}.
-
-To address this issue, we made the necessary modifications. Instead of using `xargs -n 1`, we replaced it with `xargs -I {}` in the script. This revised code ensures that each line from the requirements.txt file is properly processed and passed as an argument to the `pip install` command:
-
-We observed that installing the dependencies line by line, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by pip. Specifically, when installing all dependencies at once, pip may ignore very old packages. However, installing the dependencies sequentially allows us to reproduce the bugs accurately.
-
-By utilizing the modified approach, we were able to resolve the installation issues for specific repository dependencies. For instance, the installation of the `luigi` library from a specific GitHub repository now proceeds as expected, as evidenced by the successful cloning and checkout of the specified commit.
-
-To address this issue, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}. This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
 
 ## What makes our reproduction hard?
 
 Despite the facilitative factors mentioned above, bug reproduction can still present challenges due to the following factors:
 
-1. Complex Codebases: Some projects in the BugsInPy dataset may have intricate and extensive codebases, making it challenging to identify the specific code sections or interactions responsible for the bugs. Analyzing complex codebases requires careful examination and understanding of the project's architecture and design.
+1. **Resource constraints during building**: Projects with a large number of bugs can pose challenges in terms of the time and resources required for bug reproduction.
+Sometimes, the software environment will involve a computationally-expensive step of building software from source.
+Reproducing and testing a significant number of bugs within limited resources may result in longer reproduction times and potential resource limitations.
 
-2. Interdependencies and Compatibility: Projects often rely on external libraries, tools, and frameworks. Interdependencies and compatibility issues between different versions of these dependencies can complicate the bug reproduction process. Ensuring that all the necessary dependencies are correctly installed and compatible with each other can be time-consuming and require additional effort.
+1. **Lack of storage**: Our script ends up with quite a few Conda environments.
+These can be quite expensive to store, and we can't, for example, archive our environments in GitHub, due to space constraints.
 
-3. Intermittent or Context-Specific Bugs: Some bugs may manifest only under specific conditions or in certain environments. Reproducing these intermittent or context-specific bugs consistently can be challenging. It may require identifying and setting up the precise conditions required for the bug to occur, which can be complex and time-consuming.
+1. **Missing packages in Conda**: Unfortunately, not all Pip packages and versions exist in our selected Conda repositories.
+Conda often only has 
 
-4. Resource Constraints: Projects with a large number of bugs or a high failure rate can pose challenges in terms of the time and resources required for bug reproduction. Reproducing and testing a significant number of bugs within limited resources may result in longer reproduction times and potential resource limitations.
+1. **Missing/yanked packages in PyPI**:
+
+1. **Lack of expected output**
 
 Addressing these challenges requires careful consideration of project-specific factors and may involve additional research, debugging techniques, and resources to ensure accurate and reliable bug reproduction.
 
@@ -370,6 +389,12 @@ For authors providing artifacts in the BugsInPy dataset, the following recommend
 2. Version Control: Ensure that the artifact repository includes version control information for the codebase, making it easier for users to checkout and analyze specific versions.
 
 3. Bug Context Information: Include relevant information about the bug context, such as the steps to trigger the bug, expected behavior, and any special conditions required for reproduction. This information assists users in replicating the bugs accurately.
+
+### Infrastructure changes
+
+Reproducibility plays a significant role in software development, particularly in bug fixing and testing.
+Having access to the exact Python version used during the bug occurrence enhances the accuracy and reliability of the testing process.
+Developers can execute the same code with the same environment, ensuring that any fixes or improvements applied can be tested and validated consistently.
 
 ## Threats to Validity
 
