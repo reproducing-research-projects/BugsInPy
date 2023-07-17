@@ -5,10 +5,8 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
 test/test_event_callbacks.py F                                           [100%]
@@ -38,13 +36,13 @@ INFO: Done scheduling tasks
 INFO: Running Worker with 1 processes
 DEBUG: Asking scheduler for work...
 DEBUG: Pending tasks: 1
-INFO: [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) running   EmptyTask(fail=True)
-INFO: [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) done      EmptyTask(fail=True)
-ERROR: [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) failed    EmptyTask(fail=True)
+INFO: [pid 14771] Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) running   EmptyTask(fail=True)
+INFO: [pid 14771] Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) done      EmptyTask(fail=True)
+ERROR: [pid 14771] Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) failed    EmptyTask(fail=True)
 Traceback (most recent call last):
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 189, in run
     new_deps = self._run_get_new_deps()
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 146, in _run_get_new_deps
     task_gen = self.task.run()
   File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
     raise DummyException()
@@ -54,7 +52,7 @@ DEBUG: 1 running tasks, waiting for next task to finish
 DEBUG: Asking scheduler for work...
 INFO: Done
 INFO: There are no more tasks to run at this time
-INFO: Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) was stopped. Shutting down Keep-Alive thread
+INFO: Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) was stopped. Shutting down Keep-Alive thread
 ------------------------------ Captured log call -------------------------------
 DEBUG    luigi-interface:worker.py:266 Checking if EmptyTask(fail=True) is complete
 INFO     luigi-interface:worker.py:543 Scheduled EmptyTask(fail=True) (PENDING)
@@ -62,13 +60,13 @@ INFO     luigi-interface:interface.py:172 Done scheduling tasks
 INFO     luigi-interface:worker.py:735 Running Worker with 1 processes
 DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
 DEBUG    luigi-interface:worker.py:762 Pending tasks: 1
-INFO     luigi-interface:worker.py:169 [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) running   EmptyTask(fail=True)
-INFO     luigi-interface:worker.py:203 [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) done      EmptyTask(fail=True)
-ERROR    luigi-interface:worker.py:212 [pid 98347] Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) failed    EmptyTask(fail=True)
+INFO     luigi-interface:worker.py:169 [pid 14771] Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) running   EmptyTask(fail=True)
+INFO     luigi-interface:worker.py:203 [pid 14771] Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) done      EmptyTask(fail=True)
+ERROR    luigi-interface:worker.py:212 [pid 14771] Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) failed    EmptyTask(fail=True)
 Traceback (most recent call last):
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 189, in run
     new_deps = self._run_get_new_deps()
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 146, in _run_get_new_deps
     task_gen = self.task.run()
   File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
     raise DummyException()
@@ -78,25 +76,23 @@ DEBUG    luigi-interface:worker.py:744 1 running tasks, waiting for next task to
 DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
 INFO     luigi-interface:worker.py:562 Done
 INFO     luigi-interface:worker.py:563 There are no more tasks to run at this time
-INFO     luigi-interface:worker.py:314 Worker Worker(salt=230932092, workers=1, host=53eb59b22e25, username=root, pid=98347) was stopped. Shutting down Keep-Alive thread
+INFO     luigi-interface:worker.py:314 Worker Worker(salt=827784978, workers=1, host=4178772b82f0, username=root, pid=14771) was stopped. Shutting down Keep-Alive thread
 =============================== warnings summary ===============================
 test/test_event_callbacks.py::TestEventCallbacks::test_failure
-  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py:268: UserWarning: Task EmptyTask(fail=True) without outputs has no custom complete() method
+  /opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py:268: UserWarning: Task EmptyTask(fail=True) without outputs has no custom complete() method
     is_complete = task.complete()
 
--- Docs: https://docs.pytest.org/en/latest/warnings.html
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED test/test_event_callbacks.py::TestEventCallbacks::test_failure - Asser...
-========================= 1 failed, 1 warning in 0.13s =========================
+========================= 1 failed, 1 warning in 0.06s =========================
 RUN EVERY COMMAND
 1
 pytest test/test_event_callbacks.py::TestEventCallbacks::test_failure
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
 test/test_event_callbacks.py F                                           [100%]
@@ -126,13 +122,13 @@ INFO: Done scheduling tasks
 INFO: Running Worker with 1 processes
 DEBUG: Asking scheduler for work...
 DEBUG: Pending tasks: 1
-INFO: [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) running   EmptyTask(fail=True)
-INFO: [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) done      EmptyTask(fail=True)
-ERROR: [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) failed    EmptyTask(fail=True)
+INFO: [pid 14779] Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) running   EmptyTask(fail=True)
+INFO: [pid 14779] Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) done      EmptyTask(fail=True)
+ERROR: [pid 14779] Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) failed    EmptyTask(fail=True)
 Traceback (most recent call last):
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 189, in run
     new_deps = self._run_get_new_deps()
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 146, in _run_get_new_deps
     task_gen = self.task.run()
   File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
     raise DummyException()
@@ -142,7 +138,7 @@ DEBUG: 1 running tasks, waiting for next task to finish
 DEBUG: Asking scheduler for work...
 INFO: Done
 INFO: There are no more tasks to run at this time
-INFO: Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) was stopped. Shutting down Keep-Alive thread
+INFO: Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) was stopped. Shutting down Keep-Alive thread
 ------------------------------ Captured log call -------------------------------
 DEBUG    luigi-interface:worker.py:266 Checking if EmptyTask(fail=True) is complete
 INFO     luigi-interface:worker.py:543 Scheduled EmptyTask(fail=True) (PENDING)
@@ -150,13 +146,13 @@ INFO     luigi-interface:interface.py:172 Done scheduling tasks
 INFO     luigi-interface:worker.py:735 Running Worker with 1 processes
 DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
 DEBUG    luigi-interface:worker.py:762 Pending tasks: 1
-INFO     luigi-interface:worker.py:169 [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) running   EmptyTask(fail=True)
-INFO     luigi-interface:worker.py:203 [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) done      EmptyTask(fail=True)
-ERROR    luigi-interface:worker.py:212 [pid 98362] Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) failed    EmptyTask(fail=True)
+INFO     luigi-interface:worker.py:169 [pid 14779] Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) running   EmptyTask(fail=True)
+INFO     luigi-interface:worker.py:203 [pid 14779] Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) done      EmptyTask(fail=True)
+ERROR    luigi-interface:worker.py:212 [pid 14779] Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) failed    EmptyTask(fail=True)
 Traceback (most recent call last):
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 189, in run
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 189, in run
     new_deps = self._run_get_new_deps()
-  File "/home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py", line 146, in _run_get_new_deps
+  File "/opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py", line 146, in _run_get_new_deps
     task_gen = self.task.run()
   File "/home/user/BugsInPy/temp/projects/luigi/test/test_event_callbacks.py", line 37, in run
     raise DummyException()
@@ -166,13 +162,13 @@ DEBUG    luigi-interface:worker.py:744 1 running tasks, waiting for next task to
 DEBUG    luigi-interface:worker.py:573 Asking scheduler for work...
 INFO     luigi-interface:worker.py:562 Done
 INFO     luigi-interface:worker.py:563 There are no more tasks to run at this time
-INFO     luigi-interface:worker.py:314 Worker Worker(salt=231144918, workers=1, host=53eb59b22e25, username=root, pid=98362) was stopped. Shutting down Keep-Alive thread
+INFO     luigi-interface:worker.py:314 Worker Worker(salt=311843522, workers=1, host=4178772b82f0, username=root, pid=14779) was stopped. Shutting down Keep-Alive thread
 =============================== warnings summary ===============================
 test/test_event_callbacks.py::TestEventCallbacks::test_processing_time_handler_failure
-  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/worker.py:268: UserWarning: Task EmptyTask(fail=True) without outputs has no custom complete() method
+  /opt/conda/envs/9ed9268286bb83546f47443e1747a47b/lib/python3.8/site-packages/luigi-1.1.3-py3.8.egg/luigi/worker.py:268: UserWarning: Task EmptyTask(fail=True) without outputs has no custom complete() method
     is_complete = task.complete()
 
--- Docs: https://docs.pytest.org/en/latest/warnings.html
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED test/test_event_callbacks.py::TestEventCallbacks::test_processing_time_handler_failure
-========================= 1 failed, 1 warning in 0.09s =========================
+========================= 1 failed, 1 warning in 0.06s =========================

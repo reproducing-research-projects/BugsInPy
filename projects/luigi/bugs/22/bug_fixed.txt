@@ -4,40 +4,10 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
-test/scheduler_test.py F                                                 [100%]
+test/scheduler_test.py .                                                 [100%]
 
-=================================== FAILURES ===================================
-__________________ SchedulerTest.test_worker_prune_after_init __________________
-
-self = <scheduler_test.SchedulerTest testMethod=test_worker_prune_after_init>
-
-    def test_worker_prune_after_init(self):
-        worker = luigi.scheduler.Worker(123)
-    
-        class TmpCfg:
-            def __init__(self):
-                self.worker_disconnect_delay = 10
-    
->       worker.prune(TmpCfg())
-
-test/scheduler_test.py:108: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = <luigi.scheduler.Worker object at 0x7f09ff3086d0>
-config = <scheduler_test.SchedulerTest.test_worker_prune_after_init.<locals>.TmpCfg object at 0x7f09ff308700>
-
-    def prune(self, config):
-        # Delete workers that haven't said anything for a while (probably killed)
->       if self.last_active + config.worker_disconnect_delay < time.time():
-E       TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'
-
-src/luigi/luigi/scheduler.py:245: TypeError
-=========================== short test summary info ============================
-FAILED test/scheduler_test.py::SchedulerTest::test_worker_prune_after_init - ...
-============================== 1 failed in 0.10s ===============================
+============================== 1 passed in 0.03s ===============================
