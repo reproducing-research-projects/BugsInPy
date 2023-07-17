@@ -87,8 +87,8 @@ cookiecutter,2,buggy,fail
 cookiecutter,2,fixed,pass
 cookiecutter,3,buggy,fail
 cookiecutter,3,fixed,pass
-cookiecutter,4,buggy,error
-cookiecutter,4,fixed,error
+cookiecutter,4,buggy,fail
+cookiecutter,4,fixed,pass
 fastapi,1,buggy,fail
 fastapi,1,fixed,pass
 fastapi,2,buggy,fail
