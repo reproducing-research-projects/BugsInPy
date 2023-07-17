@@ -317,9 +317,6 @@ By using the same Python version specified in the bug, developers can accurately
 
 Reproducibility plays a significant role in software development, particularly in bug fixing and testing. Having access to the exact Python version used during the bug occurrence enhances the accuracy and reliability of the testing process. Developers can execute the same code with the same environment, ensuring that any fixes or improvements applied can be tested and validated consistently.
 
-In summary, the inclusion of Python version information in the bug dataset not only provides insights into the distribution of bugs across different versions but also enables developers to reproduce and investigate the bugs more effectively.
-This contributes to improved bug detection, diagnosis, and ultimately, the development of more reliable and stable software systems.
-
 # Discussion
 
 ## What makes our reproduction easy?
