@@ -124,7 +124,7 @@ if grep -q '[^[:space:]]' "$work_dir/bugsinpy_requirements.txt"; then
    # Iterate requirements.txt and install line by line,
    # this is similar to the original approach but avoids issues with editable dependencies
    # like this -e git+https://
-   while IFS= read -r line; do pip install --no-compile --disable-pip-version-check $line; done < $work_dir/bugsinpy_requirements.txt
+   sed -e '/^\s*#.*$/d' -e '/^\s*$/d' $work_dir/bugsinpy_requirements.txt | xargs -I {} pip install {}
 fi
 
 for index in "${!run_setup[@]}"
@@ -140,7 +140,7 @@ if grep -q '[^[:space:]]' "$work_dir/bugsinpy_requirements.txt"; then
    # Iterate requirements.txt and install line by line,
    # this is similar to the original approach but avoids issues with editable dependencies
    # like this -e git+https://
-   while IFS= read -r line; do pip install --no-compile --disable-pip-version-check $line; done < $work_dir/bugsinpy_requirements.txt
+   sed -e '/^\s*#.*$/d' -e '/^\s*$/d' $work_dir/bugsinpy_requirements.txt | xargs -I {} pip install {}
 fi
 conda deactivate
 
