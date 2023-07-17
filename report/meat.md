@@ -153,6 +153,10 @@ The success and failure percentages offer important information about the qualit
 
 The following is a table with the percentage of bug reproducibility for each project:
 
+\begin{table}[htbp]
+\centering
+\caption{Execution of Buggy Version in BugsInPy Dataset}
+\label{tab:reproduction-buggy}
 \begin{tabular}{lrrrrr}
 \toprule
 result &  error &  fail &  pass &  total &  fail\% \\
@@ -177,10 +181,14 @@ result &  error &  fail &  pass &  total &  fail\% \\
 Total (Buggy)         &      9 &   489 &     3 &    501 &  97.60 \\
 \bottomrule
 \end{tabular}
+\end{table}
 
 \includegraphics[scale=0.40]{buggy.png}
 
-
+\begin{table}[htbp]
+\centering
+\caption{Execution of Fixed Version in BugsInPy Dataset}
+\label{tab:reproduction-fixed}
 \begin{tabular}{lrrrrr}
 \toprule
 result &  error &  fail &  pass &  total &  pass\% \\
@@ -205,6 +213,7 @@ result &  error &  fail &  pass &  total &  pass\% \\
 Total (Fixed)         &     12 &     9 &   480 &    501 &  95.81 \\
 \bottomrule
 \end{tabular}
+\end{table}
 
 \includegraphics[scale=0.40]{fixed.png}
 
@@ -265,6 +274,10 @@ Please note that the provided running times are specific to the reproduction pro
 
 The inclusion of Python version information in the bug dataset is crucial for ensuring the reproducibility of tests executed for bug detection and fixing. When developers encounter a bug, having access to the specific Python version used during its occurrence enables them to reproduce the bug in a controlled environment.
 
+\begin{table}[htbp]
+\centering
+\caption{Python Versions in BugsInPy Dataset}
+\label{tab:reproduction-buggy}
 \begin{tabular}{lll}
 \toprule
 python\_version & count & percentage \\
@@ -279,6 +292,7 @@ python\_version & count & percentage \\
 Total & 501 & 100\% \\
 \bottomrule
 \end{tabular}
+\end{table}
 
 The table provides a summary of Python versions and their corresponding counts in the bug dataset mentioned in the "bugsinpy" paper. The dataset contains bug information for various Python repositories, with each bug having a corresponding "bug.info" file specifying the Python version.
 
@@ -387,6 +401,11 @@ The study presented in this paper demonstrates the effectiveness of the BugsInPy
 
 The high success rate in reproducing bugs, with over 95% of bugs passing the tests, indicates the reliability and accuracy of the bug fixes in the dataset. This is evident from the results table below:
 
+
+\begin{table}[htbp]
+\centering
+\caption{Total Reproduction in BugsInPy Dataset}
+\label{tab:reproduction-buggy}
 \begin{tabular}{lrrrrr}
 \toprule
 result &  error &  fail &  pass &  total &  results\% \\
@@ -395,6 +414,7 @@ Total (Buggy) & 9 & 489 & 3 & 501 & 97.60\% fail \\
 Total (Fixed) & 12 & 9 & 480 & 501 & 95.81\% pass \\
 \bottomrule
 \end{tabular}
+\end{table}
 
 The table shows that out of the 501 bugs analyzed, 97.60% of the bugs were classified as failures (fail), indicating the presence of issues or errors in the codebase. On the other hand, 95.81% of the bugs were classified as successful (pass), indicating that the bug fixes were effective in resolving the reported issues.
 
