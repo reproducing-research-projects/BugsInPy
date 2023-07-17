@@ -21,6 +21,8 @@ BugsInPy \cite{widyasari_bugsinpy_2020} is a curated dataset of real-world bugs 
 BugsInPy is intended to be used by researchers to develop and evaluate software testing and debugging tools for Python on a diverse set of real-world bugs from multiple projects.
 This can help to ensure that the tools are effective in detecting real-world bugs.
 
+BugsInPy is used in many software engineering studies \cite{mukherjee_fixing_2021, smytzek_sflkit_2022, hirsch_systematic_2022, lukasczyk_empirical_2023, akimova_survey_2021}. Researchers and practitioners have leveraged the dataset to investigate different aspects of bug detection, fixing, and software reliability. BugsInPy has become an great resource for advancing the field of software engineering and fostering innovation in bug detection and fixing techniques.
+
 The BugsInPy dataset contains a variety of information about each bug, including:
 
 - A buggy commit
