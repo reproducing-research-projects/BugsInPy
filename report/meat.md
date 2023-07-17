@@ -331,6 +331,16 @@ The ease of bug reproduction in the BugsInPy dataset can be attributed to severa
 
 These factors collectively contribute to the ease of reproducing bugs in the BugsInPy dataset, providing a reliable and efficient framework for bug analysis and investigation.
 
+We discovered a significant issue with the `framework/bin/bugsinpy-compile` script. The current approach utilizes `xargs -n 1` to install dependencies, resulting in failed installations for projects that include the `-e git+https://` syntax in their requirements.txt file. This syntax is used to install projects in editable mode, allowing for local project paths or VCS URLs\cite{noauthor_pip_nodate_e}.
+
+To address this issue, we made the necessary modifications. Instead of using `xargs -n 1`, we replaced it with `xargs -I {}` in the script. This revised code ensures that each line from the requirements.txt file is properly processed and passed as an argument to the `pip install` command:
+
+We observed that installing the dependencies line by line, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by pip. Specifically, when installing all dependencies at once, pip may ignore very old packages. However, installing the dependencies sequentially allows us to reproduce the bugs accurately.
+
+By utilizing the modified approach, we were able to resolve the installation issues for specific repository dependencies. For instance, the installation of the `luigi` library from a specific GitHub repository now proceeds as expected, as evidenced by the successful cloning and checkout of the specified commit.
+
+To address this issue, we have opened a pull request in the original repository~\cite{noauthor_fixes_nodate}. This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
+
 ## What makes our reproduction hard?
 
 Despite the facilitative factors mentioned above, bug reproduction can still present challenges due to the following factors:
