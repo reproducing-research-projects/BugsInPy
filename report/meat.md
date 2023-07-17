@@ -330,7 +330,7 @@ The ease of bug reproduction in the BugsInPy dataset can be attributed to severa
 
 2. Conda for Dependency Management: Leveraging Conda as the package and environment manager contributes to easy management of project dependencies. Conda ensures consistent environments across different systems, simplifying the setup process and minimizing compatibility issues.
 
-3. Comprehensive Logging: The `bugsinpy-testall` script maintains detailed logs of the test results, storing them in `~/projects/output.csv`. This centralized logging system enables easy analysis of the test outcomes, provides a historical record for reference, and facilitates tracking the progress of bug reproduction.
+3. Comprehensive Logging: The `bugsinpy-testall` script maintains detailed logs of the test results, storing them in `~/projects/bugsinpy-index.csv`. This centralized logging system enables easy analysis of the test outcomes, provides a historical record for reference, and facilitates tracking the progress of bug reproduction.
 
 These factors collectively contribute to the ease of reproducing bugs in the BugsInPy dataset, providing a reliable and efficient framework for bug analysis and investigation.
 
