@@ -4,10 +4,8 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
 test/contrib/redshift_test.py F                                          [100%]
@@ -16,7 +14,7 @@ test/contrib/redshift_test.py F                                          [100%]
 _____________ TestS3CopyToTable.test_s3_copy_with_nonetype_columns _____________
 
 self = <contrib.redshift_test.TestS3CopyToTable testMethod=test_s3_copy_with_nonetype_columns>
-mock_redshift_target = <MagicMock name='RedshiftTarget' id='139770283363200'>
+mock_redshift_target = <MagicMock name='RedshiftTarget' id='140362473157728'>
 
     @mock.patch("luigi.contrib.redshift.RedshiftTarget")
     def test_s3_copy_with_nonetype_columns(self, mock_redshift_target):
@@ -25,12 +23,12 @@ mock_redshift_target = <MagicMock name='RedshiftTarget' id='139770283363200'>
 
 test/contrib/redshift_test.py:337: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-src/luigi/luigi/contrib/redshift.py:338: in run
+/opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/contrib/redshift.py:338: in run
     self.copy(cursor, path)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 self = DummyS3CopyToTableKey(table=dummy_table, columns=null)
-cursor = <MagicMock name='RedshiftTarget().connect().cursor()' id='139770265147664'>
+cursor = <MagicMock name='RedshiftTarget().connect().cursor()' id='140362469338416'>
 f = 's3://bucket/key'
 
     def copy(self, cursor, f):
@@ -44,21 +42,21 @@ f = 's3://bucket/key'
 >       if len(self.columns) > 0:
 E       TypeError: object of type 'NoneType' has no len()
 
-src/luigi/luigi/contrib/redshift.py:356: TypeError
+/opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/contrib/redshift.py:356: TypeError
 =============================== warnings summary ===============================
-src/luigi/luigi/parameter.py:28
-  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/parameter.py:28: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
+../../../../../../opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/parameter.py:28
+  /opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/parameter.py:28: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
     from collections import OrderedDict, Mapping
 
-src/luigi/luigi/scheduler.py:208
-  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/scheduler.py:208: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
+../../../../../../opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/scheduler.py:208
+  /opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/scheduler.py:208: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
     class OrderedSet(collections.MutableSet):
 
-src/luigi/luigi/scheduler.py:98: 29 tests with warnings
-  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/scheduler.py:98: DeprecationWarning: inspect.getargspec() is deprecated since Python 3.0, use inspect.signature() or inspect.getfullargspec()
+../../../../../../opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/scheduler.py:98: 29 warnings
+  /opt/conda/envs/9c97bf17885fc0ca36f0f863aaaface0/lib/python3.8/site-packages/luigi-2.7.2-py3.8.egg/luigi/scheduler.py:98: DeprecationWarning: inspect.getargspec() is deprecated since Python 3.0, use inspect.signature() or inspect.getfullargspec()
     fn_args = inspect.getargspec(fn)
 
--- Docs: https://docs.pytest.org/en/latest/warnings.html
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED test/contrib/redshift_test.py::TestS3CopyToTable::test_s3_copy_with_nonetype_columns
-======================== 1 failed, 31 warnings in 0.74s ========================
+======================== 1 failed, 31 warnings in 0.08s ========================

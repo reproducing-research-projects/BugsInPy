@@ -4,10 +4,8 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
 test/instance_test.py F                                                  [100%]
@@ -17,8 +15,8 @@ ______________________ InstanceTest.test_unhashable_type _______________________
 
 cls = <class 'instance_test.InstanceTest.test_unhashable_type.<locals>.DummyTask'>
 args = (), kwargs = {'x': {}}
-instantiate = <function Register.__call__.<locals>.instantiate at 0x7f162c942940>
-h = {}, params = [('x', <luigi.parameter.Parameter object at 0x7f162c949460>)]
+instantiate = <function Register.__call__.<locals>.instantiate at 0x7f5c86a2d5e0>
+h = {}, params = [('x', <luigi.parameter.Parameter object at 0x7f5c866e16a0>)]
 param_values = [('x', {})]
 k = (<class 'instance_test.InstanceTest.test_unhashable_type.<locals>.DummyTask'>, (('x', {}),))
 
@@ -46,7 +44,7 @@ k = (<class 'instance_test.InstanceTest.test_unhashable_type.<locals>.DummyTask'
 >           hash(k)
 E           TypeError: unhashable type: 'dict'
 
-src/luigi/luigi/task_register.py:89: TypeError
+/opt/conda/envs/75eb04f8fcdb777b02bf36f1cb41d25c/lib/python3.8/site-packages/luigi-1.1.2-py3.8.egg/luigi/task_register.py:89: TypeError
 
 During handling of the above exception, another exception occurred:
 
@@ -64,8 +62,8 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 cls = <class 'instance_test.InstanceTest.test_unhashable_type.<locals>.DummyTask'>
 args = (), kwargs = {'x': {}}
-instantiate = <function Register.__call__.<locals>.instantiate at 0x7f162c942940>
-h = {}, params = [('x', <luigi.parameter.Parameter object at 0x7f162c949460>)]
+instantiate = <function Register.__call__.<locals>.instantiate at 0x7f5c86a2d5e0>
+h = {}, params = [('x', <luigi.parameter.Parameter object at 0x7f5c866e16a0>)]
 param_values = [('x', {})]
 k = (<class 'instance_test.InstanceTest.test_unhashable_type.<locals>.DummyTask'>, (('x', {}),))
 
@@ -95,7 +93,7 @@ k = (<class 'instance_test.InstanceTest.test_unhashable_type.<locals>.DummyTask'
 >           logger.debug("Not all parameter values are hashable so instance isn't coming from the cache")
 E           NameError: name 'logger' is not defined
 
-src/luigi/luigi/task_register.py:91: NameError
+/opt/conda/envs/75eb04f8fcdb777b02bf36f1cb41d25c/lib/python3.8/site-packages/luigi-1.1.2-py3.8.egg/luigi/task_register.py:91: NameError
 =========================== short test summary info ============================
 FAILED test/instance_test.py::InstanceTest::test_unhashable_type - NameError:...
-============================== 1 failed in 0.11s ===============================
+============================== 1 failed in 0.05s ===============================

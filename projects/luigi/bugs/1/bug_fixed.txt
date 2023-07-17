@@ -4,50 +4,15 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
-test/server_test.py F                                                    [100%]
+test/server_test.py .                                                    [100%]
 
-=================================== FAILURES ===================================
-_________________________ MetricsHandlerTest.test_get __________________________
-
-self = <server_test.MetricsHandlerTest testMethod=test_get>
-
-    def test_get(self):
-        mock_metrics = mock.MagicMock()
-        self.mock_scheduler._state._metrics_collector.generate_latest.return_value = mock_metrics
-        with mock.patch.object(self.handler, 'write') as patched_write:
-            self.handler.get()
-            patched_write.assert_called_once_with(mock_metrics)
->           self.mock_scheduler._state._metrics_collector.configure_http_handler.assert_called_once_with(
-                self.handler)
-
-test/server_test.py:468: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = <MagicMock name='mock._state._metrics_collector.configure_http_handler' id='139694389175536'>
-args = (<luigi.server.MetricsHandler object at 0x7f0d22529a30>,), kwargs = {}
-msg = "Expected 'configure_http_handler' to be called once. Called 0 times."
-
-    def assert_called_once_with(self, /, *args, **kwargs):
-        """assert that the mock was called exactly once and that that call was
-        with the specified arguments."""
-        if not self.call_count == 1:
-            msg = ("Expected '%s' to be called once. Called %s times.%s"
-                   % (self._mock_name or 'mock',
-                      self.call_count,
-                      self._calls_repr()))
->           raise AssertionError(msg)
-E           AssertionError: Expected 'configure_http_handler' to be called once. Called 0 times.
-
-/opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/unittest/mock.py:924: AssertionError
 =============================== warnings summary ===============================
-src/luigi/luigi/__init__.py:75
-  /home/user/BugsInPy/temp/projects/luigi/src/luigi/luigi/__init__.py:75: DeprecationWarning: 
+../../../../../../opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/luigi-2.8.5-py3.8.egg/luigi/__init__.py:75
+  /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/luigi-2.8.5-py3.8.egg/luigi/__init__.py:75: DeprecationWarning: 
           Autoloading range tasks by default has been deprecated and will be removed in a future version.
           To get the behavior now add an option to luigi.cfg:
   
@@ -58,23 +23,17 @@ src/luigi/luigi/__init__.py:75
       
     warnings.warn(warning_message, DeprecationWarning)
 
-/opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado/util.py:255
-  /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado/util.py:255: DeprecationWarning: invalid escape sequence \d
-    """Unescape a string escaped by `re.escape`.
+../../../../../../opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/pkg_resources/__init__.py:121
+  /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/pkg_resources/__init__.py:121: DeprecationWarning: pkg_resources is deprecated as an API
+    warnings.warn("pkg_resources is deprecated as an API", DeprecationWarning)
 
-/opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado/httputil.py:105
-  /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado/httputil.py:105: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
+../../../../../../opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado-4.5.3-py3.8-linux-x86_64.egg/tornado/httputil.py:106
+  /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado-4.5.3-py3.8-linux-x86_64.egg/tornado/httputil.py:106: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working
     class HTTPHeaders(collections.MutableMapping):
 
-/opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado/web.py:1834
-  /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/tornado/web.py:1834: DeprecationWarning: invalid escape sequence \.
-    """A collection of request handlers that make up a web application.
-
-/opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/nose/importer.py:12
+../../../../../../opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/nose/importer.py:12
   /opt/conda/envs/1d60976df65e95476305dbafbacdd124/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
     from imp import find_module, load_module, acquire_lock, release_lock
 
--- Docs: https://docs.pytest.org/en/latest/warnings.html
-=========================== short test summary info ============================
-FAILED test/server_test.py::MetricsHandlerTest::test_get - AssertionError: Ex...
-======================== 1 failed, 5 warnings in 1.17s =========================
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 4 warnings in 0.10s =========================

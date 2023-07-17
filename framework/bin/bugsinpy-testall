@@ -132,7 +132,7 @@ for project_name in $projects; do
           [ -f "$work_dir/bugsinpy_fail.txt" ]
         then
           echo "$project,$bug,$version,fail" | tee -a $index_file
-        elif grep -qwE "passed|OK" "$bug_source_dir/bug_$version.txt"; then
+        elif grep -iqwE "passed|OK" "$bug_source_dir/bug_$version.txt"; then
           echo "$project,$bug,$version,pass" | tee -a $index_file
         else
           echo "$project,$bug,$version,error" | tee -a $index_file

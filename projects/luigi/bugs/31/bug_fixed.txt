@@ -4,25 +4,10 @@ RUN EVERY COMMAND
 
 
 ============================= test session starts ==============================
-platform linux -- Python 3.8.3, pytest-5.4.3, py-1.8.1, pluggy-0.13.1
-benchmark: 3.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+platform linux -- Python 3.8.3, pytest-7.3.1, pluggy-1.0.0
 rootdir: /home/user/BugsInPy/temp/projects/luigi
-plugins: sugar-0.9.3, requests-mock-1.8.0, benchmark-3.2.3, sanic-1.6.1, cov-2.9.0
 collected 1 item
 
-test/central_planner_test.py F                                           [100%]
+test/central_planner_test.py .                                           [100%]
 
-=================================== FAILURES ===================================
-___________ CentralPlannerTest.test_assistant_get_work_external_task ___________
-
-self = <central_planner_test.CentralPlannerTest testMethod=test_assistant_get_work_external_task>
-
-    def test_assistant_get_work_external_task(self):
-        self.sch.add_task('X', task_id='A', runnable=False)
->       self.assertTrue(self.sch.get_work('Y', assistant=True)['task_id'] is None)
-E       AssertionError: False is not true
-
-test/central_planner_test.py:193: AssertionError
-=========================== short test summary info ============================
-FAILED test/central_planner_test.py::CentralPlannerTest::test_assistant_get_work_external_task
-============================== 1 failed in 0.09s ===============================
+============================== 1 passed in 0.04s ===============================
