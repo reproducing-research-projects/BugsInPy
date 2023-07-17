@@ -17,7 +17,7 @@ Also, a reminder on how to add citations:
 
 # Introduction
 
-BugsInPy~\cite{widyasari_bugsinpy_2020} is a curated dataset of real-world bugs in large Python projects.
+BugsInPy \cite{widyasari_bugsinpy_2020} is a curated dataset of real-world bugs in large Python projects.
 BugsInPy is intended to be used by researchers to develop and evaluate software testing and debugging tools for Python on a diverse set of real-world bugs from multiple projects.
 This can help to ensure that the tools are effective in detecting real-world bugs.
 
@@ -44,7 +44,7 @@ The dataset provides a large and diverse set of bugs that can be used to test th
 BugsInPy also includes a variety of tools and resources that can help researchers to use the dataset effectively.
 
 We sought to use the BugsInPy framework to verify that the test cases could be set up, that the buggy commit fails, and that the fixed commit passes.
-This is a _reproduction_~\cite{widyasari_bugsinpy_2020} of the original work, since we are using the original framework.
+This is a _reproduction_ \cite{widyasari_bugsinpy_2020} of the original work, since we are using the original framework.
 
 Our contributions are:
 
@@ -66,72 +66,102 @@ Replaced term docker by container in this section
 
 # Methodology
 
-We use a provide a container build script to provide a consitent starting point in which our scripts will install the correct software environment.
-Running in a container also sandboxes modifications that the BugsInPy script wants to make (e.g., modifying `~/.bashrc`).
-While this image is available in this registry\cite{faustinoaqbugsinpy-testall}, we suggest users build the image themselves rather than depending on this registry to remain available.
+<!--
+TODO
+whether to cite faustinoaqbugsinpy-testall or just refer to the appendix.
+-->
 
-For each bug, The BugsInPy script ignores the specified version of Python, deferring to the system default Python instead.
+We would like to answer the following questions:
+
+**RQ1.** How many of the bugs in BugsInPy are reproudcible with no "extra" work?
+For a bug to be reproducible, the software environment should install without failure, the buggy verison should fail the identified test case, and the fixed version should pass.
+
+**RQ2.** How many of those which are not reproducible can we "reescue"?
+We rescue a bug by modifying the scripts and data such that the bug is reproducible.
+
+As part of our rescue, we made the following changes:
+
+1. We use a container build script to provide a consitent starting point in which our scripts will install the correct software environment.
+Running in a container also sandboxes modifications that the BugsInPy script wants to make (e.g., modifying `~/.bashrc`).
+While this image is available in this registry \cite{faustinoaqbugsinpy-testall}, we suggest users build the image themselves rather than depending on this registry to remain available.
+
+2. For each bug, The BugsInPy script ignores the specified version of Python, deferring to the system default Python instead.
 Presumably, the BugsInPy authors manually changed their system's version of Python according to the specification of each bug, but this is not an automated process, and that makes it difficult for future users.
 We modified this script to install the correct version of Python using Conda.
 Conda is a cross-platform package manager.
 Packages installed by Conda neither use nor modify the system version of those packages, so Conda can support different environments each with their own possibly conflicting requirements.
 Conda package repositories store packages containing pre-compiled binaries and metadata for each platform, so installing is rather quick.
 
-The original BugsInPy scripts install all Python packages using Pip.
-Pip is the default package builder and installer for Python.
+3. The original BugsInPy scripts install all Python packages using Pip package manager.
 Pip can invoke the compiler to build dependencies from source \cite{noauthor_pip_nodate} or download prebuilt binary files.
-Projects do this for their own C source, however they don't do this for shared libraries, because the build system can be quite complex, and system administrators would rather have one version of that shared library on the system managed by the system package manager. 
+<!--
+The most common usage of pip is to install packages from the Python Package Index (PyPI) using requirement specifiers.
+As specified in the official Python Packaging documentation, a requirement specifier typically consists of a project name followed by an optional version specifier.
+The specification for requirement specifiers can be found in PEP 440, which provides a comprehensive guide to the currently supported specifiers \cite{noauthor_installing_nodate}.
+-->
+However, some packages may require additional system libraries or dependencies that cannot be installed solely through pip.
+For example, Matplotlib, a popular Python plotting library, has certain system-level dependencies that pip cannot automatically handle, such as libpng, freetype, or Tk, which are required for Matplotlib to function properly \cite{noauthor_installation_nodate}.
+Consequently, if a bug in a project's environment depends on Matplotlib, attempting to install and run that project on a vanilla Ubuntu or Debian system without the necessary system libraries would result in installation failures.
+<!--
+In such cases, it becomes the responsibility of the user or system administrator to ensure that the required system libraries are installed manually before attempting to install the package with pip.
+The Matplotlib documentation provides detailed instructions on how to install the necessary system-level dependencies for different platforms \cite{noauthor_contributing_nodate}.
+By following these instructions and setting up the required libraries, users can successfully install and utilize Matplotlib and any other package with similar external dependencies.
+-->
+Presumably the original authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Ubuntu or Debian and simply install those with Conda instead.
 
-System administrators prefer to rely on the system package manager for managing shared libraries because it ensures consistency, stability, security, efficient resource utilization, and ease of administration. By delegating the responsibility of library management to the system package manager, administrators can leverage the robust infrastructure provided by the operating system and reduce the complexities associated with building and maintaining shared libraries from source within individual projects.
+4. Building the environment from source can be quite costly, so we reuse environments when the Python package requirements and Python versions are exactly the same.
+This optimization helps reduce the time and resources required for environment setup, as the costly process of building environments from source can be bypassed.
+While it is tempting to use the same Conda environment for each project, there are multiple occasions where different bugs of the same project require different dependencies.
+For example, `ansible/bugs/{1,11,14}/requirements.txt` all vary subtly.
 
-It's worth noting that the most common usage of pip is to install packages from the Python Package Index (PyPI) using requirement specifiers. As specified in the official Python Packaging documentation, a requirement specifier typically consists of a project name followed by an optional version specifier. The specification for requirement specifiers can be found in PEP 440, which provides a comprehensive guide to the currently supported specifiers~\cite{noauthor_installing_nodate}.
-
-Therefore, some packages may require additional system libraries or dependencies that cannot be installed solely through pip. For example, Matplotlib, a popular Python plotting library, has certain system-level dependencies that pip cannot automatically handle. These dependencies typically include external libraries such as libpng, freetype, or Tk, which are required for Matplotlib to function properly~\cite{noauthor_installation_nodate}. Consequently, if a bug in a project's environment depends on Matplotlib, attempting to install and run that project on a clean machine without the necessary system libraries would result in installation failures.
-
-It is important to note that in such cases, it becomes the responsibility of the user or system administrator to ensure that the required system libraries are installed manually before attempting to install the package with pip. The Matplotlib documentation provides detailed instructions on how to install the necessary system-level dependencies for different platforms~\cite{noauthor_contributing_nodate}. By following these instructions and setting up the required libraries, users can successfully install and utilize Matplotlib and any other package with similar external dependencies.
-
-Presumably the original authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Debian and simply install those with Conda instead.
-
-Building the environment from source can be quite costly, so we reuse environments when the Python package requirements and Python versions are exactly the same.
-
------
+5. 
 
 The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
 
 \footnotesize
 ```sh
 for each project in BugsInPy dataset:
-  For each bug for that project:
-    For version in {buggy, fixed}:
-      Checkout the buggy version
-      Env ID := hash(requirements.txt + python version)
-      If no env with Env ID already exists:
-        Use Conda to set up the env
-      Activate env with Env ID
+  for each bug for that project:
+    for version in {buggy, fixed}:
+      bugsinpy-checkout
+      envID = hash(requirements.txt + $python_version)
+      if not conda env exists $envID:
+        conda create env $envID
+        conda install python=$python_version
+        conda install $special_case_pkgs
+        pip install requirements.txt
+      conda activate $envID
       Report environment errors
-      Run tests
+      bugsinpy-test
       Report test results
-      Deactivate env
+      conda deactivate
   done
 done
 ```
 \normalsize
 
-The provided code snippet demonstrates a common approach to managing environments by using a hash based on the project's Python package requirements and Python version. Here is a high-level explanation of the code's functionality:
+Here is a high-level explanation of the code's functionality:
 
-1. The code first checkout the respective version (buggy or fixed) of the project code to analyze and sets up the environment by sourcing the configuration from the conda package manager. This configuration allows the script to utilize conda-specific commands and environment variables. To run checkout the project we use the BugsInPy framework script `bugsinpy-checkout`
+1. The code first checkout the respective version (buggy or fixed) of the project code to analyze and sets up the environment by sourcing the configuration from the conda package manager.
+This configuration allows the script to utilize conda-specific commands and environment variables.
+To run checkout the project we use the BugsInPy framework script `bugsinpy-checkout`
 
-2. Next, a unique hash is generated based on the project's Python package requirements and the specified Python version. By combining these elements and generating a hash, a unique identifier is created for the specific environment.
+2. Next, a unique hash is generated based on the project's Python package requirements and the specified Python version.
+By combining these elements and generating a hash, a unique identifier is created for the specific environment.
 
-3. The script checks if an environment with the generated hash name already exists using the conda `env list` command. This step ensures that duplicate environments are not created unnecessarily.
+3. The script checks if an environment with the generated hash name already exists using the `conda env list` command.
+This step ensures that duplicate environments are not created unnecessarily.
 
-4. If the environment does not exist, the script proceeds to create a new conda environment. The environment is named using the generated hash and is configured with the specified Python version and any additional required packages. If an environment with the same ID already exists, skip environment creation and continue with the next bug or version.
+4. If the environment does not exist, the script proceeds to create a new conda environment.
+The environment is named using the generated hash and is configured with the specified Python version and any additional required packages.
+If an environment with the same ID already exists, skip environment creation and continue with the next bug or version.
 
 5. Activate the environment associated with the Env ID. This step ensures that the subsequent steps are executed within the desired environment.
 
 6. Report any environment errors or issues encountered during the environment setup process.
 
-7. Run tests or any other required analysis on the project code within the activated environment. To run the tests we use the BugsInPy framework script `bugsinpy-test`
+7. Run tests or any other required analysis on the project code within the activated environment.
+To run the tests we use the BugsInPy framework script `bugsinpy-test`.
 
 8. Report the results of the tests, including any bugs or failures identified during the analysis.
 
@@ -141,92 +171,56 @@ The provided code snippet demonstrates a common approach to managing environment
 
 11. Repeat the above steps for each project in the BugsInPy dataset.
 
-By using a hash-based approach, the code enables environment reuse when the Python package requirements and Python version remain the same. This optimization helps reduce the time and resources required for environment setup, as the costly process of building environments from source can be bypassed. Instead, existing environments can be reused, providing a more efficient workflow for developers and ensuring consistency in the project's execution environment.
-
 # Results
 
-## Why the percentage of success and failure for the reproducibility of bugs?
-
-The percentage of success and failure in reproducing bugs in the BugsInPy dataset provides valuable insights into the overall reproducibility of the bugs. Success indicates that the bug was successfully reproduced and the corresponding test passed, verifying the correctness of the fix. On the other hand, failure indicates that either the bug could not be reproduced or the test failed, indicating the need for further investigation or fixes.
-
-The success and failure percentages offer important information about the quality and reliability of the codebase, as well as the effectiveness of the bug fixing process. They help identify projects with higher rates of successful bug reproduction, indicating better code quality and easier bug fixing processes. Analyzing these percentages can inform project maintainers about areas that require attention and improvement. It helps prioritize bug fixes, identify patterns in the types of bugs encountered, and allocate resources to improve the overall reliability and stability of the software.
-
-The following is a table with the percentage of bug reproducibility for each project:
-
 \begin{table}[htbp]
 \centering
-\caption{Execution of Buggy Version in BugsInPy Dataset}
-\label{tab:reproduction-buggy}
+\caption{Reproduction of bugs in BugsInPy without modification}
+\label{tab:unmodified-reproduction}
 \begin{tabular}{lrrrrr}
 \toprule
-result &  error &  fail &  pass &  total &  fail\% \\
+Project   & Wall time (m) &  Error &    Both-pass &  Both-fail &      Expected &          Total \\
 \midrule
-(PySnooper, buggy)    &      1 &     1 &     1 &      3 &  33.33 \\
-(ansible, buggy)      &      0 &    18 &     0 &     18 & 100.00 \\
-(black, buggy)        &      0 &    22 &     1 &     23 &  95.65 \\
-(cookiecutter, buggy) &      0 &     4 &     0 &      4 & 100.00 \\
-(fastapi, buggy)      &      0 &    16 &     0 &     16 & 100.00 \\
-(httpie, buggy)       &      0 &     5 &     0 &      5 & 100.00 \\
-(keras, buggy)        &      3 &    41 &     1 &     45 &  91.11 \\
-(luigi, buggy)        &      0 &    33 &     0 &     33 & 100.00 \\
-(matplotlib, buggy)   &      3 &    27 &     0 &     30 &  90.00 \\
-(pandas, buggy)       &      1 &   168 &     0 &    169 &  99.41 \\
-(sanic, buggy)        &      0 &     5 &     0 &      5 & 100.00 \\
-(scrapy, buggy)       &      0 &    40 &     0 &     40 & 100.00 \\
-(spacy, buggy)        &      1 &     9 &     0 &     10 &  90.00 \\
-(thefuck, buggy)      &      0 &    32 &     0 &     32 & 100.00 \\
-(tornado, buggy)      &      0 &    16 &     0 &     16 & 100.00 \\
-(tqdm, buggy)         &      0 &     9 &     0 &      9 & 100.00 \\
-(youtube-dl, buggy)   &      0 &    43 &     0 &     43 & 100.00 \\
-Total (Buggy)         &      9 &   489 &     3 &    501 &  97.60 \\
+PySnooper &             5 &      1 &            1 &          0 &             1 &              3 \\
+          &               & (33\%) &       (33\%) &      (0\%) &        (33\%) &        (100\%) \\
+\textit{Continue...} \\
+\midrule
+All       & & \textit{continue...} &             &            &               &                \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.40]{buggy.png}
-\caption{Reproducibility Results - Buggy Version}
-\label{fig:reproducibility-results-buggy}
-\end{figure}
+**RQ1.** With the original BugsInPy framework, we achieved the following bug reproduction rates \Cref{tab:unmodified-reproduction}.
+In that table, the results we can get are:
+- **Error**: Some part of the installation of the software environment needed to test the bug failed.
+- **Both-pass**: Both versions pass; we would expect the buggy version to fail.
+- **Both-fail**: Both versions fail; we would expect the fixed version to pass.
+- **Inverted**: The buggy version passes, and the fixed version fails. We do not observe this case.
+- **Expected**: The buggy version fails, and the fixed version passes. We consider _only_ these bugs, "reproduced".
+
+In that table, for each project, we show the raw count as well as percentage of outcomes for all bugs in that project.
+The last row shows the raw count as well as percentage of outcomes for all bugs in the dataset.
+
+**RQ2.** We were able to rescue many of the broken test cases, as shown in \Cref{tab:unmodified-reproduction}.
+In that table, we show the quantity in our rescued dataset and the delta from the unmodified quantity, denoted x.
+For example, "x-2=1" is shown in PySnooper's error count, which means the rescued dataset has 2 fewer errors than the unmodified, for a total of 1 error.
 
 \begin{table}[htbp]
 \centering
-\caption{Execution of Fixed Version in BugsInPy Dataset}
-\label{tab:reproduction-fixed}
+\caption{Reproduction of bugs in BugsInPy without modification}
+\label{tab:rescued-reproduction}
 \begin{tabular}{lrrrrr}
 \toprule
-result &  error &  fail &  pass &  total &  pass\% \\
+Project   & Wall time (m) &  Error      &   Both-pass &  Both-fail &    Expected &          Total \\
 \midrule
-(PySnooper, fixed)    &      1 &     0 &     2 &      3 &  66.67 \\
-(ansible, fixed)      &      0 &     0 &    18 &     18 & 100.00 \\
-(black, fixed)        &      0 &     0 &    23 &     23 & 100.00 \\
-(cookiecutter, fixed) &      0 &     0 &     4 &      4 & 100.00 \\
-(fastapi, fixed)      &      0 &     0 &    16 &     16 & 100.00 \\
-(httpie, fixed)       &      0 &     0 &     5 &      5 & 100.00 \\
-(keras, fixed)        &      3 &     0 &    42 &     45 &  93.33 \\
-(luigi, fixed)        &      0 &     6 &    27 &     33 &  81.82 \\
-(matplotlib, fixed)   &      3 &     1 &    26 &     30 &  86.67 \\
-(pandas, fixed)       &      4 &     0 &   165 &    169 &  97.63 \\
-(sanic, fixed)        &      0 &     0 &     5 &      5 & 100.00 \\
-(scrapy, fixed)       &      0 &     2 &    38 &     40 &  95.00 \\
-(spacy, fixed)        &      1 &     0 &     9 &     10 &  90.00 \\
-(thefuck, fixed)      &      0 &     0 &    32 &     32 & 100.00 \\
-(tornado, fixed)      &      0 &     0 &    16 &     16 & 100.00 \\
-(tqdm, fixed)         &      0 &     0 &     9 &      9 & 100.00 \\
-(youtube-dl, fixed)   &      0 &     0 &    43 &     43 & 100.00 \\
-Total (Fixed)         &     12 &     9 &   480 &    501 &  95.81 \\
+PySnooper &             5 & x-2=1       &       x+1=1 &          0 &           1 &              3 \\
+          &               & x-33\%=33\% & x+33\%=33\% &  x+0\%=0\% & x+33\%=33\% &        (100\%) \\
+\textit{Continue...} \\
+\midrule
+All       & & \textit{continue...} &             &            &               &                \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.40]{fixed.png}
-\caption{Reproducibility Results - Fixed Version}
-\label{fig:reproducibility-results-fixed}
-\end{figure}
-
 
 The tables provided above showcase the percentages of bug reproducibility for each project, categorized as "fail," "pass," or "error." The term "fail" refers to an expected failure in the buggy version, indicating successful bug reproduction. Conversely, "pass" indicates the successful resolution of the bug in the fixed version, with corresponding test cases passing. "Error" represents cases where a hard error prevents the execution of the test. Understanding these categories is essential for interpreting the reproducibility results accurately and assessing the effectiveness of the bug fixing process.
 
@@ -339,7 +333,7 @@ We observed that installing the dependencies line by line, rather than using `pi
 
 By utilizing the modified approach, we were able to resolve the installation issues for specific repository dependencies. For instance, the installation of the `luigi` library from a specific GitHub repository now proceeds as expected, as evidenced by the successful cloning and checkout of the specified commit.
 
-To address this issue, we have opened a pull request in the original repository~\cite{noauthor_fixes_nodate}. This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
+To address this issue, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}. This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
 
 ## What makes our reproduction hard?
 
@@ -403,11 +397,11 @@ To enhance the reproducibility of bugs by others, it is essential to provide det
 
 5. Collaboration and Support Channels: Establish channels for users to seek support and engage in discussions related to bug reproduction. This can be in the form of mailing lists, forums, or dedicated chat platforms where users can share their experiences, ask questions, and receive assistance from the artifact authors and the BugsInPy community.
 
-In addition to the previous discussion, it is worth mentioning that the BugsInPy dataset initially relied on the original container~\cite{noauthor_soarsmubugsinpy_nodate}. This container was based on Ubuntu 18.04 and presented several issues when attempting to activate the environment.
+In addition to the previous discussion, it is worth mentioning that the BugsInPy dataset initially relied on the original container \cite{noauthor_soarsmubugsinpy_nodate}. This container was based on Ubuntu 18.04 and presented several issues when attempting to activate the environment.
 
 Some of the issues encountered included misconfigured paths for Python and the environment, which hindered the successful activation of the environment. Despite our efforts to address these issues by attempting to fix the outdated environment and unsupported libraries, it became apparent that a more robust solution was required.
 
-To overcome these challenges, we opted to create our own Docker image based on a well-maintained and supported image recommended by the official Anaconda documentation~\cite{noauthor_docker_nodate}. By using a reliable and up-to-date Docker image, we were able to ensure a stable and functional environment for reproducing the bugs in the BugsInPy dataset.
+To overcome these challenges, we opted to create our own Docker image based on a well-maintained and supported image recommended by the official Anaconda documentation \cite{noauthor_docker_nodate}. By using a reliable and up-to-date Docker image, we were able to ensure a stable and functional environment for reproducing the bugs in the BugsInPy dataset.
 
 This decision not only resolved the issues faced with the original container but also provided a more reliable foundation for the bug reproduction process. It allowed us to create a consistent and controlled environment that facilitated accurate bug reproduction and reliable test results.
 
