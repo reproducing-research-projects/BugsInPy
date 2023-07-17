@@ -126,63 +126,6 @@ By utilizing the modified approach, we were able to resolve the installation iss
 
 To address this issue, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}. This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
 
-
-
-The following is a pseudo-code representing the approach used to reproduce the BugsInPy dataset:
-
-\footnotesize
-```sh
-for each project in BugsInPy dataset:
-  for each bug for that project:
-    for version in {buggy, fixed}:
-      bugsinpy-checkout
-      envID = hash(requirements.txt + $python_version)
-      if not conda env exists $envID:
-        conda create env $envID
-        conda install python=$python_version
-        conda install $special_case_pkgs
-        pip install requirements.txt
-      conda activate $envID
-      Report environment errors
-      bugsinpy-test
-      Report test results
-      conda deactivate
-  done
-done
-```
-\normalsize
-
-Here is a high-level explanation of the code's functionality:
-
-1. The code first checkout the respective version (buggy or fixed) of the project code to analyze and sets up the environment by sourcing the configuration from the conda package manager.
-This configuration allows the script to utilize conda-specific commands and environment variables.
-To run checkout the project we use the BugsInPy framework script `bugsinpy-checkout`
-
-2. Next, a unique hash is generated based on the project's Python package requirements and the specified Python version.
-By combining these elements and generating a hash, a unique identifier is created for the specific environment.
-
-3. The script checks if an environment with the generated hash name already exists using the `conda env list` command.
-This step ensures that duplicate environments are not created unnecessarily.
-
-4. If the environment does not exist, the script proceeds to create a new conda environment.
-The environment is named using the generated hash and is configured with the specified Python version and any additional required packages.
-If an environment with the same ID already exists, skip environment creation and continue with the next bug or version.
-
-5. Activate the environment associated with the Env ID. This step ensures that the subsequent steps are executed within the desired environment.
-
-6. Report any environment errors or issues encountered during the environment setup process.
-
-7. Run tests or any other required analysis on the project code within the activated environment.
-To run the tests we use the BugsInPy framework script `bugsinpy-test`.
-
-8. Report the results of the tests, including any bugs or failures identified during the analysis.
-
-9. Deactivate the environment to conclude the analysis for the current bug and version.
-
-10. Move on to the next bug or version in the iteration until all bugs and versions for the project have been analyzed.
-
-11. Repeat the above steps for each project in the BugsInPy dataset.
-
 # Results
 
 \begin{table}[htbp]
@@ -191,45 +134,73 @@ To run the tests we use the BugsInPy framework script `bugsinpy-test`.
 \label{tab:unmodified-reproduction}
 \begin{tabular}{lrrrrr}
 \toprule
-Project   &  Error &    Both-pass &  Both-fail &      Expected &          Total \\
+\tiny
+Project   &  Err &    Bth-pass &  Bth-fail &      Exp &          Total \\
 \midrule
-PySnooper &      1 &            1 &          0 &             1 &              3 \\
-          & (33\%) &       (33\%) &      (0\%) &        (33\%) &        (100\%) \\
-\textit{Continue...} \\
+\tiny
+PySnooper & 2 (67\%) & 0 (0\%) & 0 (0\%) & 1 (33\%) & 3 (100\%)\\
+ansible & 3 (17\%) & 0 (0\%) & 0 (0\%) & 15 (83\%) & 18 (100\%)\\
+black & 1 (4\%) & 0 (0\%) & 0 (0\%) & 22 (96\%) & 23 (100\%)\\
+cookiecutter & 2 (50\%) & 0 (0\%) & 0 (0\%) & 2 (50\%) & 4 (100\%)\\
+fastapi & 0 (0\%) & 0 (0\%) & 0 (0\%) & 16 (100\%) & 16 (100\%)\\
+httpie & 4 (80\%) & 0 (0\%) & 0 (0\%) & 1 (20\%) & 5 (100\%)\\
+keras & 14 (31\%) & 0 (0\%) & 0 (0\%) & 31 (69\%) & 45 (100\%)\\
+luigi & 33 (100\%) & 0 (0\%) & 0 (0\%) & 0 (0\%) & 33 (100\%)\\
+matplotlib & 29 (97\%) & 0 (0\%) & 0 (0\%) & 1 (3\%) & 30 (100\%)\\
+pandas & 47 (28\%) & 0 (0\%) & 0 (0\%) & 122 (72\%) & 169 (100\%)\\
+sanic & 5 (100\%) & 0 (0\%) & 0 (0\%) & 0 (0\%) & 5 (100\%)\\
+scrapy & 11 (28\%) & 0 (0\%) & 0 (0\%) & 29 (72\%) & 40 (100\%)\\
+spacy & 2 (20\%) & 0 (0\%) & 0 (0\%) & 8 (80\%) & 10 (100\%)\\
+thefuck & 8 (25\%) & 0 (0\%) & 0 (0\%) & 24 (75\%) & 32 (100\%)\\
+tornado & 1 (6\%) & 0 (0\%) & 0 (0\%) & 15 (94\%) & 16 (100\%)\\
+tqdm & 2 (22\%) & 0 (0\%) & 0 (0\%) & 7 (78\%) & 9 (100\%)\\
+youtube-dl & 0 (0\%) & 0 (0\%) & 0 (0\%) & 43 (100\%) & 43 (100\%)\\
 \midrule
-All       & & \textit{continue...} &           &            &                   \\
+Total & 164 (33\%) & 0 (0\%) & 0 (0\%) & 337 (67\%) & 501 (100\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 **RQ1.** With the original BugsInPy framework, we achieved the following bug reproduction rates \Cref{tab:unmodified-reproduction}.
 In that table, the results we can get are:
+
 - **Error**: Some part of the installation of the software environment needed to test the bug failed.
 - **Both-pass**: Both versions pass; we would expect the buggy version to fail.
 - **Both-fail**: Both versions fail; we would expect the fixed version to pass.
-- **Inverted**: The buggy version passes, and the fixed version fails. We do not observe this case.
 - **Expected**: The buggy version fails, and the fixed version passes. We consider _only_ these bugs, "reproduced".
 
 In that table, for each project, we show the raw count as well as percentage of outcomes for all bugs in that project.
 The last row shows the raw count as well as percentage of outcomes for all bugs in the dataset.
 
 **RQ2.** We were able to rescue many of the broken test cases, as shown in \Cref{tab:unmodified-reproduction}.
-In that table, we show the quantity in our rescued dataset and the delta from the unmodified quantity, denoted x.
-For example, "x-2=1" means the rescued dataset has 2 fewer errors than the unmodified, for a total of 1 error.
 
 \begin{table}[htbp]
 \centering
 \caption{Reproduction of bugs in BugsInPy without modification}
 \label{tab:rescued-reproduction}
 \begin{tabular}{lrrrrr}
-\toprule
-Project   &  Error      &   Both-pass &  Both-fail &    Expected &          Total \\
+Project   &  Err &    Bth-pass &  Bth-fail &      Exp &          Total \\
 \midrule
-PySnooper & x-2=1       &       x+1=1 &          0 &           1 &              3 \\
-          & x-33\%=33\% & x+33\%=33\% &  x+0\%=0\% & x+33\%=33\% &        (100\%) \\
-\textit{Continue...} \\
+\footnotesize
+PySnooper & 1 (33\%) & 0 (0\%) & 1 (33\%) & 1 (33\%) & 3 (100\%)\\
+ansible & 0 (0\%) & 0 (0\%) & 0 (0\%) & 18 (100\%) & 18 (100\%)\\
+black & 0 (0\%) & 0 (0\%) & 1 (4\%) & 22 (96\%) & 23 (100\%)\\
+cookiecutter & 0 (0\%) & 0 (0\%) & 0 (0\%) & 4 (100\%) & 4 (100\%)\\
+fastapi & 0 (0\%) & 0 (0\%) & 0 (0\%) & 16 (100\%) & 16 (100\%)\\
+httpie & 0 (0\%) & 0 (0\%) & 0 (0\%) & 5 (100\%) & 5 (100\%)\\
+keras & 3 (7\%) & 0 (0\%) & 1 (2\%) & 41 (91\%) & 45 (100\%)\\
+luigi & 0 (0\%) & 6 (18\%) & 0 (0\%) & 27 (82\%) & 33 (100\%)\\
+matplotlib & 3 (10\%) & 1 (3\%) & 0 (0\%) & 26 (87\%) & 30 (100\%)\\
+pandas & 4 (2\%) & 0 (0\%) & 0 (0\%) & 165 (98\%) & 169 (100\%)\\
+sanic & 0 (0\%) & 0 (0\%) & 0 (0\%) & 5 (100\%) & 5 (100\%)\\
+scrapy & 0 (0\%) & 2 (5\%) & 0 (0\%) & 38 (95\%) & 40 (100\%)\\
+spacy & 1 (10\%) & 0 (0\%) & 0 (0\%) & 9 (90\%) & 10 (100\%)\\
+thefuck & 0 (0\%) & 0 (0\%) & 0 (0\%) & 32 (100\%) & 32 (100\%)\\
+tornado & 0 (0\%) & 0 (0\%) & 0 (0\%) & 16 (100\%) & 16 (100\%)\\
+tqdm & 0 (0\%) & 0 (0\%) & 0 (0\%) & 9 (100\%) & 9 (100\%)\\
+youtube-dl & 0 (0\%) & 0 (0\%) & 0 (0\%) & 43 (100\%) & 43 (100\%)\\
 \midrule
-All       &    & \textit{continue...} &             &            &                \\
+Total & 12 (2\%) & 9 (2\%) & 3 (1\%) & 477 (95\%) & 501 (100\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -309,7 +280,7 @@ Often, packages required by the software environment are only installable in a s
 \begin{table}[htbp]
 \centering
 \caption{Python Versions in BugsInPy Dataset}
-\label{tab:reproduction-buggy}
+\label{tab:reproduction-py-versions}
 \begin{tabular}{lll}
 \toprule
 Python & Bugs \\
@@ -326,7 +297,7 @@ Total & 501 & 100\% \\
 \end{tabular}
 \end{table}
 
-\Cref{tab:reproduction-buggy} provides a summary of Python versions and their corresponding counts in the BugsInPy dataset.
+\Cref{tab:reproduction-py-versions} provides a summary of Python versions and their corresponding counts in the BugsInPy dataset.
 The percentages give us insights into the distribution of bugs across different Python versions in the dataset.
 The dataset certainly shows its age; Python 3.6 and 3.7 reached their official end-of-life and are not supported by CPython developers \cite{cpython_developers_status_nodate}.
 

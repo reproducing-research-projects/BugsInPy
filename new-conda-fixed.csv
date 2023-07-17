@@ -346,6 +346,7 @@ PySnooper,1,fixed,pass
 PySnooper,2,fixed,error
 PySnooper,3,fixed,pass
 sanic,1,fixed,pass
+sanic,3,fixed,pass
 sanic,2,fixed,pass
 sanic,3,fixed,pass
 sanic,4,fixed,pass
