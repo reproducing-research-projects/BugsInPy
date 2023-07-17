@@ -3,33 +3,36 @@
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 
 \usepackage[backend=biber,style=ieee]{biblatex}
-
+\usepackage{graphicx}
 \addbibresource{main.bib}
+\addbibresource{faustinoaq1.bib}
+\addbibresource{registry.bib}
+\addbibresource{pip1.bib}
 \addbibresource{IEEEabrv.bib}
 
 \input{pandoc_header.tex}
 
 \begin{document}
 
-\title{Reproducing BugsInPy}
+\title{Source-Code Support for Replicating a Bugs Dataset}
 
-\author{\IEEEauthorblockN{Faustino Aguilar}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-University of Panama \\
-Panama City, Panama \\
-\textit{email address or ORCID}}
-\and
-\IEEEauthorblockN{Samuel Grayson}
+\author{\IEEEauthorblockN{Samuel Grayson}
 \IEEEauthorblockA{Dept. of Computer Science \\
 University of Illinois at Urbana Champaign \\
 Urbana, IL \\
-https://orcid.org/0000-0001-5411-356X}
+orcid.org/0000-0001-5411-356X}
+\and
+\IEEEauthorblockN{Faustino Aguilar}
+\IEEEauthorblockA{Dept. of Computer Engineering \\
+University of Panama \\
+Panama City, Panama \\
+orcid.org/0009-0000-1375-1143}
 \and
 \IEEEauthorblockN{Darko Marinov}
 \IEEEauthorblockA{Dept. of Computer Science \\
 University of Illinois at Urbana Champaign \\
 Urbana, IL \\
-https://orcid.org/0000-0001-5023-3492}
+orcid.org/0000-0001-5023-3492}
 }
 
 \maketitle
@@ -50,34 +53,53 @@ reproducibility, bug database, python
 
 \input{meat.tex}
 
-\section*{References}
+% \section*{References}
 
 \printbibliography
 
 \appendix[Code, Data, and Reproducing]
 
-A snapshot of the latest state of this code can be found at: \url{... (Zenodo DOI)}.
+A snapshot of the latest state of this code can be found at: \url{https://github.com/reproducing-research-projects/BugsInPy/releases/tag/v0.0.1}.
 
-A rolling release of the code can be found at: \url{... (GitHub)}.
+A rolling release of the code can be found at: \url{https://github.com/reproducing-research-projects/BugsInPy}.
 
-In the rolling release or snapshot:
+In the snapshot:
 \begin{itemize}
-\item \texttt{data} holds a machine-readable view of the data, split across several files.
-\item \texttt{spack/spack.lock} contains the Spack environment in which this experiment was run.
+  \item \texttt{v0.0.1.zip} holds a human-readable BugsInPy framework code compressed in zip format.
+  \item \texttt{v0.0.1.tar.gz} holds a human-readable BugsInPy framework code compressed in gzip format.
 \end{itemize}
 
-To reproduce this paper, run:
+In the rolling release:
+\begin{itemize}
+  \item \texttt{Dockerfile} docker file setup to build projects images.
+  \item \texttt{docker-compose.yml} docker orchestration to run projects containers.
+  \item \texttt{framework/bin/bugsinpy-testall} script to automate execution of BugsInPy framework scripts.
+\end{itemize}
+
+To reproduce all bugs in httpie for example, run: 
 
 \begin{verbatim*}
-# command
-output
+# rm projects/bugsinpy-index.csv
+# docker compose up setup httpie --build
+Cleaning up temp folder ...
+Reproducing bugs please wait ...
+-------------------------
+httpie,1,buggy,fail
+httpie,1,fixed,pass
+httpie,2,buggy,fail
+httpie,2,fixed,pass
+httpie,3,buggy,fail
+httpie,3,fixed,pass
+httpie,4,buggy,fail
+httpie,4,fixed,pass
+httpie,5,buggy,fail
+httpie,5,fixed,pass
 \end{verbatim*}
 
 After which, the results will be here:
 
 \begin{itemize}
-\item \texttt{reports/main.pdf} This is the actual paper.
-\item \texttt{raw\_data} This is the raw data.
+\item \texttt{bugsinpy-index.csv} This is the new result index.
 \end{itemize}
 
 \end{document}
