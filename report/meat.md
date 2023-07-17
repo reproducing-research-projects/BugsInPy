@@ -132,12 +132,11 @@ To address this issue, we have opened a pull request in the original repository 
 \centering
 \caption{Reproduction of bugs in BugsInPy without modification}
 \label{tab:unmodified-reproduction}
+\scriptsize
 \begin{tabular}{lrrrrr}
 \toprule
-\tiny
 Project   &  Err &    Bth-pass &  Bth-fail &      Exp &          Total \\
 \midrule
-\tiny
 PySnooper & 2 (67\%) & 0 (0\%) & 0 (0\%) & 1 (33\%) & 3 (100\%)\\
 ansible & 3 (17\%) & 0 (0\%) & 0 (0\%) & 15 (83\%) & 18 (100\%)\\
 black & 1 (4\%) & 0 (0\%) & 0 (0\%) & 22 (96\%) & 23 (100\%)\\
@@ -176,12 +175,12 @@ The last row shows the raw count as well as percentage of outcomes for all bugs 
 
 \begin{table}[htbp]
 \centering
-\caption{Reproduction of bugs in BugsInPy without modification}
+\caption{Reproduction of bugs in BugsInPy, after rescuing}
 \label{tab:rescued-reproduction}
+\scriptsize
 \begin{tabular}{lrrrrr}
 Project   &  Err &    Bth-pass &  Bth-fail &      Exp &          Total \\
 \midrule
-\footnotesize
 PySnooper & 1 (33\%) & 0 (0\%) & 1 (33\%) & 1 (33\%) & 3 (100\%)\\
 ansible & 0 (0\%) & 0 (0\%) & 0 (0\%) & 18 (100\%) & 18 (100\%)\\
 black & 0 (0\%) & 0 (0\%) & 1 (4\%) & 22 (96\%) & 23 (100\%)\\
@@ -207,7 +206,6 @@ Total & 12 (2\%) & 9 (2\%) & 3 (1\%) & 477 (95\%) & 501 (100\%)\\
 
 Analyzing the specific project results, we can observe variations in the success rates. Some projects, such as Ansible, Cookiecutter, FastAPI, Httpie, Sanic, Thefuck, Tornado, and Tqdm, show a 100% success rate in reproducing and passing the bug tests for both the buggy and fixed versions.
 On the other hand, projects like Pandas, Keras, Scrapy, and Matplotlib have a lower success rate in reproducing and passing the bug tests.
-
 Note that our bugs are _repeatable_, which means that we can run our code twice and get the same result \cite{acm_inc_staff_artifact_2020}.
 
 <!--
@@ -265,16 +263,11 @@ pysnooper    & 5   \\
 \end{tabular}
 \end{table}
 
-The running time to reproduce the bugs varies across different projects in the BugsInPy dataset.
-The reproduction process was conducted on a virtual machine (VM) with 8GB of RAM, 4 x86 cores, and 100GB of free disk space.
-The time taken for bug reproduction depends on various factors, including the complexity of the codebase, the number of bugs in the project, and the specific characteristics of each bug.
-
 Additionally, it is noteworthy that the "pandas" project has the most bugs registered in the dataset, with a total of 169 bugs out of the 501 bugs analyzed.
 The reproduction of bugs in the "pandas" project required a relatively longer running time, taking approximately 963 minutes.
 The extended time may be attributed to factors such as the complexity of the codebase, the number of bugs present in the project, and the specific characteristics of the bugs encountered during the reproduction process.
 
 The inclusion of Python version information in the bug dataset is crucial for ensuring the reproducibility of tests executed for bug detection and fixing.
-When developers encounter a bug, having access to the specific Python version used during its occurrence enables them to reproduce the bug in a controlled environment.
 Often, packages required by the software environment are only installable in a specific version of Python.
 
 \begin{table}[htbp]
@@ -335,101 +328,50 @@ These can be quite expensive to store, and we can't, for example, archive our en
 1. **Missing packages in Conda**: Unfortunately, not all Pip packages and versions exist in our selected Conda repositories.
 Conda often only has 
 
-1. **Missing/yanked packages in PyPI**:
-
-1. **Lack of expected output**
-
 Addressing these challenges requires careful consideration of project-specific factors and may involve additional research, debugging techniques, and resources to ensure accurate and reliable bug reproduction.
-
-## Recommendations to BugsInPy users
-
-For users of the BugsInPy dataset, the following recommendations can enhance their bug reproduction and analysis experience:
-
-1. Thorough Documentation: Provide detailed documentation accompanying the dataset, including clear instructions on setting up the required environments, dependencies, and any additional configuration steps. This documentation should cover the specific steps necessary to reproduce bugs successfully.
-
-2. Reproducibility Guidelines: Include guidelines or best practices for bug reproduction to ensure consistent and reliable results across different users and systems. These guidelines can cover aspects such as creating isolated environments, using version control for code checkout, and capturing relevant debugging information.
-
-3. Collaboration and Community Feedback: Foster a collaborative environment among BugsInPy users to share insights, experiences, and potential challenges faced during bug reproduction. Encouraging community participation and feedback can help identify common issues, improve reproducibility practices, and provide support to fellow users.
 
 ## Recommendations to artifact authors
 
-For authors providing artifacts in the BugsInPy dataset, the following recommendations can enhance the reproducibility of their artifacts:
+For authors providing Python research artifacts, the following recommendations can enhance the reproducibility of their artifacts:
 
-1. Detailed Artifact Descriptions: Provide comprehensive documentation accompanying the artifacts, including detailed instructions on setting up the required environments, dependencies, and specific configuration steps. This documentation should guide users in reproducing the bugs effectively.
+1. **`requirements.txt` is not enough**:
+Pip cannot handle library dependencies.
+Researchers should provide a container, a Conda lockfile, Spack lockfile, or other detailed environment specification.
 
-2. Version Control: Ensure that the artifact repository includes version control information for the codebase, making it easier for users to checkout and analyze specific versions.
+1. **Archival storage**: Ensure that the artifact repository is archived in long-term storage such as Zenodo or FigShare, so that it does not become bit rot.
 
-3. Bug Context Information: Include relevant information about the bug context, such as the steps to trigger the bug, expected behavior, and any special conditions required for reproduction. This information assists users in replicating the bugs accurately.
-
-### Infrastructure changes
-
-Reproducibility plays a significant role in software development, particularly in bug fixing and testing.
-Having access to the exact Python version used during the bug occurrence enhances the accuracy and reliability of the testing process.
-Developers can execute the same code with the same environment, ensuring that any fixes or improvements applied can be tested and validated consistently.
+1. **Make it automatic/easy to use**: The BugsInPy dataset has Python versions, but there is no automation to switch to a specific version, so users are unlikely to do so.
+Our improved version uses Conda to automatically switch to the right Python version.
 
 ## Threats to Validity
 
-### Is it possible that our reproduction is not working when it should be?
+It may be possible that some of these bugs are reproducible, but the error is on our side.
+In particular, the authors do release data on the Python version, but none of their scripts make use of that information.
+Furthermore, we believe our efforts reflect an "average" user effort with limited resources, not a researcher with infinite time to reproduce every bit of the BugsInPy dataset.
 
-While the BugsInPy dataset aims to provide reproducible bugs, there may be cases where bug reproduction does not yield the expected results. Several factors can contribute to such situations:
+It may be possible that our work is not reproducible for the following reasons:
 
-1. Misconfiguration or Environmental Variations: Differences in environmental configurations or setups between the original bug reports and the user's system can impact bug reproduction. Variations in dependencies, system configurations, or codebase versions can result in discrepancies in the bug reproduction process.
+1. Although we pin our Docker base images exact version, it is possible that the source location (DockerHub) stops hosting our image (e.g., goes out of business, ends free tier).
+In this case, one would need to change the base image, but it should still work, so long as that base image has Conda.
 
-2. Incomplete Bug Information: In some cases, the bug reports or associated artifacts may lack crucial details or steps necessary for accurate reproduction. Incomplete or ambiguous bug information can hinder the reproducibility process and lead to inconsistent results.
+2. Conda package repositories can stop existing (e.g., if Anaconda goes out of business) or drop the old package versions we refer to.
+However, the definition of Conda packages describes how to build the packages from source.
+The package definitions are smaller than the package binaries, so they may remain longer.
 
-To mitigate these threats, clear and detailed documentation, version control information, and collaboration within the BugsInPy community are crucial. Users should carefully follow the provided instructions, document any deviations or issues encountered during bug reproduction, and actively engage in discussions to address any uncertainties or challenges.
-
-### Is it possible that our reproduction won't be reproducible by others?
-
-Reproducibility can also be influenced by the unique environments and configurations of different users. Factors such as variations in operating systems, library versions, hardware capabilities, and other system-specific settings can impact the reproducibility of bugs.
-
-To enhance the reproducibility of bugs by others, it is essential to provide detailed and comprehensive documentation that includes:
-
-1. Simple Environment Setup Instructions: Provide detailed instructions for setting up the required environment, including the specific versions of Python, libraries, and tools. Specify any additional dependencies or configurations necessary for accurate bug reproduction.
-
-2. Version Control Information: Ensure that the artifact repository includes version control information, such as the specific commit or tag used for the bug reproduction. This allows users to precisely replicate the codebase used during bug identification and fixing.
-
-3. Reproduction Steps: Clearly outline the steps required to reproduce the bug, including any necessary inputs, specific code paths, or special conditions. Provide sample code or scripts that demonstrate the bug behavior to aid in accurate bug reproduction.
-
-4. Debugging Information: Document any relevant debugging information or techniques employed during the bug reproduction process. This can include log files, stack traces, or other diagnostic outputs that can assist users in understanding and resolving the bug.
-
-5. Collaboration and Support Channels: Establish channels for users to seek support and engage in discussions related to bug reproduction. This can be in the form of mailing lists, forums, or dedicated chat platforms where users can share their experiences, ask questions, and receive assistance from the artifact authors and the BugsInPy community.
-
-In addition to the previous discussion, it is worth mentioning that the BugsInPy dataset initially relied on the original container \cite{noauthor_soarsmubugsinpy_nodate}. This container was based on Ubuntu 18.04 and presented several issues when attempting to activate the environment.
-
-Some of the issues encountered included misconfigured paths for Python and the environment, which hindered the successful activation of the environment. Despite our efforts to address these issues by attempting to fix the outdated environment and unsupported libraries, it became apparent that a more robust solution was required.
-
-To overcome these challenges, we opted to create our own Docker image based on a well-maintained and supported image recommended by the official Anaconda documentation \cite{noauthor_docker_nodate}. By using a reliable and up-to-date Docker image, we were able to ensure a stable and functional environment for reproducing the bugs in the BugsInPy dataset.
-
-This decision not only resolved the issues faced with the original container but also provided a more reliable foundation for the bug reproduction process. It allowed us to create a consistent and controlled environment that facilitated accurate bug reproduction and reliable test results.
-
-By transitioning to our custom Docker image based on a supported Anaconda environment, we enhanced the reproducibility and reliability of the bug reproduction process in BugsInPy.
+3. The reproducers might not have enough computational resources to do the reproduction in a timely manner.
+However, we reuse Conda environments to minimize the computational cost.
+Furthermore, our scripts support reproducing just one project or just one bug from one project.
 
 # Conclusion
 
-The study presented in this paper demonstrates the effectiveness of the BugsInPy dataset in reproducing and testing bugs in Python projects. The standardized and automated approach provided by the `bugsinpy-testall` script, coupled with the use of Conda for dependency management, streamlines the bug reproduction process and enhances its ease.
+The study presented in this paper demonstrates the effectiveness of the BugsInPy dataset in reproducing and testing bugs in Python projects.
+The standardized and automated approach provided by the `bugsinpy-testall` script, coupled with the use of Conda for dependency management, streamlines the bug reproduction process and enhances its ease.
 
-The high success rate in reproducing bugs, with over 95% of bugs passing the tests, indicates the reliability and accuracy of the bug fixes in the dataset. This is evident from the results table below:
+The high success rate in reproducing bugs, with over 95% of bugs passing the tests, indicates the reliability and accuracy of the bug fixes in the dataset.
 
+However, challenges still exist in reproducing certain bugs due to complex codebases, interdependencies, intermittent nature, and resource constraints.
+Addressing these challenges requires further research, debugging techniques, and allocation of appropriate resources.
 
-\begin{table}[htbp]
-\centering
-\caption{Total Reproduction in BugsInPy Dataset}
-\label{tab:reproduction-buggy}
-\begin{tabular}{lrrrrr}
-\toprule
-result &  error &  fail &  pass &  total &  results\% \\
-\midrule
-Total (Buggy) & 9 & 489 & 3 & 501 & 97.60\% fail \\
-Total (Fixed) & 12 & 9 & 480 & 501 & 95.81\% pass \\
-\bottomrule
-\end{tabular}
-\end{table}
+To improve the reproducibility of BugsInPy, it is recommended to enhance the documentation and description of software environments, making reproducibility tools more accessible and user-friendly.
+Collaboration within the Python community can also foster a supportive and collaborative environment for addressing challenges and enhancing the reproducibility process.
 
-The table shows that out of the 501 bugs analyzed, 97.60% of the bugs were classified as failures (fail), indicating the presence of issues or errors in the codebase. On the other hand, 95.81% of the bugs were classified as successful (pass), indicating that the bug fixes were effective in resolving the reported issues.
-
-However, challenges still exist in reproducing certain bugs due to complex codebases, interdependencies, intermittent nature, and resource constraints. Addressing these challenges requires further research, debugging techniques, and allocation of appropriate resources.
-
-To improve the reproducibility of BugsInPy, it is recommended to enhance the documentation and description of software environments, making reproducibility tools more accessible and user-friendly. Collaboration within the BugsInPy community and engagement with artifact authors can also foster a supportive and collaborative environment for addressing challenges and enhancing the reproducibility process.
-
-In conclusion, the BugsInPy dataset provides a valuable resource for studying and understanding bugs in Python projects. By incorporating the recommendations provided and addressing the threats to validity, researchers and practitioners can leverage this dataset to improve software reliability, enhance bug fixing processes, and further advance the field of software engineering research.

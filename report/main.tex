@@ -61,17 +61,9 @@ reproducibility, bug database, python
 
 \appendix[Code, Data, and Reproducing]
 
-A snapshot of the latest state of this code can be found at: \url{https://github.com/reproducing-research-projects/BugsInPy/releases/tag/v0.0.1}.
-
 A rolling release of the code can be found at: \url{https://github.com/reproducing-research-projects/BugsInPy}.
 
-In the snapshot:
-\begin{itemize}
-  \item \texttt{v0.0.1.zip} holds a human-readable BugsInPy framework code compressed in zip format.
-  \item \texttt{v0.0.1.tar.gz} holds a human-readable BugsInPy framework code compressed in gzip format.
-\end{itemize}
-
-In the rolling release:
+In the code:
 \begin{itemize}
   \item \texttt{Dockerfile} docker file setup to build projects images.
   \item \texttt{docker-compose.yml} docker orchestration to run projects containers.
@@ -87,21 +79,11 @@ Cleaning up temp folder ...
 Reproducing bugs please wait ...
 -------------------------
 httpie,1,buggy,fail
-httpie,1,fixed,pass
-httpie,2,buggy,fail
-httpie,2,fixed,pass
-httpie,3,buggy,fail
-httpie,3,fixed,pass
-httpie,4,buggy,fail
-httpie,4,fixed,pass
-httpie,5,buggy,fail
-httpie,5,fixed,pass
+...
 \end{verbatim*}
 
-After which, the results will be here:
+After which, the results will be in \texttt{bugsinpy-index.csv} This is the new result index.
 
-\begin{itemize}
-\item \texttt{bugsinpy-index.csv} This is the new result index.
-\end{itemize}
+See the \texttt{README.md} for moe information.
 
 \end{document}
