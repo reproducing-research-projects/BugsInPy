@@ -11,19 +11,73 @@ ERROR: InterpreterNotFound: python3.3
 py34 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py34
 ERROR: InterpreterNotFound: python3.4
 py35 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py35
-ERROR: InterpreterNotFound: python3.5
+py35 installdeps: pytest, pytest-cov, pytest-mock
+py35 inst: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip
+py35 installed: DEPRECATION: Python 3.5 reached the end of its life on September 13th, 2020. Please upgrade your Python as Python 3.5 is no longer maintained. pip 21.0 will drop support for Python 3.5 in January 2021. pip 21.0 will remove support for this functionality.,attrs==22.1.0,binaryornot==0.4.4,chardet==4.0.0,click==7.1.2,cookiecutter @ file:///home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip,coverage==5.5,future==0.18.3,importlib-metadata==2.1.3,iniconfig==1.1.1,Jinja2==2.11.3,MarkupSafe==1.1.1,packaging==20.9,pathlib2==2.3.7.post1,pluggy==0.13.1,py==1.11.0,pyparsing==2.4.7,pytest==6.1.2,pytest-cov==2.12.1,pytest-mock==3.5.1,ruamel.yaml==0.17.32,ruamel.yaml.clib==0.2.7,six==1.16.0,toml==0.10.2,whichcraft==0.6.1,zipp==1.2.0
+py35 run-test-pre: PYTHONHASHSEED='1686038354'
+py35 run-test: commands[0] | py.test --cov=cookiecutter tests/test_hooks.py::TestExternalHooks::test_run_failing_hook
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-6.1.2, py-1.11.0, pluggy-0.13.1
+cachedir: .tox/py35/.pytest_cache
+rootdir: /home/user/BugsInPy/temp/projects/cookiecutter
+plugins: mock-3.5.1, cov-2.12.1
+collected 1 item
+
+tests/test_hooks.py F                                                    [100%]
+
+=================================== FAILURES ===================================
+___________________ TestExternalHooks.test_run_failing_hook ____________________
+
+self = <tests.test_hooks.TestExternalHooks object at 0x7f2bd7051ac8>
+
+    def test_run_failing_hook(self):
+        hook_path = os.path.join(self.hooks_path, 'pre_gen_project.py')
+        tests_dir = os.path.join(self.repo_path, 'input{{hooks}}')
+    
+        with open(hook_path, 'w') as f:
+            f.write("#!/usr/bin/env python\n")
+            f.write("import sys; sys.exit(1)\n")
+    
+        with utils.work_in(self.repo_path):
+>           with pytest.raises(exceptions.FailedHookException) as excinfo:
+E           AttributeError: module 'cookiecutter.exceptions' has no attribute 'FailedHookException'
+
+tests/test_hooks.py:180: AttributeError
+
+----------- coverage: platform linux, python 3.5.6-final-0 -----------
+Name                         Stmts   Miss  Cover
+------------------------------------------------
+cookiecutter/__init__.py         2      0   100%
+cookiecutter/cli.py             33     33     0%
+cookiecutter/config.py          31     31     0%
+cookiecutter/exceptions.py      12      0   100%
+cookiecutter/find.py            17     17     0%
+cookiecutter/generate.py       144    144     0%
+cookiecutter/hooks.py           43     28    35%
+cookiecutter/main.py            43     43     0%
+cookiecutter/prompt.py          47     47     0%
+cookiecutter/replay.py          33     33     0%
+cookiecutter/utils.py           32     11    66%
+cookiecutter/vcs.py             52     52     0%
+------------------------------------------------
+TOTAL                          489    439    10%
+
+=========================== short test summary info ============================
+FAILED tests/test_hooks.py::TestExternalHooks::test_run_failing_hook - Attrib...
+============================== 1 failed in 0.11s ===============================
+ERROR: InvocationError for command /home/user/BugsInPy/temp/projects/cookiecutter/.tox/py35/bin/py.test --cov=cookiecutter tests/test_hooks.py::TestExternalHooks::test_run_failing_hook (exited with code 1)
 pypy create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/pypy
 ERROR: InterpreterNotFound: pypy
 flake8 create: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/flake8
 flake8 installdeps: flake8==2.3.0, pep8==1.6.2
 flake8 inst: /home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip
-flake8 installed: binaryornot==0.4.4,chardet==5.0.0,click==8.0.4,cookiecutter @ file:///home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip,flake8==2.3.0,future==0.18.3,importlib-metadata==4.8.3,Jinja2==3.0.3,MarkupSafe==2.0.1,mccabe==0.7.0,pep8==1.6.2,pyflakes==3.0.1,ruamel.yaml==0.17.32,ruamel.yaml.clib==0.2.7,typing-extensions==4.1.1,whichcraft==0.6.1,zipp==3.6.0
-flake8 run-test-pre: PYTHONHASHSEED='2995267177'
+flake8 installed: DEPRECATION: Python 3.5 reached the end of its life on September 13th, 2020. Please upgrade your Python as Python 3.5 is no longer maintained. pip 21.0 will drop support for Python 3.5 in January 2021. pip 21.0 will remove support for this functionality.,binaryornot==0.4.4,chardet==4.0.0,click==7.1.2,cookiecutter @ file:///home/user/BugsInPy/temp/projects/cookiecutter/.tox/.tmp/package/1/cookiecutter-1.2.1.zip,flake8==2.3.0,future==0.18.3,Jinja2==2.11.3,MarkupSafe==1.1.1,mccabe==0.6.1,pep8==1.6.2,pyflakes==2.4.0,ruamel.yaml==0.17.32,ruamel.yaml.clib==0.2.7,whichcraft==0.6.1
+flake8 run-test-pre: PYTHONHASHSEED='1686038354'
 flake8 run-test: commands[0] | flake8 cookiecutter tests setup.py
 ___________________________________ summary ____________________________________
 ERROR:  py27: InterpreterNotFound: python2.7
 ERROR:  py33: InterpreterNotFound: python3.3
 ERROR:  py34: InterpreterNotFound: python3.4
-ERROR:  py35: InterpreterNotFound: python3.5
+ERROR:   py35: commands failed
 ERROR:  pypy: InterpreterNotFound: pypy
   flake8: commands succeeded
