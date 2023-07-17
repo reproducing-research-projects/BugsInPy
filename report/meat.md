@@ -121,7 +121,7 @@ The provided code snippet demonstrates a common approach to managing environment
 
 1. The code first checkout the respective version (buggy or fixed) of the project code to analyze and sets up the environment by sourcing the configuration from the conda package manager. This configuration allows the script to utilize conda-specific commands and environment variables. To run checkout the project we use the BugsInPy framework script `bugsinpy-checkout`
 
-2. Next, a unique hash is generated based on the project's Python package requirements and the specified Python version. This hash is typically created using a combination of the project's requirements file and the Python version. By combining these elements and generating a hash, a unique identifier is created for the specific environment.
+2. Next, a unique hash is generated based on the project's Python package requirements and the specified Python version. By combining these elements and generating a hash, a unique identifier is created for the specific environment.
 
 3. The script checks if an environment with the generated hash name already exists using the conda `env list` command. This step ensures that duplicate environments are not created unnecessarily.
 
