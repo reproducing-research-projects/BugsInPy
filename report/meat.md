@@ -183,7 +183,12 @@ Total (Buggy)         &      9 &   489 &     3 &    501 &  97.60 \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[htbp]
+\centering
 \includegraphics[scale=0.40]{buggy.png}
+\caption{Reproducibility Results - Buggy Version}
+\label{fig:reproducibility-results-buggy}
+\end{figure}
 
 \begin{table}[htbp]
 \centering
@@ -215,7 +220,13 @@ Total (Fixed)         &     12 &     9 &   480 &    501 &  95.81 \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[htbp]
+\centering
 \includegraphics[scale=0.40]{fixed.png}
+\caption{Reproducibility Results - Fixed Version}
+\label{fig:reproducibility-results-fixed}
+\end{figure}
+
 
 The tables provided above showcase the percentages of bug reproducibility for each project, categorized as "fail," "pass," or "error." The term "fail" refers to an expected failure in the buggy version, indicating successful bug reproduction. Conversely, "pass" indicates the successful resolution of the bug in the fixed version, with corresponding test cases passing. "Error" represents cases where a hard error prevents the execution of the test. Understanding these categories is essential for interpreting the reproducibility results accurately and assessing the effectiveness of the bug fixing process.
 
