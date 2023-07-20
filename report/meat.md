@@ -326,7 +326,6 @@ Reproducing and testing a significant number of bugs within limited resources ma
 These can be quite expensive to store, and we can't, for example, archive our environments in GitHub, due to space constraints.
 
 1. **Missing packages in Conda**: Unfortunately, not all Pip packages and versions exist in our selected Conda repositories.
-Conda often only has 
 
 Addressing these challenges requires careful consideration of project-specific factors and may involve additional research, debugging techniques, and resources to ensure accurate and reliable bug reproduction.
 
