@@ -2,6 +2,7 @@
 %\IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 
+\usepackage[]{mdframed}
 \usepackage[backend=biber,style=ieee]{biblatex}
 \usepackage{graphicx}
 \addbibresource{samuelgrayson.bib}
@@ -18,29 +19,28 @@
 
 \title{Reproduction and Improvement on the BugsInPy Dataset}
 
-\author{\IEEEauthorblockN{Faustino Aguilar}
-\IEEEauthorblockA{Dept. of Computer Engineering \\
-University of Panama \\
-Panama City, Panama \\
-orcid.org/0009-0000-1375-1143}
-\and  
-\IEEEauthorblockN{Samuel Grayson}
-\IEEEauthorblockA{Dept. of Computer Science \\
-University of Illinois at Urbana Champaign \\
-Urbana, IL \\
-orcid.org/0000-0001-5411-356X}
-\and
-\IEEEauthorblockN{Darko Marinov}
-\IEEEauthorblockA{Dept. of Computer Science \\
-University of Illinois at Urbana Champaign \\
-Urbana, IL \\
-orcid.org/0000-0001-5023-3492}
-}
+%% \author{\IEEEauthorblockN{Faustino Aguilar}
+%% \IEEEauthorblockA{Dept. of Computer Engineering \\
+%% University of Panama \\
+%% Panama City, Panama \\
+%% orcid.org/0009-0000-1375-1143}
+%% \and  
+%% \IEEEauthorblockN{Samuel Grayson}
+%% \IEEEauthorblockA{Dept. of Computer Science \\
+%% University of Illinois at Urbana Champaign \\
+%% Urbana, IL \\
+%% orcid.org/0000-0001-5411-356X}
+%% \and
+%% \IEEEauthorblockN{Darko Marinov}
+%% \IEEEauthorblockA{Dept. of Computer Science \\
+%% University of Illinois at Urbana Champaign \\
+%% Urbana, IL \\
+%% orcid.org/0000-0001-5023-3492}
+%% }
 
 \maketitle
 
 \begin{abstract}
-  We present our experience on replicating a bug dataset for the Python programming language.
   We assess the reproducibility of the original dataset less than three years after its original publication.
   The bug dataset provides some information about the software environment, but this information can be incomplete or it can decay into something uninstallable.
   We rectify as many of these problems as we can and redesign the original dataset to be more easily reusable and reproducible by future authors.
@@ -84,6 +84,6 @@ httpie,1,buggy,fail
 
 After which, the results will be in \texttt{bugsinpy-index.csv} This is the new result index.
 
-See the \texttt{README.md} for more information.
+See the \texttt{README.md} for moe information.
 
 \end{document}
