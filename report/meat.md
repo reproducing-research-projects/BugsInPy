@@ -45,7 +45,7 @@ Our contributions include:
 We evaluate the following research questions:
 
 **RQ1.** How many bugs in BugsInPy are reproducible with no "extra" work?
-For a bug to be reproducible, the software environment should install without failure, the buggy version should fail the identified test cases, and the fixed version should pass.
+For a bug to be reproducible, the software environment should install without failure, the buggy version should fail the identified test cases, and the fixed version should pass these test cases.
 
 **RQ2.** How many non-reproducible bugs can we _rescue_?
 We rescue a bug by modifying the scripts and data such that the bug that was initially not reproducible now becomes reproducible.
@@ -74,7 +74,6 @@ Pip can invoke the compiler to build dependencies from source code \cite{noautho
 The most common usage of Pip is to install packages from the Python Package Index (PyPI) using requirement specifiers.
 As specified in the official Python Packaging documentation, a requirement specifier typically consists of a project name followed by an optional version specifier.
 PEP 440 provides the specification for requirement specifiers, including a comprehensive guide to the currently supported specifiers \cite{noauthor_installing_nodate}.
-
 However, some packages may require additional system libraries or dependencies that cannot be installed solely through Pip.
 For example, Matplotlib, a popular Python plotting library, has required system-level dependencies that Pip cannot automatically handle, such as libpng, freetype, or Tk \cite{noauthor_installation_nodate}.
 Consequently, if a bug in a project's environment depends on Matplotlib, attempting to install and run that project on a vanilla Ubuntu or Debian system without the necessary system libraries would result in installation failures.
@@ -295,6 +294,6 @@ The broader implications of the workflow used in the paper would be beneficial. 
 
 # Acknowledgments
 We thank Mehzabin Haque and Rohit Naidu for comments on an earlier draft of this paper.
-We also thank Sugam Adhikari and Asi\Comment{ı}f Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
+We also thank Sugam Adhikari and Asif Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
