@@ -316,7 +316,8 @@ Challenges still exist in creating a truly long-term reproducible software envir
 
 The broader implications of the workflow used in the paper would be beneficial. The workflow of using standardized and automated approach, coupled with the use of Conda for dependency management, showcases the potential for improved bug reproduction processes. This workflow could not only be useful for BugsInPy but possibly also for other bug datasets to validate the reliability and accuracy of bug datasets in a more user friendly manner. However, challenges encountered, such as complex codebases and interdependencies, may vary across different projects and languages.
 
-# Acknowledgements
-<!-- TODO: Review on how to add this properly -->
-- Rohit Naidu <rohitnofficial@gmail.com>
-- Mehzabin Haque <bsse1233@iit.du.ac.bd>
+# Acknowledgments
+We thank Mehzabin Haque and Rohit Naidu for comments on an earlier draft of this paper.
+We also thank Sugam Adhikari and Asi\Comment{ı}f Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
+This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
+We also acknowledge support for research on flaky tests from Google and Meta.
