@@ -50,26 +50,32 @@ For a bug to be reproducible, the software environment should install without fa
 **RQ2.** How many non-reproducible bugs can we _rescue_?
 We rescue a bug by modifying the scripts and data such that the bug that was initially not reproducible now becomes reproducible.
 
-This article proceeds with the methodology section, which explains how we tried to reproduce BugsInPy and what rescue procedures we took when bugs were not reproducible.
+This article proceeds with the methodology section, which explains how we first tried to reproduce BugsInPy and what rescue procedures we took when bugs were not reproducible.
 Then we summarize the results of our executions and analyze the failures.
 Finally, we engage in an open-ended discussion of our experiments with several pieces of advice to authors of future reproducible artifacts in Python and those seeking to reproduce such artifacts.
 
 # Methodology
 
-As part of our rescue, we made the following changes:
+We first tried to reproduce each bug using the original script released with the BugsInPy dataset.
+We run the script on an Ubuntu 18.04 distribution, because the Docker image mentioned in the original BugsInPy paper used Ubuntu 18.04.
+For bugs that were not reproducible using the original script, we analyzed the problems to identify the root cause and then made changes to try to _rescue_ the bugs and make them reproducible.
 
-1. **Added Docker containers:** We use a Docker container build script to build an image that provides a consistent starting point in which our scripts will install the correct software environment.
-The container also sandboxes modifications that the BugsInPy script make to the environment (e.g., modifying `~/.bashrc`).
-While our image is available in the popular DockerHub registry, we suggest that users seeking robust reproducibility build the image from our source rather than depending on an external registry.
+As part of our rescue process, we made the following changes:
 
-2. **Added Conda package manager:** Each bug may require a different version of Python, as specified in the dataset, but the BugsInPy script _ignores_ the specified version of Python, deferring to the system default Python instead.
+1. **Added Dockerfile for containers:** We use a Docker container build script, `Dockerfile`, to build a Docker image that provides a consistent starting point in which our scripts can install the correct software environment.
+The BugsInPy original paper and the current Git repository do not mention or include any Dockerfile, but DockerHub does have an image for BugsInPy published by one of the authors of the BugsInPy original paper; however, we could not find a Dockerfile corresponding to that image.
+Moreover, we wanted our image to include other changes mentioned below (e.g., Conda).
+The use of container sandboxes modifications that the BugsInPy script makes to the environment (e.g., modifying `~/.bashrc`).
+While our image is available in the popular DockerHub registry, we suggest that users seeking robust reproducibility build the image from our Dockerfile available in our Git repository rather than depending on an external registry.
+
+3. **Added Conda package manager:** Each bug may require a different version of Python, as specified in the dataset, but the BugsInPy script _ignores_ the specified version of Python, deferring to the system default Python instead.
 Presumably, the BugsInPy authors manually changed their system's version of Python according to the specification of each bug, but this process is not fully automated, making it difficult for future users.
 We modified the main BugsInPy script to install the correct version of Python using Conda.
 Conda is a cross-platform package manager.
 Packages installed by Conda neither use nor modify the system version of those packages, so Conda can support different environments, each with its own requirements that may potentially conflict with the other environments.
 Conda package repositories store packages containing prebuilt binaries and metadata for each platform, so installing is much faster than compiling from source code.
 
-3. **Replaced Pip with Conda where appropriate:** The original BugsInPy scripts install all Python packages using Pip package manager.
+4. **Replaced Pip with Conda where appropriate:** The original BugsInPy scripts install all Python packages using Pip package manager.
 Pip can invoke the compiler to build dependencies from source code \cite{noauthor_pip_nodate} or download prebuilt binary files.
 The most common usage of Pip is to install packages from the Python Package Index (PyPI) using requirement specifiers.
 As specified in the official Python Packaging documentation, a requirement specifier typically consists of a project name followed by an optional version specifier.
@@ -82,12 +88,12 @@ The Matplotlib documentation provides detailed instructions on how to install th
 By following these instructions and setting up the required libraries, users can successfully install and utilize Matplotlib and any other package with similar external dependencies.
 Presumably, the original BugsInPy authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Ubuntu or Debian and simply install those with Conda instead.
 
-4. **Added caching of environments:** Building the environment from source code can be costly, so we reuse environments across many bugs when their Python package requirements and Python versions are identical.
+5. **Added caching of environments:** Building the environment from source code can be costly, so we reuse environments across many bugs when their Python package requirements and Python versions are identical.
 This optimization helps reduce the time and resources required for environment setup, as it bypasses the costly process of building environments from source code.
 While it is tempting to use the same Conda environment for all bugs in each project (rather than for each bug), there are multiple occasions where different bugs of the same project require different dependencies.
 For example, `ansible/bugs/{1,11,14}/requirements.txt` all vary subtly.
 
-5. **Correct installation of requirements:** The BugsInPy dataset correctly recognizes that installing the dependencies line-by-line `cat requirements.txt | filter | xargs -n 1 pip install`, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by Pip.
+6. **Correct installation of requirements:** The BugsInPy dataset correctly recognizes that installing the dependencies line-by-line `cat requirements.txt | filter | xargs -n 1 pip install`, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by Pip.
 Specifically, when installing all dependencies at once, Pip may ignore very old packages. However, sequentially installing the dependencies allows us to install these old packages and thus reproduce the bugs accurately.
 However, installing the dependencies line-by-line results in failed installations for projects that include the `-e git+https://...` syntax in their `requirements.txt` file, because they would get passed along as `pip install -e` and `pip install git+https://...`.
 Our revised script ensures that each line from the `requirements.txt` file is properly processed and passed as an argument to the `pip install` command.
@@ -99,12 +105,12 @@ We have started from this pull request because it is the simplest of our five ch
 
 \begin{table}[htbp]
 \centering
-\caption{Reproduction of bugs in BugsInPy without modification}
+\caption{Reproduction of bugs in BugsInPy without our modifications}
 \label{tab:unmodified-reproduction}
 \scriptsize
 \begin{tabular}{lrrrrr}
 \toprule
-Project   &  Err &    Bth-pass &  Bth-fail &      Exp &          Total \\
+Project   &  Err &    B-pass &  B-fail &      Exp &          Total \\
 \midrule
 PySnooper & 2 (67\%) & 0 (0\%) & 0 (0\%) & 1 (33\%) & 3 (100\%)\\
 ansible & 3 (17\%) & 0 (0\%) & 0 (0\%) & 15 (83\%) & 18 (100\%)\\
@@ -136,25 +142,21 @@ Total & 164 (33\%) & 0 (0\%) & 0 (0\%) & 337 (67\%) & 501 (100\%)\\
 
 In \Cref{tab:unmodified-reproduction}, the results we can get are:
 
-- **Error**: Some part of the installation of the software environment needed to test the bug failed.
-- **Both-pass**: Both versions pass; we would expect the buggy version to fail.
-- **Both-fail**: Both versions fail; we would expect the fixed version to pass.
-- **Expected**: The buggy version fails, and the fixed version passes. We consider _only_ these bugs, "reproduced".
+- **Error (Err)**: Some step in the installation of the software environment needed to reproduce the bug failed.
+- **Both-pass (B-pass)**: Both versions pass, although we would expect the buggy version to fail.
+- **Both-fail (B-fail)**: Both versions fail, although we would expect the fixed version to pass.
+- **Expected (Exp)**: The buggy version fails, and the fixed version passes. We consider _only_ these bugs as actually "reproduced".
 
-In that table, for each project, we show the raw count and percentage of outcomes for all bugs in that project.
-The last row shows the raw count and percentage of outcomes for all bugs in the dataset.
-
-\begin{mdframed}
-\textbf{RQ2.} We were able to rescue 85\% of the non-reproducible cases in the original BugsInPy, resulting in a total reproduction rate of 95\%.
-\end{mdframed}
+The table shows, for each project, the raw count and percentage of outcomes for all bugs in that project.
+The last, summary row shows the raw count and percentage of outcomes for all bugs in the BugsInPy dataset.
 
 \begin{table}[htbp]
 \centering
-\caption{Reproduction of bugs in BugsInPy, after rescuing}
+\caption{Reproduction of bugs in BugsInPy after rescuing}
 \label{tab:rescued-reproduction}
 \scriptsize
 \begin{tabular}{lrrrrr}
-Project   &  Err &    Bth-pass &  Bth-fail &      Exp &          Total \\
+Project   &  Err &    B-pass &  B-fail &      Exp &          Total \\
 \midrule
 PySnooper & 1 (33\%) & 0 (0\%) & 1 (33\%) & 1 (33\%) & 3 (100\%)\\
 ansible & 0 (0\%) & 0 (0\%) & 0 (0\%) & 18 (100\%) & 18 (100\%)\\
@@ -179,12 +181,18 @@ Total & 12 (2\%) & 9 (2\%) & 3 (1\%) & 477 (95\%) & 501 (100\%)\\
 \end{tabular}
 \end{table}
 
-With over 95% of bugs being successfully reproduced and passing the tests, researchers have more bugs at their disposal for evaluating fuzzing, automatic program repair, and other research techniques.
+\begin{mdframed}
+\textbf{RQ2.} We were able to rescue 85\% of the non-reproducible bugs in the original BugsInPy, resulting in a total reproduction rate of 95\%.
+\end{mdframed}
 
-\Cref{tab:reproduction-time} presents the running time required to reproduce bugs in each project within the BugsInPy dataset and run the respective containers.
-The provided running times are specific to the reproduction process on the given VM configuration, which had 8GB of RAM, 4 cores, and 100GB of free disk space.
+With over 95% of bugs being successfully reproduced (passing the test cases in the fixed commit and failing test cases in the buggy commit), researchers have more bugs at their disposal for using BugsInPy, e.g., for evaluating fuzzing, automatic program repair, and other research techniques.
+
+\Cref{tab:reproduction-time} presents the running time taken to run the respective containers that attempt to reproduce bugs in each project within the BugsInPy dataset.
+We include the time for both bugs that we could reproduce and bugs that we could not reproduce.
+These times are important to help researchers estimate the resources needed for running their future experiments; the original BugsInPy paper did not include these running times.
+The provided running times are specific to the reproduction procedure on the given VM configuration, which had 4 cores, 8GB of RAM, and 100GB of free disk space.
 Reproduction times can vary depending on hardware resources, system configurations, and other environmental factors.
-The projects are sorted based on their running time in descending order, with the project "pandas" having the highest running time of 963 minutes, followed by "luigi," "scrapy," and so on.
+The projects are sorted based on their running time in descending order, with the project `pandas` having the highest running time of 963 minutes, followed by `luigi`, `scrapy`, and so on.
 
 \begin{table}[htbp]
 \centering
