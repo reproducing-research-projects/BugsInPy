@@ -18,10 +18,10 @@ Also, a reminder on how to add citations:
 # Introduction
 
 BugsInPy \cite{widyasari_bugsinpy_2020} is a curated dataset of real-world bugs in large Python projects, intended to be used by researchers to develop and evaluate software testing and debugging tools for Python on a diverse set of real-world bugs from multiple projects.
-This dataset can evaluate the efficacy of tools in bug detection, fixing, and software reliability
+This dataset can evaluate the efficacy of tools in bug detection, fixing, and software reliability.
 Many software engineering studies \cite{mukherjee_fixing_2021, smytzek_sflkit_2022, hirsch_systematic_2022, lukasczyk_empirical_2023, akimova_survey_2021} use BugsInPy.
 
-The BugsInPy dataset contains a variety of information about each bug, including:
+The BugsInPy dataset contains a variety of information about each bug, and these bugs are organized by the library they come from, including:
 
 - A buggy commit
 - A fixed commit
@@ -313,3 +313,10 @@ The high success rate in reproducing bugs, with over 95% of bugs passing the tes
 
 However, our experiments still depend on commercial organizations continuing to store software for free (GitHub, PyPI, Conda, Dockerhub).
 Challenges still exist in creating a truly long-term reproducible software environment.
+
+The broader implications of the workflow used in the paper would be beneficial. The workflow of using standardized and automated approach, coupled with the use of Conda for dependency management, showcases the potential for improved bug reproduction processes. This workflow could not only be useful for BugsInPy but possibly also for other bug datasets to validate the reliability and accuracy of bug datasets in a more user friendly manner. However, challenges encountered, such as complex codebases and interdependencies, may vary across different projects and languages.
+
+# Acknowledgements
+<!-- TODO: Review on how to add this properly -->
+- Rohit Naidu <rohitnofficial@gmail.com>
+- Mehzabin Haque <bsse1233@iit.du.ac.bd>
