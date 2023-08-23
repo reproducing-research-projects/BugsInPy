@@ -103,6 +103,18 @@ We have started from this pull request because it is the simplest of our five ch
 
 # Results
 
+This section presents and discusses our results on reproducing bugs in BugsInPy before and after our changes.
+\Cref{tab:unmodified-reproduction} shows the results without our modifications, and \Cref{tab:rescued-reproduction} shows the results after our modifications.
+The outcomes that we can get for bugs are:
+
+- **Error (Err)**: Some step in the installation of the software environment needed to reproduce the bug failed.
+- **Both-pass (B-pass)**: Both versions pass, although we would expect the buggy version to fail.
+- **Both-fail (B-fail)**: Both versions fail, although we would expect the fixed version to pass.
+- **Expected (Exp)**: The buggy version fails, and the fixed version passes. We consider _only_ these bugs as actually "reproduced".
+
+The tables show, for each project, the raw count and percentage of outcomes for all bugs in that project.
+The last, summary rows show the raw count and percentage of outcomes for all bugs in the BugsInPy dataset.
+
 \begin{table}[htbp]
 \centering
 \caption{Reproduction of bugs in BugsInPy without our modifications}
@@ -139,16 +151,6 @@ Total & 164 (33\%) & 0 (0\%) & 0 (0\%) & 337 (67\%) & 501 (100\%)\\
 \begin{mdframed}
 \textbf{RQ1.} We can reproduce 67\% of the expected results in the unmodified BugsInPy dataset.
 \end{mdframed}
-
-In \Cref{tab:unmodified-reproduction}, the results we can get are:
-
-- **Error (Err)**: Some step in the installation of the software environment needed to reproduce the bug failed.
-- **Both-pass (B-pass)**: Both versions pass, although we would expect the buggy version to fail.
-- **Both-fail (B-fail)**: Both versions fail, although we would expect the fixed version to pass.
-- **Expected (Exp)**: The buggy version fails, and the fixed version passes. We consider _only_ these bugs as actually "reproduced".
-
-The table shows, for each project, the raw count and percentage of outcomes for all bugs in that project.
-The last, summary row shows the raw count and percentage of outcomes for all bugs in the BugsInPy dataset.
 
 \begin{table}[htbp]
 \centering
@@ -229,79 +231,87 @@ pysnooper    & 5   \\
 
 The ease of bug reproduction in the BugsInPy dataset can be attributed to several factors:
 
-1. **Automatation**: The `bugsinpy-testall` script provides an automated approach to reproducing and testing bugs in Python projects.
-The script streamlines the reproduction process, minimizes manual effort, and ensures we use a consistent procedure on each project.
-Note that these automation scripts must be carefully written and maintained.
-In particular, the original scripts did not have `set -e`, so some intermediate step might fail without alerting the user.
+1. **Automatation**: Our `bugsinpy-testall` script provides an automated approach to reproducing and testing all bugs in all projects included in the BugsInPy dataset.
+The script streamlines the overall reproduction process, minimizes manual effort, and ensures we use a consistent procedure on each project.
+The script also allows to select reproduction of only some of the bugs in some of the projects.
+The automation script must be carefully written and maintained to handle various possible errors.
+For example, the original script did not have `set -e`, so some intermediate step may fail without alerting the user.
 
-2. **Environment/Package manager**: The Conda environment/package manager simplifies the management of project dependencies.
+2. **Environment/package manager**: The Conda environment/package manager simplifies the management of project dependencies.
 The crucial insight is that Conda can install packages in a local environment without interfering with global, system-wide packages.
 Conda makes it possible to define project-specific versions of libraries that a platform-specific system-wide package manager would normally manage.
 
-3. **Lack of non-deterministic bugs**: None of the bugs in our dataset are race-conditions.
-Our scope is limited to constructing a reproducible software environment consistent with the original bug, and then the bug will show itself deterministically.
+3. **Lack of non-deterministic bugs**: All bugs in the BugsInPy dataset are supposed to be deterministic.
+Our scope is limited to constructing a reproducible software environment consistent with the original bug, where the bug can manifest itself deterministically.
 
-These factors collectively contribute to the ease of reproducing bugs in the BugsInPy dataset, providing a reliable and efficient framework for bug analysis and investigation.
+These factors collectively contribute to the ease of reproducing bugs in the BugsInPy dataset, providing a reliable and efficient dataset for bug analysis and investigation.
 
 ## What makes reproduction hard?
 
-Despite the facilitative factors mentioned above, bug reproduction can still present challenges due to the following factors:
+Despite the easy-to-reproduce factors mentioned above, bug reproduction can still present challenges due to the following factors:
 
 1. **Resource constraints during building**:
-The software environment can involve a computationally-expensive step of building software from source code.
+The software environment can involve a computationally expensive step of building software from source code.
 Reproducing and testing many bugs within limited resources may result in longer reproduction times and potential resource limitations.
 Our script creates many Conda environments.
-These can be expensive to store, and we cannot, for example, archive our environments in GitHub due to space constraints.
+These environments can be expensive to store, and we cannot, for example, archive our environments in GitHub due to space constraints.
 
-1. **Missing packages in Conda**: Unfortunately, not all Pip packages and versions exist in our selected Conda repositories.
+2. **Missing packages in Conda**: Unfortunately, not all Pip packages and versions exist in our selected Conda repositories.
 
 Addressing these challenges requires careful consideration of project-specific factors and may involve additional research, debugging techniques, and resources to ensure accurate and reliable bug reproduction.
 
-## Recommendations to artifact authors
+## Recommendations to Python artifact authors
 
 For authors providing Python research artifacts, the following recommendations can enhance the reproducibility of their artifacts:
-
 
 1. **Make it automatic/easy to use**: The BugsInPy dataset has Python versions, but there is no automation to switch to a specific version, so users are unlikely to do so.
 Our improved version uses Conda to switch to the correct Python version automatically.
 
-1. **`requirements.txt` is not enough**:
+2. **`requirements.txt` is not enough**:
 Pip cannot handle library dependencies.
 Researchers should provide a container, a Conda lockfile, Spack lockfile, or other detailed environment specification.
 
-1. **Archival storage**: Ensure that the artifact repository is archived in long-term storage, such as Zenodo or FigShare, so it does not bit rot.
+3. **Archival storage**: Ensure that the artifact repository is archived in long-term storage, such as Zenodo or FigShare, so it does not disappear.
+For example, some of our non-reproducible bugs are due to dependency versions that are not available, including `flake8` project that moved from GitLab to GitHub \cite{flake8_moved}.
 
 ## Threats to Validity
 
-Some of these bugs we find unreproducible *are* actually reproducible, but the error is on our side.
-Our efforts reflect an "average" user effort with limited resources, not a researcher with infinite time and resources.
+Some of the bugs that we find unreproducible could be actually reproduced with more effort than we expanded.
+Our effort may reflect an "average" user with limited resources, not a researcher with much more available time and resources.
 
-Our work may not be reproducible for the following reasons:
+While we show how to increase reproducibility of the BugsInPy dataset, our own work may not be reproducible for the following reasons:
 
-1. Although we pin our Docker base images exact version, the source location (DockerHub) may stop hosting our image (e.g., goes out of business, ends free tier).
-In this case, one would need to change the base image, but it should still work, so long as that base image has Conda.
+1. Although we pin the exact version of our Docker base image, the image location (DockerHub) may stop hosting this base image (e.g., goes out of business, ends free tier).
+In this case, one would need to change the base image, but it could still work, so long as that base image has Conda.
+We find that Conda is still able to easily install rather old versions of Python.
 
-2. Conda package repositories can stop existing (e.g., if Anaconda goes out of business) or drop the old package versions we refer to.
+3. Conda package repositories can stop existing (e.g., if Anaconda goes out of business), or they can drop the old package versions that our scripts use.
 However, the definition of Conda packages describes how to build the packages from source code.
-The package definitions are smaller than the binaries, so they may remain longer.
+The package definitions are smaller than the binaries, so these package definitions may remain longer.
 
-3. The reproducers might need more computational resources to do the reproduction in a timely manner.
-However, we reuse Conda environments to minimize the computational cost.
+4. The reseachers trying to reproduce the results may need more computational resources to do the reproduction in a timely manner.
+We reduce the resource demands by reusing Conda environments.
 Furthermore, our scripts support reproducing just one project or just one bug from one project.
 
 # Conclusion
 
 The study presented in this paper demonstrates the effectiveness of the BugsInPy dataset in reproducing and testing bugs in Python projects.
-The standardized and automated approach provided by the `bugsinpy-testall` script, coupled with the use of Conda for dependency management, streamlines the bug reproduction process and enhances its ease.
-The high success rate in reproducing bugs, with over 95% of bugs passing the tests, indicates the reliability and accuracy of the bug fixes in the dataset.
+The original BugsInPy dataset included highly useful information that aids in reproduction of these bugs, but the scripts had some issues that limited reproduction to 67% of the bugs in our experiments, before our modifications.
+Our modifications, embodied in the automated approach provided by our `bugsinpy-testall` script, coupled with the use of Conda for dependency management and Dockerfile for building images/containers, streamline the bug reproduction process and enhance its ease.
+The high success rate in reproducing bugs, with over 95% of bugs reproduced, indicates the reliability and accuracy that our modifications provided to the BugsInPy dataset.
+Our approach could be useful not only for BugsInPy but possibly also for other bug datasets to validate the reliability and accuracy in a more user friendly manner.
 
-However, our experiments still depend on commercial organizations continuing to store software for free (GitHub, PyPI, Conda, Dockerhub).
+However, our experiments still depend on commercial organizations continuing to store software for free (GitHub, PyPI, Anaconda, DockerHub).
 Challenges still exist in creating a truly long-term reproducible software environment.
 
-The broader implications of the workflow used in the paper would be beneficial. The workflow of using standardized and automated approach, coupled with the use of Conda for dependency management, showcases the potential for improved bug reproduction processes. This workflow could not only be useful for BugsInPy but possibly also for other bug datasets to validate the reliability and accuracy of bug datasets in a more user friendly manner. However, challenges encountered, such as complex codebases and interdependencies, may vary across different projects and languages.
+<!--
+The broader implications of the workflow used in the paper would be beneficial.
+The workflow of using an automated approach, coupled with the use of Conda for dependency management, showcases the potential for improved bug reproduction processes.
+However, challenges encountered, such as complex codebases and interdependencies, may vary across different projects and languages.
+-->
 
 # Acknowledgments
 We thank Mehzabin Haque and Rohit Naidu for comments on an earlier draft of this paper.
-We also thank Sugam Adhikari and Asif Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
+We also thank Sugam Adhikari and Asif Zubayer Palak for the initial help in reproducing some bugs from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
