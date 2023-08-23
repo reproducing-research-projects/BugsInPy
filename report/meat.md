@@ -18,106 +18,83 @@ Also, a reminder on how to add citations:
 # Introduction
 
 BugsInPy \cite{widyasari_bugsinpy_2020} is a curated dataset of real-world bugs in large Python projects, intended to be used by researchers to develop and evaluate software testing and debugging tools for Python on a diverse set of real-world bugs from multiple projects.
-This dataset can evaluate the efficacy of tools in bug detection, fixing, and software reliability.
-Many software engineering studies \cite{mukherjee_fixing_2021, smytzek_sflkit_2022, hirsch_systematic_2022, lukasczyk_empirical_2023, akimova_survey_2021} use BugsInPy.
+This dataset can be used to evaluate the efficacy of tools in bug detection, fixing, software reliability, and more.
+For example, several software engineering studies \cite{akimova_survey_2021, mukherjee_fixing_2021, hirsch_systematic_2022, smytzek_sflkit_2022, lukasczyk_empirical_2023} already use BugsInPy.
 
-The BugsInPy dataset contains a variety of information about each bug, and these bugs are organized by the library they come from, including:
+The BugsInPy dataset contains a variety of information about each bug, and these bugs are organized by the project they come from, including:
 
 - A buggy commit
 - A fixed commit
 - Python version used
-- Test cases that indicate the bug's presence
+- One or more test cases that indicate the bug's presence
 
-<!-- Double check source here
-
-Source checked only report commit, python version ans test case
-requirements.txt is not avilable in all projects
-setup script is not available in all projects
--->
-
-BugsInPy includes a database abstraction layer and a test execution framework.
+The BugsInPy dataset includes a database abstraction layer and a test execution framework.
 The database abstraction layer provides a way to access the dataset in a structured way.
-The test execution framework allows researchers to run tests relevant to a particular bug.
+The test execution framework allows researchers to run test cases relevant to a particular bug.
 
-We sought to use the BugsInPy framework to verify that the test cases could be set up, that the buggy commit fails, and that the fixed commit passes.
-This work is a _reproduction_ (using ACM's 2020 definition \cite{acm_inc_staff_artifact_2020}) since we use the original work's scripts.
+We sought to use the BugsInPy dataset to verify, for each bug, that all the test cases could be set up, that the buggy commit fails, and that the fixed commit passes.
+Our work is a _reproduction_ (using ACM's 2020 definition \cite{acm_inc_staff_artifact_2020}) because we use the scripts from the original work.
+(In contrast, our work would be a _replication_ if we did not use any original scripts but wrote all new scripts from scratch to attempt to repeat the original results.) 
 
-Our contributions are:
+Our contributions include:
 
-- Improvements to the test execution framework, which make it easier to run experiments _en masse_.
-- Modifications to the BugsInPy test execution framework, which installs and uses the correct version of Python.
-- The results of which bugs were reproducible.
+- Improvements to the BugsInPy test execution framework, which make it easier to run experiments _en masse_.
+- Modifications to the BugsInPy test execution framework, which install and use the correct version of Python.
+- The results of which bugs were reproducible with and without our improvements and modifications.
 
-<!--
-In the above section, don't mention Docker yet.
-That is an "implementation detail".
-Instead, use the term container or container image.
+We evaluate the following research questions:
 
-Replaced term docker by container in this section
--->
+**RQ1.** How many bugs in BugsInPy are reproducible with no "extra" work?
+For a bug to be reproducible, the software environment should install without failure, the buggy version should fail the identified test cases, and the fixed version should pass.
 
-We propose the following research questions:
-
-**RQ1.** How many  bugs in BugsInPy are reproducible with no "extra" work?
-For a bug to be reproducible, the software environment should install without failure, the buggy version should fail the identified test case, and the fixed version should pass.
-
-**RQ2.** How many non-reproducible bugs can we rescue?
-We rescue a bug by modifying the scripts and data such that the bug is reproducible.
+**RQ2.** How many non-reproducible bugs can we _rescue_?
+We rescue a bug by modifying the scripts and data such that the bug that was initially not reproducible now becomes reproducible.
 
 This article proceeds with the methodology section, which explains how we tried to reproduce BugsInPy and what rescue procedures we took when bugs were not reproducible.
 Then we summarize the results of our executions and analyze the failures.
-Finally, we engage in an open-ended discussion of our experiment with advice to authors of reproducible artifacts and those seeking to reproduce artifacts.
+Finally, we engage in an open-ended discussion of our experiments with several pieces of advice to authors of future reproducible artifacts in Python and those seeking to reproduce such artifacts.
 
 # Methodology
 
-<!--
-TODO
-whether to cite faustinoaqbugsinpy-testall or just refer to the appendix.
--->
-
-
 As part of our rescue, we made the following changes:
 
-1. We use a container build script to provide a consistent starting point in which our scripts will install the correct software environment.
-The container also sandboxes modifications the BugsInPy script wants to make (e.g., modifying `~/.bashrc`).
-While this image is available in this registry, we suggest that users seeking robust reproducibility build the image from our source rather than depending on an external registry.
+1. **Added Docker containers:** We use a Docker container build script to build an image that provides a consistent starting point in which our scripts will install the correct software environment.
+The container also sandboxes modifications that the BugsInPy script make to the environment (e.g., modifying `~/.bashrc`).
+While our image is available in the popular DockerHub registry, we suggest that users seeking robust reproducibility build the image from our source rather than depending on an external registry.
 
-2. For each bug, The BugsInPy script ignores the specified version of Python, deferring to the system default Python instead.
-Presumably, the BugsInPy authors manually changed their system's version of Python according to the specification of each bug, but this is not an automated process, making it difficult for future users.
-We modified this script to install the correct version of Python using Conda.
+2. **Added Conda package manager:** Each bug may require a different version of Python, as specified in the dataset, but the BugsInPy script _ignores_ the specified version of Python, deferring to the system default Python instead.
+Presumably, the BugsInPy authors manually changed their system's version of Python according to the specification of each bug, but this process is not fully automated, making it difficult for future users.
+We modified the main BugsInPy script to install the correct version of Python using Conda.
 Conda is a cross-platform package manager.
-Packages installed by Conda neither use nor modify the system version of those packages, so Conda can support different environments, each with its own potentially conflicting requirements.
-Conda package repositories store packages containing pre-compiled binaries and metadata for each platform, so installing is much faster than compiling from source code.
+Packages installed by Conda neither use nor modify the system version of those packages, so Conda can support different environments, each with its own requirements that may potentially conflict with the other environments.
+Conda package repositories store packages containing prebuilt binaries and metadata for each platform, so installing is much faster than compiling from source code.
 
-3. The original BugsInPy scripts install all Python packages using Pip package manager.
+3. **Replaced Pip with Conda where appropriate:** The original BugsInPy scripts install all Python packages using Pip package manager.
 Pip can invoke the compiler to build dependencies from source code \cite{noauthor_pip_nodate} or download prebuilt binary files.
-<!--
-The most common usage of pip is to install packages from the Python Package Index (PyPI) using requirement specifiers.
+The most common usage of Pip is to install packages from the Python Package Index (PyPI) using requirement specifiers.
 As specified in the official Python Packaging documentation, a requirement specifier typically consists of a project name followed by an optional version specifier.
-The specification for requirement specifiers can be found in PEP 440, which provides a comprehensive guide to the currently supported specifiers \cite{noauthor_installing_nodate}.
--->
-However, some packages may require additional system libraries or dependencies that cannot be installed solely through pip.
-For example, Matplotlib, a popular Python plotting library, has required system-level dependencies that pip cannot automatically handle, such as libpng, freetype, or Tk \cite{noauthor_installation_nodate}.
+PEP 440 provides the specification for requirement specifiers, including a comprehensive guide to the currently supported specifiers \cite{noauthor_installing_nodate}.
+
+However, some packages may require additional system libraries or dependencies that cannot be installed solely through Pip.
+For example, Matplotlib, a popular Python plotting library, has required system-level dependencies that Pip cannot automatically handle, such as libpng, freetype, or Tk \cite{noauthor_installation_nodate}.
 Consequently, if a bug in a project's environment depends on Matplotlib, attempting to install and run that project on a vanilla Ubuntu or Debian system without the necessary system libraries would result in installation failures.
-<!--
-In such cases, it becomes the responsibility of the user or system administrator to ensure that the required system libraries are installed manually before attempting to install the package with pip.
+In such cases, it becomes the responsibility of the user or system administrator to ensure that the required system libraries are installed manually before attempting to install the package with Pip.
 The Matplotlib documentation provides detailed instructions on how to install the necessary system-level dependencies for different platforms \cite{noauthor_contributing_nodate}.
 By following these instructions and setting up the required libraries, users can successfully install and utilize Matplotlib and any other package with similar external dependencies.
--->
-Presumably, the original authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Ubuntu or Debian and simply install those with Conda instead.
+Presumably, the original BugsInPy authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Ubuntu or Debian and simply install those with Conda instead.
 
-4. Building the environment from source code can be costly, so we reuse environments when the Python package requirements and Python versions are identical.
+4. **Added caching of environments:** Building the environment from source code can be costly, so we reuse environments across many bugs when their Python package requirements and Python versions are identical.
 This optimization helps reduce the time and resources required for environment setup, as it bypasses the costly process of building environments from source code.
-While it is tempting to use the same Conda environment for each project, there are multiple occasions where different bugs of the same project require different dependencies.
+While it is tempting to use the same Conda environment for all bugs in each project (rather than for each bug), there are multiple occasions where different bugs of the same project require different dependencies.
 For example, `ansible/bugs/{1,11,14}/requirements.txt` all vary subtly.
 
-5. The BugsInPy framework correctly recognizes that installing the dependencies line by line `cat requirements.txt | filter | xargs -n 1 pip install`, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by pip.
-Specifically, when installing all dependencies at once, pip may ignore very old packages. However, sequentially installing the dependencies allows us to reproduce the bugs accurately.
-However, this results in failed  installations for projects that include the `-e git+https://...` syntax in their `requirements.txt` file, since they would get passed along as `pip install -e` and `pip install git+https://...`.
-This revised code ensures that each line from the requirements.txt file is properly processed and passed as an argument to the `pip install` command.
-<!-- TODO: check this -->
-To address this issue, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}. 
-This fix is crucial, as it impacts the reproducibility of bugs in projects such as black, cookiecutter, keras, luigi, pandas, sanic, and thefuck.
+5. **Correct installation of requirements:** The BugsInPy dataset correctly recognizes that installing the dependencies line-by-line `cat requirements.txt | filter | xargs -n 1 pip install`, rather than using `pip install -r requirements.txt`, bypasses certain restrictions imposed by Pip.
+Specifically, when installing all dependencies at once, Pip may ignore very old packages. However, sequentially installing the dependencies allows us to install these old packages and thus reproduce the bugs accurately.
+However, installing the dependencies line-by-line results in failed installations for projects that include the `-e git+https://...` syntax in their `requirements.txt` file, because they would get passed along as `pip install -e` and `pip install git+https://...`.
+Our revised script ensures that each line from the `requirements.txt` file is properly processed and passed as an argument to the `pip install` command.
+To correct this issue in the BugsInPy dataset, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}.
+This fix is crucial, because it impacts the reproducibility of bugs in several projects such as `black`, `cookiecutter`, `keras`, `luigi`, `pandas`, `sanic`, and `thefuck`.
+We have started from this pull request because it is the simplest of our five changes; if we receive some feedback for the original BugsInPy authors, we plan to open pull requests for the other four changes. 
 
 # Results
 
@@ -318,6 +295,6 @@ The broader implications of the workflow used in the paper would be beneficial. 
 
 # Acknowledgments
 We thank Mehzabin Haque and Rohit Naidu for comments on an earlier draft of this paper.
-We also thank Sugam Adhikari and Asif Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
+We also thank Sugam Adhikari and Asi\Comment{ı}f Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
