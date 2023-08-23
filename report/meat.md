@@ -318,6 +318,6 @@ The broader implications of the workflow used in the paper would be beneficial. 
 
 # Acknowledgments
 We thank Mehzabin Haque and Rohit Naidu for comments on an earlier draft of this paper.
-We also thank Sugam Adhikari and Asi\Comment{ı}f Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
+We also thank Sugam Adhikari and Asif Zubayer Palak for the initial help in reproducing some cases from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
