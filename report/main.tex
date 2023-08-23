@@ -39,40 +39,38 @@ orcid.org/0000-0001-5023-3492}
 \maketitle
 
 \begin{abstract}
-  We assess the reproducibility of the original dataset less than three years after its original publication.
-  The bug dataset provides some information about the software environment, but this information can be incomplete or it can decay into something uninstallable.
-  We rectify as many of these problems as we can and redesign the original dataset to be more easily reusable and reproducible by future authors.
-  Based on our experience, we offer suggestions to Python artifact authors to improve their reproducibility. 
+  We assess the reproducibility of the BugsInPy dataset less than three years after its original publication.
+  The bug dataset provides some information about the software environment in which the code should be run, but this information can be incomplete or can decay into something uninstallable over time.
+  We rectify as many of these problems as we can and redesign the original dataset to be more easily reusable and reproducible by future research projects.
+  Based on our experience, we offer suggestions to authors of Python artifacts to improve their reproducibility.
 \end{abstract}
 
 \begin{IEEEkeywords}
-reproducibility, bug database, python
+reproducibility, bug database, BugsInPy, Python, package managers, Pip, Conda, containers, Docker
 \end{IEEEkeywords}
 
 % http://www.ieee-scam.org/2023/#cfpengtrack
 
 \input{meat.tex}
 
-% \section*{References}
-
 \printbibliography
 
 \appendix[Code, Data, and Reproducing]
 
-A rolling release of the code can be found at: \url{https://github.com/reproducing-research-projects/BugsInPy}.
+A rolling release of all our code and data can be found at \url{https://github.com/reproducing-research-projects/BugsInPy}.
 
-In the code:
+Our code includes:
 \begin{itemize}
   \item \texttt{Dockerfile} docker file setup to build projects images.
   \item \texttt{docker-compose.yml} docker orchestration to run projects containers.
   \item \texttt{framework/bin/bugsinpy-testall} script to automate execution of BugsInPy framework scripts.
 \end{itemize}
 
-To reproduce all bugs in httpie for example, run: 
+To reproduce all bugs in a project, for example \texttt{httpie}, run:
 
 \begin{verbatim*}
-# rm projects/bugsinpy-index.csv
-# docker compose up setup httpie --build
+$ rm -f projects/bugsinpy-index.csv
+$ docker compose up setup httpie --build
 Cleaning up temp folder ...
 Reproducing bugs please wait ...
 -------------------------
@@ -80,8 +78,8 @@ httpie,1,buggy,fail
 ...
 \end{verbatim*}
 
-After which, the results will be in \texttt{bugsinpy-index.csv} This is the new result index.
+After these commands, the new results will be in the file named \texttt{bugsinpy-index.csv}.
 
-See the \texttt{README.md} for more information.
+See \texttt{README.md} for more detailed information.
 
 \end{document}
