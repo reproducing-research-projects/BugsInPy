@@ -81,10 +81,10 @@ The most common usage of Pip is to install packages from the Python Package Inde
 As specified in the official Python Packaging documentation, a requirement specifier typically consists of a project name followed by an optional version specifier.
 PEP 440 provides the specification for requirement specifiers, including a comprehensive guide to the currently supported specifiers \cite{noauthor_installing_nodate}.
 However, some packages may require additional system libraries or dependencies that cannot be installed solely through Pip.
-For example, Matplotlib, a popular Python plotting library, has required system-level dependencies that Pip cannot automatically handle, such as libpng, freetype, or Tk \cite{noauthor_installation_nodate}.
+For example, Matplotlib, a popular Python plotting library, has required system-level dependencies that Pip cannot automatically handle, such as libpng, freetype, or Tk.
 Consequently, if a bug in a project's environment depends on Matplotlib, attempting to install and run that project on a vanilla Ubuntu or Debian system without the necessary system libraries would result in installation failures.
 In such cases, it becomes the responsibility of the user or system administrator to ensure that the required system libraries are installed manually before attempting to install the package with Pip.
-The Matplotlib documentation provides detailed instructions on how to install the necessary system-level dependencies for different platforms \cite{noauthor_contributing_nodate}.
+The Matplotlib documentation provides detailed instructions on how to install the necessary system-level dependencies for different platforms \cite{noauthor_installation_nodate}.
 By following these instructions and setting up the required libraries, users can successfully install and utilize Matplotlib and any other package with similar external dependencies.
 Presumably, the original BugsInPy authors manually modified their system to have these system libraries; in our case, we identify packages that Pip cannot install on vanilla Ubuntu or Debian and simply install those with Conda instead.
 
@@ -305,6 +305,7 @@ However, our experiments still depend on commercial organizations continuing to 
 Challenges still exist in creating a truly long-term reproducible software environment.
 
 # Acknowledgments
+
 We thank Asif Zubayer Palak, Mehzabin Haque, Rohit Naidu, Sugam Adhikari and Vedant Rathi for comments on an earlier draft of this paper and the initial help in reproducing some bugs from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
