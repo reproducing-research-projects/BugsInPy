@@ -66,7 +66,7 @@ As part of our rescue process, we made the following changes:
 The BugsInPy original paper and the current Git repository do not mention or include any Dockerfile, but DockerHub does have an image for BugsInPy published by one of the authors of the BugsInPy original paper; however, we could not find a Dockerfile corresponding to that image.
 Moreover, we wanted our image to include other changes mentioned below (e.g., Conda).
 The use of container sandboxes modifications that the BugsInPy script makes to the environment (e.g., modifying `~/.bashrc`).
-While our image is available in the popular DockerHub registry, we suggest that users seeking robust reproducibility build the image from our Dockerfile available in our Git repository rather than depending on an external registry.
+While our image is available in the popular DockerHub registry \cite{faustinoaqbugsinpy-testall}, we suggest that users seeking robust reproducibility build the image from our Dockerfile available in our Git repository rather than depending on an external registry.
 
 3. **Added Conda package manager:** Each bug may require a different version of Python, as specified in the dataset, but the BugsInPy script _ignores_ the specified version of Python, deferring to the system default Python instead.
 Presumably, the BugsInPy authors manually changed their system's version of Python according to the specification of each bug, but this process is not fully automated, making it difficult for future users.
@@ -304,14 +304,7 @@ Our approach could be useful not only for BugsInPy but possibly also for other b
 However, our experiments still depend on commercial organizations continuing to store software for free (GitHub, PyPI, Anaconda, DockerHub).
 Challenges still exist in creating a truly long-term reproducible software environment.
 
-<!--
-The broader implications of the workflow used in the paper would be beneficial.
-The workflow of using an automated approach, coupled with the use of Conda for dependency management, showcases the potential for improved bug reproduction processes.
-However, challenges encountered, such as complex codebases and interdependencies, may vary across different projects and languages.
--->
-
 # Acknowledgments
-We thank Mehzabin Haque and Rohit Naidu for comments on an earlier draft of this paper.
-We also thank Sugam Adhikari and Asif Zubayer Palak for the initial help in reproducing some bugs from BugsInPy.
+We thank Asif Zubayer Palak, Mehzabin Haque, Rohit Naidu, Sugam Adhikari and Vedant Rathi for comments on an earlier draft of this paper and the initial help in reproducing some bugs from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
