@@ -231,7 +231,7 @@ pysnooper    & 5   \\
 
 The ease of bug reproduction in the BugsInPy dataset can be attributed to several factors:
 
-1. **Automatation**: Our `bugsinpy-testall` script provides an automated approach to reproducing and testing all bugs in all projects included in the BugsInPy dataset.
+1. **Automation**: Our `bugsinpy-testall` script provides an automated approach to reproducing and testing all bugs in all projects included in the BugsInPy dataset.
 The script streamlines the overall reproduction process, minimizes manual effort, and ensures we use a consistent procedure on each project.
 The script also allows to select reproduction of only some of the bugs in some of the projects.
 The automation script must be carefully written and maintained to handle various possible errors.
