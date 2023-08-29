@@ -192,7 +192,7 @@ With over 95% of bugs being successfully reproduced (passing the test cases in t
 \Cref{tab:reproduction-time} presents the running time taken to run the respective containers that attempt to reproduce bugs in each project within the BugsInPy dataset.
 We include the time for both bugs that we could reproduce and bugs that we could not reproduce.
 These times are important to help researchers estimate the resources needed for running their future experiments; the original BugsInPy paper did not include these running times.
-The provided running times are specific to the reproduction procedure on the given VM configuration, which had 4 cores, 8GB of RAM, and 100GB of free disk space.
+The provided running times are specific to the reproduction procedure on the given VM configuration, which had 4 cores of CPU AMD Ryzen 5 3600, 8GB of RAM, and 100GB of free disk space.
 Reproduction times can vary depending on hardware resources, system configurations, and other environmental factors.
 The projects are sorted based on their running time in descending order, with the project `pandas` having the highest running time of 963 minutes, followed by `luigi`, `scrapy`, and so on.
 
@@ -306,6 +306,6 @@ Challenges still exist in creating a truly long-term reproducible software envir
 
 # Acknowledgments
 
-We thank Asif Zubayer Palak, Mehzabin Haque, Rohit Naidu, Sugam Adhikari and Vedant Rathi for comments on an earlier draft of this paper and the initial help in reproducing some bugs from BugsInPy.
+We thank Asif Zubayer Palak, Md. Wahiduzzaman, Mehzabin Haque, Rohit Naidu, Sugam Adhikari and Vedant Rathi for comments on an earlier draft of this paper and the initial help in reproducing some bugs from BugsInPy.
 This work was partially supported by NSF grants CCF-1763788 and CCF-1956374.
 We also acknowledge support for research on flaky tests from Google and Meta.
