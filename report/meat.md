@@ -99,7 +99,7 @@ However, installing the dependencies line-by-line results in failed installation
 Our revised script ensures that each line from the `requirements.txt` file is properly processed and passed as an argument to the `pip install` command.
 To correct this issue in the BugsInPy dataset, we have opened a pull request in the original repository \cite{noauthor_fixes_nodate}.
 This fix is crucial, because it impacts the reproducibility of bugs in several projects such as `black`, `cookiecutter`, `keras`, `luigi`, `pandas`, `sanic`, and `thefuck`.
-We have started from this pull request because it is the simplest of our five changes; if we receive some feedback for the original BugsInPy authors, we plan to open pull requests for the other four changes. 
+We have started from this pull request because it is the simplest of our five changes; if we receive some feedback from the original BugsInPy authors, we plan to open pull requests for the other four changes. 
 
 # Results
 
